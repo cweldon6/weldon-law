@@ -1,4 +1,11 @@
-/* Reset and basics */
+:root {
+  --brand-blue: #1c2b45;
+  --brand-gold: #b38600;
+  --text-color: #1c1c1c;
+  --bg-color: #f8f5ef;
+  --font-base: "Georgia", serif;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,9 +13,9 @@
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f9fa;
-  color: #212529;
+  font-family: var(--font-base);
+  background-color: var(--bg-color);
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -23,7 +30,7 @@ body {
 /* Header */
 .site-header {
   background-color: #fff;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid #ddd;
   padding: 1rem 0;
 }
 
@@ -34,14 +41,11 @@ body {
   flex-wrap: wrap;
 }
 
-.logo a {
-  font-size: 1.75rem;
-  font-weight: bold;
-  color: #0c1c3a;
-  text-decoration: none;
+.logo img {
+  max-height: 80px;
 }
 
-/* Nav styles */
+/* Navigation */
 .main-nav {
   position: relative;
 }
@@ -49,7 +53,7 @@ body {
 .navbar {
   list-style: none;
   display: flex;
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
 .navbar li {
@@ -58,13 +62,14 @@ body {
 
 .navbar a {
   text-decoration: none;
-  color: #0c1c3a;
+  color: var(--brand-blue);
   font-weight: 500;
+  font-size: 1rem;
   padding: 0.5rem;
 }
 
 .navbar a:hover {
-  text-decoration: underline;
+  color: var(--brand-gold);
 }
 
 /* Dropdown */
@@ -82,25 +87,26 @@ body {
 .dropdown-content a {
   display: block;
   padding: 0.5rem 1rem;
-  color: #0c1c3a;
+  color: var(--brand-blue);
 }
 
 .dropdown-content a:hover {
   background-color: #f1f1f1;
+  color: var(--brand-gold);
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
-/* Hamburger menu */
+/* Mobile nav toggle */
 .menu-toggle {
   display: none;
   background: none;
   border: none;
   font-size: 1.75rem;
   cursor: pointer;
-  color: #0c1c3a;
+  color: var(--brand-blue);
 }
 
 @media (max-width: 768px) {
@@ -130,8 +136,7 @@ body {
   .dropdown-content {
     position: static;
     border: none;
-    box-shadow: none;
-    background: #f8f9fa;
+    background: #f8f5ef;
   }
 }
 
@@ -144,28 +149,32 @@ main.landing {
 
 main h1 {
   font-size: 2.5rem;
+  color: var(--brand-blue);
   margin-bottom: 1rem;
 }
 
 .tagline {
   font-size: 1.25rem;
-  color: #6c757d;
+  color: var(--brand-gold);
   margin-bottom: 1.5rem;
 }
 
 .contact-info a {
-  color: #0056b3;
+  color: var(--brand-blue);
   text-decoration: none;
+  font-weight: bold;
 }
 
 .contact-info a:hover {
-  text-decoration: underline;
+  color: var(--brand-gold);
 }
 
 /* Footer */
 .site-footer {
-  background-color: #e9ecef;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
   text-align: center;
   padding: 1rem 0;
   font-size: 0.9rem;
+  color: var(--brand-blue);
 }
