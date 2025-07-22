@@ -1,4 +1,4 @@
-/* Basic Reset */
+/* Reset and basics */
 * {
   margin: 0;
   padding: 0;
@@ -7,15 +7,13 @@
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
   background-color: #f8f9fa;
   color: #212529;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
-/* Container */
 .container {
   width: 90%;
   max-width: 1100px;
@@ -24,7 +22,7 @@ body {
 
 /* Header */
 .site-header {
-  background-color: #ffffff;
+  background-color: #fff;
   border-bottom: 1px solid #dee2e6;
   padding: 1rem 0;
 }
@@ -43,11 +41,15 @@ body {
   text-decoration: none;
 }
 
-/* Navigation */
-.main-nav .navbar {
+/* Nav styles */
+.main-nav {
+  position: relative;
+}
+
+.navbar {
   list-style: none;
   display: flex;
-  gap: 1.75rem;
+  gap: 1.5rem;
 }
 
 .navbar li {
@@ -69,17 +71,12 @@ body {
 .dropdown-content {
   display: none;
   position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
   top: 100%;
   left: 0;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
   min-width: 200px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   z-index: 1000;
-}
-
-.dropdown-content li {
-  padding: 0;
 }
 
 .dropdown-content a {
@@ -96,7 +93,49 @@ body {
   display: block;
 }
 
-/* Landing Content */
+/* Hamburger menu */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  cursor: pointer;
+  color: #0c1c3a;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .navbar {
+    display: none;
+    flex-direction: column;
+    background-color: #fff;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border-top: 1px solid #ccc;
+  }
+
+  .navbar.open {
+    display: flex;
+  }
+
+  .navbar li {
+    padding: 0.5rem 1rem;
+  }
+
+  .dropdown-content {
+    position: static;
+    border: none;
+    box-shadow: none;
+    background: #f8f9fa;
+  }
+}
+
+/* Main content */
 main.landing {
   flex: 1;
   padding: 3rem 1rem;
