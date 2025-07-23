@@ -61,7 +61,7 @@ a:hover {
 }
 
 .navbar a {
-  color: white;
+  color: #133978;;
   font-weight: bold;
 }
 
@@ -145,7 +145,7 @@ a:hover {
 
 .services-list a {
   font-weight: 600;
-  color: var(--brand-blue);
+  color: var(--brand-gold);
 }
 
 .services-list a:hover {
@@ -154,7 +154,7 @@ a:hover {
 
 /* Contact Form */
 .full-contact-form {
-  background-color: #a8bee0;
+  background-color: #a1bce4;
   padding: 2rem 0;
 }
 
