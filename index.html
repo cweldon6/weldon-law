@@ -11,10 +11,9 @@
   <header class="site-header">
     <div class="container nav-container">
       <div class="logo">
-        <a href="index.html">Weldon Law, LLC</a>
+        <a href="index.html"><img src="images/WeldonLawLogo.png" alt="Weldon Law Logo" /></a>
       </div>
-      <nav class="main-nav" id="nav">
-        <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+      <nav>
         <ul class="navbar">
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
@@ -33,23 +32,87 @@
       </nav>
     </div>
   </header>
-  <main class="landing">
-    <div class="container">
-      <h1>Welcome to Weldon Law, LLC</h1>
-      <p class="tagline">Strategic Legal Guidance in Guardianship, Fiduciary, and Elder Law</p>
-      <p class="contact-info"><strong>Contact:</strong> <a href="mailto:chris@weldon.law">chris@weldon.law</a></p>
-    </div>
+
+  <main>
+    <!-- Intro Paragraphs -->
+    <section class="intro-banner">
+      <div class="container">
+        <p>Weldon Law, LLC is a neighborhood-rooted law practice offering experienced, compassionate legal guidance in guardianship, estate planning, probate, long-term care planning and other elder law matters throughout New Jersey.</p>
+        <p>Founded by Christopher R. Weldon, Esquire—a lifelong Camden County resident and former State Regulatory Attorney—the firm brings over a decade of public service experience to the private sector. Chris has been involved in more than 1,000 guardianship and/or fiduciary cases, advocating for vulnerable individuals and those who support them.</p>
+        <p>Weldon Law leverages modern legal technology to maximize efficiency, transparency, and client accessibility—ensuring every matter is approached with the care it deserves, regardless of asset level or complexity.</p>
+      </div>
+    </section>
+
+    <!-- Two Column Layout -->
+    <section class="info-grid container">
+      <div class="about-snippet">
+        <img src="profile-placeholder.jpg" alt="Christopher R. Weldon" class="bio-image" />
+        <p>Christopher R. Weldon, Esquire has over a decade of public service experience representing the vulnerable and elderly across New Jersey. As the founder of Weldon Law, he is committed to compassionate and practical advocacy... <a href="about.html">(continue)</a></p>
+      </div>
+
+      <div class="firm-services">
+        <h2>Firm Services</h2>
+        <ul class="services-list">
+          <li><a href="practice-guardianships.html">Guardianships</a></li>
+          <li><a href="practice-ltc.html">Long-Term Care Planning</a></li>
+          <li><a href="practice-estate.html">Estate Planning</a></li>
+          <li><a href="practice-probate.html">Probate</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="full-contact-form">
+      <div class="container">
+        <h2>Contact Weldon Law</h2>
+        <form action="submit-form.php" method="POST">
+          <div class="form-row">
+            <div>
+              <label for="first-name">First Name</label>
+              <input type="text" id="first-name" name="first-name" required>
+            </div>
+            <div>
+              <label for="last-name">Last Name</label>
+              <input type="text" id="last-name" name="last-name" required>
+            </div>
+          </div>
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" required>
+
+          <label for="location">Town and State of Residence</label>
+          <input type="text" id="location" name="location" required>
+
+          <label for="interest">Type of Matter</label>
+          <select id="interest" name="interest" required>
+            <option value=\"\">-- Please Select --</option>
+            <option value=\"guardianship\">Guardianship</option>
+            <option value=\"ltc\">Long-Term Care Planning</option>
+            <option value=\"estate\">Estate Planning</option>
+            <option value=\"probate\">Probate</option>
+            <option value=\"other\">Other</option>
+          </select>
+
+          <label for="message">Brief Summary</label>
+          <textarea id="message" name="message" rows="5" placeholder="Please describe your situation briefly..." required></textarea>
+
+          <button type="submit">Submit</button>
+          <p class="disclaimer">
+            Upon submission, this form will be sent to Christopher R. Weldon, Esquire, and copied to the email you provided. You may reply to that message with additional information or questions.
+          </p>
+        </form>
+      </div>
+    </section>
   </main>
+
   <footer class="site-footer">
     <div class="container">
       <p>&copy; 2025 Weldon Law, LLC. All rights reserved.</p>
     </div>
   </footer>
-  <script>
-    document.querySelector('.menu-toggle').addEventListener('click', function () {
-      document.querySelector('.navbar').classList.toggle('open');
-    });
-  </script>
 </body>
 </html>
 
