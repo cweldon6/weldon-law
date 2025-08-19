@@ -2,22 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Weldon Law, LLC – Home">
-  <title>Weldon Law, LLC</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Weldon Law, LLC | Christopher R. Weldon, Esq.</title>
+  <meta name="description" content="Learn about Weldon Law, LLC and founder Christopher R. Weldon, Esq., providing guardianship, estate planning, probate, and elder law services across New Jersey." />
+  <link rel="stylesheet" href="branded-styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container nav-container">
       <div class="logo">
-        <a href="index.html">Weldon Law, LLC</a>
+        <a href="index.html">
+          <img src="images/WeldonLawLogo.png" alt="Weldon Law, LLC logo" />
+        </a>
       </div>
       <nav class="main-nav" id="nav">
-        <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
-        <ul class="navbar">
+        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">&#9776;</button>
+        <ul class="navbar" id="primary-navigation">
           <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
+          <li><a href="about.html" aria-current="page">About</a></li>
           <li class="dropdown">
             <a href="#">Areas of Practice</a>
             <ul class="dropdown-content">
@@ -33,22 +35,35 @@
       </nav>
     </div>
   </header>
+
   <main class="landing">
     <div class="container">
       <h1>About Weldon Law, LLC</h1>
-      <p class="tagline">Coming Soon</p>
+      <p class="tagline">Experienced, compassionate advocacy for New Jersey families.</p>
+
+      <p><strong>Christopher R. Weldon, Esquire</strong> is a lifelong Camden County resident and former State Regulatory Attorney. Over more than a decade of public service, Chris has been involved in 1,000+ guardianship and fiduciary matters, advocating for vulnerable individuals and the loved ones who support them.</p>
+
+      <p>Weldon Law focuses on <em>guardianships</em>, <em>long‑term care planning</em>, <em>estate planning</em>, and <em>probate</em>, pairing practical strategy with modern legal technology to maximize efficiency, transparency, and client accessibility.</p>
+
       <p class="contact-info"><strong>Contact:</strong> <a href="mailto:chris@weldon.law">chris@weldon.law</a></p>
     </div>
   </main>
+
   <footer class="site-footer">
     <div class="container">
       <p>&copy; 2025 Weldon Law, LLC. All rights reserved.</p>
     </div>
   </footer>
+
   <script>
-    document.querySelector('.menu-toggle').addEventListener('click', function () {
-      document.querySelector('.navbar').classList.toggle('open');
-    });
+    const toggle = document.querySelector('.menu-toggle');
+    const navList = document.getElementById('primary-navigation');
+    if (toggle && navList) {
+      toggle.addEventListener('click', () => {
+        navList.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', navList.classList.contains('open'));
+      });
+    }
   </script>
 </body>
 </html>
