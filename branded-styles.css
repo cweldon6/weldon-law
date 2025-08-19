@@ -231,3 +231,30 @@ button[type="submit"]:hover {
   padding: 1rem 0;
   font-size: 0.9rem;
 }
+/* Buttons + header CTA */
+.button {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-weight: 700;
+  text-decoration: none;
+  background: var(--brand-blue);
+  color: #000;
+  border: 1px solid transparent;
+}
+.button:hover { background: var(--brand-gold); color: #000; }
+.nav-cta { margin-left: 0.5rem; }
+
+/* CTA row near form */
+.cta-row { margin: 0 0 1rem; }
+
+/* Mobile menu open state */
+.navbar.open {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+}
+@media (max-width: 768px) {
+  .navbar { display: none; flex-direction: column; gap: 0.75rem; }
+  .navbar.open { display: flex; }
+}
