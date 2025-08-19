@@ -74,7 +74,7 @@
           <a class="button" href="tel:+1YOUR_TEAMS_PHONE_E164">Call Now</a>
         </div>
 
-        <form action="YOUR_FLOW_POST_URL" method="POST" aria-describedby="contact-disclaimer" onsubmit="return submitIntake(event)">
+        <form action="https://prod-05.westus.logic.azure.com:443/workflows/a3c8e62700164d63804b4501e40bae8d/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=1BcgJ7hwwkHbts8G6q2brh1C7LPMqHGJZrAQvObUGoY" method="POST" aria-describedby="contact-disclaimer" onsubmit="return submitIntake(event)">
           <!-- anti‑spam -->
           <input type="hidden" name="siteKey" value="WELDON-INTAKE-2025">
           <input type="text" name="company" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off">
@@ -171,7 +171,7 @@
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
-          // Note: Preflight OPTIONS will be handled by your Flow (see steps below)
+          // Note: Preflight OPTIONS handled by your Flow
         });
         if (res.ok) {
           alert('Thanks—your message was sent. Check your email for a confirmation.');

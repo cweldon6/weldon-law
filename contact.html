@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact Weldon Law, LLC | Schedule a Consultation</title>
-  <meta name="description" content="Get in touch with Weldon Law, LLC to discuss guardianship, estate planning, probate, and long‑term care planning matters in New Jersey." />
+  <meta name="description" content="Get in touch with Weldon Law, LLC to discuss guardianship, estate planning, probate, and long-term care planning matters in New Jersey." />
   <link rel="stylesheet" href="branded-styles.css" />
 </head>
 <body>
@@ -31,7 +31,7 @@
           </li>
           <li><a href="news.html">News & Resources</a></li>
           <li><a href="contact.html" aria-current="page">Contact</a></li>
-          <li class="nav-cta"><a class="button" href="tel:+1YOUR_TEAMS_PHONE_E164">Call Now</a></li>
+          <li class="nav-cta"><a class="button" href="tel:+18568902944">Call Now</a></li>
         </ul>
       </nav>
     </div>
@@ -43,21 +43,24 @@
         <h1>Contact Weldon Law</h1>
         <p class="subtitle">Serving Voorhees, NJ and surrounding communities</p>
         <p class="tagline">
-          Providing strategic legal guidance in guardianship, long‑term care planning, estate planning, and probate matters.
+          Providing strategic legal guidance in guardianship, long-term care planning, estate planning, and probate matters.
         </p>
         <p><strong>Email:</strong> <a href="mailto:chris@weldon.law">chris@weldon.law</a></p>
-        <p><strong>Phone:</strong> <a href="tel:+1YOUR_TEAMS_PHONE_E164">(856) YOUR‑DISPLAY‑NUMBER</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+18568902944">(856) 890-2944</a></p>
       </section>
 
       <aside class="form-section">
         <h2>Send a Message</h2>
 
         <div class="cta-row">
-          <a class="button" href="tel:+1YOUR_TEAMS_PHONE_E164">Call Now</a>
+          <a class="button" href="tel:+18568902944">Call Now</a>
         </div>
 
-        <form action="YOUR_FLOW_POST_URL" method="POST" aria-describedby="contact-disclaimer" onsubmit="return submitIntake(event)">
-          <!-- anti‑spam -->
+        <form action="https://prod-05.westus.logic.azure.com:443/workflows/a3c8e62700164d63804b4501e40bae8d/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=1BcgJ7hwwkHbts8G6q2brh1C7LPMqHGJZrAQvObUGoY"
+              method="POST"
+              aria-describedby="contact-disclaimer"
+              onsubmit="return submitIntake(event)">
+          <!-- anti-spam -->
           <input type="hidden" name="siteKey" value="WELDON-INTAKE-2025">
           <input type="text" name="company" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off">
 
@@ -159,10 +162,10 @@
           alert('Thanks—your message was sent. Check your email for a confirmation.');
           form.reset();
         } else {
-          alert('Sorry, something went wrong. Please email chris@weldon.law or call (856) YOUR‑DISPLAY‑NUMBER.');
+          alert('Sorry, something went wrong. Please email chris@weldon.law or call (856) 890-2944.');
         }
       } catch (err) {
-        alert('Network issue—please email chris@weldon.law or call (856) YOUR‑DISPLAY‑NUMBER.');
+        alert('Network issue—please email chris@weldon.law or call (856) 890-2944.');
       }
       return false;
     }
