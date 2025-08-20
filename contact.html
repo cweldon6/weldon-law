@@ -42,9 +42,7 @@
       <section class="intro-text">
         <h1>Contact Weldon Law</h1>
         <p class="subtitle">Serving Voorhees, NJ and surrounding communities</p>
-        <p class="tagline">
-          Providing strategic legal guidance in guardianship, long-term care planning, estate planning, and probate matters.
-        </p>
+        <p class="tagline">Providing strategic legal guidance in guardianship, long-term care planning, estate planning, and probate matters.</p>
         <p><strong>Email:</strong> <a href="mailto:chris@weldon.law">chris@weldon.law</a></p>
         <p><strong>Phone:</strong> <a href="tel:+18568902944">(856) 890-2944</a></p>
       </section>
@@ -56,16 +54,9 @@
           <a class="button" href="tel:+18568902944">Call Now</a>
         </div>
 
-        <form
-          action="https://prod-05.westus.logic.azure.com:443/workflows/a3c8e62700164d63804b4501e40bae8d/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=1BcgJ7hwwkHbts8G6q2brh1C7LPMqHGJZrAQvObUGoY"
-          method="POST"
-          aria-describedby="contact-disclaimer"
-          onsubmit="return submitIntake(event)"
-          autocomplete="on">
-
-          <!-- anti-spam honeypot -->
-          <input type="hidden" name="siteKey" value="WELDON-INTAKE-2025">
-          <input type="text" name="company" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off">
+        <form id="intakeFormContact" novalidate>
+          <input type="hidden" name="siteKey" value="WL5616!SecureKey" />
+          <input type="text" name="company" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" />
 
           <div class="form-row">
             <div>
@@ -82,40 +73,37 @@
           <input type="email" id="email" name="email" autocomplete="email" required>
 
           <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel-national" required>
+          <input type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel-national">
 
-          <!-- Full Address -->
           <fieldset>
             <legend>Address</legend>
-
             <label for="street">Street Address</label>
-            <input type="text" id="street" name="street" autocomplete="address-line1" required>
-
+            <input type="text" id="street" name="street" autocomplete="address-line1">
             <div class="form-row">
               <div>
                 <label for="city">City</label>
-                <input type="text" id="city" name="city" autocomplete="address-level2" required>
+                <input type="text" id="city" name="city" autocomplete="address-level2">
               </div>
               <div>
                 <label for="state">State</label>
-                <select id="state" name="state" autocomplete="address-level1" required>
+                <select id="state" name="state" autocomplete="address-level1">
                   <option value="">-- Select State --</option>
+                  <!-- full list here -->
                   <option value="NJ">New Jersey</option>
                   <option value="PA">Pennsylvania</option>
                   <option value="DE">Delaware</option>
                   <option value="NY">New York</option>
-                  <!-- add full list as in index.html -->
                 </select>
               </div>
               <div>
                 <label for="zip">ZIP Code</label>
-                <input type="text" id="zip" name="zip" autocomplete="postal-code" pattern="\d{5}" maxlength="5" required>
+                <input type="text" id="zip" name="zip" autocomplete="postal-code">
               </div>
             </div>
           </fieldset>
 
           <label for="interest">Type of Matter</label>
-          <select id="interest" name="interest" required>
+          <select id="interest" name="interest">
             <option value="">-- Please Select --</option>
             <option value="guardianship">Guardianship</option>
             <option value="ltc">Long-Term Care Planning</option>
@@ -125,12 +113,9 @@
           </select>
 
           <label for="message">Brief Summary</label>
-          <textarea id="message" name="message" rows="5" placeholder="Please describe your situation briefly..." required></textarea>
+          <textarea id="message" name="message" rows="5" placeholder="Please describe your situation briefly..."></textarea>
 
           <button type="submit">Submit</button>
-          <p id="contact-disclaimer" class="disclaimer">
-            Upon submission, this form will be sent to Christopher R. Weldon, Esquire, and copied to the email you provided. You may reply to that message with additional information or questions.
-          </p>
         </form>
       </aside>
     </div>
@@ -143,45 +128,38 @@
   </footer>
 
   <script>
-    // Mobile nav toggle
-    const toggle = document.querySelector('.menu-toggle');
-    const navList = document.getElementById('primary-navigation');
-    if (toggle && navList) {
-      toggle.addEventListener('click', () => {
-        navList.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', navList.classList.contains('open'));
-      });
-    }
+    const FLOW_URL = "https://prod-121.westus.logic.azure.com:443/workflows/2fd109379c324cd5bbab1546b34dca3c/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=GH5F3oVR83EzQ2fzn0l0yUzqs9bmVpHFZP0D0lJgBV8";
 
-    // Same intake handler as index.html
-    async function submitIntake(e){
+    function digitsOnly(s) { return (s || '').replace(/[^\d]/g, ''); }
+    function trimLeadingOne(d) { return (d.length === 11 && d.startsWith('1')) ? d.slice(1) : d; }
+
+    document.getElementById('intakeFormContact').addEventListener('submit', async function(e){
       e.preventDefault();
       const form = e.target;
       const data = Object.fromEntries(new FormData(form).entries());
-
-      // Normalize autofill quirks
-      if (data.phone) data.phone = (data.phone + '').replace(/[^\d]/g,'').slice(0,15);
-      if (data['first-name']) data['first-name'] = data['first-name'].trim();
-      if (data['last-name'])  data['last-name']  = data['last-name'].trim();
-      if (data.email)         data.email         = data.email.trim();
+      data.phone = trimLeadingOne(digitsOnly(data.phone || ''));
 
       try {
-        const res = await fetch(form.action, {
+        const res = await fetch(FLOW_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
+          body: JSON.stringify(data),
+          mode: 'cors'
         });
-        if (res.ok) {
+        const raw = await res.clone().text();
+        console.debug('Flow status:', res.status, raw);
+        let payload = null;
+        try { payload = JSON.parse(raw); } catch {}
+        if (res.ok && payload?.success) {
           alert('Thanks—your message was sent. Check your email for a confirmation.');
           form.reset();
         } else {
-          alert('Sorry, something went wrong. Please email chris@weldon.law or call (856) 890-2944.');
+          alert(payload?.message || 'Sorry, something went wrong. Please email chris@weldon.law or call (856) 890-2944.');
         }
-      } catch (err) {
+      } catch {
         alert('Network issue—please email chris@weldon.law or call (856) 890-2944.');
       }
-      return false;
-    }
+    });
   </script>
 </body>
 </html>
