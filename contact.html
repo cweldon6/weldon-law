@@ -7,7 +7,7 @@
   <meta name="description" content="Get in touch with Weldon Law, LLC to discuss guardianship, estate planning, probate, and long-term care planning matters in New Jersey." />
   <link rel="stylesheet" href="branded-styles.css" />
 </head>
-<body>
+<body class="hero--copy">
   <header class="site-header">
     <div class="container nav-container">
       <div class="logo">
@@ -36,6 +36,136 @@
       </nav>
     </div>
   </header>
+
+  <!-- Sticky Intake Banner -->
+  <section class="intake-stick" role="complementary" aria-label="Quick intake">
+    <!-- Mobile bottom sticky CTA -->
+    <div class="intake-stick__mobilebar" aria-hidden="false">
+      <a href="#intakeSheet" class="intake-stick__cta" id="openIntakeMobile" role="button" aria-controls="intakeSheet" aria-expanded="false">
+        Get help now →
+      </a>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="intake-sheet" id="intakeSheet" aria-hidden="true" aria-modal="true" role="dialog" aria-label="Intake form">
+      <div class="intake-sheet__panel" role="document">
+        <button class="intake-sheet__close" id="closeIntakeMobile" aria-label="Close">✕</button>
+
+        <h2>How can we help?</h2>
+        <form id="intakeFormStickyMobile" novalidate>
+          <input type="hidden" name="siteKey" value="WL5616!SecureKey" />
+          <input type="text" name="company" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <div class="intake-form__row intake-form__row--split">
+            <div>
+              <label for="sm-first-name">First name*</label>
+              <input id="sm-first-name" name="first-name" autocomplete="given-name" required />
+            </div>
+            <div>
+              <label for="sm-last-name">Last name*</label>
+              <input id="sm-last-name" name="last-name" autocomplete="family-name" required />
+            </div>
+          </div>
+
+          <label for="sm-email">Email*</label>
+          <input id="sm-email" name="email" type="email" autocomplete="email" required />
+
+          <label for="sm-phone">Phone</label>
+          <input id="sm-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" />
+
+          <label for="sm-interest">Type of matter</label>
+          <select id="sm-interest" name="interest">
+            <option value="">-- Please Select --</option>
+            <option value="guardianship">Guardianship</option>
+            <option value="ltc">Long-Term Care Planning</option>
+            <option value="estate">Estate Planning</option>
+            <option value="probate">Probate</option>
+            <option value="other">Other</option>
+          </select>
+
+          <label for="sm-message">Brief summary</label>
+          <textarea id="sm-message" name="message" rows="5" placeholder="Please describe your situation briefly..."></textarea>
+
+          <button type="submit">Submit</button>
+          <div class="small-subtext">We’ll reply promptly. No obligation.</div>
+          <div class="intake-form__meta">
+            <a href="/privacy.html">Privacy + terms</a>
+            <span class="form-help">Submitting this form does not create an attorney–client relationship. Please avoid confidential details.</span>
+          </div>
+          <div id="sm-status" class="success-inline hidden" role="status" aria-live="polite"></div>
+          <div id="sm-error" class="error-inline hidden" role="alert"></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Desktop/tablet collapsing bar -->
+    <div class="intake-bar intake-bar--collapsed" role="region" aria-label="Quick intake">
+      <div class="container intake-bar__inner">
+        <div class="intake-bar__copy">
+          <strong>Have a question?</strong> Start here and we’ll get back to you quickly.
+        </div>
+        <button class="intake-bar__toggle" id="toggleIntakeDesktop" aria-controls="intakePanel" aria-expanded="false">
+          Get help now →
+        </button>
+      </div>
+
+      <div class="container intake-panel" id="intakePanel" aria-hidden="true">
+        <form id="intakeFormStickyDesktop" novalidate>
+          <input type="hidden" name="siteKey" value="WL5616!SecureKey" />
+          <input type="text" name="company" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <div class="intake-form__row intake-form__row--split">
+            <div>
+              <label for="sd-first-name">First name*</label>
+              <input id="sd-first-name" name="first-name" autocomplete="given-name" required />
+            </div>
+            <div>
+              <label for="sd-last-name">Last name*</label>
+              <input id="sd-last-name" name="last-name" autocomplete="family-name" required />
+            </div>
+          </div>
+
+          <div class="intake-form__row intake-form__row--split">
+            <div>
+              <label for="sd-email">Email*</label>
+              <input id="sd-email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div>
+              <label for="sd-phone">Phone</label>
+              <input id="sd-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" />
+            </div>
+          </div>
+
+          <div class="intake-form__row intake-form__row--split">
+            <div>
+              <label for="sd-interest">Type of matter</label>
+              <select id="sd-interest" name="interest">
+                <option value="">-- Please Select --</option>
+                <option value="guardianship">Guardianship</option>
+                <option value="ltc">Long-Term Care Planning</option>
+                <option value="estate">Estate Planning</option>
+                <option value="probate">Probate</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="sd-message">Brief summary</label>
+              <textarea id="sd-message" name="message" rows="3" placeholder="Short overview…"></textarea>
+            </div>
+          </div>
+
+          <button type="submit">Submit</button>
+          <div class="small-subtext">We’ll reply promptly. No obligation.</div>
+          <div class="intake-form__meta">
+            <a href="/privacy.html">Privacy + terms</a>
+            <span class="form-help">Submitting this form does not create an attorney–client relationship. Please avoid confidential details.</span>
+          </div>
+          <div id="sd-status" class="success-inline hidden" role="status" aria-live="polite"></div>
+          <div id="sd-error" class="error-inline hidden" role="alert"></div>
+        </form>
+      </div>
+    </div>
+  </section>
 
   <main class="landing">
     <div class="container landing-layout">
@@ -89,6 +219,8 @@
           <textarea id="message" name="message" rows="5" placeholder="Please describe your situation briefly..."></textarea>
 
           <button type="submit">Submit</button>
+          <div id="contact-status" class="success-inline hidden" role="status" aria-live="polite"></div>
+          <div id="contact-error" class="error-inline hidden" role="alert"></div>
         </form>
       </aside>
     </div>
@@ -100,39 +232,176 @@
     </div>
   </footer>
 
+  <!-- ONE unified script for nav + banner + forms -->
   <script>
-    const FLOW_URL = "https://prod-121.westus.logic.azure.com:443/workflows/2fd109379c324cd5bbab1546b34dca3c/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=GH5F3oVR83EzQ2fzn0l0yUzqs9bmVpHFZP0D0lJgBV8";
+  /* ===== Config ===== */
+  const FLOW_URL = "https://prod-121.westus.logic.azure.com:443/workflows/2fd109379c324cd5bbab1546b34dca3c/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=GH5F3oVR83EzQ2fzn0l0yUzqs9bmVpHFZP0D0lJgBV8";
 
-    function digitsOnly(s) { return (s || '').replace(/[^\d]/g, ''); }
-    function trimLeadingOne(d) { return (d.length === 11 && d.startsWith('1')) ? d.slice(1) : d; }
+  /* ===== Menu toggle ===== */
+  (function(){
+    const toggle = document.querySelector('.menu-toggle');
+    const navList = document.getElementById('primary-navigation');
+    if (toggle && navList) {
+      toggle.addEventListener('click', () => {
+        navList.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', navList.classList.contains('open'));
+      });
+    }
+  })();
 
-    document.getElementById('intakeFormContact').addEventListener('submit', async function(e){
-      e.preventDefault();
-      const form = e.target;
-      const data = Object.fromEntries(new FormData(form).entries());
-      data.phone = trimLeadingOne(digitsOnly(data.phone || ''));
-
-      try {
-        const res = await fetch(FLOW_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-          mode: 'cors'
-        });
-        const raw = await res.clone().text();
-        console.debug('Flow status:', res.status, raw);
-        let payload = null;
-        try { payload = JSON.parse(raw); } catch {}
-        if (res.ok && payload?.success) {
-          alert('Thanks—your message was sent. Check your email for a confirmation.');
-          form.reset();
-        } else {
-          alert(payload?.message || 'Sorry, something went wrong. Please email chris@weldon.law or call (856) 890-2944.');
-        }
-      } catch {
-        alert('Network issue—please email chris@weldon.law or call (856) 890-2944.');
-      }
+  /* ===== Utilities ===== */
+  const qs = (s, r=document) => r.querySelector(s);
+  function digitsOnly(s) { return (s || '').replace(/[^\d]/g, ''); }
+  function trimLeadingOne(d) { return (d.length === 11 && d.startsWith('1')) ? d.slice(1) : d; }
+  function formatPhoneLive(el) {
+    el.addEventListener('input', () => {
+      let d = trimLeadingOne(digitsOnly(el.value));
+      if (!d) { el.value = ''; return; }
+      if (d.length <= 3) el.value = `(${d}`;
+      else if (d.length <= 6) el.value = `(${d.slice(0,3)}) ${d.slice(3)}`;
+      else el.value = `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6,10)}`;
     });
+  }
+
+  /* ===== Accessibility helpers ===== */
+  function trapFocus(container, enabled) {
+    if (!container) return;
+    const focusable = () => container.querySelectorAll('a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])');
+    function onKey(e) {
+      if (!enabled) return;
+      if (e.key === 'Escape') { closeMobileSheet(); return; }
+      if (e.key !== 'Tab') return;
+      const nodes = Array.from(focusable()).filter(n => !n.disabled && n.offsetParent !== null);
+      if (nodes.length === 0) return;
+      const first = nodes[0], last = nodes[nodes.length-1];
+      if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+      else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+    }
+    container.__trapHandler && document.removeEventListener('keydown', container.__trapHandler);
+    container.__trapHandler = onKey;
+    document.addEventListener('keydown', onKey);
+  }
+
+  /* ===== Mobile sheet behavior ===== */
+  const sheet = qs('#intakeSheet');
+  const openMobile = qs('#openIntakeMobile');
+  const closeMobile = qs('#closeIntakeMobile');
+
+  function openMobileSheet() {
+    sheet.setAttribute('aria-hidden', 'false');
+    openMobile.setAttribute('aria-expanded', 'true');
+    setTimeout(() => qs('#sm-first-name')?.focus(), 0);
+    trapFocus(sheet, true);
+  }
+  function closeMobileSheet() {
+    sheet.setAttribute('aria-hidden', 'true');
+    openMobile.setAttribute('aria-expanded', 'false');
+    trapFocus(sheet, false);
+    openMobile.focus();
+  }
+  openMobile?.addEventListener('click', (e) => { e.preventDefault(); openMobileSheet(); });
+  closeMobile?.addEventListener('click', closeMobileSheet);
+  sheet?.addEventListener('click', (e) => { if (e.target === sheet) closeMobileSheet(); });
+
+  /* ===== Desktop collapsing bar ===== */
+  const toggleDesktop = qs('#toggleIntakeDesktop');
+  const panel = qs('#intakePanel');
+  const bar = qs('.intake-bar');
+
+  function toggleDesktopPanel() {
+    const hidden = panel.getAttribute('aria-hidden') === 'true';
+    panel.setAttribute('aria-hidden', hidden ? 'false' : 'true');
+    toggleDesktop.setAttribute('aria-expanded', hidden ? 'true' : 'false');
+    bar.classList.toggle('intake-bar--collapsed', !hidden);
+    if (hidden) qs('#sd-first-name')?.focus();
+  }
+  toggleDesktop?.addEventListener('click', toggleDesktopPanel);
+
+  /* ===== Validation helpers ===== */
+  function validateRequired(form) {
+    const required = form.querySelectorAll('[required]');
+    let ok = true;
+    required.forEach(f => {
+      if (!f.value.trim()) { ok = false; f.setAttribute('aria-invalid', 'true'); }
+      else f.removeAttribute('aria-invalid');
+    });
+    return ok;
+  }
+  function attachBlurValidation(form) {
+    form.querySelectorAll('[required]').forEach(f => {
+      f.addEventListener('blur', () => {
+        if (!f.value.trim()) f.setAttribute('aria-invalid', 'true');
+        else f.removeAttribute('aria-invalid');
+      });
+    });
+  }
+
+  /* ===== Submit handler (shared) ===== */
+  async function submitIntake(form, statusEl, errorEl) {
+    const data = Object.fromEntries(new FormData(form).entries());
+    data.phone = trimLeadingOne(digitsOnly(data.phone || ''));
+
+    if (!validateRequired(form)) {
+      errorEl.textContent = 'Please fill in the required fields.';
+      errorEl.classList.remove('hidden');
+      statusEl.classList.add('hidden');
+      return;
+    }
+
+    errorEl.classList.add('hidden');
+    statusEl.textContent = 'Sending…';
+    statusEl.classList.remove('hidden');
+
+    try {
+      const res = await fetch(FLOW_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        mode: 'cors'
+      });
+      const raw = await res.clone().text();
+      let payload = null; try { payload = JSON.parse(raw); } catch {}
+      if (res.ok && payload?.success) {
+        statusEl.textContent = 'Thanks—check your email for a confirmation.';
+        form.reset();
+      } else {
+        errorEl.textContent = payload?.message || 'Sorry, something went wrong. Please email chris@weldon.law or call (856) 890-2944.';
+        errorEl.classList.remove('hidden');
+        statusEl.classList.add('hidden');
+      }
+    } catch {
+      errorEl.textContent = 'Network issue—please email chris@weldon.law or call (856) 890-2944.';
+      errorEl.classList.remove('hidden');
+      statusEl.classList.add('hidden');
+    }
+  }
+
+  /* ===== Wire up forms + phone formatting ===== */
+  function readyIntakeForm(formId, statusId, errorId, phoneId) {
+    const form = qs('#' + formId); if (!form) return;
+    attachBlurValidation(form);
+    const phone = qs('#' + phoneId); if (phone) formatPhoneLive(phone);
+    const statusEl = qs('#' + statusId), errorEl = qs('#' + errorId);
+    form.addEventListener('submit', (e) => { e.preventDefault(); submitIntake(form, statusEl, errorEl); });
+  }
+
+  // Sticky forms
+  readyIntakeForm('intakeFormStickyMobile', 'sm-status', 'sm-error', 'sm-phone');
+  readyIntakeForm('intakeFormStickyDesktop', 'sd-status', 'sd-error', 'sd-phone');
+
+  // Page form on Contact
+  readyIntakeForm('intakeFormContact', 'contact-status', 'contact-error', 'phone');
+
+  /* ===== Prevent mobile bar blocking call targets ===== */
+  function adjustBottomPadding() {
+    const bar = document.querySelector('.intake-stick__mobilebar');
+    if (!bar) return;
+    const h = bar.getBoundingClientRect().height || 56;
+    document.body.style.paddingBottom = (window.innerWidth <= 768) ? (h + 8) + 'px' : '';
+  }
+  window.addEventListener('resize', adjustBottomPadding);
+  window.addEventListener('orientationchange', adjustBottomPadding);
+  adjustBottomPadding();
   </script>
 </body>
 </html>
