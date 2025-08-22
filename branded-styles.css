@@ -369,7 +369,14 @@ input:focus, select:focus, textarea:focus {
   color: #f5f5f5; /* High-contrast light gray against dark footer */
   font-style: italic;
 }
+/* === Responsive overrides === */
 
+/* Hide desktop intake bar on mobile */
+@media (max-width: 768px) {
+  .intake-bar {
+    display: none !important;
+  }
+}
 
 /* Ensure body content isn't hidden behind the fixed bar */
 @media (min-width: 1024px) {
