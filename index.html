@@ -8,6 +8,23 @@
   <link rel="stylesheet" href="branded-styles.css" />
 </head>
 <body class="hero--copy">
+
+  <!-- Top utility CTA bar (above the blue nav) -->
+  <section class="top-cta" role="region" aria-label="Quick contact">
+    <div class="container top-cta__inner">
+      <div class="top-cta__prompt">
+        <strong>Have a question?</strong> Start here and we’ll get back to you quickly.
+      </div>
+      <div class="top-cta__actions">
+        <a href="#" id="ctaGetHelp" class="btn btn--outline" role="button">Get help now →</a>
+        <a class="btn btn--phone" href="tel:+18568902944" aria-label="Call Weldon Law at (856) 890-2944">
+          (856) 890-2944
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main site header -->
   <header class="site-header">
     <div class="container nav-container">
       <div class="logo">
@@ -31,7 +48,7 @@
           </li>
           <li><a href="news.html">News & Resources</a></li>
           <li><a href="contact.html">Contact</a></li>
-          <li class="nav-cta"><a class="button" href="tel:+18568902944">Call Now</a></li>
+          <!-- no header call-CTA per request -->
         </ul>
       </nav>
     </div>
@@ -39,6 +56,7 @@
 
   <!-- Sticky Intake Banner -->
   <section class="intake-stick" role="complementary" aria-label="Quick intake">
+
     <!-- Mobile bottom sticky CTA -->
     <div class="intake-stick__mobilebar" aria-hidden="false">
       <a href="#intakeSheet" class="intake-stick__cta" id="openIntakeMobile" role="button" aria-controls="intakeSheet" aria-expanded="false">
@@ -98,7 +116,7 @@
       </div>
     </div>
 
-    <!-- Desktop/tablet collapsing bar -->
+    <!-- Desktop/tablet: collapsing intake bar + panel -->
     <div class="intake-bar intake-bar--collapsed" role="region" aria-label="Quick intake">
       <div class="container intake-bar__inner">
         <div class="intake-bar__copy">
@@ -198,7 +216,7 @@
       </div>
     </section>
 
-    <!-- PRACTICE AREAS (SCAN-READY) -->
+    <!-- PRACTICE AREAS -->
     <section class="container" style="padding: var(--space-6) 0;">
       <h2>Areas of Practice</h2>
       <div class="info-grid" style="grid-template-columns: repeat(2,minmax(0,1fr));">
@@ -209,7 +227,7 @@
       </div>
     </section>
 
-    <!-- SHORT BIO / LINK OUT -->
+    <!-- SHORT BIO / RESOURCES -->
     <section class="info-grid container">
       <div class="about-snippet">
         <img src="profile-placeholder.jpg" alt="Portrait of Christopher R. Weldon, Esq." class="bio-image" />
@@ -224,7 +242,7 @@
       </div>
     </section>
 
-    <!-- FAQ (lightweight, index-friendly) -->
+    <!-- FAQ -->
     <section class="container" style="padding: var(--space-6) 0;">
       <h2>Frequently Asked Questions</h2>
       <details><summary>Do I need an attorney for a guardianship?</summary><p>In most cases, yes. The process involves court filings, medical certifications, and hearings. We’ll map the steps and timeline for you.</p></details>
@@ -285,7 +303,7 @@
     </form>
   </section>
 
-  <!-- ONE unified script for nav + banner + forms -->
+  <!-- Unified script -->
   <script>
   /* ===== Config ===== */
   const FLOW_URL = "https://prod-121.westus.logic.azure.com:443/workflows/2fd109379c324cd5bbab1546b34dca3c/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=GH5F3oVR83EzQ2fzn0l0yUzqs9bmVpHFZP0D0lJgBV8";
@@ -371,6 +389,22 @@
   }
   toggleDesktop?.addEventListener('click', toggleDesktopPanel);
 
+  // Top-CTA "Get help now" opens the correct intake
+  (function(){
+    const cta = document.getElementById('ctaGetHelp');
+    if (!cta) return;
+    cta.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (window.innerWidth <= 768) {
+        openMobileSheet && openMobileSheet();
+      } else {
+        const isHidden = panel && panel.getAttribute('aria-hidden') === 'true';
+        if (isHidden) toggleDesktopPanel && toggleDesktopPanel();
+        else panel?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  })();
+
   /* ===== Validation helpers ===== */
   function validateRequired(form) {
     const required = form.querySelectorAll('[required]');
@@ -420,13 +454,11 @@
         statusEl.textContent = 'Thanks—check your email for a confirmation.';
         statusEl.classList.add('success-inline');
         errorEl.classList.remove('error-inline');
-
         form.reset();
       } else {
         errorEl.textContent = payload?.message || 'Sorry, something went wrong. Please email chris@weldon.law or call (856) 890-2944.';
         errorEl.classList.add('error-inline');
         statusEl.classList.remove('success-inline');
-
         errorEl.classList.remove('hidden');
         statusEl.classList.add('hidden');
       }
@@ -463,32 +495,6 @@
   window.addEventListener('resize', adjustBottomPaddingMobile);
   window.addEventListener('orientationchange', adjustBottomPaddingMobile);
   adjustBottomPaddingMobile();
-
-  /* ===== Desktop footer toggle & bottom padding ===== */
-  (function(){
-    const footer = document.querySelector('.intake-footer');
-    const toggle = document.getElementById('intakeFooterToggle');
-    const panel  = document.getElementById('intakeFooterPanel');
-
-    if (!footer || !toggle) return;
-
-    function setPadding() {
-      if (window.innerWidth < 1024) { document.body.style.paddingBottom = ''; return; }
-      const h = footer.getBoundingClientRect().height || 92;
-      document.body.style.paddingBottom = footer.classList.contains('intake-footer--collapsed') ? '16px' : (h + 8) + 'px';
-    }
-
-    toggle.addEventListener('click', () => {
-      const collapsed = footer.classList.toggle('intake-footer--collapsed');
-      toggle.setAttribute('aria-expanded', (!collapsed).toString());
-      panel.style.visibility = collapsed ? 'hidden' : 'visible';
-      setPadding();
-    });
-
-    window.addEventListener('resize', setPadding);
-    window.addEventListener('orientationchange', setPadding);
-    setTimeout(setPadding, 0);
-  })();
   </script>
 </body>
 </html>

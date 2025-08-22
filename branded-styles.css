@@ -104,14 +104,38 @@ textarea:focus-visible {
 }
 .dropdown-content a { display: block; padding: 0.5rem 1rem; color: var(--color-ink); }
 .dropdown:hover .dropdown-content { display: block; }
-
-/* Keyboard-friendly dropdown opening */
+/* Keyboard-friendly dropdown */
 .dropdown:focus-within .dropdown-content,
 .dropdown:focus-within > a + .dropdown-content { display: block; }
 .dropdown > a:focus-visible {
   outline: 3px solid var(--color-focus);
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* --- Top utility CTA bar (above the blue header) --- */
+.top-cta {
+  background: #f6f8fb;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  font-size: .975rem;
+}
+.top-cta__inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .75rem 1rem;
+  align-items: center;
+  padding: .5rem 0;
+}
+.top-cta__prompt { color: #1f2937; }
+.top-cta__actions { display: flex; align-items: center; gap: .5rem; }
+.btn { display:inline-block; border-radius: 999px; padding:.5rem 1rem; text-decoration:none; font-weight:600; line-height:1; }
+.btn--outline { border:1px solid #1f3a63; color:#1f3a63; background:transparent; }
+.btn--outline:hover { background: rgba(31,58,99,.06); }
+.btn--phone { background:#d4a017; color:#fff; border:0; }
+.btn--phone:hover { background:#b98d14; }
+@media (max-width: 768px) {
+  .top-cta__inner { grid-template-columns: 1fr; text-align:center; }
+  .top-cta__actions { justify-content: center; flex-wrap: wrap; }
 }
 
 /* Mobile nav */
@@ -121,7 +145,7 @@ textarea:focus-visible {
   .navbar.open { display: flex; }
 }
 
-/* Buttons */
+/* Buttons (legacy .button class) */
 .button {
   display: inline-block;
   padding: 0.6rem 1rem;
@@ -132,10 +156,9 @@ textarea:focus-visible {
   color: var(--color-ink-strong);
   border: 1px solid transparent;
   box-shadow: var(--shadow-1);
-  min-height: 44px; /* Meet tap target */
+  min-height: 44px;
 }
 .button:hover { filter: brightness(0.95); text-decoration: none; }
-.nav-cta { margin-left: .5rem; }
 
 /* Intro / Homepage */
 .intro-banner { background: var(--color-bg-soft); padding: var(--space-6) 0; }
@@ -151,9 +174,7 @@ h3 { font-size: var(--fs-600); line-height: var(--lh-tight); margin: 0 0 var(--s
   .info-grid { grid-template-columns: 1fr 0.8fr; align-items: start; }
 }
 .about-snippet p { max-width: var(--measure); }
-.bio-image {
-  float: left; width: 120px; height: auto; margin: 0 1rem 1rem 0; border-radius: 8px; display: none;
-}
+.bio-image { float: left; width: 120px; height: auto; margin: 0 1rem 1rem 0; border-radius: 8px; display: none; }
 @media (min-width: 768px) { .bio-image { display: block; } }
 
 /* Services */
@@ -177,7 +198,7 @@ textarea { resize: vertical; }
 button[type="submit"] {
   padding: 0.75rem 1rem; background: var(--color-primary); color: #fff;
   font-size: var(--fs-400); font-weight: 700; border: none; border-radius: 6px; cursor: pointer;
-  min-height: 44px; /* tap target */
+  min-height: 44px;
 }
 button[type="submit"]:hover { filter: brightness(1.05); }
 
@@ -206,15 +227,13 @@ input:focus, select:focus, textarea:focus {
 }
 
 /* =========================================
-   Sticky Intake Banner (MUST-HAVE)
+   Sticky Intake Banner
    ========================================= */
-/* 1) Mobile: bottom sticky bar with expand-to-sheet */
-.intake-stick { /* wrapper sits at document root */ }
+
+/* 1) Mobile: bottom sticky bar + sheet */
 .intake-stick__mobilebar {
   position: fixed; inset-inline: 0; bottom: 0; z-index: 1100;
-  background: rgba(255,255,255,.95); /* fallback */
-  background: #ffffffF2;             /* 8-digit hex with alpha */
-  backdrop-filter: saturate(120%) blur(6px);
+  background: #ffffffF2; backdrop-filter: saturate(120%) blur(6px);
   border-top: 1px solid var(--color-border);
   display: flex; align-items: center; justify-content: center;
   min-height: 56px; padding: 0.5rem 1rem calc(0.5rem + env(safe-area-inset-bottom));
@@ -224,15 +243,11 @@ input:focus, select:focus, textarea:focus {
   font-weight: 700; border: 1px solid var(--color-primary);
   background: var(--color-accent); color: var(--color-ink-strong);
   padding: .6rem 1rem; border-radius: 999px; text-decoration: none;
-  min-height: 44px; /* tap target */
+  min-height: 44px;
 }
 .intake-stick__cta:focus-visible { outline: 3px solid var(--color-focus); }
 
-/* sheet (hidden by default) */
-.intake-sheet {
-  position: fixed; inset: 0 0 0 0; z-index: 1200; display: none;
-  background: #00000066; /* scrim */
-}
+.intake-sheet { position: fixed; inset: 0; z-index: 1200; display: none; background: #00000066; }
 .intake-sheet[aria-hidden="false"] { display: block; }
 .intake-sheet__panel {
   position: absolute; left: 0; right: 0; bottom: 0;
@@ -245,18 +260,21 @@ input:focus, select:focus, textarea:focus {
   width: 44px; height: 44px; line-height: 44px; text-align: center; border-radius: 6px;
 }
 
-/* 2) Tablet/Desktop: top collapsing bar (pushes content down, no overlay) */
+/* 2) Tablet/Desktop: collapsing bar */
 @media (min-width: 769px) {
   .intake-stick__mobilebar { display: none; }
+
   .intake-bar {
     position: sticky; top: 0; z-index: 900;
     background: #fff; border-bottom: 1px solid var(--color-border);
   }
+
   .intake-bar__inner {
     display: grid; grid-template-columns: 1fr auto; align-items: center;
     gap: var(--space-3); padding: .5rem 0; transition: padding .2s ease;
   }
   .intake-bar--collapsed .intake-bar__inner { padding: .25rem 0; }
+
   .intake-bar__toggle {
     justify-self: end;
     display: inline-flex; align-items: center; gap: .5rem;
@@ -264,6 +282,7 @@ input:focus, select:focus, textarea:focus {
     border-radius: 999px; padding: .4rem .75rem; font-weight: 700;
     min-height: 44px;
   }
+
   .intake-panel {
     display: none; border-top: 1px dashed var(--color-border); padding: var(--space-4) 0;
   }
@@ -272,116 +291,41 @@ input:focus, select:focus, textarea:focus {
 
 /* Shared form bits for intake */
 .intake-form__row { display: grid; gap: .75rem; }
-@media (min-width: 900px) {
-  .intake-form__row--split { grid-template-columns: 1fr 1fr; }
-}
-.intake-form__meta {
-  display: flex; align-items: start; gap: .75rem; flex-wrap: wrap; margin-top: .25rem;
-}
+@media (min-width: 900px) { .intake-form__row--split { grid-template-columns: 1fr 1fr; } }
+.intake-form__meta { display: flex; align-items: start; gap: .75rem; flex-wrap: wrap; margin-top: .25rem; }
 .intake-form__meta a { text-decoration: underline; }
 
-/* Reduce motion */
-@media (prefers-reduced-motion: reduce) {
-  .intake-bar__inner { transition: none; }
-}
-
 /* ===== Desktop Fixed Footer Intake ===== */
-.intake-footer { display: none; } /* hide on mobile/tablet */
-
+.intake-footer { display: none; }
 @media (min-width: 1024px) {
   .intake-footer {
     display: block;
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    background: var(--color-primary);
-    color: #fff;
-    box-shadow: 0 -2px 6px rgba(0,0,0,0.2);
-    z-index: 9999;
-    padding: 0.5rem 1rem;
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--color-primary); color: #fff;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.2); z-index: 9999; padding: 0.5rem 1rem;
   }
-
-  .intake-footer__row {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  gap: 0.5rem;
-  max-width: var(--max-width);
-  margin: 0 auto;
-}
-
+  .intake-footer__row,
   .intake-footer__form {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    gap: 0.5rem;
-    max-width: var(--max-width);
-    margin: 0 auto;
+    display: flex; flex-wrap: nowrap; align-items: center; gap: 0.5rem;
+    max-width: var(--max-width); margin: 0 auto;
   }
-
   .intake-footer__form input,
   .intake-footer__form select {
-    padding: 0.5rem 0.6rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    flex: 1 1 140px;   /* allow shrinking but stay horizontal */
-    min-width: 140px;
+    padding: 0.5rem 0.6rem; border: 1px solid #ccc; border-radius: 6px;
+    flex: 1 1 140px; min-width: 140px;
   }
-
   .intake-footer__submit {
-    background: var(--color-accent);
-    color: var(--color-ink-strong);
-    font-weight: 700;
-    padding: 0.55rem 1rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    flex: 0 0 auto;
-    min-height: 44px;
+    background: var(--color-accent); color: var(--color-ink-strong);
+    font-weight: 700; padding: 0.55rem 1rem; border: none; border-radius: 8px; cursor: pointer; flex: 0 0 auto; min-height: 44px;
   }
-
-  /* Optional status line (if you show it) */
-  .intake-footer__statusline {
-    flex-basis: 100%;
-    font-size: 0.85rem;
-    padding-top: 0.25rem;
-  }
-}
-  /* Footer intake status messages */
-.intake-footer__statusline {
-  margin-top: 0.25rem;
-  font-size: 0.85rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  .intake-footer__statusline { flex-basis: 100%; font-size: 0.85rem; padding-top: 0.25rem; }
 }
 
-.intake-footer__statusline .success-inline {
-  color: #2e7d32; /* Accessible green */
-  font-weight: 600;
-}
-
-.intake-footer__statusline .error-inline {
-  color: #c62828; /* Accessible red */
-  font-weight: 600;
-}
-
-.intake-footer__statusline .small-subtext {
-  color: #f5f5f5; /* High-contrast light gray against dark footer */
-  font-style: italic;
-}
-/* === Responsive overrides === */
-
-/* Hide desktop intake bar on mobile */
-@media (max-width: 768px) {
-  .intake-bar {
-    display: none !important;
-  }
-}
-
-/* Ensure body content isn't hidden behind the fixed bar */
-@media (min-width: 1024px) {
-  body { padding-bottom: 96px; } /* ~footer height; adjust if needed */
-}
+/* Footer intake status messages */
+.intake-footer__statusline { margin-top: 0.25rem; font-size: 0.85rem; display: flex; align-items: center; gap: 1rem; }
+.intake-footer__statusline .success-inline { color: #2e7d32; font-weight: 600; }
+.intake-footer__statusline .error-inline { color: #c62828; font-weight: 600; }
+.intake-footer__statusline .small-subtext { color: #f5f5f5; font-style: italic; }
 
 /* Helpers */
 .hidden { display: none !important; }
@@ -389,9 +333,8 @@ input:focus, select:focus, textarea:focus {
   position: absolute !important; clip: rect(1px,1px,1px,1px); clip-path: inset(50%);
   width: 1px; height: 1px; overflow: hidden; white-space: nowrap;
 }
-/* Compact footer label helpers used in the HTML */
 .vh { position: absolute !important; clip: rect(1px,1px,1px,1px); clip-path: inset(50%); width:1px; height:1px; overflow:hidden; white-space:nowrap; }
-.vf { display: contents; } /* keeps label clickable but doesn't add a box */
+.vf { display: contents; }
 
 /* Callouts under submit */
 .small-subtext { font-size: var(--fs-300); color: #444; margin-top: .25rem; }
@@ -401,19 +344,10 @@ input:focus, select:focus, textarea:focus {
 /* Anchor offsets so sticky header doesn't cover targets */
 :where(h1, h2, h3, [id]) { scroll-margin-top: 80px; }
 
-/* Forced colors (high contrast) */
-@media (forced-colors: active) {
-  * { forced-color-adjust: auto; }
-  .button, button[type="submit"] { border: 1px solid ButtonText; }
-  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-    outline: 2px solid Highlight;
-  }
-}
-
 /* Print stylesheet basics */
 @media print {
   body { color: #000; background: #fff; }
-  .site-header, .site-footer, .intake-stick__mobilebar, .intake-bar { display: none !important; }
+  .site-header, .site-footer, .intake-stick__mobilebar, .intake-bar, .top-cta { display: none !important; }
   a { color: #000; text-decoration: underline; }
   input, select, textarea { border: 1px solid #000; }
 }
