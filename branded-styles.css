@@ -145,6 +145,15 @@ textarea:focus-visible {
   .navbar.open { display: flex; }
 }
 
+/* Mobile: never show the desktop intake bar/panel */
+@media (max-width: 768px) {
+  .intake-bar,
+  .intake-panel,
+  #intakePanel {        /* in case it's outside the .intake-bar wrapper */
+    display: none !important;
+  }
+}
+
 /* Buttons (legacy .button class) */
 .button {
   display: inline-block;

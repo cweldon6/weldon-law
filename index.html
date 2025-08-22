@@ -13,7 +13,7 @@
   <section class="top-cta" role="region" aria-label="Quick contact">
     <div class="container top-cta__inner">
       <div class="top-cta__prompt">
-        <strong>Have a question?</strong> Submit an inquiry by clicking "Get help now →". and we’ll get back to you quickly. Or, give us a call!
+        <strong>Have a question?</strong> Start here and we’ll get back to you quickly.
       </div>
       <div class="top-cta__actions">
         <a href="#" id="ctaGetHelp" class="btn btn--outline" role="button">Get help now →</a>
@@ -54,9 +54,8 @@
     </div>
   </header>
 
-  <!-- Sticky Intake Banner -->
+  <!-- Sticky Intake (mobile: bottom CTA + sheet) -->
   <section class="intake-stick" role="complementary" aria-label="Quick intake">
-
     <!-- Mobile bottom sticky CTA -->
     <div class="intake-stick__mobilebar" aria-hidden="false">
       <a href="#intakeSheet" class="intake-stick__cta" id="openIntakeMobile" role="button" aria-controls="intakeSheet" aria-expanded="false">
@@ -64,7 +63,7 @@
       </a>
     </div>
 
-    <!-- Mobile sheet -->
+    <!-- Mobile slide-up sheet -->
     <div class="intake-sheet" id="intakeSheet" aria-hidden="true" aria-modal="true" role="dialog" aria-label="Intake form">
       <div class="intake-sheet__panel" role="document">
         <button class="intake-sheet__close" id="closeIntakeMobile" aria-label="Close">✕</button>
@@ -115,63 +114,6 @@
         </form>
       </div>
     </div>
-
-      <div class="container intake-panel" id="intakePanel" aria-hidden="true">
-        <form id="intakeFormStickyDesktop" novalidate>
-          <input type="hidden" name="siteKey" value="WL5616!SecureKey" />
-          <input type="text" name="company" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
-
-          <div class="intake-form__row intake-form__row--split">
-            <div>
-              <label for="sd-first-name">First name*</label>
-              <input id="sd-first-name" name="first-name" autocomplete="given-name" required />
-            </div>
-            <div>
-              <label for="sd-last-name">Last name*</label>
-              <input id="sd-last-name" name="last-name" autocomplete="family-name" required />
-            </div>
-          </div>
-
-          <div class="intake-form__row intake-form__row--split">
-            <div>
-              <label for="sd-email">Email*</label>
-              <input id="sd-email" name="email" type="email" autocomplete="email" required />
-            </div>
-            <div>
-              <label for="sd-phone">Phone</label>
-              <input id="sd-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" />
-            </div>
-          </div>
-
-          <div class="intake-form__row intake-form__row--split">
-            <div>
-              <label for="sd-interest">Type of matter</label>
-              <select id="sd-interest" name="interest">
-                <option value="">-- Please Select --</option>
-                <option value="guardianship">Guardianship</option>
-                <option value="ltc">Long-Term Care Planning</option>
-                <option value="estate">Estate Planning</option>
-                <option value="probate">Probate</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-            <div>
-              <label for="sd-message">Brief summary</label>
-              <textarea id="sd-message" name="message" rows="3" placeholder="Short overview…"></textarea>
-            </div>
-          </div>
-
-          <button type="submit">Submit</button>
-          <div class="small-subtext">We’ll reply promptly. No obligation.</div>
-          <div class="intake-form__meta">
-            <a href="/privacy.html">Privacy + terms</a>
-            <span class="form-help">Submitting this form does not create an attorney–client relationship. Please avoid confidential details.</span>
-          </div>
-          <div id="sd-status" class="success-inline hidden" role="status" aria-live="polite"></div>
-          <div id="sd-error" class="error-inline hidden" role="alert"></div>
-        </form>
-      </div>
-    </div>
   </section>
 
   <main>
@@ -197,7 +139,7 @@
         <div>
           <h2>How we work</h2>
           <ol class="services-list">
-            <li><strong>Start here:</strong> Send a short intake (bottom bar or “Get help now →”)</li>
+            <li><strong>Start here:</strong> Send a short intake (mobile sheet or “Get help now →”)</li>
             <li><strong>We respond quickly</strong> with next steps and a short call</li>
             <li><strong>Clear plan</strong> for your matter and timelines</li>
           </ol>
@@ -232,7 +174,7 @@
     </section>
 
     <!-- FAQ -->
-    <section class="container" style="padding: var(--space-6) 0;">
+    <section class="container" style="padding: var(--space-6) 0%;">
       <h2>Frequently Asked Questions</h2>
       <details><summary>Do I need an attorney for a guardianship?</summary><p>In most cases, yes. The process involves court filings, medical certifications, and hearings. We’ll map the steps and timeline for you.</p></details>
       <details><summary>How fast can we start?</summary><p>After you send the intake, we typically respond the same day or next business day with next steps.</p></details>
@@ -364,32 +306,27 @@
   closeMobile?.addEventListener('click', closeMobileSheet);
   sheet?.addEventListener('click', (e) => { if (e.target === sheet) closeMobileSheet(); });
 
-  /* ===== Desktop collapsing bar ===== */
-  const toggleDesktop = qs('#toggleIntakeDesktop');
-  const panel = qs('#intakePanel');
-  const bar = qs('.intake-bar');
-
-  function toggleDesktopPanel() {
-    const hidden = panel.getAttribute('aria-hidden') === 'true';
-    panel.setAttribute('aria-hidden', hidden ? 'false' : 'true');
-    toggleDesktop.setAttribute('aria-expanded', hidden ? 'true' : 'false');
-    bar.classList.toggle('intake-bar--collapsed', !hidden);
-    if (hidden) qs('#sd-first-name')?.focus();
-  }
-  toggleDesktop?.addEventListener('click', toggleDesktopPanel);
-
-  // Top-CTA "Get help now" opens the correct intake
-  (function(){
+  /* ===== Top CTA: route to correct intake ===== */
+  (function () {
     const cta = document.getElementById('ctaGetHelp');
     if (!cta) return;
+
+    function focusFooterFirstField() {
+      const first = document.querySelector('#ft-last-name, #ft-first-name, #ft-email');
+      first?.focus({ preventScroll: true });
+    }
+
     cta.addEventListener('click', (e) => {
       e.preventDefault();
       if (window.innerWidth <= 768) {
-        openMobileSheet && openMobileSheet();
+        openMobileSheet();
       } else {
-        const isHidden = panel && panel.getAttribute('aria-hidden') === 'true';
-        if (isHidden) toggleDesktopPanel && toggleDesktopPanel();
-        else panel?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Desktop: scroll to the fixed footer intake and focus
+        const footer = document.querySelector('.intake-footer');
+        if (footer) {
+          footer.scrollIntoView({ behavior: 'smooth', block: 'end' });
+          setTimeout(focusFooterFirstField, 350);
+        }
       }
     });
   })();
@@ -439,6 +376,7 @@
       });
       const raw = await res.clone().text();
       let payload = null; try { payload = JSON.parse(raw); } catch {}
+
       if (res.ok && payload?.success) {
         statusEl.textContent = 'Thanks—check your email for a confirmation.';
         statusEl.classList.add('success-inline');
@@ -467,10 +405,8 @@
     form.addEventListener('submit', (e) => { e.preventDefault(); submitIntake(form, statusEl, errorEl); });
   }
 
-  // Sticky forms
+  // Mobile sheet form
   readyIntakeForm('intakeFormStickyMobile', 'sm-status', 'sm-error', 'sm-phone');
-  readyIntakeForm('intakeFormStickyDesktop', 'sd-status', 'sd-error', 'sd-phone');
-
   // Desktop footer quick intake
   readyIntakeForm('intakeFormFooterDesktop', 'ft-status', 'ft-error', 'ft-phone');
 
