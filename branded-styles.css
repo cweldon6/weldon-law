@@ -178,13 +178,38 @@ h3 { font-size: var(--fs-600); line-height: var(--lh-tight); margin: 0 0 var(--s
 .subtitle, .tagline { font-size: var(--fs-500); }
 
 /* Two Column Section */
-.info-grid { display: grid; gap: var(--space-6); padding: var(--space-6) 0; }
-@media (min-width: 900px) {
-  .info-grid { grid-template-columns: 1fr 0.8fr; align-items: start; }
+.info-grid { 
+  display: grid; 
+  gap: var(--space-6); 
+  padding: var(--space-6) 0; 
 }
-.about-snippet p { max-width: var(--measure); }
-.bio-image { float: left; width: 200; height: auto; margin: 0 1rem 1rem 0; border-radius: 8px; display: none; }
-@media (min-width: 768px) { .bio-image { display: block; } }
+
+@media (min-width: 900px) {
+  .info-grid { 
+    grid-template-columns: 1fr 0.8fr; 
+    align-items: start; 
+  }
+}
+
+.about-snippet p { 
+  max-width: var(--measure); 
+}
+
+.bio-image { 
+  float: left; 
+  width: 120px;  /* Fixed width instead of auto */
+  height: 150px; /* Added px unit */
+  margin: 0 var(--space-4) var(--space-4) 0; /* Use consistent spacing */
+  border-radius: var(--radius-sm); /* Use design system value */
+  object-fit: cover; /* Ensures image scales properly */
+  display: none; 
+}
+
+@media (min-width: 768px) { /* More reasonable breakpoint */
+  .bio-image { 
+    display: block; 
+  } 
+}
 
 /* Services */
 .firm-services h2 { margin-top: 0; }
