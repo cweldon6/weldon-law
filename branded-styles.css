@@ -183,12 +183,12 @@ h3 { font-size: var(--fs-600); line-height: var(--lh-tight); margin: 0 0 var(--s
   .info-grid { grid-template-columns: 1fr 0.8fr; align-items: start; }
 }
 .about-snippet p { max-width: var(--measure); }
-.bio-image { float: left; width: 200; height: auto; margin: 0 1rem 1rem 0; border-radius: 8px; display: none; }
+.bio-image { float: left; width: 120; height: auto; margin: 0 1rem 1rem 0; border-radius: 8px; display: none; }
 @media (min-width: 768px) { .bio-image { display: block; } }
 
 /* Services */
 .firm-services h2 { margin-top: 0; }
-.services-list {  list-style: none; padding: 0; margin: 0; }
+.services-list { float: right; list-style: none; padding: 0; margin: 0; }
 .services-list li { margin-bottom: .5rem; }
 .services-list a { font-weight: 600; color: var(--color-primary); }
 .services-list a:hover { text-decoration: underline; }
