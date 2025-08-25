@@ -202,6 +202,14 @@ h3 { font-size: var(--fs-600); line-height: var(--lh-tight); margin: 0 0 var(--s
   max-width: none;
 }
 
+.bio-section .about-snippet p {
+  max-width: none;
+}
+
+.bio-section {
+  overflow: hidden;
+}
+
 .bio-image { 
   float: left; 
   width: 120px;
