@@ -87,7 +87,11 @@ textarea:focus-visible {
   color: #fff;
   padding: var(--space-3) 0;
 }
-.logo img { height: 64px; }
+.logo img { 
+  width: auto;
+  max-height: 64px; /* Use max-height instead */
+  height: auto;
+}
 .nav-container { display: flex; justify-content: space-between; align-items: center; }
 .navbar { list-style: none; display: flex; flex-wrap: wrap; gap: 1.25rem; margin: 0; padding: 0; }
 .navbar a { color: #fff; font-weight: 600; }
@@ -170,7 +174,7 @@ textarea:focus-visible {
 .button:hover { filter: brightness(0.95); text-decoration: none; }
 
 /* Intro / Homepage */
-.intro-banner { background: var(--color-bg-soft); padding: var(--space-6) 0; }
+.intro-banner { background: var(--color-bg-soft); padding: var(--space-2) 0; }
 .intro-banner p { margin-bottom: 1rem; max-width: var(--max-width); }
 h1 { font-family: var(--font-serif); font-size: var(--fs-800); line-height: var(--lh-tight); color: var(--color-ink-strong); margin: 0 0 var(--space-3); }
 h2 { font-family: var(--font-serif); font-size: var(--fs-700); line-height: var(--lh-tight); margin: 0 0 var(--space-3); }
@@ -181,7 +185,7 @@ h3 { font-size: var(--fs-600); line-height: var(--lh-tight); margin: 0 0 var(--s
 .info-grid { 
   display: grid; 
   gap: var(--space-6); 
-  padding: var(--space-6) 0; 
+  padding: var(--space-2) 0; 
 }
 
 @media (min-width: 900px) {
@@ -249,7 +253,7 @@ input:focus, select:focus, textarea:focus {
 
 /* Footer */
 .site-footer {
-  background: #111; color: #fff; text-align: center; padding: var(--space-4) 0; font-size: var(--fs-300);
+  background: #111; color: #fff; text-align: center; padding: var(--space-2) 0; font-size: var(--fs-300);
 }
 
 /* =========================================
