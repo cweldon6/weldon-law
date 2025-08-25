@@ -264,7 +264,6 @@
   </div>
 </section>
 </main>
-
   <footer class="site-footer">
     <div class="container">
       <p>&copy; 2025 Weldon Law, LLC. All rights reserved.</p>
@@ -524,21 +523,12 @@
     const cta = document.getElementById('ctaGetHelp');
     if (!cta) return;
 
-    function focusFooterFirstField() {
-      const first = document.querySelector('#ft-last-name, #ft-first-name, #ft-email');
-      first?.focus({ preventScroll: true });
-    }
-
     cta.addEventListener('click', (e) => {
       e.preventDefault();
       if (window.innerWidth <= 768) {
-        openMobileSheet();
+        openMobileSheet();  // Mobile: opens the intake sheet
       } else {
-        const footer = document.querySelector('.intake-footer');
-        if (footer) {
-          footer.scrollIntoView({ behavior: 'smooth', block: 'end' });
-          setTimeout(focusFooterFirstField, 350);
-        }
+        window.location.href = 'contact.html';  // Desktop: goes to contact page
       }
     });
   })();
