@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Weldon Law, LLC | Guardianship, Estate & Elder Law in New Jersey</title>
   <meta name="description" content="Weldon Law, LLC provides experienced, compassionate counsel in guardianship, estate planning, probate, and long-term care planning throughout New Jersey." />
-  
+
   <!-- Enhanced SEO Meta Tags -->
   <meta property="og:title" content="Weldon Law, LLC | Guardianship, Estate & Elder Law in New Jersey" />
   <meta property="og:description" content="Experienced, compassionate counsel in guardianship, estate planning, probate, and long-term care planning throughout New Jersey." />
@@ -15,7 +15,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Weldon Law, LLC | Elder Law Attorney in New Jersey" />
   <meta name="twitter:description" content="Expert guidance in guardianship, estate planning, and elder law matters." />
-  
+
   <!-- Local Business Schema -->
   <script type="application/ld+json">
   {
@@ -36,11 +36,8 @@
   <link rel="stylesheet" href="branded-styles.css" />
   <link rel="preload" href="images/WeldonLawLogoG.png" as="image" />
 
-  <script>
-    window.INTAKE_PROXY = '/api/intake';
-  </script>
+  <script>window.INTAKE_PROXY = '/api/intake';</script>
 </head>
-
 <body class="hero--copy">
 
   <!-- Top utility CTA bar -->
@@ -101,6 +98,7 @@
         <form id="intakeFormStickyMobile" novalidate>
           <input type="hidden" name="siteKey" value="WL5616!SecureKey" />
           <input type="text" name="company" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
           <div class="intake-form__row intake-form__row--split">
             <div class="form-field">
               <label for="sm-first-name">First name*</label>
@@ -113,16 +111,19 @@
               <div class="field-error" role="alert" aria-live="polite"></div>
             </div>
           </div>
+
           <div class="form-field">
             <label for="sm-email">Email*</label>
             <input id="sm-email" name="email" type="email" autocomplete="email" required />
             <div class="field-error" role="alert" aria-live="polite"></div>
           </div>
+
           <div class="form-field">
             <label for="sm-phone">Phone</label>
             <input id="sm-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" />
             <div class="field-error" role="alert" aria-live="polite"></div>
           </div>
+
           <div class="form-field">
             <label for="sm-interest">Type of matter</label>
             <select id="sm-interest" name="interest">
@@ -134,16 +135,20 @@
               <option value="other">Other</option>
             </select>
           </div>
+
           <div class="form-field">
             <label for="sm-message">Brief summary</label>
             <textarea id="sm-message" name="message" rows="5" placeholder="Please describe your situation briefly..."></textarea>
           </div>
+
           <button type="submit"><span class="btn-text">Submit</span><span class="btn-loading hidden" aria-hidden="true">Sending...</span></button>
           <div class="small-subtext">We'll reply promptly. No obligation.</div>
+
           <div class="intake-form__meta">
             <a href="/privacy.html">Privacy + terms</a>
             <span class="form-help">Submitting this form does not create an attorney–client relationship. Please avoid confidential details.</span>
           </div>
+
           <div id="sm-status" class="success-inline hidden" role="status" aria-live="polite"></div>
           <div id="sm-error" class="error-inline hidden" role="alert"></div>
         </form>
@@ -204,7 +209,7 @@
           <h3><a href="practice-ltc.html">Long-Term Care Planning</a></h3>
           <p>Protecting assets while aligning care needs and benefits.</p>
         </div>
-        
+
         <div class="practice-area" data-pa="legacy" style="--pa-bg:url('images/pa-legacy.jpg')">
           <h3><a href="practice-legacy.html">Legacy Planning (Wills & Trusts)</a></h3>
           <p>Directing your estate and preserving your intent for loved ones.</p>
@@ -376,16 +381,14 @@
   function validateField(field) {
     const fieldContainer = field.closest('.form-field');
     const errorDiv = fieldContainer?.querySelector('.field-error');
-    const fieldName = field.name;
-    let isValid = true;
-    let errorMessage = '';
+    let isValid = true, errorMessage = '';
 
     field.removeAttribute('aria-invalid');
     fieldContainer?.classList.remove('valid', 'error');
     if (errorDiv) errorDiv.textContent = '';
 
     if (field.hasAttribute('required') && !field.value.trim()) {
-      isValid = false; errorMessage = errorMessages[fieldName] || 'This field is required';
+      isValid = false; errorMessage = errorMessages[field.name] || 'This field is required';
     } else if (field.type === 'email' && field.value && !isValidEmail(field.value)) {
       isValid = false; errorMessage = 'Please enter a valid email address';
     } else if (field.type === 'tel' && field.value && digitsOnly(field.value).length < 10) {
@@ -576,142 +579,143 @@
     const DURATION = 6500;
     const FADE_MS  = 450;
     const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobile = () => window.innerWidth < 640;
 
-    // Per-message tint palette
+    // Per-message tint palette (all gold for now)
     const TINTS = [
-      'rgba(201,161,59,0.10)',  // #1 – gold
-      'rgba(201,161,59,0.10)',  // #2 – gold
-      'rgba(201,161,59,0.10)',  // #3 – gold
-      'rgba(201,161,59,0.10)',  // #4 – gold
+      'rgba(201,161,59,0.12)',
+      'rgba(201,161,59,0.12)',
+      'rgba(201,161,59,0.12)',
+      'rgba(201,161,59,0.12)'
     ];
 
     // Build dots
-const dots = [];
-if (dotsWrap && messages.length > 1) {
-  messages.forEach((_, idx) => {
-    const b = document.createElement('button');
-    b.type = 'button'; b.className = 'hero-dot';
-    b.setAttribute('role', 'tab');
-    b.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
-    b.setAttribute('aria-label', `Show message ${idx + 1} of ${messages.length}`);
-    dotsWrap.appendChild(b); dots.push(b);
-  });
-}
-function updateDots(active) { dots.forEach((d, idx) => d.setAttribute('aria-selected', idx === active ? 'true' : 'false')); }
+    const dots = [];
+    if (dotsWrap && messages.length > 1) {
+      messages.forEach((_, idx) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'hero-dot';
+        b.setAttribute('role', 'tab');
+        b.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
+        b.setAttribute('aria-label', `Show message ${idx + 1} of ${messages.length}`);
+        dotsWrap.appendChild(b); dots.push(b);
+      });
+    }
+    function updateDots(active) { dots.forEach((d, idx) => d.setAttribute('aria-selected', idx === active ? 'true' : 'false')); }
 
-function insertAt(container, el, index) {
-  const ref = container.children[index] || null;
-  if (el && el !== ref) container.insertBefore(el, ref);
-}
+    function insertAt(container, el, index) {
+      const ref = container.children[index] || null;
+      if (el && el !== ref) container.insertBefore(el, ref);
+    }
 
-function clearTiles() {
-  paTiles.forEach(t => {
-    t.classList.remove('is-active');
-    t.style.removeProperty('--pa-tint');
-  });
-}
-function restoreOriginalOrder() {
-  if (!paContainer || !paTiles.length) return;
-  const sorted = Array.from(paTiles).sort((a, b) => (+a.dataset.origIndex) - (+b.dataset.origIndex));
-  sorted.forEach(t => paContainer.appendChild(t));
-}
+    function clearTiles() {
+      paTiles.forEach(t => {
+        t.classList.remove('is-active');
+        t.style.removeProperty('--pa-tint');
+      });
+    }
+    function restoreOriginalOrder() {
+      if (!paContainer || !paTiles.length) return;
+      const sorted = Array.from(paTiles).sort((a, b) => (+a.dataset.origIndex) - (+b.dataset.origIndex));
+      sorted.forEach(t => paContainer.appendChild(t));
+    }
 
-// NEW: detect true single-column grid (works at any breakpoint)
-function isSingleColumn() {
-  if (!paContainer) return false;
-  const cols = (getComputedStyle(paContainer).gridTemplateColumns || '')
-    .split(' ')
-    .filter(Boolean).length;
-  return cols <= 1;
-}
+    // detect true single-column grid (works at any breakpoint)
+    function isSingleColumn() {
+      if (!paContainer) return false;
+      const cols = (getComputedStyle(paContainer).gridTemplateColumns || '')
+        .split(' ')
+        .filter(Boolean).length;
+      return cols <= 1;
+    }
 
-function applyFor(idx) {
-  const msg = messages[idx % messages.length];
-  const tint = TINTS[idx % TINTS.length] || 'rgba(201,161,59,0.10)';
-  const targets = msg.targets;
-  const isAll = targets.length === 1 && targets[0].toLowerCase() === 'all';
+    function applyFor(idx) {
+      const msg = messages[idx % messages.length];
+      const tint = TINTS[idx % TINTS.length] || 'rgba(201,161,59,0.12)';
+      const targets = msg.targets;
+      const isAll = targets.length === 1 && targets[0].toLowerCase() === 'all';
 
-  clearTiles();
+      clearTiles();
 
-  if (isAll) {
-    // Message 1: expand + tint ALL, keep default order
-    restoreOriginalOrder();
-    paTiles.forEach(t => { t.classList.add('is-active'); t.style.setProperty('--pa-tint', tint); });
-    return;
-  }
+      if (isAll) {
+        // Message 1: expand + tint ALL, keep default order
+        restoreOriginalOrder();
+        paTiles.forEach(t => {
+          t.classList.add('is-active');
+          t.style.setProperty('--pa-tint', tint);
+        });
+        return;
+      }
 
-  // Else: highlight two tiles (first & second) – expand + tint both
-  const firstTile  = paByKey[targets[0]];
-  const secondTile = paByKey[targets[1]];
-  if (firstTile)  { firstTile.classList.add('is-active');  firstTile.style.setProperty('--pa-tint', tint); }
-  if (secondTile) { secondTile.classList.add('is-active'); secondTile.style.setProperty('--pa-tint', tint); }
+      // Else: highlight two tiles (first & second) – expand + tint both
+      const firstTile  = paByKey[targets[0]];
+      const secondTile = paByKey[targets[1]];
+      if (firstTile)  { firstTile.classList.add('is-active');  firstTile.style.setProperty('--pa-tint', tint); }
+      if (secondTile) { secondTile.classList.add('is-active'); secondTile.style.setProperty('--pa-tint', tint); }
 
-  if (isSingleColumn()) {
-    // Single-column: move FIRST to slot 0, then SECOND to slot 1
-    if (firstTile)  insertAt(paContainer, firstTile, 0);
-    if (secondTile) insertAt(paContainer, secondTile, 1);
-  } else {
-    // Multi-column (tablet/desktop): keep original order
-    restoreOriginalOrder();
-  }
-}
+      if (isSingleColumn()) {
+        // Single-column: move FIRST to slot 0, then SECOND to slot 1
+        if (firstTile)  insertAt(paContainer, firstTile, 0);
+        if (secondTile) insertAt(paContainer, secondTile, 1);
+      } else {
+        // Multi-column (tablet/desktop): keep original order
+        restoreOriginalOrder();
+      }
+    }
 
-function render(idx, immediate = false) {
-  const msg = messages[idx % messages.length];
-  if (!msg) return;
+    function render(idx, immediate = false) {
+      const msg = messages[idx % messages.length];
+      if (!msg) return;
 
-  if (immediate) {
-    h1.textContent = msg.h1;
-    p.textContent  = msg.sub;
-    updateDots(idx);
-    applyFor(idx);
-    return;
-  }
+      if (immediate) {
+        h1.textContent = msg.h1;
+        p.textContent  = msg.sub;
+        updateDots(idx);
+        applyFor(idx);
+        return;
+      }
 
-  wrap.classList.add('is-fading');
-  setTimeout(() => {
-    h1.textContent = msg.h1;
-    p.textContent  = msg.sub;
-    wrap.classList.remove('is-fading');
-    updateDots(idx);
-    applyFor(idx);
-  }, FADE_MS);
-}
+      wrap.classList.add('is-fading');
+      setTimeout(() => {
+        h1.textContent = msg.h1;
+        p.textContent  = msg.sub;
+        wrap.classList.remove('is-fading');
+        updateDots(idx);
+        applyFor(idx);
+      }, FADE_MS);
+    }
 
-function start() {
-  if (prefersReduce || messages.length < 2) return;
-  stop(); timer = setInterval(() => { i = (i + 1) % messages.length; render(i); }, DURATION);
-}
-function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function start() {
+      if (prefersReduce || messages.length < 2) return;
+      stop(); timer = setInterval(() => { i = (i + 1) % messages.length; render(i); }, DURATION);
+    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
 
-// Init
-render(i, true); start();
+    // Init
+    render(i, true); start();
 
-// Pause on hover/focus
-wrap.addEventListener('mouseenter', stop);
-wrap.addEventListener('mouseleave', start);
-wrap.addEventListener('focusin', stop);
-wrap.addEventListener('focusout', start);
+    // Pause on hover/focus
+    wrap.addEventListener('mouseenter', stop);
+    wrap.addEventListener('mouseleave', start);
+    wrap.addEventListener('focusin', stop);
+    wrap.addEventListener('focusout', start);
 
-// Buttons
-prevBtn?.addEventListener('click', () => { stop(); i = (i - 1 + messages.length) % messages.length; render(i); start(); });
-nextBtn?.addEventListener('click', () => { stop(); i = (i + 1) % messages.length; render(i); start(); });
+    // Buttons
+    prevBtn?.addEventListener('click', () => { stop(); i = (i - 1 + messages.length) % messages.length; render(i); start(); });
+    nextBtn?.addEventListener('click', () => { stop(); i = (i + 1) % messages.length; render(i); start(); });
 
-// Dots
-dots.forEach((dot, idx) => {
-  dot.addEventListener('click', () => { stop(); i = idx; render(i); start(); });
-  dot.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft')  { e.preventDefault(); prevBtn?.click(); dots[Math.max(0, idx - 1)]?.focus(); }
-    if (e.key === 'ArrowRight') { e.preventDefault(); nextBtn?.click(); dots[Math.min(messages.length - 1, idx + 1)]?.focus(); }
-  });
-});
+    // Dots
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => { stop(); i = idx; render(i); start(); });
+      dot.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); prevBtn?.click(); dots[Math.max(0, idx - 1)]?.focus(); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); nextBtn?.click(); dots[Math.min(messages.length - 1, idx + 1)]?.focus(); }
+      });
+    });
 
-// Re-apply on resize (for single-column reordering)
-window.addEventListener('resize', () => applyFor(i));
-document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else start(); });
-})();
-</script>
+    // Re-apply on resize (for single-column reordering)
+    window.addEventListener('resize', () => applyFor(i));
+    document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else start(); });
+  })();
+  </script>
 </body>
 </html>
-

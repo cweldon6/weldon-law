@@ -135,12 +135,17 @@ textarea:focus-visible {
    ========================= */
 .intro-banner { background: var(--color-bg-soft); padding: var(--space-6) 0; position: relative; }
 
-/* Keep hero text readable */
+/* Keep hero text readable and left-aligned */
 .intro-banner h1,
-.intro-banner p { max-width: var(--measure); margin-inline: auto; }
+.intro-banner p {
+  max-width: var(--measure);
+  margin-inline: auto;         /* center the block */
+  text-align: left;            /* …but keep text left-aligned */
+}
+.intro-banner p { margin-bottom: 1rem; }
 
 /* Hero rotator */
-.hero-rotator { position: relative; }
+.hero-rotator { position: relative; text-align: initial; } /* reset any inherited centering */
 .hero-line, .hero-sub { transition: opacity .45s ease; will-change: opacity; }
 .hero-rotator.is-fading .hero-line,
 .hero-rotator.is-fading .hero-sub { opacity: 0; }
@@ -151,7 +156,10 @@ textarea:focus-visible {
 }
 
 /* Hero manual controls */
-.hero-controls { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-3); justify-content: center; }
+.hero-controls {
+  display: flex; align-items: center; gap: var(--space-2);
+  margin-top: var(--space-3); justify-content: center; /* center dots/arrows only */
+}
 .hero-dots { display: flex; gap: .5rem; }
 .hero-controls button {
   width: 2.25rem; height: 2.25rem; display: grid; place-items: center;
@@ -165,36 +173,14 @@ textarea:focus-visible {
 .hero-dot { width: .55rem; height: .55rem; border-radius: 9999px; border: 0; background: var(--color-ink, #333); opacity: .35; cursor: pointer; }
 .hero-dot[aria-selected="true"] { opacity: 1; background: var(--color-accent, #0a7); }
 
-.intro-banner p { margin-bottom: 1rem; }
-
-h1 { font-family: var(--font-serif); font-size: var(--fs-700); line-height: var(--lh-tight); color: var(--color-ink-strong); margin: 0 0 var(--space-3); }
-h2 { font-family: var(--font-serif); font-size: var(--fs-600); line-height: var(--lh-tight); margin: 0 0 var(--space-3); }
-h3 { font-size: var(--fs-600); line-height: var(--lh-tight); margin: 0 0 var(--space-2); }
-.subtitle, .tagline { font-size: var(--fs-500); }
-
-/* Two Column Section */
-.info-grid { display: grid; gap: var(--space-6); padding: var(--space-6) 0; }
-@media (min-width: 900px) { .info-grid { grid-template-columns: 1fr 0.8fr; align-items: start; } }
-
-/* Bio */
-.about-snippet p { max-width: var(--measure); }
-.bio-section .about-snippet, .bio-section .about-snippet p { max-width: none; }
-.bio-section { overflow: hidden; }
-.bio-image {
-  float: left; width: 250px; height: 250px;
-  margin: 0 var(--space-4) var(--space-4) 0; border-radius: var(--radius-sm);
-  object-fit: cover; display: none;
-}
-@media (min-width: 768px) { .bio-image { display: block; } }
-
 /* =========================
    Practice Areas – 6 tiles
    ========================= */
 .practice-areas {
   display: grid; gap: var(--space-5);
-  grid-template-columns: 1fr; /* mobile */
+  grid-template-columns: 1fr;                 /* mobile */
 }
-@media (min-width: 640px) { .practice-areas { grid-template-columns: repeat(2, 1fr); } }  /* tablet */
+@media (min-width: 640px)  { .practice-areas { grid-template-columns: repeat(2, 1fr); } }  /* tablet */
 @media (min-width: 1024px) { .practice-areas { grid-template-columns: repeat(3, 1fr); } } /* desktop */
 
 .practice-area {
@@ -207,12 +193,11 @@ h3 { font-size: var(--fs-600); line-height: var(--lh-tight); margin: 0 0 var(--s
   overflow: hidden;
 }
 .practice-area::before {
-  content: "";
-  position: absolute; inset: 0; z-index: 0;
+  content: ""; position: absolute; inset: 0; z-index: 0;
   background: var(--pa-bg) center/cover no-repeat;
   opacity: 0.08; transition: opacity .2s ease; pointer-events: none;
 }
-/* Subtle tint overlay (set via --pa-tint in JS) */
+/* The subtle tint applied programmatically via --pa-tint */
 .practice-area::after {
   content: ""; position: absolute; inset: 0; z-index: 0;
   background: var(--pa-tint, transparent); pointer-events: none;
@@ -221,14 +206,18 @@ h3 { font-size: var(--fs-600); line-height: var(--lh-tight); margin: 0 0 var(--s
 .practice-area:hover::before,
 .practice-area:focus-within::before { opacity: 0.16; }
 .practice-area:hover { border-color: var(--color-primary); box-shadow: var(--shadow-1); transform: translateY(-2px); }
-.practice-area h3 { margin-top: 0; position: relative; z-index: 1; }
+
+/* ensure text sits above overlays */
+.practice-area h3,
+.practice-area p { position: relative; z-index: 1; }
+
+.practice-area h3 { margin-top: 0; }
 .practice-area h3 a { color: var(--color-primary); text-decoration: none; font-weight: 700; }
 .practice-area h3 a:hover { text-decoration: underline; }
+
 .practice-area p {
-  margin: .5rem 0 0;
-  max-height: 0; opacity: 0; overflow: hidden;
+  margin: .5rem 0 0; max-height: 0; opacity: 0; overflow: hidden;
   transition: max-height .25s ease, opacity .25s ease;
-  position: relative; z-index: 1; /* keep text above tint */
 }
 /* Hover/focus opens; JS adds .is-active to open programmatically */
 .practice-area:hover p,
@@ -238,6 +227,21 @@ h3 { font-size: var(--fs-600); line-height: var(--lh-tight); margin: 0 0 var(--s
 /* Programmatic 'active' accent */
 .practice-area.is-active { border-color: var(--color-primary); box-shadow: var(--shadow-1); }
 .practice-area.is-active::before { opacity: 0.16; }
+
+/* Two Column Section */
+.info-grid { display: grid; gap: var(--space-6); padding: var(--space-6) 0; }
+@media (min-width: 900px) { .info-grid { grid-template-columns: 1fr 0.8fr; align-items: start; } }
+
+/* Bio */
+.about-snippet p { max-width: var(--measure); }
+.bio-section .about-snippet, .bio-section .about-snippet p { max-width: none; }
+.bio-section { overflow: hidden; }
+.bio-image {
+  float: left; width: 250px; height: 250px;
+  margin: 0 var(--space-4) var(--space-4) 0;
+  border-radius: var(--radius-sm); object-fit: cover; display: none;
+}
+@media (min-width: 768px) { .bio-image { display: block; } }
 
 /* Lists / FAQ */
 .firm-services h2 { margin-top: 0; }
