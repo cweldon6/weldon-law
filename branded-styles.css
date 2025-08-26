@@ -8,8 +8,8 @@
   --color-ink-strong:#0B1220;
   --color-bg:      #FFFFFF;
   --color-bg-soft: #F7F7F5;
-  --color-border:  #E5E7EB;
-  --color-focus:   #0B76FF;
+  --color-border:  #C9A13B;
+  --color-focus:   #133978;
 
   --brand-blue: var(--color-primary);
   --brand-gold: var(--color-accent);
@@ -323,7 +323,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--color-primary); 
 .intake-sheet[aria-hidden="false"] { display: block; }
 .intake-sheet__panel {
   position: absolute; left: 0; right: 0; bottom: 0;
-  background: #fff; border-top-left-radius: var(--radius-md); border-top-right-radius: var(--radius-md);
+  background: #630303; border-top-left-radius: var(--radius-md); border-top-right-radius: var(--radius-md);
   box-shadow: var(--shadow-1); padding: var(--space-5);
   max-height: 85vh; overflow: auto;
 }
