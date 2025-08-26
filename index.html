@@ -26,20 +26,10 @@
     "url": "https://weldon.law",
     "telephone": "+1-856-890-2944",
     "email": "chris@weldon.law",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Voorhees",
-      "addressRegion": "NJ",
-      "addressCountry": "US"
-    },
+    "address": { "@type": "PostalAddress", "addressLocality": "Voorhees", "addressRegion": "NJ", "addressCountry": "US" },
     "areaServed": { "@type": "State", "name": "New Jersey" },
     "serviceType": ["Guardianship", "Estate Planning", "Probate", "Long-Term Care Planning"],
-    "founder": {
-      "@type": "Person",
-      "name": "Christopher R. Weldon",
-      "jobTitle": "Attorney",
-      "description": "Experienced elder law attorney and former State Regulatory Attorney with over 1,000 guardianship and fiduciary matters handled."
-    }
+    "founder": { "@type": "Person", "name": "Christopher R. Weldon", "jobTitle": "Attorney" }
   }
   </script>
 
@@ -47,9 +37,7 @@
   <link rel="preload" href="images/WeldonLawLogoG.png" as="image" />
 
   <script>
-    /* if you proxy the intake endpoint on your server, set it here (optional) */
     window.INTAKE_PROXY = '/api/intake';
-    // window.INTAKE_SECRET = 'your-short-shared-secret';
   </script>
 </head>
 
@@ -74,9 +62,7 @@
   <header class="site-header">
     <div class="container nav-container">
       <div class="logo">
-        <a href="index.html">
-          <img src="images/WeldonLawLogoG.png" alt="Weldon Law logo" />
-        </a>
+        <a href="index.html"><img src="images/WeldonLawLogoG.png" alt="Weldon Law logo" /></a>
       </div>
       <nav class="main-nav" id="nav">
         <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">☰</button>
@@ -101,25 +87,20 @@
     </div>
   </header>
 
-  <!-- Sticky Intake (mobile: bottom CTA + sheet) -->
+  <!-- Sticky Intake (mobile) -->
   <section class="intake-stick" role="complementary" aria-label="Quick intake">
-    <!-- Mobile bottom sticky CTA -->
     <div class="intake-stick__mobilebar" aria-hidden="false">
       <a href="#intakeSheet" class="intake-stick__cta" id="openIntakeMobile" role="button" aria-controls="intakeSheet" aria-expanded="false">
         Get help now →
       </a>
     </div>
-
-    <!-- Mobile slide-up sheet -->
     <div class="intake-sheet" id="intakeSheet" aria-hidden="true" aria-modal="true" role="dialog" aria-label="Intake form">
       <div class="intake-sheet__panel" role="document">
         <button class="intake-sheet__close" id="closeIntakeMobile" aria-label="Close">✕</button>
-
         <h2>How can we help?</h2>
         <form id="intakeFormStickyMobile" novalidate>
           <input type="hidden" name="siteKey" value="WL5616!SecureKey" />
           <input type="text" name="company" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
-
           <div class="intake-form__row intake-form__row--split">
             <div class="form-field">
               <label for="sm-first-name">First name*</label>
@@ -132,19 +113,16 @@
               <div class="field-error" role="alert" aria-live="polite"></div>
             </div>
           </div>
-
           <div class="form-field">
             <label for="sm-email">Email*</label>
             <input id="sm-email" name="email" type="email" autocomplete="email" required />
             <div class="field-error" role="alert" aria-live="polite"></div>
           </div>
-
           <div class="form-field">
             <label for="sm-phone">Phone</label>
             <input id="sm-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" />
             <div class="field-error" role="alert" aria-live="polite"></div>
           </div>
-
           <div class="form-field">
             <label for="sm-interest">Type of matter</label>
             <select id="sm-interest" name="interest">
@@ -156,16 +134,11 @@
               <option value="other">Other</option>
             </select>
           </div>
-
           <div class="form-field">
             <label for="sm-message">Brief summary</label>
             <textarea id="sm-message" name="message" rows="5" placeholder="Please describe your situation briefly..."></textarea>
           </div>
-
-          <button type="submit">
-            <span class="btn-text">Submit</span>
-            <span class="btn-loading hidden" aria-hidden="true">Sending...</span>
-          </button>
+          <button type="submit"><span class="btn-text">Submit</span><span class="btn-loading hidden" aria-hidden="true">Sending...</span></button>
           <div class="small-subtext">We'll reply promptly. No obligation.</div>
           <div class="intake-form__meta">
             <a href="/privacy.html">Privacy + terms</a>
@@ -191,19 +164,23 @@
           <button class="hero-next" type="button" aria-label="Next message">›</button>
         </div>
 
-        <!-- Message data lives here so content is visible in source for SEO -->
+        <!-- Message data in source for SEO -->
         <template id="heroMessages">
           <div data-h1="Compassionate, precise elder law counsel—rooted in your community"
                data-sub="Every matter is approached with the care it deserves, regardless of asset level or complexity."
-               data-target="guard"></div>
+               data-target="all"></div>
 
           <div data-h1="Life vs. Legacy"
                data-sub="Take control now—not from the grave."
-               data-target="legacy"></div>
+               data-target="lp,legacy"></div>
 
           <div data-h1="Protecting dignity. Preserving independence."
                data-sub="Guidance in guardianship, planning, and care when it matters most."
-               data-target="ltc"></div>
+               data-target="guard,ltc"></div>
+
+          <div data-h1="Harnessing technology to improve access and outcomes"
+               data-sub="Secure digital intake, e-signatures, and clear updates—so your matter moves efficiently and you stay informed."
+               data-target="probate,general"></div>
         </template>
       </div>
     </section>
@@ -319,29 +296,16 @@
     </div>
   </footer>
 
-  <!-- Desktop Fixed Footer Intake (desktop only) -->
+  <!-- Desktop Fixed Footer Intake -->
   <section class="intake-footer" role="complementary" aria-label="Quick intake footer">
     <form id="intakeFormFooterDesktop" class="intake-footer__form" novalidate>
       <input type="hidden" name="siteKey" value="WL5616!SecureKey" />
       <input type="text" name="company" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
-
       <div class="intake-footer__row">
-        <label class="vf">
-          <span class="vh">Last name</span>
-          <input id="ft-last-name" name="last-name" placeholder="Last name" required />
-        </label>
-        <label class="vf">
-          <span class="vh">First name</span>
-          <input id="ft-first-name" name="first-name" placeholder="First name" required />
-        </label>
-        <label class="vf">
-          <span class="vh">Email</span>
-          <input id="ft-email" name="email" type="email" placeholder="Email" required />
-        </label>
-        <label class="vf">
-          <span class="vh">Phone</span>
-          <input id="ft-phone" name="phone" type="tel" inputmode="tel" placeholder="Phone" />
-        </label>
+        <label class="vf"><span class="vh">Last name</span><input id="ft-last-name" name="last-name" placeholder="Last name" required /></label>
+        <label class="vf"><span class="vh">First name</span><input id="ft-first-name" name="first-name" placeholder="First name" required /></label>
+        <label class="vf"><span class="vh">Email</span><input id="ft-email" name="email" type="email" placeholder="Email" required /></label>
+        <label class="vf"><span class="vh">Phone</span><input id="ft-phone" name="phone" type="tel" inputmode="tel" placeholder="Phone" /></label>
         <label class="vf">
           <span class="vh">Type of matter</span>
           <select id="ft-interest" name="interest" aria-label="Type of matter">
@@ -353,13 +317,10 @@
             <option value="other">Other</option>
           </select>
         </label>
-
         <button type="submit" class="intake-footer__submit" aria-label="Submit intake">
-          <span class="btn-text">Submit</span>
-          <span class="btn-loading hidden" aria-hidden="true">Sending...</span>
+          <span class="btn-text">Submit</span><span class="btn-loading hidden" aria-hidden="true">Sending...</span>
         </button>
       </div>
-
       <div id="intakeFooterPanel" class="intake-footer__statusline" aria-live="polite">
         <span id="ft-status" class="success-inline hidden"></span>
         <span id="ft-error" class="error-inline hidden" role="alert"></span>
@@ -368,12 +329,12 @@
     </form>
   </section>
 
-  <!-- === Full JavaScript (restores all functionality) === -->
+  <!-- === JavaScript === -->
   <script>
   /* ===== Config ===== */
   const FLOW_URL = "https://prod-121.westus.logic.azure.com:443/workflows/2fd109379c324cd5bbab1546b34dca3c/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=GH5F3oVR83EzQ2fzn0l0yUzqs9bmVpHFZP0D0lJgBV8";
 
-  /* ===== Enhanced Error Messages ===== */
+  /* ===== Error messages ===== */
   const errorMessages = {
     'first-name': 'Please enter your first name',
     'last-name': 'Please enter your last name',
@@ -396,10 +357,9 @@
   /* ===== Utilities ===== */
   const qs = (s, r=document) => r.querySelector(s);
   const qsa = (s, r=document) => Array.from(r.querySelectorAll(s));
-  
-  function digitsOnly(s) { return (s || '').replace(/[^\d]/g, ''); }
-  function trimLeadingOne(d) { return (d.length === 11 && d.startsWith('1')) ? d.slice(1) : d; }
-  
+  const digitsOnly = s => (s || '').replace(/[^\d]/g, '');
+  const trimLeadingOne = d => (d.length === 11 && d.startsWith('1')) ? d.slice(1) : d;
+
   function formatPhoneLive(el) {
     if (!el) return;
     el.addEventListener('input', () => {
@@ -410,12 +370,9 @@
       else el.value = `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6,10)}`;
     });
   }
+  const isValidEmail = email => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
-  /* ===== Enhanced Form Validation ===== */
+  /* ===== Validation ===== */
   function validateField(field) {
     const fieldContainer = field.closest('.form-field');
     const errorDiv = fieldContainer?.querySelector('.field-error');
@@ -423,77 +380,55 @@
     let isValid = true;
     let errorMessage = '';
 
-    // Clear previous state
     field.removeAttribute('aria-invalid');
-    if (fieldContainer) fieldContainer.classList.remove('valid', 'error');
+    fieldContainer?.classList.remove('valid', 'error');
     if (errorDiv) errorDiv.textContent = '';
 
-    // Required field validation
     if (field.hasAttribute('required') && !field.value.trim()) {
-      isValid = false;
-      errorMessage = errorMessages[fieldName] || 'This field is required';
-    } 
-    // Email validation
-    else if (field.type === 'email' && field.value && !isValidEmail(field.value)) {
-      isValid = false;
-      errorMessage = 'Please enter a valid email address';
-    }
-    // Phone validation (if provided)
-    else if (field.type === 'tel' && field.value && digitsOnly(field.value).length < 10) {
-      isValid = false;
-      errorMessage = 'Please enter a valid phone number';
+      isValid = false; errorMessage = errorMessages[fieldName] || 'This field is required';
+    } else if (field.type === 'email' && field.value && !isValidEmail(field.value)) {
+      isValid = false; errorMessage = 'Please enter a valid email address';
+    } else if (field.type === 'tel' && field.value && digitsOnly(field.value).length < 10) {
+      isValid = false; errorMessage = 'Please enter a valid phone number';
     }
 
-    // Apply validation state
     if (!isValid) {
       field.setAttribute('aria-invalid', 'true');
-      if (fieldContainer) fieldContainer.classList.add('error');
+      fieldContainer?.classList.add('error');
       if (errorDiv) errorDiv.textContent = errorMessage;
     } else if (field.value.trim()) {
-      if (fieldContainer) fieldContainer.classList.add('valid');
+      fieldContainer?.classList.add('valid');
     }
-
     return isValid;
   }
 
   function validateForm(form) {
     const fields = form.querySelectorAll('input[required], input[type="email"], input[type="tel"]');
-    let isValid = true;
-    fields.forEach(field => { if (!validateField(field)) isValid = false; });
-    return isValid;
+    let ok = true; fields.forEach(f => { if (!validateField(f)) ok = false; });
+    return ok;
   }
 
-  /* ===== Real-time Validation Setup ===== */
   function setupFormValidation(form) {
     if (!form) return;
     const fields = form.querySelectorAll('input, select, textarea');
     fields.forEach(field => {
       field.addEventListener('blur', () => validateField(field));
       field.addEventListener('input', () => {
-        const fieldContainer = field.closest('.form-field');
-        if (fieldContainer?.classList.contains('error')) {
-          setTimeout(() => validateField(field), 300);
-        }
+        const fc = field.closest('.form-field');
+        if (fc?.classList.contains('error')) setTimeout(() => validateField(field), 300);
       });
     });
   }
 
-  /* ===== Loading Button States ===== */
   function setButtonLoading(button, loading) {
     const textSpan = button.querySelector('.btn-text');
     const loadingSpan = button.querySelector('.btn-loading');
-    if (loading) {
-      button.disabled = true;
-      if (textSpan) textSpan.classList.add('hidden');
-      if (loadingSpan) loadingSpan.classList.remove('hidden');
-    } else {
-      button.disabled = false;
-      if (textSpan) textSpan.classList.remove('hidden');
-      if (loadingSpan) loadingSpan.classList.add('hidden');
-    }
+    button.disabled = !!loading;
+    if (textSpan) textSpan.classList.toggle('hidden', !!loading);
+    if (loadingSpan) loadingSpan.classList.toggle('hidden', !loading);
   }
 
-  /* ===== Mobile Sheet Behavior ===== */
+  /* ===== Mobile sheet ===== */
   const sheet = qs('#intakeSheet');
   const openMobile = qs('#openIntakeMobile');
   const closeMobile = qs('#closeIntakeMobile');
@@ -519,129 +454,95 @@
   function openMobileSheet() {
     if (!sheet) return;
     sheet.setAttribute('aria-hidden', 'false');
-    if (openMobile) openMobile.setAttribute('aria-expanded', 'true');
+    openMobile?.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
     setTimeout(() => qs('#sm-first-name')?.focus(), 100);
     trapFocus(sheet, true);
   }
-
   function closeMobileSheet() {
     if (!sheet) return;
     sheet.setAttribute('aria-hidden', 'true');
-    if (openMobile) openMobile.setAttribute('aria-expanded', 'false');
+    openMobile?.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
     trapFocus(sheet, false);
-    if (openMobile) openMobile.focus();
+    openMobile?.focus();
   }
-
   openMobile?.addEventListener('click', (e) => { e.preventDefault(); openMobileSheet(); });
   closeMobile?.addEventListener('click', closeMobileSheet);
   sheet?.addEventListener('click', (e) => { if (e.target === sheet) closeMobileSheet(); });
 
-  /* ===== Top CTA Routing (Submit Inquiry button) ===== */
+  /* ===== CTA routing ===== */
   (function () {
     const cta = document.getElementById('ctaGetHelp');
     if (!cta) return;
     cta.addEventListener('click', (e) => {
       e.preventDefault();
-      if (window.innerWidth <= 768) {
-        openMobileSheet();            // Mobile → opens the intake sheet
-      } else {
-        window.location.href = 'contact.html'; // Desktop → contact page
-      }
+      if (window.innerWidth <= 768) openMobileSheet();
+      else window.location.href = 'contact.html';
     });
   })();
 
-  /* ===== Enhanced Form Submission ===== */
+  /* ===== Submit ===== */
   async function submitIntake(form, statusEl, errorEl) {
     const submitButton = form.querySelector('button[type="submit"]');
     if (!validateForm(form)) {
       errorEl.textContent = 'Please correct the errors above';
-      errorEl.classList.remove('hidden');
-      statusEl.classList.add('hidden');
+      errorEl.classList.remove('hidden'); statusEl.classList.add('hidden');
       return;
     }
-
     const data = Object.fromEntries(new FormData(form).entries());
     data.phone = trimLeadingOne(digitsOnly(data.phone || ''));
 
     setButtonLoading(submitButton, true);
-    errorEl.classList.add('hidden');
-    statusEl.textContent = 'Sending…';
-    statusEl.classList.add('success-inline');
-    statusEl.classList.remove('hidden');
+    errorEl.classList.add('hidden'); statusEl.textContent = 'Sending…';
+    statusEl.classList.add('success-inline'); statusEl.classList.remove('hidden');
 
     try {
-      const response = await fetch(FLOW_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-        mode: 'cors'
-      });
-
-      const responseText = await response.clone().text();
-      let responseData = null;
-      try { responseData = JSON.parse(responseText); } catch (_) {}
-
-      if (response.ok && responseData?.success) {
+      const response = await fetch(FLOW_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data), mode: 'cors' });
+      const txt = await response.clone().text();
+      let json = null; try { json = JSON.parse(txt); } catch {}
+      if (response.ok && json?.success) {
         statusEl.textContent = 'Thanks—check your email for a confirmation.';
-        statusEl.classList.add('success-inline');
-        form.reset();
-        form.querySelectorAll('.form-field').forEach(f => f.classList.remove('valid', 'error'));
+        form.reset(); form.querySelectorAll('.form-field').forEach(f => f.classList.remove('valid','error'));
         if (form.id === 'intakeFormStickyMobile') setTimeout(closeMobileSheet, 2000);
-      } else {
-        throw new Error(responseData?.message || `Server error: ${response.status}`);
-      }
-    } catch (error) {
-      console.error('Form submission error:', error);
-      errorEl.textContent = error.message.includes('fetch') || error.message.includes('Network') 
+      } else { throw new Error(json?.message || `Server error: ${response.status}`); }
+    } catch (err) {
+      console.error(err);
+      errorEl.textContent = ('' + err.message).includes('Network')
         ? 'Network issue—please email chris@weldon.law or call (856) 890-2944.'
         : 'Sorry, something went wrong. Please email chris@weldon.law or call (856) 890-2944.';
-      errorEl.classList.add('error-inline');
-      statusEl.classList.remove('success-inline');
-      errorEl.classList.remove('hidden');
-      statusEl.classList.add('hidden');
+      errorEl.classList.add('error-inline'); errorEl.classList.remove('hidden');
+      statusEl.classList.remove('success-inline'); statusEl.classList.add('hidden');
     } finally {
       setButtonLoading(submitButton, false);
     }
   }
 
-  /* ===== Initialize Forms ===== */
   function initializeIntakeForm(formId, statusId, errorId, phoneId) {
-    const form = qs('#' + formId);
-    if (!form) return;
-    setupFormValidation(form);
-    formatPhoneLive(qs('#' + phoneId));
-    const statusEl = qs('#' + statusId);
-    const errorEl = qs('#' + errorId);
+    const form = qs('#' + formId); if (!form) return;
+    setupFormValidation(form); formatPhoneLive(qs('#' + phoneId));
+    const statusEl = qs('#' + statusId); const errorEl = qs('#' + errorId);
     form.addEventListener('submit', (e) => { e.preventDefault(); submitIntake(form, statusEl, errorEl); });
   }
-
   initializeIntakeForm('intakeFormStickyMobile', 'sm-status', 'sm-error', 'sm-phone');
   initializeIntakeForm('intakeFormFooterDesktop', 'ft-status', 'ft-error', 'ft-phone');
 
-  /* ===== Mobile Padding Adjustment ===== */
   function adjustBottomPaddingMobile() {
-    const bar = document.querySelector('.intake-stick__mobilebar');
-    if (!bar) return;
-    const height = bar.getBoundingClientRect().height || 56;
-    document.body.style.paddingBottom = (window.innerWidth <= 768) ? (height + 8) + 'px' : '';
+    const bar = document.querySelector('.intake-stick__mobilebar'); if (!bar) return;
+    const h = bar.getBoundingClientRect().height || 56;
+    document.body.style.paddingBottom = (window.innerWidth <= 768) ? (h + 8) + 'px' : '';
   }
   window.addEventListener('resize', adjustBottomPaddingMobile);
   window.addEventListener('orientationchange', adjustBottomPaddingMobile);
   adjustBottomPaddingMobile();
 
-  /* ===== Performance: Preload likely next pages ===== */
   if ('requestIdleCallback' in window) {
     requestIdleCallback(() => {
-      const link = document.createElement('link');
-      link.rel = 'prefetch';
-      link.href = 'about.html';
-      document.head.appendChild(link);
+      const link = document.createElement('link'); link.rel = 'prefetch'; link.href = 'about.html'; document.head.appendChild(link);
     });
   }
 
-  /* ===== Hero message rotator + tile linking ===== */
+  /* ===== Hero rotator + tile linking + per-message tint ===== */
   (function () {
     const wrap = document.querySelector('.hero-rotator');
     if (!wrap) return;
@@ -653,19 +554,16 @@
     // Practice Areas
     const paContainer = document.querySelector('.practice-areas');
     const paTiles = paContainer ? Array.from(paContainer.children) : [];
-    // Record original order so we can restore on desktop
     paTiles.forEach((tile, idx) => (tile.dataset.origIndex ??= String(idx)));
     const paByKey = paTiles.reduce((m, tile) => {
-      const key = (tile.getAttribute('data-pa') || '').trim();
-      if (key) m[key] = tile;
-      return m;
+      const key = (tile.getAttribute('data-pa') || '').trim(); if (key) m[key] = tile; return m;
     }, {});
 
-    // Pull messages (with optional target key)
+    // Messages (allow multiple targets via comma, or "all")
     const messages = Array.from(tpl?.content?.children || []).map(n => ({
       h1: n.getAttribute('data-h1') || '',
       sub: n.getAttribute('data-sub') || '',
-      target: (n.getAttribute('data-target') || '').trim()
+      targets: (n.getAttribute('data-target') || '').split(',').map(s => s.trim()).filter(Boolean)
     })).filter(m => m.h1);
 
     if (!messages.length) return;
@@ -674,123 +572,146 @@
     const nextBtn  = wrap.querySelector('.hero-next');
     const dotsWrap = wrap.querySelector('.hero-dots');
 
-    let i = 0, timer = null, activeTile = null;
-    const DURATION = 6500; // 6.5s per slide
-    const FADE_MS  = 450;  // matches CSS
+    let i = 0, timer = null;
+    const DURATION = 6500;
+    const FADE_MS  = 450;
     const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobile = () => window.innerWidth < 640; // matches CSS breakpoint
+    const isMobile = () => window.innerWidth < 640;
 
-    // Build dots if present
-    const dots = [];
-    if (dotsWrap && messages.length > 1) {
-      messages.forEach((_, idx) => {
-        const b = document.createElement('button');
-        b.type = 'button';
-        b.className = 'hero-dot';
-        b.setAttribute('role', 'tab');
-        b.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
-        b.setAttribute('aria-label', `Show message ${idx + 1} of ${messages.length}`);
-        dotsWrap.appendChild(b);
-        dots.push(b);
-      });
-    }
-    function updateDots(active) {
-      dots.forEach((d, idx) => d.setAttribute('aria-selected', idx === active ? 'true' : 'false'));
-    }
+    // Per-message tint palette
+    const TINTS = [
+      'rgba(201,161,59,0.10)',  // #1 – gold
+      'rgba(201,161,59,0.10)',  // #2 – gold
+      'rgba(201,161,59,0.10)',  // #3 – gold
+      'rgba(201,161,59,0.10)',  // #4 – gold
+    ];
 
-    function clearActiveTile() {
-      if (!activeTile) return;
-      activeTile.classList.remove('is-active');
-      activeTile = null;
-    }
-    function restoreOriginalOrder() {
-      if (!paContainer || !paTiles.length) return;
-      const sorted = Array.from(paTiles).sort((a, b) =>
-        (+a.dataset.origIndex) - (+b.dataset.origIndex)
-      );
-      sorted.forEach(t => paContainer.appendChild(t));
-    }
-    function moveTileToTop(tile) {
-      if (!paContainer || !tile) return;
-      if (paContainer.firstElementChild !== tile) {
-        paContainer.insertBefore(tile, paContainer.firstElementChild);
-      }
-    }
-    function applyPracticeAreaFor(idx) {
-      const msg = messages[idx % messages.length];
-      const key = msg.target;
-      clearActiveTile();
-      if (!key || !paByKey[key]) {
-        if (!isMobile()) restoreOriginalOrder();
-        return;
-      }
-      activeTile = paByKey[key];
-      activeTile.classList.add('is-active');
+    // Build dots
+const dots = [];
+if (dotsWrap && messages.length > 1) {
+  messages.forEach((_, idx) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'hero-dot';
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
+    b.setAttribute('aria-label', `Show message ${idx + 1} of ${messages.length}`);
+    dotsWrap.appendChild(b); dots.push(b);
+  });
+}
+function updateDots(active) { dots.forEach((d, idx) => d.setAttribute('aria-selected', idx === active ? 'true' : 'false')); }
 
-      if (isMobile()) {
-        moveTileToTop(activeTile);
-      } else {
-        restoreOriginalOrder();
-      }
-    }
+function insertAt(container, el, index) {
+  const ref = container.children[index] || null;
+  if (el && el !== ref) container.insertBefore(el, ref);
+}
 
-    function render(idx, immediate = false) {
-      const msg = messages[idx % messages.length];
-      if (!msg) return;
+function clearTiles() {
+  paTiles.forEach(t => {
+    t.classList.remove('is-active');
+    t.style.removeProperty('--pa-tint');
+  });
+}
+function restoreOriginalOrder() {
+  if (!paContainer || !paTiles.length) return;
+  const sorted = Array.from(paTiles).sort((a, b) => (+a.dataset.origIndex) - (+b.dataset.origIndex));
+  sorted.forEach(t => paContainer.appendChild(t));
+}
 
-      if (immediate) {
-        h1.textContent = msg.h1;
-        p.textContent  = msg.sub;
-        updateDots(idx);
-        applyPracticeAreaFor(idx);
-        return;
-      }
+// NEW: detect true single-column grid (works at any breakpoint)
+function isSingleColumn() {
+  if (!paContainer) return false;
+  const cols = (getComputedStyle(paContainer).gridTemplateColumns || '')
+    .split(' ')
+    .filter(Boolean).length;
+  return cols <= 1;
+}
 
-      wrap.classList.add('is-fading');
-      setTimeout(() => {
-        h1.textContent = msg.h1;
-        p.textContent  = msg.sub;
-        wrap.classList.remove('is-fading');
-        updateDots(idx);
-        applyPracticeAreaFor(idx);
-      }, FADE_MS);
-    }
+function applyFor(idx) {
+  const msg = messages[idx % messages.length];
+  const tint = TINTS[idx % TINTS.length] || 'rgba(201,161,59,0.10)';
+  const targets = msg.targets;
+  const isAll = targets.length === 1 && targets[0].toLowerCase() === 'all';
 
-    function start() {
-      if (prefersReduce || messages.length < 2) return;
-      stop();
-      timer = setInterval(() => { i = (i + 1) % messages.length; render(i); }, DURATION);
-    }
-    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  clearTiles();
 
-    // Init
-    render(i, true);
-    start();
+  if (isAll) {
+    // Message 1: expand + tint ALL, keep default order
+    restoreOriginalOrder();
+    paTiles.forEach(t => { t.classList.add('is-active'); t.style.setProperty('--pa-tint', tint); });
+    return;
+  }
 
-    // Pause on hover/focus for accessibility
-    wrap.addEventListener('mouseenter', stop);
-    wrap.addEventListener('mouseleave', start);
-    wrap.addEventListener('focusin', stop);
-    wrap.addEventListener('focusout', start);
+  // Else: highlight two tiles (first & second) – expand + tint both
+  const firstTile  = paByKey[targets[0]];
+  const secondTile = paByKey[targets[1]];
+  if (firstTile)  { firstTile.classList.add('is-active');  firstTile.style.setProperty('--pa-tint', tint); }
+  if (secondTile) { secondTile.classList.add('is-active'); secondTile.style.setProperty('--pa-tint', tint); }
 
-    // Buttons
-    prevBtn?.addEventListener('click', () => { stop(); i = (i - 1 + messages.length) % messages.length; render(i); start(); });
-    nextBtn?.addEventListener('click', () => { stop(); i = (i + 1) % messages.length; render(i); start(); });
+  if (isSingleColumn()) {
+    // Single-column: move FIRST to slot 0, then SECOND to slot 1
+    if (firstTile)  insertAt(paContainer, firstTile, 0);
+    if (secondTile) insertAt(paContainer, secondTile, 1);
+  } else {
+    // Multi-column (tablet/desktop): keep original order
+    restoreOriginalOrder();
+  }
+}
 
-    // Dots
-    dots.forEach((dot, idx) => {
-      dot.addEventListener('click', () => { stop(); i = idx; render(i); start(); });
-      dot.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft')  { e.preventDefault(); prevBtn?.click(); dots[Math.max(0, idx - 1)]?.focus(); }
-        if (e.key === 'ArrowRight') { e.preventDefault(); nextBtn?.click(); dots[Math.min(messages.length - 1, idx + 1)]?.focus(); }
-      });
-    });
+function render(idx, immediate = false) {
+  const msg = messages[idx % messages.length];
+  if (!msg) return;
 
-    // Handle layout changes
-    window.addEventListener('resize', () => applyPracticeAreaFor(i));
-    document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else start(); });
-  })();
+  if (immediate) {
+    h1.textContent = msg.h1;
+    p.textContent  = msg.sub;
+    updateDots(idx);
+    applyFor(idx);
+    return;
+  }
 
-  </script>
+  wrap.classList.add('is-fading');
+  setTimeout(() => {
+    h1.textContent = msg.h1;
+    p.textContent  = msg.sub;
+    wrap.classList.remove('is-fading');
+    updateDots(idx);
+    applyFor(idx);
+  }, FADE_MS);
+}
+
+function start() {
+  if (prefersReduce || messages.length < 2) return;
+  stop(); timer = setInterval(() => { i = (i + 1) % messages.length; render(i); }, DURATION);
+}
+function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+// Init
+render(i, true); start();
+
+// Pause on hover/focus
+wrap.addEventListener('mouseenter', stop);
+wrap.addEventListener('mouseleave', start);
+wrap.addEventListener('focusin', stop);
+wrap.addEventListener('focusout', start);
+
+// Buttons
+prevBtn?.addEventListener('click', () => { stop(); i = (i - 1 + messages.length) % messages.length; render(i); start(); });
+nextBtn?.addEventListener('click', () => { stop(); i = (i + 1) % messages.length; render(i); start(); });
+
+// Dots
+dots.forEach((dot, idx) => {
+  dot.addEventListener('click', () => { stop(); i = idx; render(i); start(); });
+  dot.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); prevBtn?.click(); dots[Math.max(0, idx - 1)]?.focus(); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); nextBtn?.click(); dots[Math.min(messages.length - 1, idx + 1)]?.focus(); }
+  });
+});
+
+// Re-apply on resize (for single-column reordering)
+window.addEventListener('resize', () => applyFor(i));
+document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else start(); });
+})();
+</script>
 </body>
 </html>
+
