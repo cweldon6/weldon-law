@@ -211,9 +211,9 @@ h3 { font-size: var(--fs-600); line-height: var(--lh-tight); margin: 0 0 var(--s
 }
 
 .bio-image { 
-  float: left; 
-  width: 120px;
-  height: 150px;
+  float: right;
+  width: 360px;
+  height: 360px;
   margin: 0 var(--space-4) var(--space-4) 0;
   border-radius: var(--radius-sm);
   object-fit: cover;
