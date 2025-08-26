@@ -1,69 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About Weldon Law, LLC | Christopher R. Weldon, Esq.</title>
-  <meta name="description" content="Learn about Weldon Law, LLC and founder Christopher R. Weldon, Esq., providing guardianship, estate planning, probate, and elder law services across New Jersey." />
-  <link rel="stylesheet" href="branded-styles.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About Weldon Law, LLC | Christopher R. Weldon, Esq.</title>
+<meta name="description" content="Learn about Weldon Law, LLC and founder Christopher R. Weldon, Esq.—guardianship, life & legacy planning, probate, and elder law services across New Jersey." />
+<link rel="stylesheet" href="branded-styles.css" />
 </head>
-<body>
-  <header class="site-header">
-    <div class="container nav-container">
-      <div class="logo">
-        <a href="index.html">
-          <img src="images/WeldonLawLogo.png" alt="Weldon Law, LLC logo" />
-        </a>
-      </div>
-      <nav class="main-nav" id="nav">
-        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">&#9776;</button>
-        <ul class="navbar" id="primary-navigation">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html" aria-current="page">About</a></li>
-          <li class="dropdown">
-            <a href="#">Areas of Practice</a>
-            <ul class="dropdown-content">
-              <li><a href="practice-guardianships.html">Guardianships</a></li>
-              <li><a href="practice-ltc.html">Long-Term Care Planning</a></li>
-              <li><a href="practice-estate.html">Estate Planning</a></li>
-              <li><a href="practice-probate.html">Probate</a></li>
-            </ul>
-          </li>
-          <li><a href="news.html">News & Resources</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<body class="hero--copy">
+<header class="site-header">
+<div class="container nav-container">
+<div class="logo">
+<a href="index.html"><img src="images/WeldonLawLogoG.png" alt="Weldon Law logo" /></a>
+</div>
+<nav class="main-nav" id="nav">
+<button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">☰</button>
+<ul class="navbar" id="primary-navigation">
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html" aria-current="page">About</a></li>
+<li class="dropdown">
+<a href="#" aria-haspopup="true" aria-expanded="false">Areas of Practice</a>
+<ul class="dropdown-content">
+<li><a href="practice-guardianships.html">Guardianships</a></li>
+<li><a href="practice-ltc.html">Long-Term Care Planning</a></li>
+<li><a href="practice-lp.html">Life Planning (POA/Advance Directive)</a></li>
+<li><a href="practice-legacy.html">Legacy Planning (Wills & Trusts)</a></li>
+<li><a href="practice-probate.html">Probate</a></li>
+<li><a href="practice-general.html">General Counsel & Other Matters</a></li>
+</ul>
+</li>
+<li><a href="news.html">News & Resources</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</nav>
+</div>
+</header>
 
-  <main class="landing">
-    <div class="container">
-      <h1>About Weldon Law, LLC</h1>
-      <p class="tagline">Experienced, compassionate advocacy for New Jersey families.</p>
 
-      <p><strong>Christopher R. Weldon, Esquire</strong> is a lifelong Camden County resident and former State Regulatory Attorney. Over more than a decade of public service, Chris has been involved in 1,000+ guardianship and fiduciary matters, advocating for vulnerable individuals and the loved ones who support them.</p>
+<main class="landing">
+<div class="container">
+<h1>About Weldon Law, LLC</h1>
+<p class="tagline">Experienced, compassionate advocacy for New Jersey families.</p>
 
-      <p>Weldon Law focuses on <em>guardianships</em>, <em>long‑term care planning</em>, <em>estate planning</em>, and <em>probate</em>, pairing practical strategy with modern legal technology to maximize efficiency, transparency, and client accessibility.</p>
 
-      <p class="contact-info"><strong>Contact:</strong> <a href="mailto:chris@weldon.law">chris@weldon.law</a></p>
-    </div>
-  </main>
+<div class="about-snippet">
+<img src="images/christopher-weldon-headshot2.jpg" alt="Portrait of Christopher R. Weldon, Esquire" class="bio-image" width="250" height="250" loading="lazy" />
+<p><strong>Christopher R. Weldon, Esquire</strong>—founder of Weldon Law—has dedicated his legal career to protecting the rights, dignity, and independence of older adults and individuals with special needs. He focuses on guardianship; life &amp; legacy planning; long‑term care preparation; probate matters; and related elder‑law issues.</p>
+<p>With over a decade of elder‑law experience and involvement in more than 1,000 guardianship and fiduciary matters, Chris is known for a compassionate, steady approach and for resolving conflict efficiently. His background includes service as a State Regulatory Attorney with the New Jersey Office of the Public Guardian, legislative advocacy to improve elder‑care and guardianship laws, and frequent presentations to judicial and professional audiences.</p>
+<p><a class="button" href="contact.html">Get in touch →</a></p>
+</div>
+</div>
+</main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2025 Weldon Law, LLC. All rights reserved.</p>
-    </div>
-  </footer>
 
-  <script>
-    const toggle = document.querySelector('.menu-toggle');
-    const navList = document.getElementById('primary-navigation');
-    if (toggle && navList) {
-      toggle.addEventListener('click', () => {
-        navList.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', navList.classList.contains('open'));
-      });
-    }
-  </script>
+<footer class="site-footer">
+<div class="container">
+<p>&copy; 2025 Weldon Law, LLC. All rights reserved.</p>
+</div>
+</footer>
+
+
+<script>
+const toggle=document.querySelector('.menu-toggle');
+const navList=document.getElementById('primary-navigation');
+toggle&&navList&&toggle.addEventListener('click',()=>{
+const open=navList.classList.toggle('open');
+toggle.setAttribute('aria-expanded', open);
+});
+</script>
 </body>
 </html>
