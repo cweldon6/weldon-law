@@ -177,8 +177,9 @@ textarea:focus-visible {
    Practice Areas – 6 tiles
    ========================= */
 .practice-areas {
-  display: grid; gap: var(--space-5);
-  grid-template-columns: 1fr;                 /* mobile */
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: 1fr; /* mobile */
 }
 @media (min-width: 640px)  { .practice-areas { grid-template-columns: repeat(2, 1fr); } }  /* tablet */
 @media (min-width: 1024px) { .practice-areas { grid-template-columns: repeat(3, 1fr); } } /* desktop */
@@ -189,25 +190,36 @@ textarea:focus-visible {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   background: var(--color-bg);
-  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
   overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
 }
+
+/* Full-tile background image */
 .practice-area::before {
-  content: ""; position: absolute; inset: 0; z-index: 0;
+  content: "";
+  position: absolute; inset: 0; z-index: 0;
   background: var(--pa-bg) center/cover no-repeat;
-  opacity: 0.08; transition: opacity .2s ease; pointer-events: none;
+  opacity: 0.22;               /* base image visibility */
+  transition: opacity .2s ease;
+  pointer-events: none;
 }
-/* The subtle tint applied programmatically via --pa-tint */
+
+/* Tint overlay (set by JS with --pa-tint) */
 .practice-area::after {
-  content: ""; position: absolute; inset: 0; z-index: 0;
-  background: var(--pa-tint, transparent); pointer-events: none;
+  content: "";
+  position: absolute; inset: 0; z-index: 0;
+  background: var(--pa-tint, transparent);
+  opacity: 0;                   /* only visible when active */
+  transition: opacity .2s ease;
+  pointer-events: none;
 }
 
-.practice-area:hover::before,
-.practice-area:focus-within::before { opacity: 0.16; }
+/* Elevation + slightly stronger image on hover/focus */
 .practice-area:hover { border-color: var(--color-primary); box-shadow: var(--shadow-1); transform: translateY(-2px); }
+.practice-area:hover::before,
+.practice-area:focus-within::before { opacity: 0.30; }
 
-/* ensure text sits above overlays */
+/* Ensure text sits above overlays */
 .practice-area h3,
 .practice-area p { position: relative; z-index: 1; }
 
@@ -215,33 +227,83 @@ textarea:focus-visible {
 .practice-area h3 a { color: var(--color-primary); text-decoration: none; font-weight: 700; }
 .practice-area h3 a:hover { text-decoration: underline; }
 
+/* Body copy hidden by default; revealed on hover or when JS marks active */
 .practice-area p {
-  margin: .5rem 0 0; max-height: 0; opacity: 0; overflow: hidden;
+  margin: .5rem 0 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
   transition: max-height .25s ease, opacity .25s ease;
 }
-/* Hover/focus opens; JS adds .is-active to open programmatically */
 .practice-area:hover p,
 .practice-area:focus-within p,
 .practice-area.is-active p { max-height: 10rem; opacity: 1; }
 
-/* Programmatic 'active' accent */
+/* When targeted by the hero: keep elevation and show the tint */
 .practice-area.is-active { border-color: var(--color-primary); box-shadow: var(--shadow-1); }
-.practice-area.is-active::before { opacity: 0.16; }
+.practice-area.is-active::after { opacity: 1; }
 
 /* Two Column Section */
 .info-grid { display: grid; gap: var(--space-6); padding: var(--space-6) 0; }
 @media (min-width: 900px) { .info-grid { grid-template-columns: 1fr 0.8fr; align-items: start; } }
 
 /* Bio */
-.about-snippet p { max-width: var(--measure); }
 .bio-section .about-snippet, .bio-section .about-snippet p { max-width: none; }
 .bio-section { overflow: hidden; }
+
+/* Default: desktop/tablet – float left, larger portrait */
 .bio-image {
-  float: left; width: 250px; height: 250px;
+  float: left;
+  width: 250px; height: 250px;
   margin: 0 var(--space-4) var(--space-4) 0;
-  border-radius: var(--radius-sm); object-fit: cover; display: none;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  display: block;            /* <-- ensure it shows */
 }
-@media (min-width: 768px) { .bio-image { display: block; } }
+
+/* Mobile: image left, all text in the right column */
+
+  .bio-image {
+    float: none;               /* cancel desktop float */
+    width: 120px; height: 120px;
+    margin: 0;
+    grid-column: 1;
+    grid-row: 1 / span 99;     /* image occupies left rail */
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+  }
+
+  /* Put everything except the image into the right column */
+  .about-snippet > *:not(.bio-image) {
+    grid-column: 2;
+  }
+
+  /* === Bio: image floats left; text wraps around === */
+.about-snippet::after {             /* clear the float so following sections don't wrap */
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.bio-image {
+  float: left;                      /* key: wrap text around image */
+  width: 200px;
+  height: 250px;
+  margin: 0 var(--space-4) var(--space-4) 0;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  display: block;
+}
+
+/* scale up on larger screens */
+@media (min-width: 768px) {
+  .bio-image { width: 250px; height: 250px; }
+}
+
+/* keep wrap on small screens, just make the photo smaller */
+@media (max-width: 480px) {
+  .bio-image { width: 140px; height: 140px; }
+}
 
 /* Lists / FAQ */
 .firm-services h2 { margin-top: 0; }
