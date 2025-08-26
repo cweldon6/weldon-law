@@ -176,7 +176,7 @@ h3 { font-size: var(--fs-600); line-height: var(--lh-tight); margin: 0 0 var(--s
 .subtitle, .tagline { font-size: var(--fs-500); }
 
 /* Two Column Section */
-.info-grid { display: grid; gap: var(--space-6); padding: var(--space-2) 0; }
+.info-grid { display: grid; gap: var(--space-6); padding: var(--space-6) 0; }
 @media (min-width: 900px) {
   .info-grid { grid-template-columns: 1fr 0.8fr; align-items: start; }
 }
@@ -186,8 +186,8 @@ h3 { font-size: var(--fs-600); line-height: var(--lh-tight); margin: 0 0 var(--s
 .bio-section .about-snippet, .bio-section .about-snippet p { max-width: none; }
 .bio-section { overflow: hidden; }
 .bio-image {
-  float: right;
-  width: 360px; height: 360px;
+  float: left;
+  width: 250px; height: 250px;
   margin: 0 var(--space-4) var(--space-4) 0;
   border-radius: var(--radius-sm);
   object-fit: cover;
@@ -323,7 +323,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--color-primary); 
 .intake-sheet[aria-hidden="false"] { display: block; }
 .intake-sheet__panel {
   position: absolute; left: 0; right: 0; bottom: 0;
-  background: #630303; border-top-left-radius: var(--radius-md); border-top-right-radius: var(--radius-md);
+  background: #fff; border-top-left-radius: var(--radius-md); border-top-right-radius: var(--radius-md);
   box-shadow: var(--shadow-1); padding: var(--space-5);
   max-height: 85vh; overflow: auto;
 }
