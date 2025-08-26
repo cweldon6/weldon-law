@@ -75,7 +75,7 @@
     <div class="container nav-container">
       <div class="logo">
         <a href="index.html">
-          <img src="images/WeldonLawLogoG.png" as="image" />
+          <img src="images/WeldonLawLogoG.png" alt="Weldon Law logo" />
         </a>
       </div>
       <nav class="main-nav" id="nav">
@@ -180,59 +180,69 @@
 
   <main id="main-content">
     <!-- HERO / INTRO (rotating messages) -->
-<section class="intro-banner">
-  <div class="container hero-rotator" aria-live="polite">
-    <h1 class="hero-line"></h1>
-    <p class="hero-sub"></p>
+    <section class="intro-banner">
+      <div class="container hero-rotator" aria-live="polite">
+        <h1 class="hero-line"></h1>
+        <p class="hero-sub"></p>
 
-    <!-- Message data lives here so content is visible in source for SEO -->
-    <template id="heroMessages">
-      <div data-h1="Compassionate, precise elder law counsel—rooted in your community"
-           data-sub="Every matter is approached with the care it deserves, regardless of asset level or complexity."></div>
+        <div class="hero-controls">
+          <button class="hero-prev" type="button" aria-label="Previous message">‹</button>
+          <div class="hero-dots" role="tablist" aria-label="Hero messages"></div>
+          <button class="hero-next" type="button" aria-label="Next message">›</button>
+        </div>
 
-      <div data-h1="Life vs. Legacy"
-           data-sub="Take control now—not from the grave."></div>
+        <!-- Message data lives here so content is visible in source for SEO -->
+        <template id="heroMessages">
+          <div data-h1="Compassionate, precise elder law counsel—rooted in your community"
+               data-sub="Every matter is approached with the care it deserves, regardless of asset level or complexity."
+               data-target="guard"></div>
 
-      <div data-h1="Protecting dignity. Preserving independence."
-           data-sub="Guidance in guardianship, planning, and care when it matters most."></div>
-    </template>
-  </div>
-</section>
+          <div data-h1="Life vs. Legacy"
+               data-sub="Take control now—not from the grave."
+               data-target="legacy"></div>
+
+          <div data-h1="Protecting dignity. Preserving independence."
+               data-sub="Guidance in guardianship, planning, and care when it matters most."
+               data-target="ltc"></div>
+        </template>
+      </div>
+    </section>
 
     <!-- PRACTICE AREAS (6 tiles) -->
     <section class="container" style="padding: var(--space-6) 0;">
       <h2>Areas of Practice</h2>
       <div class="practice-areas">
-        
-        <div class="practice-area" style="--pa-bg:url('images/pa-life.jpg')">
+
+        <div class="practice-area" data-pa="lp" style="--pa-bg:url('images/pa-life.jpg')">
           <h3><a href="practice-lp.html">Life Planning (POA/Advance Directive)</a></h3>
           <p>Planning for in-life decision-making and authority if you can’t act.</p>
         </div>
 
-        <div class="practice-area" style="--pa-bg:url('images/pa-guardianships.jpg')">
+        <div class="practice-area" data-pa="guard" style="--pa-bg:url('images/pa-guardianships.jpg')">
           <h3><a href="practice-guardianships.html">Guardianships</a></h3>
           <p>Establishing and administering guardianships with diligence and care.</p>
         </div>
 
-        <div class="practice-area" style="--pa-bg:url('images/pa-ltc.jpg')">
+        <div class="practice-area" data-pa="ltc" style="--pa-bg:url('images/pa-ltc.jpg')">
           <h3><a href="practice-ltc.html">Long-Term Care Planning</a></h3>
           <p>Protecting assets while aligning care needs and benefits.</p>
         </div>
         
-        <div class="practice-area" style="--pa-bg:url('images/pa-legacy.jpg')">
+        <div class="practice-area" data-pa="legacy" style="--pa-bg:url('images/pa-legacy.jpg')">
           <h3><a href="practice-legacy.html">Legacy Planning (Wills & Trusts)</a></h3>
           <p>Directing your estate and preserving your intent for loved ones.</p>
         </div>
 
-        <div class="practice-area" style="--pa-bg:url('images/pa-probate.jpg')">
+        <div class="practice-area" data-pa="probate" style="--pa-bg:url('images/pa-probate.jpg')">
           <h3><a href="practice-probate.html">Probate</a></h3>
           <p>Guidance through estate administration and court procedures.</p>
         </div>
 
-        <div class="practice-area" style="--pa-bg:url('images/pa-general.jpg')">
+        <div class="practice-area" data-pa="general" style="--pa-bg:url('images/pa-general.jpg')">
           <h3><a href="practice-general.html">General Counsel & Other Matters</a></h3>
           <p>Related elder-law and fiduciary issues tailored to your situation.</p>
         </div>
+
       </div>
     </section>
 
@@ -240,16 +250,15 @@
     <section class="container bio-section" style="padding: var(--space-5) 0;">
       <div class="about-snippet">
         <img src="images/christopher-weldon-headshot2.jpg" alt="Portrait of Christopher R. Weldon, Esquire, elder law attorney" class="bio-image" width="120" height="150" loading="lazy" />
-<p>
-Christopher R. Weldon, Esquire&mdash;founder of Weldon Law&mdash;has dedicated his legal career to advocating for vulnerable individuals and those who support them. He focuses on guardianship; life & legacy planning;  long-term care preparation; probate matters; and other related elder law issues.*
-</p>
-<p>
-With more than a decade of elder law experience and involvement in over 1,000 guardianship and fiduciary matters, Chris is recognized for his compassionate approach and commitment to resolving conflict efficiently. His background includes service as a State Regulatory Attorney with the New Jersey Office of the Public Guardian, legislative advocacy to improve elder care and guardianship laws, and presentations to judicial and professional audiences.
-</p>
-<p
- href="about.html">Learn more →</a>
-</p>
-</section>
+        <p>
+          Christopher R. Weldon, Esquire&mdash;founder of Weldon Law&mdash;has dedicated his legal career to advocating for vulnerable individuals and those who support them. He focuses on guardianship; life &amp; legacy planning; long-term care preparation; probate matters; and other related elder law issues.*
+        </p>
+        <p>
+          With more than a decade of elder law experience and involvement in over 1,000 guardianship and fiduciary matters, Chris is recognized for his compassionate approach and commitment to resolving conflict efficiently. His background includes service as a State Regulatory Attorney with the New Jersey Office of the Public Guardian, legislative advocacy to improve elder care and guardianship laws, and presentations to judicial and professional audiences.
+        </p>
+        <p><a href="about.html">Learn more →</a></p>
+      </div>
+    </section>
 
     <!-- TRUST / QUICK FACTS -->
     <section class="container" style="padding: var(--space-6) 0;">
@@ -281,7 +290,7 @@ With more than a decade of elder law experience and involvement in over 1,000 gu
           <div class="faq-list">
             <details>
               <summary>Do I need an attorney for a guardianship?</summary>
-              <p>It depends. The process involves court filings, medical certifications, and hearings.  Together we will map the steps and timeline.</p>
+              <p>It depends. The process involves court filings, medical certifications, and hearings. Together we will map the steps and timeline.</p>
             </details>
             <details>
               <summary>How fast can we start?</summary>
@@ -632,60 +641,155 @@ With more than a decade of elder law experience and involvement in over 1,000 gu
     });
   }
 
-  /* ===== Hero message rotator ===== */
-(function () {
-  const wrap = document.querySelector('.hero-rotator');
-  if (!wrap) return;
+  /* ===== Hero message rotator + tile linking ===== */
+  (function () {
+    const wrap = document.querySelector('.hero-rotator');
+    if (!wrap) return;
 
-  const h1 = wrap.querySelector('.hero-line');
-  const p  = wrap.querySelector('.hero-sub');
-  const tpl = document.getElementById('heroMessages');
+    const h1  = wrap.querySelector('.hero-line');
+    const p   = wrap.querySelector('.hero-sub');
+    const tpl = document.getElementById('heroMessages');
 
-  // Pull messages from <template> attributes
-  const messages = Array.from(tpl.content.children).map(n => ({
-    h1: n.getAttribute('data-h1') || '',
-    sub: n.getAttribute('data-sub') || ''
-  })).filter(m => m.h1);
+    // Practice Areas
+    const paContainer = document.querySelector('.practice-areas');
+    const paTiles = paContainer ? Array.from(paContainer.children) : [];
+    // Record original order so we can restore on desktop
+    paTiles.forEach((tile, idx) => (tile.dataset.origIndex ??= String(idx)));
+    const paByKey = paTiles.reduce((m, tile) => {
+      const key = (tile.getAttribute('data-pa') || '').trim();
+      if (key) m[key] = tile;
+      return m;
+    }, {});
 
-  if (!messages.length) return;
+    // Pull messages (with optional target key)
+    const messages = Array.from(tpl?.content?.children || []).map(n => ({
+      h1: n.getAttribute('data-h1') || '',
+      sub: n.getAttribute('data-sub') || '',
+      target: (n.getAttribute('data-target') || '').trim()
+    })).filter(m => m.h1);
 
-  let i = 0, timer = null;
-  const DURATION = 6500;     // 6.5s per slide
-  const FADE_MS  = 450;      // matches CSS
+    if (!messages.length) return;
 
-  function render(idx, immediate=false) {
-    const msg = messages[idx % messages.length];
-    if (!msg) return;
+    const prevBtn  = wrap.querySelector('.hero-prev');
+    const nextBtn  = wrap.querySelector('.hero-next');
+    const dotsWrap = wrap.querySelector('.hero-dots');
 
-    if (immediate) {
-      h1.textContent = msg.h1;
-      p.textContent  = msg.sub;
-      return;
+    let i = 0, timer = null, activeTile = null;
+    const DURATION = 6500; // 6.5s per slide
+    const FADE_MS  = 450;  // matches CSS
+    const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = () => window.innerWidth < 640; // matches CSS breakpoint
+
+    // Build dots if present
+    const dots = [];
+    if (dotsWrap && messages.length > 1) {
+      messages.forEach((_, idx) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'hero-dot';
+        b.setAttribute('role', 'tab');
+        b.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
+        b.setAttribute('aria-label', `Show message ${idx + 1} of ${messages.length}`);
+        dotsWrap.appendChild(b);
+        dots.push(b);
+      });
+    }
+    function updateDots(active) {
+      dots.forEach((d, idx) => d.setAttribute('aria-selected', idx === active ? 'true' : 'false'));
     }
 
-    wrap.classList.add('is-fading');
-    setTimeout(() => {
-      h1.textContent = msg.h1;
-      p.textContent  = msg.sub;
-      wrap.classList.remove('is-fading');
-    }, FADE_MS);
-  }
+    function clearActiveTile() {
+      if (!activeTile) return;
+      activeTile.classList.remove('is-active');
+      activeTile = null;
+    }
+    function restoreOriginalOrder() {
+      if (!paContainer || !paTiles.length) return;
+      const sorted = Array.from(paTiles).sort((a, b) =>
+        (+a.dataset.origIndex) - (+b.dataset.origIndex)
+      );
+      sorted.forEach(t => paContainer.appendChild(t));
+    }
+    function moveTileToTop(tile) {
+      if (!paContainer || !tile) return;
+      if (paContainer.firstElementChild !== tile) {
+        paContainer.insertBefore(tile, paContainer.firstElementChild);
+      }
+    }
+    function applyPracticeAreaFor(idx) {
+      const msg = messages[idx % messages.length];
+      const key = msg.target;
+      clearActiveTile();
+      if (!key || !paByKey[key]) {
+        if (!isMobile()) restoreOriginalOrder();
+        return;
+      }
+      activeTile = paByKey[key];
+      activeTile.classList.add('is-active');
 
-  // First paint immediately for CLS/SEO
-  render(i, true);
+      if (isMobile()) {
+        moveTileToTop(activeTile);
+      } else {
+        restoreOriginalOrder();
+      }
+    }
 
-  // Respect reduced motion: don’t auto-rotate
-  const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!prefersReduce && messages.length > 1) {
-    timer = setInterval(() => { i = (i + 1) % messages.length; render(i); }, DURATION);
-    // Pause on hover/focus for accessibility
-    wrap.addEventListener('mouseenter', () => clearInterval(timer));
-    wrap.addEventListener('mouseleave', () => {
-      clearInterval(timer);
+    function render(idx, immediate = false) {
+      const msg = messages[idx % messages.length];
+      if (!msg) return;
+
+      if (immediate) {
+        h1.textContent = msg.h1;
+        p.textContent  = msg.sub;
+        updateDots(idx);
+        applyPracticeAreaFor(idx);
+        return;
+      }
+
+      wrap.classList.add('is-fading');
+      setTimeout(() => {
+        h1.textContent = msg.h1;
+        p.textContent  = msg.sub;
+        wrap.classList.remove('is-fading');
+        updateDots(idx);
+        applyPracticeAreaFor(idx);
+      }, FADE_MS);
+    }
+
+    function start() {
+      if (prefersReduce || messages.length < 2) return;
+      stop();
       timer = setInterval(() => { i = (i + 1) % messages.length; render(i); }, DURATION);
+    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+    // Init
+    render(i, true);
+    start();
+
+    // Pause on hover/focus for accessibility
+    wrap.addEventListener('mouseenter', stop);
+    wrap.addEventListener('mouseleave', start);
+    wrap.addEventListener('focusin', stop);
+    wrap.addEventListener('focusout', start);
+
+    // Buttons
+    prevBtn?.addEventListener('click', () => { stop(); i = (i - 1 + messages.length) % messages.length; render(i); start(); });
+    nextBtn?.addEventListener('click', () => { stop(); i = (i + 1) % messages.length; render(i); start(); });
+
+    // Dots
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => { stop(); i = idx; render(i); start(); });
+      dot.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); prevBtn?.click(); dots[Math.max(0, idx - 1)]?.focus(); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); nextBtn?.click(); dots[Math.min(messages.length - 1, idx + 1)]?.focus(); }
+      });
     });
-  }
-})();
+
+    // Handle layout changes
+    window.addEventListener('resize', () => applyPracticeAreaFor(i));
+    document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else start(); });
+  })();
 
   </script>
 </body>

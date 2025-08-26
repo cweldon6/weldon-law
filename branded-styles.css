@@ -167,11 +167,12 @@ textarea:focus-visible {
 .intro-banner h1,
 .intro-banner p {
   max-width: var(--measure);
+  margin-inline: auto;
 }
 
 /* Hero rotator */
 .hero-rotator { position: relative; }
-.hero-line, .hero-sub { transition: opacity .45s ease; }
+.hero-line, .hero-sub { transition: opacity .45s ease; will-change: opacity; }
 .hero-rotator.is-fading .hero-line,
 .hero-rotator.is-fading .hero-sub { opacity: 0; }
 
@@ -179,6 +180,36 @@ textarea:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .hero-line, .hero-sub { transition: none; }
 }
+
+/* Hero manual controls */
+.hero-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  justify-content: center;
+}
+.hero-dots { display: flex; gap: .5rem; }
+.hero-controls button {
+  width: 2.25rem; height: 2.25rem;
+  display: grid; place-items: center;
+  border: 1px solid var(--color-border, #ddd);
+  background: var(--color-bg, #fff);
+  border-radius: 9999px;
+  font-size: 1.25rem; line-height: 1;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, transform .08s ease;
+}
+.hero-controls button:hover { background: var(--color-bg-soft); }
+.hero-controls button:active { transform: scale(.98); }
+.hero-controls button:focus-visible { outline: 2px solid var(--color-accent, #0a7); outline-offset: 2px; }
+.hero-dot {
+  width: .55rem; height: .55rem;
+  border-radius: 9999px; border: 0;
+  background: var(--color-ink, #333); opacity: .35;
+  cursor: pointer;
+}
+.hero-dot[aria-selected="true"] { opacity: 1; background: var(--color-accent, #0a7); }
 
 .intro-banner p { margin-bottom: 1rem; }
 
@@ -252,8 +283,17 @@ h3 { font-size: var(--fs-600); line-height: var(--lh-tight); margin: 0 0 var(--s
   overflow: hidden;
   transition: max-height .25s ease, opacity .25s ease;
 }
+/* Hover/focus opens; JS adds .is-active to open programmatically */
 .practice-area:hover p,
-.practice-area:focus-within p { max-height: 10rem; opacity: 1; }
+.practice-area:focus-within p,
+.practice-area.is-active p { max-height: 10rem; opacity: 1; }
+
+/* Programmatic 'active' accent */
+.practice-area.is-active {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-1);
+}
+.practice-area.is-active::before { opacity: 0.16; }
 
 /* Lists / FAQ */
 .firm-services h2 { margin-top: 0; }
