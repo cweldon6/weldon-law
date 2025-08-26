@@ -136,12 +136,12 @@ textarea:focus-visible {
 .intro-banner { background: var(--color-bg-soft); padding: var(--space-6) 0; position: relative; }
 
 /* Keep hero text readable and left-aligned */
-.intro-banner h1,
-.intro-banner p {
+.intro-banner :is(h1, p) {
   max-width: var(--measure);
-  margin-inline: center;       /* center the block */
-  text-align: left;            /* …but keep text left-aligned */
+  margin-inline: auto;   /* center the block container */
+  text-align: left;
 }
+
 .intro-banner p { margin-bottom: 1rem; }
 
 /* Hero rotator */
@@ -437,3 +437,20 @@ input:focus, select:focus, textarea:focus { border-color: var(--color-primary); 
 
 /* Wide-screen polish */
 @media (min-width: 1600px) { .container { width: min(88%, 78rem); } }
+
+/* ===== Hero spacing – tighten ===== */
+.intro-banner { padding: var(--space-4) 0; }                 /* was 2rem → now 1rem top/bottom */
+.intro-banner .hero-line { 
+  margin: 0 0 .25rem 0;                                      /* remove default top margin */
+  line-height: var(--lh-tight);                              /* 1.25 */
+}
+.intro-banner .hero-sub {
+  margin: 0;                                                 /* remove default margin */
+  line-height: 1.4;
+}
+.hero-controls { margin-top: var(--space-2); }               /* was 0.75rem → now 0.5rem */
+
+@media (max-width: 768px) {
+  .intro-banner { padding: var(--space-3) 0; }               /* a touch tighter on mobile */
+  .hero-controls { margin-top: .25rem; }
+}
