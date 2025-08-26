@@ -168,6 +168,18 @@ textarea:focus-visible {
 .intro-banner p {
   max-width: var(--measure);
 }
+
+/* Hero rotator */
+.hero-rotator { position: relative; }
+.hero-line, .hero-sub { transition: opacity .45s ease; }
+.hero-rotator.is-fading .hero-line,
+.hero-rotator.is-fading .hero-sub { opacity: 0; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-line, .hero-sub { transition: none; }
+}
+
 .intro-banner p { margin-bottom: 1rem; }
 
 h1 { font-family: var(--font-serif); font-size: var(--fs-700); line-height: var(--lh-tight); color: var(--color-ink-strong); margin: 0 0 var(--space-3); }

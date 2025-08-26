@@ -179,13 +179,25 @@
   </section>
 
   <main id="main-content">
-    <!-- HERO / INTRO -->
-    <section class="intro-banner">
-      <div class="container">
-        <h1>Compassionate, precise elder law counsel—rooted in your community</h1>
-        <p>Weldon Law, LLC offers experienced guidance in guardianship, estate planning, probate, and long-term care planning throughout New Jersey. Every matter is approached with the care it deserves, regardless of asset level or complexity.</p>
-      </div>
-    </section>
+    <!-- HERO / INTRO (rotating messages) -->
+<section class="intro-banner">
+  <div class="container hero-rotator" aria-live="polite">
+    <h1 class="hero-line"></h1>
+    <p class="hero-sub"></p>
+
+    <!-- Message data lives here so content is visible in source for SEO -->
+    <template id="heroMessages">
+      <div data-h1="Compassionate, precise elder law counsel—rooted in your community"
+           data-sub="Every matter is approached with the care it deserves, regardless of asset level or complexity."></div>
+
+      <div data-h1="Life vs. Legacy"
+           data-sub="Take control now—not from the grave."></div>
+
+      <div data-h1="Protecting dignity. Preserving independence."
+           data-sub="Guidance in guardianship, planning, and care when it matters most."></div>
+    </template>
+  </div>
+</section>
 
     <!-- PRACTICE AREAS (6 tiles) -->
     <section class="container" style="padding: var(--space-6) 0;">
@@ -232,7 +244,7 @@
 Christopher R. Weldon, Esquire&mdash;founder of Weldon Law&mdash;has dedicated his legal career to advocating for vulnerable individuals and those who support them. He focuses on guardianship; life & legacy planning;  long-term care preparation; probate matters; and other related elder law issues.*
 </p>
 <p>
-With more than a decade of elder law experience and involvement in over 1,000 guardianship and fiduciary matters, Chris is recognized for his compassionate approach and commitment to resolving conflict efficiently. His background includes service as a State Regulatory Attorney with the New Jersey Office of the Public Guardian, legislative advocacy to improve elder care and guardianship laws, and frequent presentations to judicial and professional audiences.
+With more than a decade of elder law experience and involvement in over 1,000 guardianship and fiduciary matters, Chris is recognized for his compassionate approach and commitment to resolving conflict efficiently. His background includes service as a State Regulatory Attorney with the New Jersey Office of the Public Guardian, legislative advocacy to improve elder care and guardianship laws, and presentations to judicial and professional audiences.
 </p>
 <p
  href="about.html">Learn more →</a>
@@ -619,6 +631,62 @@ With more than a decade of elder law experience and involvement in over 1,000 gu
       document.head.appendChild(link);
     });
   }
+
+  /* ===== Hero message rotator ===== */
+(function () {
+  const wrap = document.querySelector('.hero-rotator');
+  if (!wrap) return;
+
+  const h1 = wrap.querySelector('.hero-line');
+  const p  = wrap.querySelector('.hero-sub');
+  const tpl = document.getElementById('heroMessages');
+
+  // Pull messages from <template> attributes
+  const messages = Array.from(tpl.content.children).map(n => ({
+    h1: n.getAttribute('data-h1') || '',
+    sub: n.getAttribute('data-sub') || ''
+  })).filter(m => m.h1);
+
+  if (!messages.length) return;
+
+  let i = 0, timer = null;
+  const DURATION = 6500;     // 6.5s per slide
+  const FADE_MS  = 450;      // matches CSS
+
+  function render(idx, immediate=false) {
+    const msg = messages[idx % messages.length];
+    if (!msg) return;
+
+    if (immediate) {
+      h1.textContent = msg.h1;
+      p.textContent  = msg.sub;
+      return;
+    }
+
+    wrap.classList.add('is-fading');
+    setTimeout(() => {
+      h1.textContent = msg.h1;
+      p.textContent  = msg.sub;
+      wrap.classList.remove('is-fading');
+    }, FADE_MS);
+  }
+
+  // First paint immediately for CLS/SEO
+  render(i, true);
+
+  // Respect reduced motion: don’t auto-rotate
+  const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduce && messages.length > 1) {
+    timer = setInterval(() => { i = (i + 1) % messages.length; render(i); }, DURATION);
+    // Pause on hover/focus for accessibility
+    wrap.addEventListener('mouseenter', () => clearInterval(timer));
+    wrap.addEventListener('mouseleave', () => {
+      clearInterval(timer);
+      timer = setInterval(() => { i = (i + 1) % messages.length; render(i); }, DURATION);
+    });
+  }
+})();
+
   </script>
 </body>
 </html>
