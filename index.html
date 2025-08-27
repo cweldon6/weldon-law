@@ -74,6 +74,13 @@
     </div>
   </section>
 
+  <!-- Construction Notice -->
+  <div class="construction-notice">
+    <div class="container">
+      <strong>Site Under Construction:</strong> This website will officially launch soon. Current content may include placeholders and should not be relied upon for legal advice. For immediate assistance, please call (856) 890-2944.
+    </div>
+  </div>
+
   <!-- Main Header -->
   <header class="site-header">
     <div class="container nav-container">
@@ -849,7 +856,6 @@
 
       const prevButton = wrapper.querySelector('.hero-prev');
       const nextButton = wrapper.querySelector('.hero-next');
-      const dotsWrapper = wrapper.querySelector('.hero-dots');
 
       let currentIndex = 0;
       let rotationTimer = null;
@@ -857,31 +863,53 @@
       const FADE_DURATION = 450;
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+      // Touch/Swipe support for mobile
+      let touchStartX = 0;
+      let touchEndX = 0;
+      const SWIPE_THRESHOLD = 75; // Minimum distance for a swipe
+
+      function handleTouchStart(e) {
+        touchStartX = e.changedTouches[0].screenX;
+      }
+
+      function handleTouchEnd(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipeGesture();
+      }
+
+      function handleSwipeGesture() {
+        const swipeDistance = touchEndX - touchStartX;
+        
+        if (Math.abs(swipeDistance) > SWIPE_THRESHOLD) {
+          if (swipeDistance > 0) {
+            // Swipe right - go to previous
+            navigateToPrevious();
+          } else {
+            // Swipe left - go to next
+            navigateToNext();
+          }
+        }
+      }
+
+      // Navigation functions
+      function navigateToPrevious() {
+        stopRotation();
+        currentIndex = (currentIndex - 1 + messages.length) % messages.length;
+        renderMessage(currentIndex);
+        startRotation();
+      }
+
+      function navigateToNext() {
+        stopRotation();
+        currentIndex = (currentIndex + 1) % messages.length;
+        renderMessage(currentIndex);
+        startRotation();
+      }
+
       // Theming
       const TILE_TINT = getComputedStyle(document.documentElement)
         .getPropertyValue('--tile-tint').trim() || 'rgba(201,161,59,0.12)';
       const tints = Array(messages.length).fill(TILE_TINT);
-
-      // Build navigation dots
-      const dots = [];
-      if (dotsWrapper && messages.length > 1) {
-        messages.forEach((_, index) => {
-          const button = document.createElement('button');
-          button.type = 'button';
-          button.className = 'hero-dot';
-          button.setAttribute('role', 'tab');
-          button.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
-          button.setAttribute('aria-label', `Show message ${index + 1} of ${messages.length}`);
-          dotsWrapper.appendChild(button);
-          dots.push(button);
-        });
-      }
-
-      function updateDots(activeIndex) {
-        dots.forEach((dot, index) => {
-          dot.setAttribute('aria-selected', index === activeIndex ? 'true' : 'false');
-        });
-      }
 
       function insertAtPosition(container, element, position) {
         const referenceNode = container.children[position] || null;
@@ -962,7 +990,6 @@
         if (immediate) {
           h1Element.textContent = message.h1;
           pElement.textContent = message.sub;
-          updateDots(index);
           applyMessageToTiles(index);
           return;
         }
@@ -973,7 +1000,6 @@
           h1Element.textContent = message.h1;
           pElement.textContent = message.sub;
           wrapper.classList.remove('is-fading');
-          updateDots(index);
           applyMessageToTiles(index);
         }, FADE_DURATION);
       }
@@ -999,48 +1025,19 @@
       renderMessage(currentIndex, true);
       startRotation();
 
+      // Add touch event listeners for mobile swipe
+      wrapper.addEventListener('touchstart', handleTouchStart, { passive: true });
+      wrapper.addEventListener('touchend', handleTouchEnd, { passive: true });
+
       // Pause rotation on interaction
       wrapper.addEventListener('mouseenter', stopRotation);
       wrapper.addEventListener('mouseleave', startRotation);
       wrapper.addEventListener('focusin', stopRotation);
       wrapper.addEventListener('focusout', startRotation);
 
-      // Navigation controls
-      prevButton?.addEventListener('click', () => {
-        stopRotation();
-        currentIndex = (currentIndex - 1 + messages.length) % messages.length;
-        renderMessage(currentIndex);
-        startRotation();
-      });
-
-      nextButton?.addEventListener('click', () => {
-        stopRotation();
-        currentIndex = (currentIndex + 1) % messages.length;
-        renderMessage(currentIndex);
-        startRotation();
-      });
-
-      // Dot navigation
-      dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-          stopRotation();
-          currentIndex = index;
-          renderMessage(currentIndex);
-          startRotation();
-        });
-
-        dot.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            prevButton?.click();
-            dots[Math.max(0, index - 1)]?.focus();
-          } else if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            nextButton?.click();
-            dots[Math.min(messages.length - 1, index + 1)]?.focus();
-          }
-        });
-      });
+      // Desktop arrow navigation
+      prevButton?.addEventListener('click', navigateToPrevious);
+      nextButton?.addEventListener('click', navigateToNext);
 
       // Handle window events
       window.addEventListener('resize', () => applyMessageToTiles(currentIndex));
