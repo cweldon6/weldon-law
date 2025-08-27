@@ -447,6 +447,13 @@ h1, h2, h3, [id] {
   max-width: var(--measure);
   margin-inline: auto;
   text-align: left;
+  padding: 0 4rem; /* Account for arrow buttons */
+}
+
+@media (max-width: 768px) {
+  .intro-banner :is(h1, p) {
+    padding: 0 3rem; /* Smaller padding for mobile arrows */
+  }
 }
 
 .intro-banner .hero-line {
@@ -489,34 +496,38 @@ h1, h2, h3, [id] {
 
 /* Hero Controls */
 .hero-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: var(--space-2);
-  margin-top: var(--space-2);
-  justify-content: center;
-}
-
-.hero-dots {
-  display: flex;
-  gap: 0.5rem;
+  pointer-events: none;
+  padding: 0 var(--space-4);
 }
 
 .hero-controls button {
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2.75rem;
+  height: 2.75rem;
   display: grid;
   place-items: center;
   border: 1px solid var(--color-border);
-  background: var(--color-bg);
-  border-radius: 9999px;
-  font-size: 1.25rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  font-size: 1.5rem;
   line-height: 1;
   cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.08s ease;
+  pointer-events: auto;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-1);
 }
 
 .hero-controls button:hover {
-  background: var(--color-bg-soft);
+  background: var(--color-bg);
+  border-color: var(--color-primary);
+  transform: scale(1.05);
 }
 
 .hero-controls button:active {
@@ -529,19 +540,16 @@ h1, h2, h3, [id] {
   outline-offset: 2px;
 }
 
-.hero-dot {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 9999px;
-  border: 0;
-  background: var(--color-ink);
-  opacity: 0.35;
-  cursor: pointer;
-}
-
-.hero-dot[aria-selected="true"] {
-  opacity: 1;
-  background: var(--color-primary);
+@media (max-width: 768px) {
+  .hero-controls {
+    padding: 0 var(--space-2);
+  }
+  
+  .hero-controls button {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.25rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -556,7 +564,7 @@ h1, h2, h3, [id] {
 
 /* === Practice Areas === */
 .practice-areas-section {
-  padding: var(--space-6) 0;
+  padding: var(--space-3) 0 var(--space-6) 0;
 }
 
 .practice-areas {
