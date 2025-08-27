@@ -454,3 +454,67 @@ input:focus, select:focus, textarea:focus { border-color: var(--color-primary); 
   .intro-banner { padding: var(--space-3) 0; }               /* a touch tighter on mobile */
   .hero-controls { margin-top: .25rem; }
 }
+
+/* ===== Palette refactor – tokenize everything ===== */
+:root{
+  /* helpers derived from your palette */
+  --color-success:  #0a5c22;
+  --color-danger:   #b42318;
+  --color-backdrop: #00000066;
+  --color-input-border: color-mix(in oklab, var(--color-ink) 20%, var(--color-bg));
+  --tile-tint: color-mix(in oklab, var(--color-accent) 25%, transparent);
+}
+
+/* Top CTA (utility bar) */
+.top-cta{ background: var(--color-bg-soft); }
+.top-cta__prompt{ color: var(--color-ink); }
+.btn--outline{ border:1px solid var(--color-primary); color:var(--color-primary); background:transparent; }
+.btn--outline:hover{ background: color-mix(in oklab, var(--color-primary) 10%, transparent); }
+.btn--phone{ background: var(--color-accent); color:#fff; border:0; }
+.btn--phone:hover{ filter: brightness(0.95); }
+
+/* Modal backdrop + messages */
+.intake-sheet{ background: var(--color-backdrop); }
+.success-inline{
+  color: var(--color-success);
+  background: color-mix(in oklab, var(--color-success) 10%, #fff);
+  border-color: color-mix(in oklab, var(--color-success) 25%, #fff);
+}
+.error-inline{
+  color: var(--color-danger);
+  background: color-mix(in oklab, var(--color-danger) 10%, #fff);
+  border-color: color-mix(in oklab, var(--color-danger) 25%, #fff);
+}
+
+/* Inputs (global + desktop footer form) */
+input, select, textarea{ border-color: var(--color-input-border); }
+@media (min-width:1024px){
+  .intake-footer__form input, .intake-footer__form select{ border-color: var(--color-input-border); }
+}
+
+/* FAQ hover tone derived from primary */
+.faq-content summary:hover{ color: color-mix(in oklab, var(--color-primary) 85%, #000); }
+
+/* Footer uses brand primary */
+.site-footer{ background: var(--color-primary); color:#fff; }
+
+/* === Gold only on buttons — global overrides === */
+:root{
+  /* Make borders neutral (no more gold lines) */
+  --color-border: var(--color-input-border); /* already defined above */
+
+  /* Make tile overlay a neutral wash instead of gold */
+  --tile-tint: color-mix(in oklab, var(--color-primary) 10%, transparent);
+}
+
+/* Hero dots: active state no longer gold */
+.hero-dot[aria-selected="true"] { background: var(--color-primary); }
+
+/* Hero control focus ring: use focus color, not gold */
+.hero-controls button:focus-visible { outline-color: var(--color-focus); }
+
+/* (Optional) ensure any lingering borders follow neutral token */
+.dropdown-content { border-color: var(--color-border); }
+.practice-area     { border-color: var(--color-border); }
+.faq-content details{ border-color: var(--color-border); }
+

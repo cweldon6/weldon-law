@@ -578,13 +578,10 @@
     const FADE_MS  = 450;
     const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Per-message tint palette (all gold for now)
-    const TINTS = [
-      'rgba(201,161,59,0.12)',
-      'rgba(201,161,59,0.12)',
-      'rgba(201,161,59,0.12)',
-      'rgba(201,161,59,0.12)'
-    ];
+    // Per-message tint palette (driven by CSS --tile-tint)
+    const TILE_TINT = getComputedStyle(document.documentElement)
+      .getPropertyValue('--tile-tint').trim() || 'rgba(201,161,59,0.12)';
+    const TINTS = Array(messages.length).fill(TILE_TINT);
 
     // Build dots
     const dots = [];
