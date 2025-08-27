@@ -542,13 +542,11 @@ h1, h2, h3, [id] {
 
 @media (max-width: 768px) {
   .hero-controls {
-    padding: 0 var(--space-2);
+    display: none; /* Hide arrows on mobile - use swipe instead */
   }
   
-  .hero-controls button {
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1.25rem;
+  .intro-banner :is(h1, p) {
+    padding: 0; /* Remove padding since no arrows on mobile */
   }
 }
 
