@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Weldon Law, LLC | Guardianship, Estate & Elder Law in New Jersey</title>
-  <meta name="description" content="Weldon Law, LLC provides experienced, compassionate counsel in guardianship, estate planning, probate, and long-term care planning throughout New Jersey." />
+  <meta name="description" content="Weldon Law, LLC provides experienced, compassionate counsel in guardianship, estate planning, probate, and long-term care planning throughout New Jersey.">
 
-  <!-- Enhanced SEO Meta Tags -->
-  <meta property="og:title" content="Weldon Law, LLC | Guardianship, Estate & Elder Law in New Jersey" />
-  <meta property="og:description" content="Experienced, compassionate counsel in guardianship, estate planning, probate, and long-term care planning throughout New Jersey." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://weldon.law/" />
-  <meta property="og:image" content="https://weldon.law/images/og-image.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Weldon Law, LLC | Elder Law Attorney in New Jersey" />
-  <meta name="twitter:description" content="Expert guidance in guardianship, estate planning, and elder law matters." />
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Weldon Law, LLC | Guardianship, Estate & Elder Law in New Jersey">
+  <meta property="og:description" content="Experienced, compassionate counsel in guardianship, estate planning, probate, and long-term care planning throughout New Jersey.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://weldon.law/">
+  <meta property="og:image" content="https://weldon.law/images/og-image.jpg">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Weldon Law, LLC | Elder Law Attorney in New Jersey">
+  <meta name="twitter:description" content="Expert guidance in guardianship, estate planning, and elder law matters.">
 
-  <!-- Local Business Schema -->
+  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -26,28 +28,45 @@
     "url": "https://weldon.law",
     "telephone": "+1-856-890-2944",
     "email": "chris@weldon.law",
-    "address": { "@type": "PostalAddress", "addressLocality": "Voorhees", "addressRegion": "NJ", "addressCountry": "US" },
-    "areaServed": { "@type": "State", "name": "New Jersey" },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Voorhees",
+      "addressRegion": "NJ",
+      "addressCountry": "US"
+    },
+    "areaServed": {
+      "@type": "State",
+      "name": "New Jersey"
+    },
     "serviceType": ["Guardianship", "Estate Planning", "Probate", "Long-Term Care Planning"],
-    "founder": { "@type": "Person", "name": "Christopher R. Weldon", "jobTitle": "Attorney" }
+    "founder": {
+      "@type": "Person",
+      "name": "Christopher R. Weldon",
+      "jobTitle": "Attorney"
+    }
   }
   </script>
 
-  <link rel="stylesheet" href="branded-styles.css" />
-  <link rel="preload" href="images/WeldonLawLogoG.png" as="image" />
-
-  <script>window.INTAKE_PROXY = '/api/intake';</script>
+  <link rel="stylesheet" href="branded-styles.css">
+  <link rel="preload" href="images/WeldonLawLogoG.png" as="image">
+  
+  <!-- Configuration -->
+  <script>
+    window.INTAKE_PROXY = '/api/intake';
+  </script>
 </head>
-<body class="hero--copy">
 
-  <!-- Top utility CTA bar -->
+<body class="hero--copy">
+  <!-- Quick Contact Bar -->
   <section class="top-cta" role="region" aria-label="Quick contact">
     <div class="container top-cta__inner">
       <div class="top-cta__prompt">
         <strong>Have a question?</strong> Start here and hear back fast.
       </div>
       <div class="top-cta__actions">
-        <a href="#" id="ctaGetHelp" class="btn btn--outline" role="button">Submit Inquiry →</a>
+        <a href="#" id="ctaGetHelp" class="btn btn--outline" role="button">
+          Submit Inquiry →
+        </a>
         <a class="btn btn--phone" href="tel:+18568902944" aria-label="Call Weldon Law at (856) 890-2944">
           (856) 890-2944
         </a>
@@ -55,23 +74,28 @@
     </div>
   </section>
 
-  <!-- Main site header -->
+  <!-- Main Header -->
   <header class="site-header">
     <div class="container nav-container">
       <div class="logo">
-        <a href="index.html"><img src="images/WeldonLawLogoG.png" alt="Weldon Law logo" /></a>
+        <a href="index.html">
+          <img src="images/WeldonLawLogoG.png" alt="Weldon Law logo">
+        </a>
       </div>
+      
       <nav class="main-nav" id="nav">
-        <!-- Hamburger toggle -->
         <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">
-          <span class="menu-icon" aria-hidden="true"></span>
+          <span class="menu-icon"></span>
         </button>
-
+        
         <ul class="navbar" id="primary-navigation">
           <li><a href="index.html" aria-current="page">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li class="dropdown">
-            <a href="#" aria-haspopup="true" aria-expanded="false">Areas of Practice</a>
+            <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+              Areas of Practice
+              <span class="dropdown-arrow">▼</span>
+            </a>
             <ul class="dropdown-content">
               <li><a href="practice-guardianships.html">Guardianships</a></li>
               <li><a href="practice-ltc.html">Long-Term Care Planning</a></li>
@@ -88,46 +112,53 @@
     </div>
   </header>
 
-  <!-- Sticky Intake (mobile) -->
+  <!-- Mobile Contact Sheet -->
   <section class="intake-stick" role="complementary" aria-label="Quick intake">
     <div class="intake-stick__mobilebar" aria-hidden="false">
       <a href="#intakeSheet" class="intake-stick__cta" id="openIntakeMobile" role="button" aria-controls="intakeSheet" aria-expanded="false">
         Get help now →
       </a>
     </div>
+    
     <div class="intake-sheet" id="intakeSheet" aria-hidden="true" aria-modal="true" role="dialog" aria-label="Intake form">
       <div class="intake-sheet__panel" role="document">
         <button class="intake-sheet__close" id="closeIntakeMobile" aria-label="Close">✕</button>
+        
         <h2>How can we help?</h2>
+        
         <form id="intakeFormStickyMobile" novalidate>
-          <input type="hidden" name="siteKey" value="WL5616!SecureKey" />
-          <input type="text" name="company" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <!-- Security Fields -->
+          <input type="hidden" name="siteKey" value="WL5616!SecureKey">
+          <input type="text" name="company" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
 
+          <!-- Name Fields -->
           <div class="intake-form__row intake-form__row--split">
             <div class="form-field">
               <label for="sm-first-name">First name*</label>
-              <input id="sm-first-name" name="first-name" autocomplete="given-name" required />
+              <input id="sm-first-name" name="first-name" autocomplete="given-name" required>
               <div class="field-error" role="alert" aria-live="polite"></div>
             </div>
             <div class="form-field">
               <label for="sm-last-name">Last name*</label>
-              <input id="sm-last-name" name="last-name" autocomplete="family-name" required />
+              <input id="sm-last-name" name="last-name" autocomplete="family-name" required>
               <div class="field-error" role="alert" aria-live="polite"></div>
             </div>
           </div>
 
+          <!-- Contact Fields -->
           <div class="form-field">
             <label for="sm-email">Email*</label>
-            <input id="sm-email" name="email" type="email" autocomplete="email" required />
+            <input id="sm-email" name="email" type="email" autocomplete="email" required>
             <div class="field-error" role="alert" aria-live="polite"></div>
           </div>
 
           <div class="form-field">
             <label for="sm-phone">Phone</label>
-            <input id="sm-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" />
+            <input id="sm-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national">
             <div class="field-error" role="alert" aria-live="polite"></div>
           </div>
 
+          <!-- Matter Type -->
           <div class="form-field">
             <label for="sm-interest">Type of matter</label>
             <select id="sm-interest" name="interest">
@@ -140,19 +171,27 @@
             </select>
           </div>
 
+          <!-- Message -->
           <div class="form-field">
             <label for="sm-message">Brief summary</label>
             <textarea id="sm-message" name="message" rows="5" placeholder="Please describe your situation briefly..."></textarea>
           </div>
 
-          <button type="submit"><span class="btn-text">Submit</span><span class="btn-loading hidden" aria-hidden="true">Sending...</span></button>
+          <!-- Submit -->
+          <button type="submit">
+            <span class="btn-text">Submit</span>
+            <span class="btn-loading hidden" aria-hidden="true">Sending...</span>
+          </button>
+          
           <div class="small-subtext">We'll reply promptly. No obligation.</div>
 
+          <!-- Form Meta -->
           <div class="intake-form__meta">
             <a href="/privacy.html">Privacy + terms</a>
             <span class="form-help">Submitting this form does not create an attorney–client relationship. Please avoid confidential details.</span>
           </div>
 
+          <!-- Status Messages -->
           <div id="sm-status" class="success-inline hidden" role="status" aria-live="polite"></div>
           <div id="sm-error" class="error-inline hidden" role="alert"></div>
         </form>
@@ -160,8 +199,9 @@
     </div>
   </section>
 
+  <!-- Main Content -->
   <main id="main-content">
-    <!-- HERO / INTRO (rotating messages) -->
+    <!-- Hero Section -->
     <section class="intro-banner">
       <div class="container hero-rotator" aria-live="polite">
         <h1 class="hero-line"></h1>
@@ -173,7 +213,7 @@
           <button class="hero-next" type="button" aria-label="Next message">›</button>
         </div>
 
-        <!-- Message data in source for SEO -->
+        <!-- Hero Message Templates -->
         <template id="heroMessages">
           <div data-h1="Compassionate, precise elder law counsel—rooted in your community"
                data-sub="Every matter is approached with the care it deserves, regardless of asset level or complexity."
@@ -194,59 +234,82 @@
       </div>
     </section>
 
-    <!-- PRACTICE AREAS (6 tiles) -->
-    <section class="container" style="padding: var(--space-6) 0;">
+    <!-- Practice Areas -->
+    <section class="container practice-areas-section">
       <h2>Areas of Practice</h2>
+      
       <div class="practice-areas">
-        <div class="practice-area" data-pa="lp"     style="--pa-bg:url('images/pa-life.PNG')">
-          <h3><a href="practice-lp.html">Life Planning (POA/Advance Directive)</a></h3>
-          <p>Planning for in-life decision-making and authority if you can’t act.</p>
-        </div>
+        <article class="practice-area" data-pa="lp" style="--pa-bg:url('images/pa-life.PNG')">
+          <h3>
+            <a href="practice-lp.html">Life Planning (POA/Advance Directive)</a>
+          </h3>
+          <p>Planning for in-life decision-making and authority if you can't act.</p>
+        </article>
 
-        <div class="practice-area" data-pa="guard"  style="--pa-bg:url('images/pa-guardianships.PNG')">
-          <h3><a href="practice-guardianships.html">Guardianships</a></h3>
+        <article class="practice-area" data-pa="guard" style="--pa-bg:url('images/pa-guardianships.PNG')">
+          <h3>
+            <a href="practice-guardianships.html">Guardianships</a>
+          </h3>
           <p>Establishing and administering guardianships with diligence and care.</p>
-        </div>
+        </article>
 
-        <div class="practice-area" data-pa="ltc"    style="--pa-bg:url('images/pa-ltc.PNG')">
-          <h3><a href="practice-ltc.html">Long-Term Care Planning</a></h3>
+        <article class="practice-area" data-pa="ltc" style="--pa-bg:url('images/pa-ltc.PNG')">
+          <h3>
+            <a href="practice-ltc.html">Long-Term Care Planning</a>
+          </h3>
           <p>Protecting assets while aligning care needs and benefits.</p>
-        </div>
+        </article>
 
-        <div class="practice-area" data-pa="legacy" style="--pa-bg:url('images/pa-legacy.PNG')">
-          <h3><a href="practice-legacy.html">Legacy Planning (Wills & Trusts)</a></h3>
+        <article class="practice-area" data-pa="legacy" style="--pa-bg:url('images/pa-legacy.PNG')">
+          <h3>
+            <a href="practice-legacy.html">Legacy Planning (Wills & Trusts)</a>
+          </h3>
           <p>Directing your estate and preserving your intent for loved ones.</p>
-        </div>
+        </article>
 
-        <div class="practice-area" data-pa="probate" style="--pa-bg:url('images/pa-probate.PNG')">
-          <h3><a href="practice-probate.html">Probate</a></h3>
+        <article class="practice-area" data-pa="probate" style="--pa-bg:url('images/pa-probate.PNG')">
+          <h3>
+            <a href="practice-probate.html">Probate</a>
+          </h3>
           <p>Guidance through estate administration and court procedures.</p>
-        </div>
+        </article>
 
-        <div class="practice-area" data-pa="general" style="--pa-bg:url('images/pa-general.PNG')">
-          <h3><a href="practice-general.html">General Counsel & Other Matters</a></h3>
+        <article class="practice-area" data-pa="general" style="--pa-bg:url('images/pa-general.PNG')">
+          <h3>
+            <a href="practice-general.html">General Counsel & Other Matters</a>
+          </h3>
           <p>Related elder-law and fiduciary issues tailored to your situation.</p>
-        </div>
+        </article>
       </div>
     </section>
 
-    <!-- BIO -->
-    <section class="container bio-section" style="padding: var(--space-5) 0;">
+    <!-- Attorney Biography -->
+    <section class="container bio-section">
       <div class="about-snippet">
-        <img src="images/christopher-weldon-headshot2.jpg" alt="Portrait of Christopher R. Weldon, Esquire, elder law attorney" class="bio-image" width="120" height="150" loading="lazy" />
+        <img src="images/christopher-weldon-headshot2.jpg" 
+             alt="Portrait of Christopher R. Weldon, Esquire, elder law attorney" 
+             class="bio-image" 
+             width="250" 
+             height="250" 
+             loading="lazy">
+        
         <p>
-          Christopher R. Weldon, Esquire&mdash;founder of Weldon Law&mdash;has dedicated his legal career to advocating for vulnerable individuals and those who support them. He focuses on guardianship; life &amp; legacy planning; long-term care preparation; probate matters; and other related elder law issues.*
+          Christopher R. Weldon, Esquire—founder of Weldon Law—has dedicated his legal career to advocating for vulnerable individuals and those who support them. He focuses on guardianship; life &amp; legacy planning; long-term care preparation; probate matters; and other related elder law issues.*
         </p>
+        
         <p>
           With more than a decade of elder law experience and involvement in over 1,000 guardianship and fiduciary matters, Chris is recognized for his compassionate approach and commitment to resolving conflict efficiently. His background includes service as a State Regulatory Attorney with the New Jersey Office of the Public Guardian, legislative advocacy to improve elder care and guardianship laws, and presentations to judicial and professional audiences.
         </p>
-        <p><a href="about.html">Learn more →</a></p>
+        
+        <p>
+          <a href="about.html">Learn more →</a>
+        </p>
       </div>
     </section>
 
-    <!-- TRUST / QUICK FACTS -->
-    <section class="container" style="padding: var(--space-6) 0;">
-      <div class="info-grid" style="padding: 0;">
+    <!-- Why Choose Us / How We Work -->
+    <section class="container">
+      <div class="info-grid">
         <div>
           <h2>Why families choose Weldon Law</h2>
           <ul class="services-list">
@@ -255,10 +318,11 @@
             <li><strong>Neighborly, steady counsel</strong> when decisions feel overwhelming</li>
           </ul>
         </div>
+        
         <div>
           <h2>How we work</h2>
           <ol class="services-list">
-            <li><strong>Start here:</strong> Send a short intake (mobile sheet or “Get help now →”)</li>
+            <li><strong>Start here:</strong> Send a short intake (mobile sheet or "Get help now →")</li>
             <li><strong>You will hear back quickly</strong> with next steps and a short call</li>
             <li><strong>Clear plan</strong> for your matter and timelines</li>
           </ol>
@@ -266,26 +330,30 @@
       </div>
     </section>
 
-    <!-- FAQ + RESOURCES -->
-    <section class="container" style="padding: var(--space-6) 0;">
-      <div class="info-grid" style="padding: 0;">
+    <!-- FAQ + Resources -->
+    <section class="container">
+      <div class="info-grid">
         <div class="faq-content">
           <h2>Frequently Asked Questions</h2>
+          
           <div class="faq-list">
             <details>
               <summary>Do I need an attorney for a guardianship?</summary>
               <p>It depends. The process involves court filings, medical certifications, and hearings. Together we will map the steps and timeline.</p>
             </details>
+            
             <details>
               <summary>How fast can we start?</summary>
               <p>After you send the intake, we typically respond the same day or next business day with next steps.</p>
             </details>
+            
             <details>
               <summary>Is the first message confidential?</summary>
               <p>Submitting the form does not create an attorney–client relationship. Please avoid sharing sensitive details initially; you will be advised if anything further is needed.</p>
             </details>
           </div>
         </div>
+        
         <div class="firm-services">
           <h2>Resources</h2>
           <ul class="services-list">
@@ -297,22 +365,41 @@
     </section>
   </main>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <p>&copy; 2025 Weldon Law, LLC. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- Desktop Fixed Footer Intake -->
+  <!-- Desktop Footer Intake Form -->
   <section class="intake-footer" role="complementary" aria-label="Quick intake footer">
     <form id="intakeFormFooterDesktop" class="intake-footer__form" novalidate>
-      <input type="hidden" name="siteKey" value="WL5616!SecureKey" />
-      <input type="text" name="company" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <!-- Security Fields -->
+      <input type="hidden" name="siteKey" value="WL5616!SecureKey">
+      <input type="text" name="company" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+      
       <div class="intake-footer__row">
-        <label class="vf"><span class="vh">Last name</span><input id="ft-last-name" name="last-name" placeholder="Last name" required /></label>
-        <label class="vf"><span class="vh">First name</span><input id="ft-first-name" name="first-name" placeholder="First name" required /></label>
-        <label class="vf"><span class="vh">Email</span><input id="ft-email" name="email" type="email" placeholder="Email" required /></label>
-        <label class="vf"><span class="vh">Phone</span><input id="ft-phone" name="phone" type="tel" inputmode="tel" placeholder="Phone" /></label>
+        <label class="vf">
+          <span class="vh">Last name</span>
+          <input id="ft-last-name" name="last-name" placeholder="Last name" required>
+        </label>
+        
+        <label class="vf">
+          <span class="vh">First name</span>
+          <input id="ft-first-name" name="first-name" placeholder="First name" required>
+        </label>
+        
+        <label class="vf">
+          <span class="vh">Email</span>
+          <input id="ft-email" name="email" type="email" placeholder="Email" required>
+        </label>
+        
+        <label class="vf">
+          <span class="vh">Phone</span>
+          <input id="ft-phone" name="phone" type="tel" inputmode="tel" placeholder="Phone">
+        </label>
+        
         <label class="vf">
           <span class="vh">Type of matter</span>
           <select id="ft-interest" name="interest" aria-label="Type of matter">
@@ -324,10 +411,13 @@
             <option value="other">Other</option>
           </select>
         </label>
+        
         <button type="submit" class="intake-footer__submit" aria-label="Submit intake">
-          <span class="btn-text">Submit</span><span class="btn-loading hidden" aria-hidden="true">Sending...</span>
+          <span class="btn-text">Submit</span>
+          <span class="btn-loading hidden" aria-hidden="true">Sending...</span>
         </button>
       </div>
+      
       <div id="intakeFooterPanel" class="intake-footer__statusline" aria-live="polite">
         <span id="ft-status" class="success-inline hidden"></span>
         <span id="ft-error" class="error-inline hidden" role="alert"></span>
@@ -336,388 +426,674 @@
     </form>
   </section>
 
-  <!-- === JavaScript === -->
+  <!-- JavaScript -->
   <script>
-  /* ===== Config ===== */
-  const FLOW_URL = "https://prod-121.westus.logic.azure.com:443/workflows/2fd109379c324cd5bbab1546b34dca3c/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=GH5F3oVR83EzQ2fzn0l0yUzqs9bmVpHFZP0D0lJgBV8";
+    // Configuration
+    const FLOW_URL = "https://prod-121.westus.logic.azure.com:443/workflows/2fd109379c324cd5bbab1546b34dca3c/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=GH5F3oVR83EzQ2fzn0l0yUzqs9bmVpHFZP0D0lJgBV8";
 
-  /* ===== Error messages ===== */
-  const errorMessages = {
-    'first-name': 'Please enter your first name',
-    'last-name': 'Please enter your last name',
-    'email': 'Please enter a valid email address',
-    'phone': 'Please enter a valid phone number'
-  };
+    // Error Messages
+    const errorMessages = {
+      'first-name': 'Please enter your first name',
+      'last-name': 'Please enter your last name',
+      'email': 'Please enter a valid email address',
+      'phone': 'Please enter a valid phone number'
+    };
 
-  /* ===== Menu toggle (adds body.nav-open and locks scroll) ===== */
-  (function(){
-    const toggle = document.querySelector('.menu-toggle');
-    const navList = document.getElementById('primary-navigation');
-    if (toggle && navList) {
+    // Utility Functions
+    const qs = (selector, root = document) => root.querySelector(selector);
+    const qsa = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+    const digitsOnly = str => (str || '').replace(/[^\d]/g, '');
+    const trimLeadingOne = digits => (digits.length === 11 && digits.startsWith('1')) ? digits.slice(1) : digits;
+
+    // Mobile Navigation
+    function initMobileNavigation() {
+      const toggle = qs('.menu-toggle');
+      const navList = qs('#primary-navigation');
+      const body = document.body;
+      
+      if (!toggle || !navList) return;
+
+      // Toggle mobile menu
       toggle.addEventListener('click', () => {
         const isOpen = navList.classList.toggle('open');
         toggle.setAttribute('aria-expanded', isOpen);
-        document.body.classList.toggle('nav-open', isOpen);
-        // Lock/unlock background scroll when menu is open
-        document.body.style.overflow = isOpen ? 'hidden' : '';
+        body.classList.toggle('nav-open', isOpen);
       });
-    }
-  })();
 
-  /* ===== Utilities ===== */
-  const qs = (s, r=document) => r.querySelector(s);
-  const qsa = (s, r=document) => Array.from(r.querySelectorAll(s));
-  const digitsOnly = s => (s || '').replace(/[^\d]/g, '');
-  const trimLeadingOne = d => (d.length === 11 && d.startsWith('1')) ? d.slice(1) : d;
-
-  function formatPhoneLive(el) {
-    if (!el) return;
-    el.addEventListener('input', () => {
-      let d = trimLeadingOne(digitsOnly(el.value));
-      if (!d) { el.value = ''; return; }
-      if (d.length <= 3) el.value = `(${d}`;
-      else if (d.length <= 6) el.value = `(${d.slice(0,3)}) ${d.slice(3)}`;
-      else el.value = `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6,10)}`;
-    });
-  }
-  const isValidEmail = email => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-  /* ===== Validation ===== */
-  function validateField(field) {
-    const fieldContainer = field.closest('.form-field');
-    const errorDiv = fieldContainer?.querySelector('.field-error');
-    let isValid = true, errorMessage = '';
-
-    field.removeAttribute('aria-invalid');
-    fieldContainer?.classList.remove('valid', 'error');
-    if (errorDiv) errorDiv.textContent = '';
-
-    if (field.hasAttribute('required') && !field.value.trim()) {
-      isValid = false; errorMessage = errorMessages[field.name] || 'This field is required';
-    } else if (field.type === 'email' && field.value && !isValidEmail(field.value)) {
-      isValid = false; errorMessage = 'Please enter a valid email address';
-    } else if (field.type === 'tel' && field.value && digitsOnly(field.value).length < 10) {
-      isValid = false; errorMessage = 'Please enter a valid phone number';
-    }
-
-    if (!isValid) {
-      field.setAttribute('aria-invalid', 'true');
-      fieldContainer?.classList.add('error');
-      if (errorDiv) errorDiv.textContent = errorMessage;
-    } else if (field.value.trim()) {
-      fieldContainer?.classList.add('valid');
-    }
-    return isValid;
-  }
-
-  function validateForm(form) {
-    const fields = form.querySelectorAll('input[required], input[type="email"], input[type="tel"]');
-    let ok = true; fields.forEach(f => { if (!validateField(f)) ok = false; });
-    return ok;
-  }
-
-  function setupFormValidation(form) {
-    if (!form) return;
-    const fields = form.querySelectorAll('input, select, textarea');
-    fields.forEach(field => {
-      field.addEventListener('blur', () => validateField(field));
-      field.addEventListener('input', () => {
-        const fc = field.closest('.form-field');
-        if (fc?.classList.contains('error')) setTimeout(() => validateField(field), 300);
-      });
-    });
-  }
-
-  function setButtonLoading(button, loading) {
-    const textSpan = button.querySelector('.btn-text');
-    const loadingSpan = button.querySelector('.btn-loading');
-    button.disabled = !!loading;
-    if (textSpan) textSpan.classList.toggle('hidden', !!loading);
-    if (loadingSpan) loadingSpan.classList.toggle('hidden', !loading);
-  }
-
-  /* ===== Mobile sheet ===== */
-  const sheet = qs('#intakeSheet');
-  const openMobile = qs('#openIntakeMobile');
-  const closeMobile = qs('#closeIntakeMobile');
-
-  function trapFocus(container, enabled) {
-    if (!container) return;
-    const focusable = () => container.querySelectorAll('a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])');
-    function onKey(e) {
-      if (!enabled) return;
-      if (e.key === 'Escape') { closeMobileSheet(); return; }
-      if (e.key !== 'Tab') return;
-      const nodes = Array.from(focusable()).filter(n => !n.disabled && n.offsetParent !== null);
-      if (!nodes.length) return;
-      const first = nodes[0], last = nodes[nodes.length-1];
-      if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
-      else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
-    }
-    if (container.__trapHandler) document.removeEventListener('keydown', container.__trapHandler);
-    container.__trapHandler = onKey;
-    document.addEventListener('keydown', onKey);
-  }
-
-  function openMobileSheet() {
-    if (!sheet) return;
-    sheet.setAttribute('aria-hidden', 'false');
-    openMobile?.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => qs('#sm-first-name')?.focus(), 100);
-    trapFocus(sheet, true);
-  }
-  function closeMobileSheet() {
-    if (!sheet) return;
-    sheet.setAttribute('aria-hidden', 'true');
-    openMobile?.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-    trapFocus(sheet, false);
-    openMobile?.focus();
-  }
-  openMobile?.addEventListener('click', (e) => { e.preventDefault(); openMobileSheet(); });
-  closeMobile?.addEventListener('click', closeMobileSheet);
-  sheet?.addEventListener('click', (e) => { if (e.target === sheet) closeMobileSheet(); });
-
-  /* ===== CTA routing ===== */
-  (function () {
-    const cta = document.getElementById('ctaGetHelp');
-    if (!cta) return;
-    cta.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (window.innerWidth <= 768) openMobileSheet();
-      else window.location.href = 'contact.html';
-    });
-  })();
-
-  /* ===== Submit ===== */
-  async function submitIntake(form, statusEl, errorEl) {
-    const submitButton = form.querySelector('button[type="submit"]');
-    if (!validateForm(form)) {
-      errorEl.textContent = 'Please correct the errors above';
-      errorEl.classList.remove('hidden'); statusEl.classList.add('hidden');
-      return;
-    }
-    const data = Object.fromEntries(new FormData(form).entries());
-    data.phone = trimLeadingOne(digitsOnly(data.phone || ''));
-
-    setButtonLoading(submitButton, true);
-    errorEl.classList.add('hidden'); statusEl.textContent = 'Sending…';
-    statusEl.classList.add('success-inline'); statusEl.classList.remove('hidden');
-
-    try {
-      const response = await fetch(FLOW_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data), mode: 'cors' });
-      const txt = await response.clone().text();
-      let json = null; try { json = JSON.parse(txt); } catch {}
-      if (response.ok && json?.success) {
-        statusEl.textContent = 'Thanks—check your email for a confirmation.';
-        form.reset(); form.querySelectorAll('.form-field').forEach(f => f.classList.remove('valid','error'));
-        if (form.id === 'intakeFormStickyMobile') setTimeout(closeMobileSheet, 2000);
-      } else { throw new Error(json?.message || `Server error: ${response.status}`); }
-    } catch (err) {
-      console.error(err);
-      errorEl.textContent = ('' + err.message).includes('Network')
-        ? 'Network issue—please email chris@weldon.law or call (856) 890-2944.'
-        : 'Sorry, something went wrong. Please email chris@weldon.law or call (856) 890-2944.';
-      errorEl.classList.add('error-inline'); errorEl.classList.remove('hidden');
-      statusEl.classList.remove('success-inline'); statusEl.classList.add('hidden');
-    } finally {
-      setButtonLoading(submitButton, false);
-    }
-  }
-
-  function initializeIntakeForm(formId, statusId, errorId, phoneId) {
-    const form = qs('#' + formId); if (!form) return;
-    setupFormValidation(form); formatPhoneLive(qs('#' + phoneId));
-    const statusEl = qs('#' + statusId); const errorEl = qs('#' + errorId);
-    form.addEventListener('submit', (e) => { e.preventDefault(); submitIntake(form, statusEl, errorEl); });
-  }
-  initializeIntakeForm('intakeFormStickyMobile', 'sm-status', 'sm-error', 'sm-phone');
-  initializeIntakeForm('intakeFormFooterDesktop', 'ft-status', 'ft-error', 'ft-phone');
-
-  function adjustBottomPaddingMobile() {
-    const bar = document.querySelector('.intake-stick__mobilebar'); if (!bar) return;
-    const h = bar.getBoundingClientRect().height || 56;
-    document.body.style.paddingBottom = (window.innerWidth <= 768) ? (h + 8) + 'px' : '';
-  }
-  window.addEventListener('resize', adjustBottomPaddingMobile);
-  window.addEventListener('orientationchange', adjustBottomPaddingMobile);
-  adjustBottomPaddingMobile();
-
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => {
-      const link = document.createElement('link'); link.rel = 'prefetch'; link.href = 'about.html'; document.head.appendChild(link);
-    });
-  }
-
-  /* ===== Hero rotator + tile linking + per-message tint ===== */
-  (function () {
-    const wrap = document.querySelector('.hero-rotator');
-    if (!wrap) return;
-
-    const h1  = wrap.querySelector('.hero-line');
-    const p   = wrap.querySelector('.hero-sub');
-    const tpl = document.getElementById('heroMessages');
-
-    // Practice Areas
-    const paContainer = document.querySelector('.practice-areas');
-    const paTiles = paContainer ? Array.from(paContainer.children) : [];
-    paTiles.forEach((tile, idx) => (tile.dataset.origIndex ??= String(idx)));
-    const paByKey = paTiles.reduce((m, tile) => {
-      const key = (tile.getAttribute('data-pa') || '').trim(); if (key) m[key] = tile; return m;
-    }, {});
-
-    // Messages (allow multiple targets via comma, or "all")
-    const messages = Array.from(tpl?.content?.children || []).map(n => ({
-      h1: n.getAttribute('data-h1') || '',
-      sub: n.getAttribute('data-sub') || '',
-      targets: (n.getAttribute('data-target') || '').split(',').map(s => s.trim()).filter(Boolean)
-    })).filter(m => m.h1);
-
-    if (!messages.length) return;
-
-    const prevBtn  = wrap.querySelector('.hero-prev');
-    const nextBtn  = wrap.querySelector('.hero-next');
-    const dotsWrap = wrap.querySelector('.hero-dots');
-
-    let i = 0, timer = null;
-    const DURATION = 6500;
-    const FADE_MS  = 450;
-    const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Per-message tint palette (driven by CSS --tile-tint)
-    const TILE_TINT = getComputedStyle(document.documentElement)
-      .getPropertyValue('--tile-tint').trim() || 'rgba(201,161,59,0.12)';
-    const TINTS = Array(messages.length).fill(TILE_TINT);
-
-    // Build dots
-    const dots = [];
-    if (dotsWrap && messages.length > 1) {
-      messages.forEach((_, idx) => {
-        const b = document.createElement('button');
-        b.type = 'button'; b.className = 'hero-dot';
-        b.setAttribute('role', 'tab');
-        b.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
-        b.setAttribute('aria-label', `Show message ${idx + 1} of ${messages.length}`);
-        dotsWrap.appendChild(b); dots.push(b);
-      });
-    }
-    function updateDots(active) { dots.forEach((d, idx) => d.setAttribute('aria-selected', idx === active ? 'true' : 'false')); }
-
-    function insertAt(container, el, index) {
-      const ref = container.children[index] || null;
-      if (el && el !== ref) container.insertBefore(el, ref);
-    }
-
-    function clearTiles() {
-      paTiles.forEach(t => {
-        t.classList.remove('is-active');
-        t.style.removeProperty('--pa-tint');
-      });
-    }
-    function restoreOriginalOrder() {
-      if (!paContainer || !paTiles.length) return;
-      const sorted = Array.from(paTiles).sort((a, b) => (+a.dataset.origIndex) - (+b.dataset.origIndex));
-      sorted.forEach(t => paContainer.appendChild(t));
-    }
-
-    // detect true single-column grid (works at any breakpoint)
-    function isSingleColumn() {
-      if (!paContainer) return false;
-      const cols = (getComputedStyle(paContainer).gridTemplateColumns || '')
-        .split(' ')
-        .filter(Boolean).length;
-      return cols <= 1;
-    }
-
-    function applyFor(idx) {
-      const msg = messages[idx % messages.length];
-      const tint = TINTS[idx % TINTS.length] || 'rgba(201,161,59,0.12)';
-      const targets = msg.targets;
-      const isAll = targets.length === 1 && targets[0].toLowerCase() === 'all';
-
-      clearTiles();
-
-      if (isAll) {
-        // Message 1: expand + tint ALL, keep default order
-        restoreOriginalOrder();
-        paTiles.forEach(t => {
-          t.classList.add('is-active');
-          t.style.setProperty('--pa-tint', tint);
+      // Handle dropdown toggle on mobile
+      const dropdownToggle = qs('.dropdown-toggle');
+      if (dropdownToggle) {
+        dropdownToggle.addEventListener('click', (e) => {
+          if (window.innerWidth <= 768) {
+            e.preventDefault();
+            const dropdown = dropdownToggle.closest('.dropdown');
+            const isExpanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
+            
+            // Toggle dropdown
+            dropdownToggle.setAttribute('aria-expanded', !isExpanded);
+            dropdown.classList.toggle('expanded');
+          }
         });
-        return;
       }
 
-      // Else: highlight two tiles (first & second) – expand + tint both
-      const firstTile  = paByKey[targets[0]];
-      const secondTile = paByKey[targets[1]];
-      if (firstTile)  { firstTile.classList.add('is-active');  firstTile.style.setProperty('--pa-tint', tint); }
-      if (secondTile) { secondTile.classList.add('is-active'); secondTile.style.setProperty('--pa-tint', tint); }
-
-      if (isSingleColumn()) {
-        // Single-column: move FIRST to slot 0, then SECOND to slot 1
-        if (firstTile)  insertAt(paContainer, firstTile, 0);
-        if (secondTile) insertAt(paContainer, secondTile, 1);
-      } else {
-        // Multi-column (tablet/desktop): keep original order
-        restoreOriginalOrder();
-      }
-    }
-
-    function render(idx, immediate = false) {
-      const msg = messages[idx % messages.length];
-      if (!msg) return;
-
-      if (immediate) {
-        h1.textContent = msg.h1;
-        p.textContent  = msg.sub;
-        updateDots(idx);
-        applyFor(idx);
-        return;
-      }
-
-      wrap.classList.add('is-fading');
-      setTimeout(() => {
-        h1.textContent = msg.h1;
-        p.textContent  = msg.sub;
-        wrap.classList.remove('is-fading');
-        updateDots(idx);
-        applyFor(idx);
-      }, FADE_MS);
-    }
-
-    function start() {
-      if (prefersReduce || messages.length < 2) return;
-      stop(); timer = setInterval(() => { i = (i + 1) % messages.length; render(i); }, DURATION);
-    }
-    function stop() { if (timer) { clearInterval(timer); timer = null; } }
-
-    // Init
-    render(i, true); start();
-
-    // Pause on hover/focus
-    wrap.addEventListener('mouseenter', stop);
-    wrap.addEventListener('mouseleave', start);
-    wrap.addEventListener('focusin', stop);
-    wrap.addEventListener('focusout', start);
-
-    // Buttons
-    prevBtn?.addEventListener('click', () => { stop(); i = (i - 1 + messages.length) % messages.length; render(i); start(); });
-    nextBtn?.addEventListener('click', () => { stop(); i = (i + 1) % messages.length; render(i); start(); });
-
-    // Dots
-    dots.forEach((dot, idx) => {
-      dot.addEventListener('click', () => { stop(); i = idx; render(i); start(); });
-      dot.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft')  { e.preventDefault(); prevBtn?.click(); dots[Math.max(0, idx - 1)]?.focus(); }
-        if (e.key === 'ArrowRight') { e.preventDefault(); nextBtn?.click(); dots[Math.min(messages.length - 1, idx + 1)]?.focus(); }
+      // Close mobile nav when clicking outside
+      document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768 && navList.classList.contains('open')) {
+          if (!e.target.closest('.site-header')) {
+            closeMobileNav();
+          }
+        }
       });
-    });
 
-    // Re-apply on resize (for single-column reordering)
-    window.addEventListener('resize', () => applyFor(i));
-    document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else start(); });
-  })();
+      // Close mobile nav on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navList.classList.contains('open')) {
+          closeMobileNav();
+          toggle.focus();
+        }
+      });
+
+      // Close mobile nav on window resize
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && navList.classList.contains('open')) {
+          closeMobileNav();
+        }
+      });
+
+      function closeMobileNav() {
+        navList.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        body.classList.remove('nav-open');
+        
+        // Reset dropdown state
+        const dropdown = qs('.dropdown');
+        const dropdownToggle = qs('.dropdown-toggle');
+        if (dropdown && dropdownToggle) {
+          dropdown.classList.remove('expanded');
+          dropdownToggle.setAttribute('aria-expanded', 'false');
+        }
+      }
+    }
+
+    // Phone Number Formatting
+    function formatPhoneLive(element) {
+      if (!element) return;
+      
+      element.addEventListener('input', () => {
+        let digits = trimLeadingOne(digitsOnly(element.value));
+        
+        if (!digits) {
+          element.value = '';
+          return;
+        }
+        
+        if (digits.length <= 3) {
+          element.value = `(${digits}`;
+        } else if (digits.length <= 6) {
+          element.value = `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+        } else {
+          element.value = `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
+        }
+      });
+    }
+
+    // Form Validation
+    const isValidEmail = email => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    function validateField(field) {
+      const fieldContainer = field.closest('.form-field');
+      const errorDiv = fieldContainer?.querySelector('.field-error');
+      let isValid = true;
+      let errorMessage = '';
+
+      // Reset field state
+      field.removeAttribute('aria-invalid');
+      fieldContainer?.classList.remove('valid', 'error');
+      if (errorDiv) errorDiv.textContent = '';
+
+      // Validation logic
+      if (field.hasAttribute('required') && !field.value.trim()) {
+        isValid = false;
+        errorMessage = errorMessages[field.name] || 'This field is required';
+      } else if (field.type === 'email' && field.value && !isValidEmail(field.value)) {
+        isValid = false;
+        errorMessage = 'Please enter a valid email address';
+      } else if (field.type === 'tel' && field.value && digitsOnly(field.value).length < 10) {
+        isValid = false;
+        errorMessage = 'Please enter a valid phone number';
+      }
+
+      // Apply validation state
+      if (!isValid) {
+        field.setAttribute('aria-invalid', 'true');
+        fieldContainer?.classList.add('error');
+        if (errorDiv) errorDiv.textContent = errorMessage;
+      } else if (field.value.trim()) {
+        fieldContainer?.classList.add('valid');
+      }
+
+      return isValid;
+    }
+
+    function validateForm(form) {
+      const fields = form.querySelectorAll('input[required], input[type="email"], input[type="tel"]');
+      let isValid = true;
+      
+      fields.forEach(field => {
+        if (!validateField(field)) {
+          isValid = false;
+        }
+      });
+      
+      return isValid;
+    }
+
+    function setupFormValidation(form) {
+      if (!form) return;
+      
+      const fields = form.querySelectorAll('input, select, textarea');
+      fields.forEach(field => {
+        field.addEventListener('blur', () => validateField(field));
+        field.addEventListener('input', () => {
+          const fieldContainer = field.closest('.form-field');
+          if (fieldContainer?.classList.contains('error')) {
+            setTimeout(() => validateField(field), 300);
+          }
+        });
+      });
+    }
+
+    // Button Loading State
+    function setButtonLoading(button, loading) {
+      const textSpan = button.querySelector('.btn-text');
+      const loadingSpan = button.querySelector('.btn-loading');
+      
+      button.disabled = !!loading;
+      if (textSpan) textSpan.classList.toggle('hidden', !!loading);
+      if (loadingSpan) loadingSpan.classList.toggle('hidden', !loading);
+    }
+
+    // Mobile Sheet Management
+    function initMobileSheet() {
+      const sheet = qs('#intakeSheet');
+      const openButton = qs('#openIntakeMobile');
+      const closeButton = qs('#closeIntakeMobile');
+
+      if (!sheet || !openButton || !closeButton) return;
+
+      function trapFocus(container, enabled) {
+        if (!container) return;
+        
+        const getFocusableElements = () => container.querySelectorAll(
+          'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        );
+
+        function handleKeydown(e) {
+          if (!enabled) return;
+          
+          if (e.key === 'Escape') {
+            closeMobileSheet();
+            return;
+          }
+          
+          if (e.key !== 'Tab') return;
+          
+          const focusable = Array.from(getFocusableElements()).filter(
+            el => !el.disabled && el.offsetParent !== null
+          );
+          
+          if (!focusable.length) return;
+          
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+          
+          if (e.shiftKey && document.activeElement === first) {
+            last.focus();
+            e.preventDefault();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            first.focus();
+            e.preventDefault();
+          }
+        }
+
+        if (container.__trapHandler) {
+          document.removeEventListener('keydown', container.__trapHandler);
+        }
+        
+        container.__trapHandler = handleKeydown;
+        document.addEventListener('keydown', handleKeydown);
+      }
+
+      function openMobileSheet() {
+        sheet.setAttribute('aria-hidden', 'false');
+        openButton.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+        
+        setTimeout(() => {
+          qs('#sm-first-name')?.focus();
+        }, 100);
+        
+        trapFocus(sheet, true);
+      }
+
+      function closeMobileSheet() {
+        sheet.setAttribute('aria-hidden', 'true');
+        openButton.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        trapFocus(sheet, false);
+        openButton.focus();
+      }
+
+      // Event listeners
+      openButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        openMobileSheet();
+      });
+
+      closeButton.addEventListener('click', closeMobileSheet);
+      
+      sheet.addEventListener('click', (e) => {
+        if (e.target === sheet) closeMobileSheet();
+      });
+
+      // Export for global access
+      window.closeMobileSheet = closeMobileSheet;
+    }
+
+    // CTA Button Routing
+    function initCTARouting() {
+      const ctaButton = qs('#ctaGetHelp');
+      if (!ctaButton) return;
+
+      ctaButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (window.innerWidth <= 768) {
+          // Open mobile sheet on mobile
+          qs('#openIntakeMobile')?.click();
+        } else {
+          // Navigate to contact page on desktop
+          window.location.href = 'contact.html';
+        }
+      });
+    }
+
+    // Form Submission
+    async function submitIntake(form, statusElement, errorElement) {
+      const submitButton = form.querySelector('button[type="submit"]');
+      
+      if (!validateForm(form)) {
+        errorElement.textContent = 'Please correct the errors above';
+        errorElement.classList.remove('hidden');
+        statusElement.classList.add('hidden');
+        return;
+      }
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      data.phone = trimLeadingOne(digitsOnly(data.phone || ''));
+
+      setButtonLoading(submitButton, true);
+      errorElement.classList.add('hidden');
+      statusElement.textContent = 'Sending…';
+      statusElement.classList.add('success-inline');
+      statusElement.classList.remove('hidden');
+
+      try {
+        const response = await fetch(FLOW_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+          mode: 'cors'
+        });
+
+        const responseText = await response.clone().text();
+        let responseJson = null;
+        
+        try {
+          responseJson = JSON.parse(responseText);
+        } catch (e) {
+          // Response is not JSON
+        }
+
+        if (response.ok && responseJson?.success) {
+          statusElement.textContent = 'Thanks—check your email for a confirmation.';
+          form.reset();
+          
+          // Clear validation states
+          form.querySelectorAll('.form-field').forEach(field => {
+            field.classList.remove('valid', 'error');
+          });
+          
+          // Auto-close mobile sheet
+          if (form.id === 'intakeFormStickyMobile') {
+            setTimeout(() => {
+              if (window.closeMobileSheet) window.closeMobileSheet();
+            }, 2000);
+          }
+        } else {
+          throw new Error(responseJson?.message || `Server error: ${response.status}`);
+        }
+      } catch (error) {
+        console.error('Form submission error:', error);
+        
+        const errorMessage = error.message.includes('Network')
+          ? 'Network issue—please email chris@weldon.law or call (856) 890-2944.'
+          : 'Sorry, something went wrong. Please email chris@weldon.law or call (856) 890-2944.';
+        
+        errorElement.textContent = errorMessage;
+        errorElement.classList.add('error-inline');
+        errorElement.classList.remove('hidden');
+        statusElement.classList.remove('success-inline');
+        statusElement.classList.add('hidden');
+      } finally {
+        setButtonLoading(submitButton, false);
+      }
+    }
+
+    // Initialize Individual Forms
+    function initializeIntakeForm(formId, statusId, errorId, phoneId) {
+      const form = qs('#' + formId);
+      if (!form) return;
+
+      setupFormValidation(form);
+      formatPhoneLive(qs('#' + phoneId));
+
+      const statusElement = qs('#' + statusId);
+      const errorElement = qs('#' + errorId);
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        submitIntake(form, statusElement, errorElement);
+      });
+    }
+
+    // Mobile Bottom Padding Adjustment
+    function adjustBottomPaddingMobile() {
+      const mobileBar = qs('.intake-stick__mobilebar');
+      if (!mobileBar) return;
+
+      const height = mobileBar.getBoundingClientRect().height || 56;
+      document.body.style.paddingBottom = window.innerWidth <= 768 ? `${height + 8}px` : '';
+    }
+
+    // Hero Rotator System
+    function initHeroRotator() {
+      const wrapper = qs('.hero-rotator');
+      if (!wrapper) return;
+
+      const h1Element = wrapper.querySelector('.hero-line');
+      const pElement = wrapper.querySelector('.hero-sub');
+      const template = qs('#heroMessages');
+
+      // Practice Areas
+      const practiceContainer = qs('.practice-areas');
+      const practiceTiles = practiceContainer ? Array.from(practiceContainer.children) : [];
+      
+      // Store original positions
+      practiceTiles.forEach((tile, index) => {
+        tile.dataset.origIndex ??= String(index);
+      });
+
+      // Create lookup by data-pa attribute
+      const practiceByKey = practiceTiles.reduce((map, tile) => {
+        const key = tile.getAttribute('data-pa')?.trim();
+        if (key) map[key] = tile;
+        return map;
+      }, {});
+
+      // Extract messages from template
+      const messages = Array.from(template?.content?.children || []).map(node => ({
+        h1: node.getAttribute('data-h1') || '',
+        sub: node.getAttribute('data-sub') || '',
+        targets: (node.getAttribute('data-target') || '').split(',').map(s => s.trim()).filter(Boolean)
+      })).filter(msg => msg.h1);
+
+      if (!messages.length) return;
+
+      const prevButton = wrapper.querySelector('.hero-prev');
+      const nextButton = wrapper.querySelector('.hero-next');
+      const dotsWrapper = wrapper.querySelector('.hero-dots');
+
+      let currentIndex = 0;
+      let rotationTimer = null;
+      const ROTATION_DURATION = 6500;
+      const FADE_DURATION = 450;
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Theming
+      const TILE_TINT = getComputedStyle(document.documentElement)
+        .getPropertyValue('--tile-tint').trim() || 'rgba(201,161,59,0.12)';
+      const tints = Array(messages.length).fill(TILE_TINT);
+
+      // Build navigation dots
+      const dots = [];
+      if (dotsWrapper && messages.length > 1) {
+        messages.forEach((_, index) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'hero-dot';
+          button.setAttribute('role', 'tab');
+          button.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+          button.setAttribute('aria-label', `Show message ${index + 1} of ${messages.length}`);
+          dotsWrapper.appendChild(button);
+          dots.push(button);
+        });
+      }
+
+      function updateDots(activeIndex) {
+        dots.forEach((dot, index) => {
+          dot.setAttribute('aria-selected', index === activeIndex ? 'true' : 'false');
+        });
+      }
+
+      function insertAtPosition(container, element, position) {
+        const referenceNode = container.children[position] || null;
+        if (element && element !== referenceNode) {
+          container.insertBefore(element, referenceNode);
+        }
+      }
+
+      function clearTileStates() {
+        practiceTiles.forEach(tile => {
+          tile.classList.remove('is-active');
+          tile.style.removeProperty('--pa-tint');
+        });
+      }
+
+      function restoreOriginalTileOrder() {
+        if (!practiceContainer || !practiceTiles.length) return;
+        
+        const sorted = [...practiceTiles].sort((a, b) => 
+          (+a.dataset.origIndex) - (+b.dataset.origIndex)
+        );
+        
+        sorted.forEach(tile => practiceContainer.appendChild(tile));
+      }
+
+      function isSingleColumnLayout() {
+        if (!practiceContainer) return false;
+        
+        const columns = getComputedStyle(practiceContainer)
+          .gridTemplateColumns.split(' ').filter(Boolean).length;
+        
+        return columns <= 1;
+      }
+
+      function applyMessageToTiles(messageIndex) {
+        const message = messages[messageIndex % messages.length];
+        const tint = tints[messageIndex % tints.length] || 'rgba(201,161,59,0.12)';
+        const targets = message.targets;
+        const isShowingAll = targets.length === 1 && targets[0].toLowerCase() === 'all';
+
+        clearTileStates();
+
+        if (isShowingAll) {
+          restoreOriginalTileOrder();
+          practiceTiles.forEach(tile => {
+            tile.classList.add('is-active');
+            tile.style.setProperty('--pa-tint', tint);
+          });
+          return;
+        }
+
+        const primaryTile = practiceByKey[targets[0]];
+        const secondaryTile = practiceByKey[targets[1]];
+
+        if (primaryTile) {
+          primaryTile.classList.add('is-active');
+          primaryTile.style.setProperty('--pa-tint', tint);
+        }
+        
+        if (secondaryTile) {
+          secondaryTile.classList.add('is-active');
+          secondaryTile.style.setProperty('--pa-tint', tint);
+        }
+
+        // Reorder tiles for single column layout
+        if (isSingleColumnLayout()) {
+          if (primaryTile) insertAtPosition(practiceContainer, primaryTile, 0);
+          if (secondaryTile) insertAtPosition(practiceContainer, secondaryTile, 1);
+        } else {
+          restoreOriginalTileOrder();
+        }
+      }
+
+      function renderMessage(index, immediate = false) {
+        const message = messages[index % messages.length];
+        if (!message) return;
+
+        if (immediate) {
+          h1Element.textContent = message.h1;
+          pElement.textContent = message.sub;
+          updateDots(index);
+          applyMessageToTiles(index);
+          return;
+        }
+
+        wrapper.classList.add('is-fading');
+        
+        setTimeout(() => {
+          h1Element.textContent = message.h1;
+          pElement.textContent = message.sub;
+          wrapper.classList.remove('is-fading');
+          updateDots(index);
+          applyMessageToTiles(index);
+        }, FADE_DURATION);
+      }
+
+      function startRotation() {
+        if (prefersReducedMotion || messages.length < 2) return;
+        
+        stopRotation();
+        rotationTimer = setInterval(() => {
+          currentIndex = (currentIndex + 1) % messages.length;
+          renderMessage(currentIndex);
+        }, ROTATION_DURATION);
+      }
+
+      function stopRotation() {
+        if (rotationTimer) {
+          clearInterval(rotationTimer);
+          rotationTimer = null;
+        }
+      }
+
+      // Initialize
+      renderMessage(currentIndex, true);
+      startRotation();
+
+      // Pause rotation on interaction
+      wrapper.addEventListener('mouseenter', stopRotation);
+      wrapper.addEventListener('mouseleave', startRotation);
+      wrapper.addEventListener('focusin', stopRotation);
+      wrapper.addEventListener('focusout', startRotation);
+
+      // Navigation controls
+      prevButton?.addEventListener('click', () => {
+        stopRotation();
+        currentIndex = (currentIndex - 1 + messages.length) % messages.length;
+        renderMessage(currentIndex);
+        startRotation();
+      });
+
+      nextButton?.addEventListener('click', () => {
+        stopRotation();
+        currentIndex = (currentIndex + 1) % messages.length;
+        renderMessage(currentIndex);
+        startRotation();
+      });
+
+      // Dot navigation
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          stopRotation();
+          currentIndex = index;
+          renderMessage(currentIndex);
+          startRotation();
+        });
+
+        dot.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            prevButton?.click();
+            dots[Math.max(0, index - 1)]?.focus();
+          } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            nextButton?.click();
+            dots[Math.min(messages.length - 1, index + 1)]?.focus();
+          }
+        });
+      });
+
+      // Handle window events
+      window.addEventListener('resize', () => applyMessageToTiles(currentIndex));
+      
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          stopRotation();
+        } else {
+          startRotation();
+        }
+      });
+    }
+
+    // Prefetch Enhancement
+    function initPrefetching() {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+          const link = document.createElement('link');
+          link.rel = 'prefetch';
+          link.href = 'about.html';
+          document.head.appendChild(link);
+        });
+      }
+    }
+
+    // Application Initialization
+    function initializeApp() {
+      // Core functionality
+      initMobileNavigation();
+      initMobileSheet();
+      initCTARouting();
+      initHeroRotator();
+      
+      // Form setup
+      initializeIntakeForm('intakeFormStickyMobile', 'sm-status', 'sm-error', 'sm-phone');
+      initializeIntakeForm('intakeFormFooterDesktop', 'ft-status', 'ft-error', 'ft-phone');
+      
+      // Layout adjustments
+      adjustBottomPaddingMobile();
+      
+      // Enhancement
+      initPrefetching();
+      
+      // Event listeners
+      window.addEventListener('resize', adjustBottomPaddingMobile);
+      window.addEventListener('orientationchange', adjustBottomPaddingMobile);
+    }
+
+    // Start the application
+    document.addEventListener('DOMContentLoaded', initializeApp);
   </script>
 </body>
 </html>
