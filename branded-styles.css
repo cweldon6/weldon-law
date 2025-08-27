@@ -567,6 +567,12 @@ h1, h2, h3, [id] {
   padding: var(--space-3) 0 var(--space-6) 0;
 }
 
+@media (max-width: 768px) {
+  .practice-areas-section {
+    padding: var(--space-2) 0 var(--space-5) 0;
+  }
+}
+
 .practice-areas {
   display: grid;
   gap: var(--space-5);
