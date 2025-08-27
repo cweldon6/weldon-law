@@ -62,7 +62,11 @@
         <a href="index.html"><img src="images/WeldonLawLogoG.png" alt="Weldon Law logo" /></a>
       </div>
       <nav class="main-nav" id="nav">
-        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">☰</button>
+        <!-- Hamburger toggle -->
+        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">
+          <span class="menu-icon" aria-hidden="true"></span>
+        </button>
+
         <ul class="navbar" id="primary-navigation">
           <li><a href="index.html" aria-current="page">Home</a></li>
           <li><a href="about.html">About</a></li>
@@ -345,7 +349,7 @@
     'phone': 'Please enter a valid phone number'
   };
 
-  /* ===== Menu toggle ===== */
+  /* ===== Menu toggle (adds body.nav-open and locks scroll) ===== */
   (function(){
     const toggle = document.querySelector('.menu-toggle');
     const navList = document.getElementById('primary-navigation');
@@ -353,6 +357,9 @@
       toggle.addEventListener('click', () => {
         const isOpen = navList.classList.toggle('open');
         toggle.setAttribute('aria-expanded', isOpen);
+        document.body.classList.toggle('nav-open', isOpen);
+        // Lock/unlock background scroll when menu is open
+        document.body.style.overflow = isOpen ? 'hidden' : '';
       });
     }
   })();
