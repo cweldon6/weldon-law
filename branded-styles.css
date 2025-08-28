@@ -1706,3 +1706,67 @@ button[type="submit"]:hover {
 .home-cards .info-grid {
   gap: var(--space-3);  /* same as About's card grid gap */
 }
+
+/* === Practice Tiles: branded card look + typography === */
+.practice-area{
+  background:#fff;
+  border:0;                          /* remove thin grey border */
+  border-left:4px solid #A47864;     /* subtle accent bar */
+  border-radius:var(--radius-sm);
+  box-shadow:var(--shadow-1);
+  padding:var(--space-4);            /* tighter padding to reduce empty space */
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.practice-area:hover,
+.practice-area:focus-within{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow-2);
+  border-color:#A47864;
+}
+
+/* Headings */
+.practice-area h3{ 
+  margin:0 0 .35rem; 
+  line-height:1.15;
+}
+.practice-area h3 a{ 
+  color:var(--color-primary); 
+  text-decoration:none; 
+  display:block; 
+}
+
+/* Two-line title styling when main/sub spans are present */
+.pa-title-main{
+  display:block;
+  font-weight:800;
+  font-size:clamp(1.1rem, 1rem + .7vw, 1.45rem);  /* slightly larger */
+}
+.pa-title-sub{
+  display:block;
+  margin-top:.15rem;
+  font-style:italic;
+  font-weight:400;
+  font-size:clamp(.95rem, .9rem + .35vw, 1.05rem); /* slightly smaller */
+  opacity:.95;
+}
+
+/* Body text (shown on hover already) */
+.practice-area p{
+  margin:.35rem 0 0;                 /* reduce extra space */
+  font-size:var(--fs-500);           /* match page body size */
+  line-height:1.5;
+}
+
+/* Keep your progressive disclosure but with sane height */
+.practice-area p{
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+  transition:max-height .25s ease, opacity .25s ease;
+}
+.practice-area:hover p,
+.practice-area:focus-within p,
+.practice-area.is-active p{
+  max-height:8rem;                   /* enough for 2–3 lines without huge tiles */
+  opacity:1;
+}
