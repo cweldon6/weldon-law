@@ -126,6 +126,12 @@ h1, h2, h3, [id] {
   scroll-margin-top: 80px;
 }
 
+/* Justify paragraph text */
+p {
+  text-align: justify;
+  hyphens: auto;
+}
+
 /* === Header & Navigation === */
 .site-header {
   position: sticky;
