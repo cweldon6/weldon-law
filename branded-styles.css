@@ -1770,3 +1770,96 @@ button[type="submit"]:hover {
   max-height:8rem;                   /* enough for 2–3 lines without huge tiles */
   opacity:1;
 }
+
+/* Center the hero headline + subhead on the home banner */
+.hero--copy .hero-rotator,
+.hero--copy .intro-banner :is(h1, p) {
+  text-align: center;
+}
+
+/* Anchor hero arrows to the hero container edges (desktop) */
+.hero--copy .intro-banner .hero-rotator {
+  /* keep content centered and aligned to your site container */
+  width: min(90%, var(--max-width));
+  margin-inline: auto;
+  padding-inline: 0;                 /* ← no extra inset so arrows sit at edges */
+  text-align: center;
+  position: relative;
+}
+
+/* readable line lengths */
+.hero--copy .intro-banner .hero-line {
+  max-width: 28ch;
+  margin: 0 auto .25rem;
+  line-height: var(--lh-tight);
+}
+.hero--copy .intro-banner .hero-sub {
+  max-width: var(--measure);
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* arrows span exactly the hero container width */
+.hero--copy .intro-banner .hero-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;                          /* ← edges of .hero-rotator, not viewport */
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 0;                 /* flush to container edges */
+  pointer-events: none;              /* clicks pass through */
+}
+.hero--copy .intro-banner .hero-controls button {
+  pointer-events: auto;              /* but arrows remain clickable */
+  margin-inline: .25rem;             /* tiny breathing room */
+}
+
+@media (max-width: 768px) {
+  .hero--copy .intro-banner .hero-rotator { padding-inline: 0; }
+}
+
+/* --- Home hero: stop justification/hyphenation and remove extra padding --- */
+.hero--copy .intro-banner :is(h1, p) {
+  padding-inline: 0;            /* undo the 0 4rem padding for the hero text */
+  text-align: center;           /* keep centered */
+}
+
+/* readable line lengths and no hyphenation for the sub line */
+.hero--copy .intro-banner .hero-line {
+  max-width: 28ch;
+  margin: 0 auto .25rem;
+}
+
+.hero--copy .intro-banner .hero-sub {
+  max-width: var(--measure);    /* ~65ch */
+  margin: 0 auto;
+  text-align: center;
+  hyphens: none;                /* override global setting */
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+}
+
+.hero--copy .intro-banner .hero-sub { max-width: 56ch; }
+
+/* Practice tiles: invert stripe only; keep text brand-dark */
+.practice-area {
+  border-left-color: var(--color-primary);   /* default stripe = brand dark */
+}
+
+/* On hover/active, flip stripe to accent */
+.practice-area:hover,
+.practice-area:focus-within,
+.practice-area.is-active {
+  border-left-color: var(--color-accent);    /* highlight stripe = accent */
+}
+
+/* Keep heading text always brand dark (no color flip) */
+.practice-area h3 a,
+.practice-area:hover h3 a,
+.practice-area:focus-within h3 a,
+.practice-area.is-active h3 a {
+  color: var(--color-primary);
+}
+
