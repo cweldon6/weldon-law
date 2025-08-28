@@ -733,7 +733,7 @@ p {
 /* === Info Grid Layout === */
 .info-grid {
   display: grid;
-  gap: var(--space-6);
+  gap: var(--space-3);
   padding: var(--space-6) 0;
 }
 
@@ -752,7 +752,7 @@ p {
 }
 
 .services-list li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .services-list a {
@@ -998,7 +998,7 @@ button[type="submit"]:hover {
   border-top-left-radius: var(--radius-md);
   border-top-right-radius: var(--radius-md);
   box-shadow: var(--shadow-1);
-  padding: var(--space-5);
+  padding: var(--space-2);
   max-height: 85vh;
   overflow: auto;
 }
