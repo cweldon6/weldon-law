@@ -579,7 +579,7 @@ p {
 
 .practice-areas {
   display: grid;
-  gap: var(--space-5);
+  gap: var(--space-1);
   grid-template-columns: 1fr;
 }
 
