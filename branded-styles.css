@@ -1863,3 +1863,41 @@ button[type="submit"]:hover {
   color: var(--color-primary);
 }
 
+/* === Practice tiles: unify typography across all cards === */
+.practice-area {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* All headings the same weight & size */
+.practice-area h3 {
+  font-weight: 700;
+  font-size: clamp(1.15rem, 1rem + 0.7vw, 1.5rem);
+  line-height: 1.15;
+  margin: 0 0 .35rem;
+  letter-spacing: .1px; /* subtle consistency */
+}
+
+/* Links inherit weight/size from the h3 */
+.practice-area h3 a {
+  color: var(--color-primary);
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+/* Split-title styling: main = same as h3, sub = smaller italic */
+.pa-title-main {
+  display: block;
+  font-weight: inherit;   /* was 800; unify with the others */
+  font-size: inherit;     /* match the h3 size */
+}
+
+.pa-title-sub {
+  display: block;
+  margin-top: .15rem;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(.95rem, .9rem + .35vw, 1.05rem);
+  opacity: .95;
+}
