@@ -583,7 +583,7 @@ p {
 /* Professional Section */
 .professional-section {
   background: #fff;
-  padding: var(--space-7) 0;
+  padding: var(--space-1) 0;
   position: relative;
 }
 
@@ -1149,62 +1149,6 @@ p {
   margin-top: 0;
 }
 
-/* === FAQ Section === */
-.faq-content .faq-list {
-  display: grid;
-  gap: var(--space-3);
-}
-
-.faq-content details {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: var(--space-4);
-  background: var(--color-bg);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-.faq-content details:hover {
-  box-shadow: var(--shadow-1);
-}
-
-.faq-content details[open] {
-  border-color: var(--color-primary);
-}
-
-.faq-content summary {
-  font-weight: 600;
-  cursor: pointer;
-  color: var(--color-primary);
-  list-style: none;
-  position: relative;
-  padding-right: 2rem;
-}
-
-.faq-content summary::-webkit-details-marker {
-  display: none;
-}
-
-.faq-content summary::after {
-  content: "+";
-  position: absolute;
-  right: 0;
-  font-size: 1.2em;
-  font-weight: bold;
-}
-
-.faq-content details[open] summary::after {
-  content: "âˆ'";
-}
-
-.faq-content summary:hover {
-  color: color-mix(in oklab, var(--color-primary) 85%, #000);
-}
-
-.faq-content details p {
-  margin: var(--space-3) 0 0;
-  color: var(--color-ink);
-}
-
 /* === Forms === */
 form {
   display: grid;
@@ -1621,7 +1565,7 @@ button[type="submit"]:hover {
 /* Reusable About-style cards for index page */
 .about-cards {
   background: var(--color-bg-soft); /* match About page section backdrop */
-  padding: var(--space-7) 0;        /* equal vertical spacing */
+  padding: var(--space-4) 0;        /* equal vertical spacing */
   position: relative;
 }
 
