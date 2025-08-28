@@ -1583,7 +1583,7 @@ button[type="submit"]:hover {
 
 .about-card {
   background: #fff;
-  padding: var(--space-6);
+  padding: var(--space-3);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-1);
   border-left: 4px solid var(--color-accent);
@@ -1608,4 +1608,101 @@ button[type="submit"]:hover {
   font-size: var(--fs-500);
 }
 
+/* Collapse long home cards by default */
+.about-card[data-collapsed="true"] .services-list li:nth-child(n+3) { display: none; }  /* keep 1–2 */
+.about-card[data-collapsed="true"] p:nth-of-type(n+2) { display: none; }               /* keep first <p> */
 
+/* Optional: subtle fade at the bottom when collapsed */
+.about-card[data-collapsed="true"] {
+  mask-image: linear-gradient(to bottom, #000 85%, rgba(0,0,0,0.85) 95%, transparent 100%);
+}
+
+/* Toggle button */
+.card-toggle {
+  margin-top: var(--space-4);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  padding: .5rem .85rem;
+  font: inherit;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .15s ease;
+}
+.card-toggle:hover {
+  background: var(--color-bg-soft);
+  transform: translateY(-1px);
+}
+.card-toggle:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Open state (show everything, remove fade) */
+.about-card[data-collapsed="false"] {
+  mask-image: none;
+}
+
+/* === Home: Info-grid cards (Why / How / Approach / Getting Started) === */
+/* Visual card treatment with accent stripe, soft shadow, and hover lift */
+.info-grid > .card-collapsible {
+  background: #fff;
+  padding: var(--space-6);
+  border-radius: var(--radius-md);
+  border-left: 4px solid #A47864;       /* requested accent color */
+  box-shadow: var(--shadow-1);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.info-grid > .card-collapsible:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+}
+
+/* Headings inside these cards */
+.info-grid > .card-collapsible h2 {
+  color: var(--color-primary);
+  margin-top: 0;
+  margin-bottom: var(--space-4);
+  font-size: var(--fs-700);
+}
+
+/* Collapsed-by-default rules for the home cards */
+.card-collapsible[data-collapsed="true"] .services-list li:nth-child(n+3) { display: none; } /* keep 1–2 */
+.card-collapsible[data-collapsed="true"] p:nth-of-type(n+2) { display: none; }               /* keep first <p> */
+
+/* Optional: subtle fade hint when collapsed */
+.card-collapsible[data-collapsed="true"] {
+  -webkit-mask-image: linear-gradient(to bottom, #000 85%, rgba(0,0,0,.85) 95%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 85%, rgba(0,0,0,.85) 95%, transparent 100%);
+}
+
+/* Toggle button look (reuses your existing .card-toggle styles if present) */
+.info-grid .card-toggle {
+  margin-top: var(--space-1);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  padding: .5rem .85rem;
+  font: inherit;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .15s ease;
+}
+.info-grid .card-toggle:hover {
+  background: var(--color-bg-soft);
+  transform: translateY(-1px);
+}
+.info-grid .card-toggle:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Expanded state removes the fade */
+.card-collapsible[data-collapsed="false"] {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* Equalize spacing for index home cards to match About cards */
+.home-cards .info-grid {
+  gap: var(--space-3);  /* same as About's card grid gap */
+}

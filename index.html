@@ -54,6 +54,44 @@
   <script>
     window.INTAKE_PROXY = '/api/intake';
   </script>
+
+  <!-- Minimal inline CSS to collapse long cards on the home page -->
+  <style>
+    /* Collapse behavior (first two list items + first paragraph only) */
+    .card-collapsible[data-collapsed="true"] .services-list li:nth-child(n+3) { display: none; }
+    .card-collapsible[data-collapsed="true"] p:nth-of-type(n+2) { display: none; }
+
+    /* Subtle fade hint when collapsed (won't affect layout) */
+    .card-collapsible[data-collapsed="true"] {
+      -webkit-mask-image: linear-gradient(to bottom, #000 85%, rgba(0,0,0,.85) 95%, transparent 100%);
+      mask-image: linear-gradient(to bottom, #000 85%, rgba(0,0,0,.85) 95%, transparent 100%);
+    }
+
+    /* Toggle button styling */
+    .card-toggle {
+      margin-top: var(--space-4, 1rem);
+      background: transparent;
+      border: 1px solid var(--color-border, #C9A13B);
+      border-radius: 9999px;
+      padding: .5rem .9rem;
+      font: inherit;
+      cursor: pointer;
+      transition: background .15s ease, border-color .15s ease, transform .15s ease;
+    }
+    .card-toggle:hover {
+      background: var(--color-bg-soft, #F7F7F5);
+      transform: translateY(-1px);
+    }
+    .card-toggle:focus-visible {
+      outline: 2px solid var(--color-focus, #133978);
+      outline-offset: 2px;
+    }
+    /* Remove fade when expanded */
+    .card-collapsible[data-collapsed="false"] {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+  </style>
 </head>
 
 <body class="hero--copy">
@@ -73,8 +111,6 @@
       </div>
     </div>
   </section>
-
-
 
   <!-- Main Header -->
   <header class="site-header">
@@ -284,32 +320,31 @@
 
     <!-- Attorney Biography -->
     <section class="bio-section" aria-labelledby="bio-heading">
-  <div class="container about-snippet">
-    <img src="images/christopher-weldon-headshot2.jpg" 
-         alt="Portrait of Christopher R. Weldon, Esquire" 
-         class="bio-image" width="220" height="220" loading="lazy" />
+      <div class="container about-snippet">
+        <img src="images/christopher-weldon-headshot2.jpg" 
+             alt="Portrait of Christopher R. Weldon, Esquire" 
+             class="bio-image" width="220" height="220" loading="lazy" />
 
-    <div class="prose">
-      <h2 id="bio-heading">Meet Christopher R. Weldon</h2>
-      <p>
-        Founder of Weldon Law, Chris has guided families through more than 
-        1,000 guardianship and fiduciary matters across New Jersey. With 
-        experience as a State Regulatory Attorney, he combines deep legal 
-        expertise with a compassionate, practical approach to elder law, 
-        life & legacy planning, and probate.
-      </p>
-      <p>
-        <a href="about.html" class="learn-more">Learn more about Chris →</a>
-      </p>
-    </div>
-  </div>
-</section>
-
+        <div class="prose">
+          <h2 id="bio-heading">Meet Christopher R. Weldon</h2>
+          <p>
+            Founder of Weldon Law, Chris has guided families through more than 
+            1,000 guardianship and fiduciary matters across New Jersey. With 
+            experience as a State Regulatory Attorney, he combines deep legal 
+            expertise with a compassionate, practical approach to elder law, 
+            life &amp; legacy planning, and probate.
+          </p>
+          <p>
+            <a href="about.html" class="learn-more">Learn more about Chris →</a>
+          </p>
+        </div>
+      </div>
+    </section>
 
     <!-- Why Choose Us / How We Work -->
-<section class="container about-cards">
-  <div class="about-cards-grid">
-    <div class="about-card">
+<section class="container home-cards">
+  <div class="info-grid">
+    <div class="card-collapsible" data-collapsed="true">
       <h2>Why families choose Weldon Law</h2>
       <ul class="services-list">
         <li><strong>1,000+ guardianship/fiduciary matters</strong> handled across NJ courts</li>
@@ -320,9 +355,10 @@
       </ul>
       <p>Chris brings over a decade of focused experience in elder law matters, with deep knowledge of healthcare regulations, benefit programs, and the complex intersection of legal and financial planning for aging adults. His background includes extensive work with Medicaid, Medicare, VA benefits, and private insurance matters, ensuring clients receive comprehensive guidance on asset protection and benefit eligibility.</p>
       <p>What sets Weldon Law apart is the combination of legal expertise and genuine understanding of the challenges families face during difficult transitions. Every case receives personal attention, with clear communication at each step and practical solutions designed to minimize family stress while achieving the best possible outcomes for your situation.</p>
+      <button type="button" class="card-toggle" aria-expanded="false">Read more</button>
     </div>
 
-    <div class="about-card">
+    <div class="card-collapsible" data-collapsed="true">
       <h2>How we work</h2>
       <ol class="services-list">
         <li><strong>Start here:</strong> Send a short intake (mobile sheet or "Get help now →")</li>
@@ -333,14 +369,15 @@
       </ol>
       <p>The streamlined process begins with a thorough understanding of your specific situation and goals. The practice uses secure digital tools for document sharing and communication, making it easy to provide updates and receive information without unnecessary delays. This efficient approach means your matter progresses smoothly while you stay informed throughout the process.</p>
       <p>I believe in transparent communication and realistic timelines. You'll always know what to expect next, what documents may be needed, and how I'm working toward resolution of your matter. My goal is to remove uncertainty and provide steady guidance when legal decisions feel overwhelming.</p>
+      <button type="button" class="card-toggle" aria-expanded="false">Read more</button>
     </div>
   </div>
 </section>
 
 <!-- Our Approach / Getting Started -->
-<section class="container about-cards">
-  <div class="about-cards-grid">
-    <div class="about-card">
+<section class="container home-cards">
+  <div class="info-grid">
+    <div class="card-collapsible" data-collapsed="true">
       <h2>Our Approach</h2>
       <p>Every elder law matter involves both legal complexity and deeply personal family dynamics. I take time to understand not just the legal requirements, but also your family's specific needs, concerns, and goals. This comprehensive understanding allows me to craft solutions that work practically for your situation, not just theoretically on paper.</p>
       <p>My experience with healthcare regulations, government benefits, and estate planning enables me to spot potential issues early and address them proactively. I focus on practical solutions that protect your interests while working efficiently within New Jersey's legal framework, always keeping your family's long-term wellbeing as the priority.</p>
@@ -350,17 +387,18 @@
         <li>Step-by-step guidance through the process</li>
         <li>Ongoing support and communication</li>
       </ul>
+      <button type="button" class="card-toggle" aria-expanded="false">Read more</button>
     </div>
 
-    <div class="about-card">
+    <div class="card-collapsible" data-collapsed="true">
       <h2>Getting Started</h2>
       <p>Beginning a legal matter doesn't have to be complicated. My initial consultation process is designed to quickly assess your situation and provide you with a clear understanding of your options. I'll explain the relevant laws, discuss potential approaches, and help you make informed decisions about how to proceed.</p>
       <p>Whether you're planning ahead or responding to an immediate need, I'm here to provide guidance tailored to your timeline and circumstances. This technology-enabled practice means I can often begin working on your matter quickly while ensuring nothing falls through the cracks in the process.</p>
       <p><strong>Ready to get started?</strong> Use the contact form below or call us directly at <a href="tel:+18568902944">(856) 890-2944</a>. We typically respond to inquiries within the same business day.</p>
+      <button type="button" class="card-toggle" aria-expanded="false">Read more</button>
     </div>
   </div>
 </section>
-
 
 
   </main>
@@ -876,15 +914,8 @@
 
       function handleSwipeGesture() {
         const swipeDistance = touchEndX - touchStartX;
-        
         if (Math.abs(swipeDistance) > SWIPE_THRESHOLD) {
-          if (swipeDistance > 0) {
-            // Swipe right - go to previous
-            navigateToPrevious();
-          } else {
-            // Swipe left - go to next
-            navigateToNext();
-          }
+          swipeDistance > 0 ? navigateToPrevious() : navigateToNext();
         }
       }
 
@@ -924,20 +955,14 @@
 
       function restoreOriginalTileOrder() {
         if (!practiceContainer || !practiceTiles.length) return;
-        
-        const sorted = [...practiceTiles].sort((a, b) => 
-          (+a.dataset.origIndex) - (+b.dataset.origIndex)
-        );
-        
+        const sorted = [...practiceTiles].sort((a, b) => (+a.dataset.origIndex) - (+b.dataset.origIndex));
         sorted.forEach(tile => practiceContainer.appendChild(tile));
       }
 
       function isSingleColumnLayout() {
         if (!practiceContainer) return false;
-        
         const columns = getComputedStyle(practiceContainer)
           .gridTemplateColumns.split(' ').filter(Boolean).length;
-        
         return columns <= 1;
       }
 
@@ -965,13 +990,11 @@
           primaryTile.classList.add('is-active');
           primaryTile.style.setProperty('--pa-tint', tint);
         }
-        
         if (secondaryTile) {
           secondaryTile.classList.add('is-active');
           secondaryTile.style.setProperty('--pa-tint', tint);
         }
 
-        // Reorder tiles for single column layout
         if (isSingleColumnLayout()) {
           if (primaryTile) insertAtPosition(practiceContainer, primaryTile, 0);
           if (secondaryTile) insertAtPosition(practiceContainer, secondaryTile, 1);
@@ -992,7 +1015,6 @@
         }
 
         wrapper.classList.add('is-fading');
-        
         setTimeout(() => {
           h1Element.textContent = message.h1;
           pElement.textContent = message.sub;
@@ -1003,7 +1025,6 @@
 
       function startRotation() {
         if (prefersReducedMotion || messages.length < 2) return;
-        
         stopRotation();
         rotationTimer = setInterval(() => {
           currentIndex = (currentIndex + 1) % messages.length;
@@ -1033,38 +1054,21 @@
       wrapper.addEventListener('focusout', startRotation);
 
       // Desktop arrow navigation
-      prevButton?.addEventListener('click', navigateToPrevious);
       nextButton?.addEventListener('click', navigateToNext);
+      prevButton?.addEventListener('click', navigateToPrevious);
 
       // Handle window events
       window.addEventListener('resize', () => applyMessageToTiles(currentIndex));
-      
       document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-          stopRotation();
-        } else {
-          startRotation();
-        }
+        document.hidden ? stopRotation() : startRotation();
       });
 
       // Pause rotation on scroll
-      let scrollTimeout;
-      let isScrollPaused = false;
-      
+      let scrollTimeout, isScrollPaused = false;
       window.addEventListener('scroll', () => {
-        if (!isScrollPaused) {
-          stopRotation();
-          isScrollPaused = true;
-        }
-        
-        // Clear existing timeout
+        if (!isScrollPaused) { stopRotation(); isScrollPaused = true; }
         clearTimeout(scrollTimeout);
-        
-        // Resume rotation after scrolling stops for 15 seconds
-        scrollTimeout = setTimeout(() => {
-          isScrollPaused = false;
-          startRotation();
-        }, 15000);
+        scrollTimeout = setTimeout(() => { isScrollPaused = false; startRotation(); }, 15000);
       }, { passive: true });
     }
 
@@ -1080,6 +1084,34 @@
       }
     }
 
+    // Home-page card collapsers
+    function initCardCollapsers() {
+      const cards = document.querySelectorAll('.card-collapsible');
+      cards.forEach(card => {
+        // Ensure collapsed default state
+        if (!card.hasAttribute('data-collapsed')) {
+          card.setAttribute('data-collapsed', 'true');
+        }
+        // Find/create button (in case HTML changes later)
+        let btn = card.querySelector('.card-toggle');
+        if (!btn) {
+          btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'card-toggle';
+          btn.textContent = 'Read more';
+          btn.setAttribute('aria-expanded', 'false');
+          card.appendChild(btn);
+        }
+        // Toggle behavior
+        btn.addEventListener('click', () => {
+          const isCollapsed = card.getAttribute('data-collapsed') === 'true';
+          card.setAttribute('data-collapsed', String(!isCollapsed));
+          btn.setAttribute('aria-expanded', String(!isCollapsed));
+          btn.textContent = isCollapsed ? 'Show less' : 'Read more';
+        });
+      });
+    }
+
     // Application Initialization
     function initializeApp() {
       // Core functionality
@@ -1087,6 +1119,7 @@
       initMobileSheet();
       initCTARouting();
       initHeroRotator();
+      initCardCollapsers(); // <-- enable collapsible cards
       
       // Form setup
       initializeIntakeForm('intakeFormStickyMobile', 'sm-status', 'sm-error', 'sm-phone');
