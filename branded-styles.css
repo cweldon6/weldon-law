@@ -426,6 +426,12 @@ p {
   }
 }
 
+@media (max-width: 768px) {
+  .hero-controls {
+    display: none;
+  }
+}
+
 /* Enhanced Bio Section */
 .bio-section-enhanced {
   background: var(--color-bg);
@@ -1916,8 +1922,3 @@ button[type="submit"]:hover {
   -ms-hyphens: none;
 }
 
-@media (max-width: 768px) {
-  .hero-controls {
-    display: none;
-  }
-}
