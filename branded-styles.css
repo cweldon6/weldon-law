@@ -1073,42 +1073,46 @@ p {
 /* === Bio Section === */
 .bio-section {
   padding: var(--space-5) 0;
-  overflow: hidden;
 }
 
-.bio-section .about-snippet,
-.bio-section .about-snippet p {
-  max-width: none;
+.bio-section .about-snippet {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
 }
 
-.bio-image {
-  float: left;
-  width: 200px;
-  height: 250px;
-  margin: 0 var(--space-4) var(--space-4) 0;
+.bio-section .bio-image {
+  width: 180px;
+  height: 180px;
   border-radius: var(--radius-sm);
   object-fit: cover;
-  display: block;
+  flex-shrink: 0;
 }
 
+.bio-section .prose {
+  max-width: 65ch;
+  text-align: left;
+}
+
+/* Desktop: side-by-side layout */
 @media (min-width: 768px) {
-  .bio-image {
-    width: 250px;
-    height: 250px;
+  .bio-section .about-snippet {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-6);
   }
-}
-
-@media (max-width: 480px) {
-  .bio-image {
-    width: 140px;
-    height: 140px;
+  
+  .bio-section .bio-image {
+    width: 240px;
+    height: 240px;
+    flex: 0 0 240px;
   }
-}
-
-.about-snippet::after {
-  content: "";
-  display: block;
-  clear: both;
+  
+  .bio-section .prose {
+    flex: 1; /* take remaining space */
+    max-width: none;
+  }
 }
 
 /* === Info Grid Layout === */
@@ -1901,3 +1905,15 @@ button[type="submit"]:hover {
   font-size: clamp(.95rem, .9rem + .35vw, 1.05rem);
   opacity: .95;
 }
+
+/* === Readability overrides: no hyphenation where we showcase copy === */
+.intro-banner .hero-line,
+.intro-banner .hero-sub,
+.bio-section .prose p,
+.info-grid .card-collapsible p {
+  hyphens: none;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+}
+
+
