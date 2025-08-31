@@ -55,42 +55,23 @@
     window.INTAKE_PROXY = '/api/intake';
   </script>
 
-  <!-- Minimal inline CSS to collapse long cards on the home page -->
+  <!-- Minimal inline CSS for collapsible cards (kept lightweight) -->
   <style>
-    /* Collapse behavior (first two list items + first paragraph only) */
-    .card-collapsible[data-collapsed="true"] .services-list li:nth-child(n+3) { display: none; }
-    .card-collapsible[data-collapsed="true"] p:nth-of-type(n+2) { display: none; }
-
-    /* Subtle fade hint when collapsed (won't affect layout) */
-    .card-collapsible[data-collapsed="true"] {
-      -webkit-mask-image: linear-gradient(to bottom, #000 85%, rgba(0,0,0,.85) 95%, transparent 100%);
-      mask-image: linear-gradient(to bottom, #000 85%, rgba(0,0,0,.85) 95%, transparent 100%);
+    .card-collapsible[data-collapsed="true"] .services-list li:nth-child(n+3){display:none}
+    .card-collapsible[data-collapsed="true"] p:nth-of-type(n+2){display:none}
+    .card-collapsible[data-collapsed="true"]{
+      -webkit-mask-image:linear-gradient(to bottom,#000 85%,rgba(0,0,0,.85) 95%,transparent 100%);
+      mask-image:linear-gradient(to bottom,#000 85%,rgba(0,0,0,.85) 95%,transparent 100%);
     }
-
-    /* Toggle button styling */
-    .card-toggle {
-      margin-top: var(--space-4, 1rem);
-      background: transparent;
-      border: 1px solid var(--color-border, #C9A13B);
-      border-radius: 9999px;
-      padding: .5rem .9rem;
-      font: inherit;
-      cursor: pointer;
-      transition: background .15s ease, border-color .15s ease, transform .15s ease;
+    .card-toggle{
+      margin-top:var(--space-4,1rem);
+      background:transparent;border:1px solid var(--color-border,#C9A13B);
+      border-radius:9999px;padding:.5rem .9rem;font:inherit;cursor:pointer;
+      transition:background .15s ease,border-color .15s ease,transform .15s ease
     }
-    .card-toggle:hover {
-      background: var(--color-bg-soft, #F7F7F5);
-      transform: translateY(-1px);
-    }
-    .card-toggle:focus-visible {
-      outline: 2px solid var(--color-focus, #133978);
-      outline-offset: 2px;
-    }
-    /* Remove fade when expanded */
-    .card-collapsible[data-collapsed="false"] {
-      -webkit-mask-image: none;
-      mask-image: none;
-    }
+    .card-toggle:hover{background:var(--color-bg-soft,#F7F7F5);transform:translateY(-1px)}
+    .card-toggle:focus-visible{outline:2px solid var(--color-focus,#133978);outline-offset:2px}
+    .card-collapsible[data-collapsed="false"]{-webkit-mask-image:none;mask-image:none}
   </style>
 </head>
 
@@ -277,54 +258,46 @@
         <article class="practice-area" data-pa="lp" style="--pa-bg:url('images/pa-life.PNG')">
           <h3 class="pa-title">
             <a href="practice-lp.html">
-                <span class="pa-title-main">Life Planning</span>
-                <span class="pa-title-sub">(POA/Advance Directive)</span>
+              <span class="pa-title-main">Life Planning</span>
+              <span class="pa-title-sub">(POA/Advance Directive)</span>
             </a>
-        </h3>
+          </h3>
           <p>Planning for in-life decision-making and authority if you can't act.</p>
         </article>
 
         <article class="practice-area" data-pa="guard" style="--pa-bg:url('images/pa-guardianships.PNG')">
-          <h3>
-            <a href="practice-guardianships.html">Guardianships</a>
-          </h3>
+          <h3><a href="practice-guardianships.html">Guardianships</a></h3>
           <p>Establishing and administering guardianships with diligence and care.</p>
         </article>
 
         <article class="practice-area" data-pa="ltc" style="--pa-bg:url('images/pa-ltc.PNG')">
-          <h3>
-            <a href="practice-ltc.html">Long-Term Care Planning</a>
-          </h3>
+          <h3><a href="practice-ltc.html">Long-Term Care Planning</a></h3>
           <p>Protecting assets while aligning care needs and benefits.</p>
         </article>
 
         <article class="practice-area" data-pa="legacy" style="--pa-bg:url('images/pa-legacy.PNG')">
           <h3 class="pa-title">
             <a href="practice-legacy.html">
-                <span class="pa-title-main">Legacy Planning</span>
-                <span class="pa-title-sub">(Wills & Trusts)</span>
+              <span class="pa-title-main">Legacy Planning</span>
+              <span class="pa-title-sub">(Wills & Trusts)</span>
             </a>
-        </h3>
+          </h3>
           <p>Directing your estate and preserving your intent for loved ones.</p>
         </article>
 
         <article class="practice-area" data-pa="probate" style="--pa-bg:url('images/pa-probate.PNG')">
-          <h3>
-            <a href="practice-probate.html">Probate</a>
-          </h3>
+          <h3><a href="practice-probate.html">Probate</a></h3>
           <p>Guidance through estate administration and court procedures.</p>
         </article>
 
         <article class="practice-area" data-pa="general" style="--pa-bg:url('images/pa-general.PNG')">
-          <h3>
-            <a href="practice-general.html">General Counsel & Other Matters</a>
-          </h3>
+          <h3><a href="practice-general.html">General Counsel & Other Matters</a></h3>
           <p>Related elder-law and fiduciary issues tailored to your situation.</p>
         </article>
       </div>
     </section>
 
-    <!-- Firm-first Bio (responsive grid; photo bottom-right on desktop) -->
+    <!-- Firm-first Bio -->
     <section class="bio-section" aria-labelledby="bio-heading">
       <div class="container about-snippet">
         <div class="prose">
@@ -354,66 +327,63 @@
       </div>
     </section>
 
-    <!-- Why Choose Us / How We Work -->
-<section class="container home-cards">
-  <div class="info-grid">
-    <div class="card-collapsible" data-collapsed="true">
-      <h2>Why families choose Weldon Law</h2>
-      <ul class="services-list">
-        <li><strong>1,000+ guardianship/fiduciary matters</strong> handled across NJ courts</li>
-        <li><strong>Transparent process</strong> and timely communication</li>
-        <li><strong>Neighborly, steady counsel</strong> when decisions feel overwhelming</li>
-        <li><strong>Local expertise</strong> with statewide experience</li>
-        <li><strong>Technology-enabled efficiency</strong> without losing the personal touch</li>
-      </ul>
-      <p>Chris brings over a decade of focused experience in elder law matters, with deep knowledge of healthcare regulations, benefit programs, and the complex intersection of legal and financial planning for aging adults. His background includes extensive work with Medicaid, Medicare, VA benefits, and private insurance matters, ensuring clients receive comprehensive guidance on asset protection and benefit eligibility.</p>
-      <p>What sets Weldon Law apart is the combination of legal expertise and genuine understanding of the challenges families face during difficult transitions. Every case receives personal attention, with clear communication at each step and practical solutions designed to minimize family stress while achieving the best possible outcomes for your situation.</p>
-      <button type="button" class="card-toggle" aria-expanded="false">Read more</button>
-    </div>
+    <!-- Why / How -->
+    <section class="container home-cards">
+      <div class="info-grid">
+        <div class="card-collapsible" data-collapsed="true">
+          <h2>Why families choose Weldon Law</h2>
+          <ul class="services-list">
+            <li><strong>1,000+ guardianship/fiduciary matters</strong> handled across NJ courts</li>
+            <li><strong>Transparent process</strong> and timely communication</li>
+            <li><strong>Neighborly, steady counsel</strong> when decisions feel overwhelming</li>
+            <li><strong>Local expertise</strong> with statewide experience</li>
+            <li><strong>Technology-enabled efficiency</strong> without losing the personal touch</li>
+          </ul>
+          <p>Chris brings over a decade of focused experience in elder law matters, with deep knowledge of healthcare regulations, benefit programs, and the complex intersection of legal and financial planning for aging adults.</p>
+          <p>What sets Weldon Law apart is the combination of legal expertise and genuine understanding of the challenges families face during difficult transitions.</p>
+          <button type="button" class="card-toggle" aria-expanded="false">Read more</button>
+        </div>
 
-    <div class="card-collapsible" data-collapsed="true">
-      <h2>How we work</h2>
-      <ol class="services-list">
-        <li><strong>Start here:</strong> Send a short intake (mobile sheet or "Get help now →")</li>
-        <li><strong>You will hear back quickly</strong> with next steps and a short call</li>
-        <li><strong>Clear plan</strong> for your matter and timelines</li>
-        <li><strong>Regular updates</strong> as your matter progresses</li>
-        <li><strong>Efficient resolution</strong> with minimal stress on your family</li>
-      </ol>
-      <p>The streamlined process begins with a thorough understanding of your specific situation and goals. The practice uses secure digital tools for document sharing and communication, making it easy to provide updates and receive information without unnecessary delays. This efficient approach means your matter progresses smoothly while you stay informed throughout the process.</p>
-      <p>I believe in transparent communication and realistic timelines. You'll always know what to expect next, what documents may be needed, and how I'm working toward resolution of your matter. My goal is to remove uncertainty and provide steady guidance when legal decisions feel overwhelming.</p>
-      <button type="button" class="card-toggle" aria-expanded="false">Read more</button>
-    </div>
-  </div>
-</section>
+        <div class="card-collapsible" data-collapsed="true">
+          <h2>How we work</h2>
+          <ol class="services-list">
+            <li><strong>Start here:</strong> Send a short intake (mobile sheet or "Get help now →")</li>
+            <li><strong>You will hear back quickly</strong> with next steps and a short call</li>
+            <li><strong>Clear plan</strong> for your matter and timelines</li>
+            <li><strong>Regular updates</strong> as your matter progresses</li>
+            <li><strong>Efficient resolution</strong> with minimal stress on your family</li>
+          </ol>
+          <p>The practice uses secure digital tools for document sharing and communication, making it easy to provide updates and receive information without unnecessary delays.</p>
+          <p>You'll always know what to expect next, what documents may be needed, and how your matter is progressing.</p>
+          <button type="button" class="card-toggle" aria-expanded="false">Read more</button>
+        </div>
+      </div>
+    </section>
 
-<!-- Our Approach / Getting Started -->
-<section class="container home-cards">
-  <div class="info-grid">
-    <div class="card-collapsible" data-collapsed="true">
-      <h2>Our Approach</h2>
-      <p>Every elder law matter involves both legal complexity and deeply personal family dynamics. I take time to understand not just the legal requirements, but also your family's specific needs, concerns, and goals. This comprehensive understanding allows me to craft solutions that work practically for your situation, not just theoretically on paper.</p>
-      <p>My experience with healthcare regulations, government benefits, and estate planning enables me to spot potential issues early and address them proactively. I focus on practical solutions that protect your interests while working efficiently within New Jersey's legal framework, always keeping your family's long-term wellbeing as the priority.</p>
-      <ul class="services-list">
-        <li>Comprehensive evaluation of your situation</li>
-        <li>Clear explanation of your options</li>
-        <li>Step-by-step guidance through the process</li>
-        <li>Ongoing support and communication</li>
-      </ul>
-      <button type="button" class="card-toggle" aria-expanded="false">Read more</button>
-    </div>
+    <!-- Approach / Getting Started -->
+    <section class="container home-cards">
+      <div class="info-grid">
+        <div class="card-collapsible" data-collapsed="true">
+          <h2>Our Approach</h2>
+          <p>Every elder law matter involves both legal complexity and deeply personal family dynamics. I take time to understand your family’s specific needs, concerns, and goals.</p>
+          <p>My experience with healthcare regulations, government benefits, and estate planning enables proactive issue-spotting and practical solutions.</p>
+          <ul class="services-list">
+            <li>Comprehensive evaluation</li>
+            <li>Clear explanation of options</li>
+            <li>Step-by-step guidance</li>
+            <li>Ongoing support and communication</li>
+          </ul>
+          <button type="button" class="card-toggle" aria-expanded="false">Read more</button>
+        </div>
 
-    <div class="card-collapsible" data-collapsed="true">
-      <h2>Getting Started</h2>
-      <p>Beginning a legal matter doesn't have to be complicated. My initial consultation process is designed to quickly assess your situation and provide you with a clear understanding of your options. I'll explain the relevant laws, discuss potential approaches, and help you make informed decisions about how to proceed.</p>
-      <p>Whether you're planning ahead or responding to an immediate need, I'm here to provide guidance tailored to your timeline and circumstances. This technology-enabled practice means I can often begin working on your matter quickly while ensuring nothing falls through the cracks in the process.</p>
-      <p><strong>Ready to get started?</strong> Use the contact form below or call us directly at <a href="tel:+18568902944">(856) 890-2944</a>. We typically respond to inquiries within the same business day.</p>
-      <button type="button" class="card-toggle" aria-expanded="false">Read more</button>
-    </div>
-  </div>
-</section>
-
-
+        <div class="card-collapsible" data-collapsed="true">
+          <h2>Getting Started</h2>
+          <p>Initial consultations assess your situation and outline options and next steps. Planning ahead or responding to immediate needs—both are welcome.</p>
+          <p><strong>Ready?</strong> Use the contact form below or call <a href="tel:+18568902944">(856) 890-2944</a>. We typically respond the same business day.</p>
+          <button type="button" class="card-toggle" aria-expanded="false">Read more</button>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Footer -->
@@ -483,7 +453,6 @@
     // Configuration
     const FLOW_URL = "https://prod-121.westus.logic.azure.com:443/workflows/2fd109379c324cd5bbab1546b34dca3c/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=GH5F3oVR83EzQ2fzn0l0yUzqs9bmVpHFZP0D0lJgBV8";
 
-    // Error Messages
     const errorMessages = {
       'first-name': 'Please enter your first name',
       'last-name': 'Please enter your last name',
@@ -491,7 +460,6 @@
       'phone': 'Please enter a valid phone number'
     };
 
-    // Utility Functions
     const qs = (selector, root = document) => root.querySelector(selector);
     const qsa = (selector, root = document) => Array.from(root.querySelectorAll(selector));
     const digitsOnly = str => (str || '').replace(/[^\d]/g, '');
@@ -502,17 +470,14 @@
       const toggle = qs('.menu-toggle');
       const navList = qs('#primary-navigation');
       const body = document.body;
-      
       if (!toggle || !navList) return;
 
-      // Toggle mobile menu
       toggle.addEventListener('click', () => {
         const isOpen = navList.classList.toggle('open');
         toggle.setAttribute('aria-expanded', isOpen);
         body.classList.toggle('nav-open', isOpen);
       });
 
-      // Handle dropdown toggle on mobile
       const dropdownToggle = qs('.dropdown-toggle');
       if (dropdownToggle) {
         dropdownToggle.addEventListener('click', (e) => {
@@ -520,24 +485,18 @@
             e.preventDefault();
             const dropdown = dropdownToggle.closest('.dropdown');
             const isExpanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
-            
-            // Toggle dropdown
             dropdownToggle.setAttribute('aria-expanded', !isExpanded);
             dropdown.classList.toggle('expanded');
           }
         });
       }
 
-      // Close mobile nav when clicking outside
       document.addEventListener('click', (e) => {
         if (window.innerWidth <= 768 && navList.classList.contains('open')) {
-          if (!e.target.closest('.site-header')) {
-            closeMobileNav();
-          }
+          if (!e.target.closest('.site-header')) closeMobileNav();
         }
       });
 
-      // Close mobile nav on escape key
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && navList.classList.contains('open')) {
           closeMobileNav();
@@ -545,7 +504,6 @@
         }
       });
 
-      // Close mobile nav on window resize
       window.addEventListener('resize', () => {
         if (window.innerWidth > 768 && navList.classList.contains('open')) {
           closeMobileNav();
@@ -556,8 +514,6 @@
         navList.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
         body.classList.remove('nav-open');
-        
-        // Reset dropdown state
         const dropdown = qs('.dropdown');
         const dropdownToggle = qs('.dropdown-toggle');
         if (dropdown && dropdownToggle) {
@@ -570,26 +526,19 @@
     // Phone Number Formatting
     function formatPhoneLive(element) {
       if (!element) return;
-      
       element.addEventListener('input', () => {
         let digits = trimLeadingOne(digitsOnly(element.value));
-        
-        if (!digits) {
-          element.value = '';
-          return;
-        }
-        
+        if (!digits) { element.value = ''; return; }
         if (digits.length <= 3) {
           element.value = `(${digits}`;
         } else if (digits.length <= 6) {
-          element.value = `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+          element.value = `(${digits.slice(0,3)}) ${digits.slice(3)}`;
         } else {
-          element.value = `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
+          element.value = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6,10)}`;
         }
       });
     }
 
-    // Form Validation
     const isValidEmail = email => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
     function validateField(field) {
@@ -598,12 +547,10 @@
       let isValid = true;
       let errorMessage = '';
 
-      // Reset field state
       field.removeAttribute('aria-invalid');
       fieldContainer?.classList.remove('valid', 'error');
       if (errorDiv) errorDiv.textContent = '';
 
-      // Validation logic
       if (field.hasAttribute('required') && !field.value.trim()) {
         isValid = false;
         errorMessage = errorMessages[field.name] || 'This field is required';
@@ -615,7 +562,6 @@
         errorMessage = 'Please enter a valid phone number';
       }
 
-      // Apply validation state
       if (!isValid) {
         field.setAttribute('aria-invalid', 'true');
         fieldContainer?.classList.add('error');
@@ -623,26 +569,18 @@
       } else if (field.value.trim()) {
         fieldContainer?.classList.add('valid');
       }
-
       return isValid;
     }
 
     function validateForm(form) {
       const fields = form.querySelectorAll('input[required], input[type="email"], input[type="tel"]');
       let isValid = true;
-      
-      fields.forEach(field => {
-        if (!validateField(field)) {
-          isValid = false;
-        }
-      });
-      
+      fields.forEach(field => { if (!validateField(field)) isValid = false; });
       return isValid;
     }
 
     function setupFormValidation(form) {
       if (!form) return;
-      
       const fields = form.querySelectorAll('input, select, textarea');
       fields.forEach(field => {
         field.addEventListener('blur', () => validateField(field));
@@ -655,63 +593,37 @@
       });
     }
 
-    // Button Loading State
     function setButtonLoading(button, loading) {
       const textSpan = button.querySelector('.btn-text');
       const loadingSpan = button.querySelector('.btn-loading');
-      
       button.disabled = !!loading;
       if (textSpan) textSpan.classList.toggle('hidden', !!loading);
       if (loadingSpan) loadingSpan.classList.toggle('hidden', !loading);
     }
 
-    // Mobile Sheet Management
+    // Mobile Sheet
     function initMobileSheet() {
       const sheet = qs('#intakeSheet');
       const openButton = qs('#openIntakeMobile');
       const closeButton = qs('#closeIntakeMobile');
-
       if (!sheet || !openButton || !closeButton) return;
 
       function trapFocus(container, enabled) {
         if (!container) return;
-        
-        const getFocusableElements = () => container.querySelectorAll(
+        const getFocusable = () => container.querySelectorAll(
           'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
         );
-
         function handleKeydown(e) {
           if (!enabled) return;
-          
-          if (e.key === 'Escape') {
-            closeMobileSheet();
-            return;
-          }
-          
+          if (e.key === 'Escape') { closeMobileSheet(); return; }
           if (e.key !== 'Tab') return;
-          
-          const focusable = Array.from(getFocusableElements()).filter(
-            el => !el.disabled && el.offsetParent !== null
-          );
-          
+          const focusable = Array.from(getFocusable()).filter(el => !el.disabled && el.offsetParent !== null);
           if (!focusable.length) return;
-          
-          const first = focusable[0];
-          const last = focusable[focusable.length - 1];
-          
-          if (e.shiftKey && document.activeElement === first) {
-            last.focus();
-            e.preventDefault();
-          } else if (!e.shiftKey && document.activeElement === last) {
-            first.focus();
-            e.preventDefault();
-          }
+          const first = focusable[0], last = focusable[focusable.length - 1];
+          if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+          else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
         }
-
-        if (container.__trapHandler) {
-          document.removeEventListener('keydown', container.__trapHandler);
-        }
-        
+        if (container.__trapHandler) document.removeEventListener('keydown', container.__trapHandler);
         container.__trapHandler = handleKeydown;
         document.addEventListener('keydown', handleKeydown);
       }
@@ -720,11 +632,7 @@
         sheet.setAttribute('aria-hidden', 'false');
         openButton.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
-        
-        setTimeout(() => {
-          qs('#sm-first-name')?.focus();
-        }, 100);
-        
+        setTimeout(() => { qs('#sm-first-name')?.focus(); }, 100);
         trapFocus(sheet, true);
       }
 
@@ -736,43 +644,30 @@
         openButton.focus();
       }
 
-      // Event listeners
-      openButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        openMobileSheet();
-      });
-
+      openButton.addEventListener('click', (e) => { e.preventDefault(); openMobileSheet(); });
       closeButton.addEventListener('click', closeMobileSheet);
-      
-      sheet.addEventListener('click', (e) => {
-        if (e.target === sheet) closeMobileSheet();
-      });
+      sheet.addEventListener('click', (e) => { if (e.target === sheet) closeMobileSheet(); });
 
-      // Export for global access
       window.closeMobileSheet = closeMobileSheet;
     }
 
-    // CTA Button Routing
+    // CTA Routing
     function initCTARouting() {
       const ctaButton = qs('#ctaGetHelp');
       if (!ctaButton) return;
-
       ctaButton.addEventListener('click', (e) => {
         e.preventDefault();
         if (window.innerWidth <= 768) {
-          // Open mobile sheet on mobile
           qs('#openIntakeMobile')?.click();
         } else {
-          // Navigate to contact page on desktop
           window.location.href = 'contact.html';
         }
       });
     }
 
-    // Form Submission
+    // Submit flow
     async function submitIntake(form, statusElement, errorElement) {
       const submitButton = form.querySelector('button[type="submit"]');
-      
       if (!validateForm(form)) {
         errorElement.textContent = 'Please correct the errors above';
         errorElement.classList.remove('hidden');
@@ -800,39 +695,24 @@
 
         const responseText = await response.clone().text();
         let responseJson = null;
-        
-        try {
-          responseJson = JSON.parse(responseText);
-        } catch (e) {
-          // Response is not JSON
-        }
+        try { responseJson = JSON.parse(responseText); } catch {}
 
         if (response.ok && responseJson?.success) {
           statusElement.textContent = 'Thanks—check your email for a confirmation.';
           form.reset();
-          
-          // Clear validation states
-          form.querySelectorAll('.form-field').forEach(field => {
-            field.classList.remove('valid', 'error');
-          });
-          
-          // Auto-close mobile sheet
+          form.querySelectorAll('.form-field').forEach(f => f.classList.remove('valid','error'));
           if (form.id === 'intakeFormStickyMobile') {
-            setTimeout(() => {
-              if (window.closeMobileSheet) window.closeMobileSheet();
-            }, 2000);
+            setTimeout(() => { if (window.closeMobileSheet) window.closeMobileSheet(); }, 2000);
           }
         } else {
           throw new Error(responseJson?.message || `Server error: ${response.status}`);
         }
       } catch (error) {
         console.error('Form submission error:', error);
-        
-        const errorMessage = error.message.includes('Network')
+        const msg = error.message.includes('Network')
           ? 'Network issue—please email chris@weldon.law or call (856) 890-2944.'
           : 'Sorry, something went wrong. Please email chris@weldon.law or call (856) 890-2944.';
-        
-        errorElement.textContent = errorMessage;
+        errorElement.textContent = msg;
         errorElement.classList.add('error-inline');
         errorElement.classList.remove('hidden');
         statusElement.classList.remove('success-inline');
@@ -842,33 +722,25 @@
       }
     }
 
-    // Initialize Individual Forms
     function initializeIntakeForm(formId, statusId, errorId, phoneId) {
       const form = qs('#' + formId);
       if (!form) return;
-
       setupFormValidation(form);
       formatPhoneLive(qs('#' + phoneId));
-
       const statusElement = qs('#' + statusId);
       const errorElement = qs('#' + errorId);
-
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        submitIntake(form, statusElement, errorElement);
-      });
+      form.addEventListener('submit', (e) => { e.preventDefault(); submitIntake(form, statusElement, errorElement); });
     }
 
-    // Mobile Bottom Padding Adjustment
+    // Bottom padding for mobile sticky bar
     function adjustBottomPaddingMobile() {
       const mobileBar = qs('.intake-stick__mobilebar');
       if (!mobileBar) return;
-
-      const height = mobileBar.getBoundingClientRect().height || 56;
-      document.body.style.paddingBottom = window.innerWidth <= 768 ? `${height + 8}px` : '';
+      const h = mobileBar.getBoundingClientRect().height || 56;
+      document.body.style.paddingBottom = window.innerWidth <= 768 ? `${h + 8}px` : '';
     }
 
-    // Hero Rotator System
+    // Hero Rotator (unchanged logic; swipe enabled)
     function initHeroRotator() {
       const wrapper = qs('.hero-rotator');
       if (!wrapper) return;
@@ -877,23 +749,15 @@
       const pElement = wrapper.querySelector('.hero-sub');
       const template = qs('#heroMessages');
 
-      // Practice Areas
       const practiceContainer = qs('.practice-areas');
       const practiceTiles = practiceContainer ? Array.from(practiceContainer.children) : [];
-      
-      // Store original positions
-      practiceTiles.forEach((tile, index) => {
-        tile.dataset.origIndex ??= String(index);
-      });
-
-      // Create lookup by data-pa attribute
+      practiceTiles.forEach((tile, index) => { tile.dataset.origIndex ??= String(index); });
       const practiceByKey = practiceTiles.reduce((map, tile) => {
         const key = tile.getAttribute('data-pa')?.trim();
         if (key) map[key] = tile;
         return map;
       }, {});
 
-      // Extract messages from template
       const messages = Array.from(template?.content?.children || []).map(node => ({
         h1: node.getAttribute('data-h1') || '',
         sub: node.getAttribute('data-sub') || '',
@@ -911,102 +775,63 @@
       const FADE_DURATION = 450;
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      // Touch/Swipe support for mobile
       let touchStartX = 0;
       let touchEndX = 0;
-      const SWIPE_THRESHOLD = 75; // Minimum distance for a swipe
+      const SWIPE_THRESHOLD = 75;
 
-      function handleTouchStart(e) {
-        touchStartX = e.changedTouches[0].screenX;
+      function handleTouchStart(e){ touchStartX = e.changedTouches[0].screenX; }
+      function handleTouchEnd(e){ touchEndX = e.changedTouches[0].screenX; handleSwipeGesture(); }
+      function handleSwipeGesture(){
+        const d = touchEndX - touchStartX;
+        if (Math.abs(d) > SWIPE_THRESHOLD) d > 0 ? navigateToPrevious() : navigateToNext();
       }
 
-      function handleTouchEnd(e) {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipeGesture();
-      }
+      function navigateToPrevious(){ stopRotation(); currentIndex = (currentIndex - 1 + messages.length) % messages.length; renderMessage(currentIndex); startRotation(); }
+      function navigateToNext(){ stopRotation(); currentIndex = (currentIndex + 1) % messages.length; renderMessage(currentIndex); startRotation(); }
 
-      function handleSwipeGesture() {
-        const swipeDistance = touchEndX - touchStartX;
-        if (Math.abs(swipeDistance) > SWIPE_THRESHOLD) {
-          swipeDistance > 0 ? navigateToPrevious() : navigateToNext();
-        }
-      }
-
-      // Navigation functions
-      function navigateToPrevious() {
-        stopRotation();
-        currentIndex = (currentIndex - 1 + messages.length) % messages.length;
-        renderMessage(currentIndex);
-        startRotation();
-      }
-
-      function navigateToNext() {
-        stopRotation();
-        currentIndex = (currentIndex + 1) % messages.length;
-        renderMessage(currentIndex);
-        startRotation();
-      }
-
-      // Theming
-      const TILE_TINT = getComputedStyle(document.documentElement)
-        .getPropertyValue('--tile-tint').trim() || 'rgba(201,161,59,0.12)';
+      const TILE_TINT = getComputedStyle(document.documentElement).getPropertyValue('--tile-tint').trim() || 'rgba(201,161,59,0.12)';
       const tints = Array(messages.length).fill(TILE_TINT);
 
-      function insertAtPosition(container, element, position) {
+      function insertAtPosition(container, element, position){
         const referenceNode = container.children[position] || null;
-        if (element && element !== referenceNode) {
-          container.insertBefore(element, referenceNode);
-        }
+        if (element && element !== referenceNode) container.insertBefore(element, referenceNode);
       }
 
-      function clearTileStates() {
-        practiceTiles.forEach(tile => {
-          tile.classList.remove('is-active');
-          tile.style.removeProperty('--pa-tint');
-        });
+      function clearTileStates(){
+        practiceTiles.forEach(tile => { tile.classList.remove('is-active'); tile.style.removeProperty('--pa-tint'); });
       }
 
-      function restoreOriginalTileOrder() {
+      function restoreOriginalTileOrder(){
         if (!practiceContainer || !practiceTiles.length) return;
-        const sorted = [...practiceTiles].sort((a, b) => (+a.dataset.origIndex) - (+b.dataset.origIndex));
+        const sorted = [...practiceTiles].sort((a,b)=> (+a.dataset.origIndex) - (+b.dataset.origIndex));
         sorted.forEach(tile => practiceContainer.appendChild(tile));
       }
 
-      function isSingleColumnLayout() {
+      function isSingleColumnLayout(){
         if (!practiceContainer) return false;
-        const columns = getComputedStyle(practiceContainer)
-          .gridTemplateColumns.split(' ').filter(Boolean).length;
+        const columns = getComputedStyle(practiceContainer).gridTemplateColumns.split(' ').filter(Boolean).length;
         return columns <= 1;
       }
 
-      function applyMessageToTiles(messageIndex) {
+      function applyMessageToTiles(messageIndex){
         const message = messages[messageIndex % messages.length];
         const tint = tints[messageIndex % tints.length] || 'rgba(201,161,59,0.12)';
         const targets = message.targets;
-        const isShowingAll = targets.length === 1 && targets[0].toLowerCase() === 'all';
+        const isAll = targets.length === 1 && targets[0].toLowerCase() === 'all';
 
         clearTileStates();
 
-        if (isShowingAll) {
+        if (isAll) {
           restoreOriginalTileOrder();
-          practiceTiles.forEach(tile => {
-            tile.classList.add('is-active');
-            tile.style.setProperty('--pa-tint', tint);
-          });
+          practiceTiles.forEach(tile => { tile.classList.add('is-active'); tile.style.setProperty('--pa-tint', tint); });
           return;
         }
 
         const primaryTile = practiceByKey[targets[0]];
         const secondaryTile = practiceByKey[targets[1]];
 
-        if (primaryTile) {
-          primaryTile.classList.add('is-active');
-          primaryTile.style.setProperty('--pa-tint', tint);
-        }
-        if (secondaryTile) {
-          secondaryTile.classList.add('is-active');
-          secondaryTile.style.setProperty('--pa-tint', tint);
-        }
+        if (primaryTile) { primaryTile.classList.add('is-active'); primaryTile.style.setProperty('--pa-tint', tint); }
+        if (secondaryTile) { secondaryTile.classList.add('is-active'); secondaryTile.style.setProperty('--pa-tint', tint); }
 
         if (isSingleColumnLayout()) {
           if (primaryTile) insertAtPosition(practiceContainer, primaryTile, 0);
@@ -1016,7 +841,7 @@
         }
       }
 
-      function renderMessage(index, immediate = false) {
+      function renderMessage(index, immediate = false){
         const message = messages[index % messages.length];
         if (!message) return;
 
@@ -1036,7 +861,7 @@
         }, FADE_DURATION);
       }
 
-      function startRotation() {
+      function startRotation(){
         if (prefersReducedMotion || messages.length < 2) return;
         stopRotation();
         rotationTimer = setInterval(() => {
@@ -1045,38 +870,25 @@
         }, ROTATION_DURATION);
       }
 
-      function stopRotation() {
-        if (rotationTimer) {
-          clearInterval(rotationTimer);
-          rotationTimer = null;
-        }
-      }
+      function stopRotation(){ if (rotationTimer) { clearInterval(rotationTimer); rotationTimer = null; } }
 
-      // Initialize
       renderMessage(currentIndex, true);
       startRotation();
 
-      // Add touch event listeners for mobile swipe
       wrapper.addEventListener('touchstart', handleTouchStart, { passive: true });
       wrapper.addEventListener('touchend', handleTouchEnd, { passive: true });
 
-      // Pause rotation on interaction
       wrapper.addEventListener('mouseenter', stopRotation);
       wrapper.addEventListener('mouseleave', startRotation);
       wrapper.addEventListener('focusin', stopRotation);
       wrapper.addEventListener('focusout', startRotation);
 
-      // Desktop arrow navigation
       nextButton?.addEventListener('click', navigateToNext);
       prevButton?.addEventListener('click', navigateToPrevious);
 
-      // Handle window events
       window.addEventListener('resize', () => applyMessageToTiles(currentIndex));
-      document.addEventListener('visibilitychange', () => {
-        document.hidden ? stopRotation() : startRotation();
-      });
+      document.addEventListener('visibilitychange', () => { document.hidden ? stopRotation() : startRotation(); });
 
-      // Pause rotation on scroll
       let scrollTimeout, isScrollPaused = false;
       window.addEventListener('scroll', () => {
         if (!isScrollPaused) { stopRotation(); isScrollPaused = true; }
@@ -1085,7 +897,6 @@
       }, { passive: true });
     }
 
-    // Prefetch Enhancement
     function initPrefetching() {
       if ('requestIdleCallback' in window) {
         requestIdleCallback(() => {
@@ -1097,25 +908,19 @@
       }
     }
 
-    // Home-page card collapsers
     function initCardCollapsers() {
       const cards = document.querySelectorAll('.card-collapsible');
       cards.forEach(card => {
-        // Ensure collapsed default state
-        if (!card.hasAttribute('data-collapsed')) {
-          card.setAttribute('data-collapsed', 'true');
-        }
-        // Find/create button (in case HTML changes later)
+        if (!card.hasAttribute('data-collapsed')) card.setAttribute('data-collapsed','true');
         let btn = card.querySelector('.card-toggle');
         if (!btn) {
           btn = document.createElement('button');
           btn.type = 'button';
           btn.className = 'card-toggle';
           btn.textContent = 'Read more';
-          btn.setAttribute('aria-expanded', 'false');
+          btn.setAttribute('aria-expanded','false');
           card.appendChild(btn);
         }
-        // Toggle behavior
         btn.addEventListener('click', () => {
           const isCollapsed = card.getAttribute('data-collapsed') === 'true';
           card.setAttribute('data-collapsed', String(!isCollapsed));
@@ -1125,31 +930,23 @@
       });
     }
 
-    // Application Initialization
     function initializeApp() {
-      // Core functionality
       initMobileNavigation();
       initMobileSheet();
       initCTARouting();
       initHeroRotator();
-      initCardCollapsers(); // <-- enable collapsible cards
-      
-      // Form setup
+      initCardCollapsers();
+
       initializeIntakeForm('intakeFormStickyMobile', 'sm-status', 'sm-error', 'sm-phone');
       initializeIntakeForm('intakeFormFooterDesktop', 'ft-status', 'ft-error', 'ft-phone');
-      
-      // Layout adjustments
+
       adjustBottomPaddingMobile();
-      
-      // Enhancement
       initPrefetching();
-      
-      // Event listeners
+
       window.addEventListener('resize', adjustBottomPaddingMobile);
       window.addEventListener('orientationchange', adjustBottomPaddingMobile);
     }
 
-    // Start the application
     document.addEventListener('DOMContentLoaded', initializeApp);
   </script>
 </body>
