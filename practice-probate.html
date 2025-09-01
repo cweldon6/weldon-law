@@ -4,12 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Probate | Weldon Law, LLC</title>
-  <meta name="description" content="Compassionate, efficient guidance through probate and estate administration in New Jersey." />
+  <meta name="description" content="Guidance through estate administration and court procedures — Probate by Weldon Law, LLC." />
   <link rel="stylesheet" href="branded-styles.css" />
 </head>
 <body class="hero--copy">
 
-  <!-- Site Header / Navigation -->
   <header class="site-header">
     <div class="container nav-container">
       <div class="logo">
@@ -17,27 +16,28 @@
           <img src="images/WeldonLawLogoG.png" alt="Weldon Law, LLC logo" />
         </a>
       </div>
+
       <nav class="main-nav" id="nav">
         <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">
           <span class="menu-icon"></span>
         </button>
+
         <ul class="navbar" id="primary-navigation">
-          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
+
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-              Areas of Practice
-              <span class="dropdown-arrow">▼</span>
-            </a>
+            <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Areas of Practice</a>
             <ul class="dropdown-content">
               <li><a href="practice-guardianships.html">Guardianships</a></li>
               <li><a href="practice-ltc.html">Long-Term Care Planning</a></li>
               <li><a href="practice-lp.html">Life Planning (POA/Advance Directive)</a></li>
               <li><a href="practice-legacy.html">Legacy Planning (Wills & Trusts)</a></li>
-              <li><a href="practice-probate.html">Probate</a></li>
+              <li><a href="practice-probate.html" aria-current="page">Probate</a></li>
               <li><a href="practice-general.html">General Counsel & Other Matters</a></li>
             </ul>
           </li>
+
           <li><a href="news.html">News & Resources</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -45,70 +45,78 @@
     </div>
   </header>
 
-  <!-- Page Content -->
   <main class="landing container" style="padding: var(--space-6) 0;">
     <h1>Probate</h1>
-    <p class="tagline">Clear steps. Steady guidance. Respect for your loved one’s wishes.</p>
+    <p class="tagline">Guidance through estate administration and court procedures.</p>
 
     <div class="info-grid">
       <article class="card-collapsible">
-        <h2>Guidance through estate administration</h2>
-        <p>
-          Losing a loved one is difficult. We help executors and families navigate probate and
-          estate administration with clarity and compassion—from Surrogate’s Court filings to
-          asset transfers and final accounting.
-        </p>
+        <h2>What we handle</h2>
         <ul class="services-list">
-          <li>Probate of Will / intestate administration</li>
-          <li>Notices to heirs and beneficiaries</li>
-          <li>Inventory, valuation, and debt resolution</li>
-          <li>Tax filings and final distributions</li>
+          <li>Probate filings and Surrogate’s Court procedures</li>
+          <li>Executor/Administrator guidance</li>
+          <li>Creditor claims and notices</li>
+          <li>Accounting and distributions</li>
+          <li>Disputes and conflict resolution</li>
         </ul>
-        <p>
-          Each matter moves at a different pace depending on assets, beneficiaries, and any
-          disputes. We’ll outline a practical timeline and keep you informed throughout.
-        </p>
       </article>
 
       <aside class="card-collapsible">
         <h2>Common questions</h2>
         <div class="faq-list">
           <details>
-            <summary>Do all estates have to go through probate?</summary>
-            <p>Not always. Small estates or assets with beneficiary designations can transfer outside probate. We’ll help you determine what’s required.</p>
-          </details>
-          <details>
             <summary>How long does probate take?</summary>
-            <p>Simple estates can wrap up in months; more complex estates may take longer. We’ll set expectations early and keep things moving.</p>
+            <p>It varies by county and complexity; we’ll set expectations at the outset.</p>
           </details>
           <details>
-            <summary>What if there’s a dispute?</summary>
-            <p>We work to resolve issues efficiently, from clarifying fiduciary duties to addressing objections, always aiming to minimize stress and cost.</p>
+            <summary>What if there’s no will?</summary>
+            <p>We assist with administration proceedings and the statutory distribution process.</p>
           </details>
         </div>
-        <p><a class="button" href="contact.html">Talk to an attorney →</a></p>
+        <p><a class="button button--accent" href="contact.html">We can help →</a></p>
       </aside>
     </div>
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <p>&copy; 2025 Weldon Law, LLC. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- Mobile Menu Script -->
   <script>
-    (function(){
+    (function () {
       const toggle = document.querySelector('.menu-toggle');
       const navList = document.getElementById('primary-navigation');
-      if (toggle && navList) {
-        toggle.addEventListener('click', () => {
-          const open = navList.classList.toggle('open');
-          toggle.setAttribute('aria-expanded', open);
-        });
-      }
+
+      toggle?.addEventListener('click', () => {
+        const open = navList.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open);
+        document.body.classList.toggle('nav-open', open);
+      });
+
+      const dropdown = document.querySelector('.dropdown');
+      const trigger = dropdown?.querySelector('.dropdown-toggle');
+
+      function isMobile() { return window.matchMedia('(max-width:768px)').matches; }
+
+      trigger?.addEventListener('click', (e) => {
+        if (isMobile()) {
+          e.preventDefault();
+          const expanded = dropdown.classList.toggle('expanded');
+          trigger.setAttribute('aria-expanded', String(expanded));
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          navList.classList.remove('open');
+          toggle?.setAttribute('aria-expanded', 'false');
+          document.body.classList.remove('nav-open');
+          dropdown?.classList.remove('expanded');
+          trigger?.setAttribute('aria-expanded', 'false');
+        }
+      });
     })();
   </script>
 </body>

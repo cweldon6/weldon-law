@@ -9,6 +9,7 @@
 </head>
 <body class="hero--copy">
 
+  <!-- Unified Header / Navigation -->
   <header class="site-header">
     <div class="container nav-container">
       <div class="logo">
@@ -21,20 +22,17 @@
           <span class="menu-icon"></span>
         </button>
         <ul class="navbar" id="primary-navigation">
-          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-              Areas of Practice
-              <span class="dropdown-arrow">▼</span>
-            </a>
+            <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Areas of Practice</a>
             <ul class="dropdown-content">
               <li><a href="practice-guardianships.html">Guardianships</a></li>
               <li><a href="practice-ltc.html">Long-Term Care Planning</a></li>
               <li><a href="practice-lp.html">Life Planning (POA/Advance Directive)</a></li>
               <li><a href="practice-legacy.html">Legacy Planning (Wills & Trusts)</a></li>
               <li><a href="practice-probate.html">Probate</a></li>
-              <li><a href="practice-general.html">General Counsel & Other Matters</a></li>
+              <li><a href="practice-general.html" aria-current="page">General Counsel & Other Matters</a></li>
             </ul>
           </li>
           <li><a href="news.html">News & Resources</a></li>
@@ -44,6 +42,7 @@
     </div>
   </header>
 
+  <!-- Page Content -->
   <main class="landing container" style="padding: var(--space-6) 0;">
     <h1>General Counsel &amp; Other Matters</h1>
     <p class="tagline">Practical advice. Steady guidance. Trusted partner.</p>
@@ -58,7 +57,7 @@
           <li>Conflict resolution and mediation</li>
           <li>Other related elder law matters</li>
         </ul>
-        <p><a class="button" href="contact.html">Get help today →</a></p>
+        <p><a class="button button--accent" href="contact.html">Get help today →</a></p>
       </div>
 
       <div class="faq-content">
@@ -77,20 +76,37 @@
     </div>
   </main>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <p>&copy; 2025 Weldon Law, LLC. All rights reserved.</p>
     </div>
   </footer>
 
+  <!-- Unified Mobile Menu Script -->
   <script>
     (function(){
       const toggle = document.querySelector('.menu-toggle');
       const navList = document.getElementById('primary-navigation');
+      const dropdownToggle = document.querySelector('.dropdown-toggle');
+
       if (toggle && navList) {
         toggle.addEventListener('click', () => {
           const open = navList.classList.toggle('open');
-          toggle.setAttribute('aria-expanded', open);
+          toggle.setAttribute('aria-expanded', String(open));
+        });
+      }
+
+      if (dropdownToggle) {
+        dropdownToggle.addEventListener('click', (e) => {
+          const isMobile = window.matchMedia('(max-width: 768px)').matches;
+          if (isMobile) {
+            e.preventDefault();
+            const dropdown = dropdownToggle.closest('.dropdown');
+            const expanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
+            dropdownToggle.setAttribute('aria-expanded', String(!expanded));
+            dropdown.classList.toggle('expanded');
+          }
         });
       }
     })();

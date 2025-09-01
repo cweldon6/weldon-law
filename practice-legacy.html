@@ -17,27 +17,28 @@
           <img src="images/WeldonLawLogoG.png" alt="Weldon Law, LLC logo" />
         </a>
       </div>
+
       <nav class="main-nav" id="nav">
         <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">
           <span class="menu-icon"></span>
         </button>
+
         <ul class="navbar" id="primary-navigation">
-          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
+
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-              Areas of Practice
-              <span class="dropdown-arrow">▼</span>
-            </a>
+            <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Areas of Practice</a>
             <ul class="dropdown-content">
               <li><a href="practice-guardianships.html">Guardianships</a></li>
               <li><a href="practice-ltc.html">Long-Term Care Planning</a></li>
               <li><a href="practice-lp.html">Life Planning (POA/Advance Directive)</a></li>
-              <li><a href="practice-legacy.html">Legacy Planning (Wills & Trusts)</a></li>
+              <li><a href="practice-legacy.html" aria-current="page">Legacy Planning (Wills & Trusts)</a></li>
               <li><a href="practice-probate.html">Probate</a></li>
               <li><a href="practice-general.html">General Counsel & Other Matters</a></li>
             </ul>
           </li>
+
           <li><a href="news.html">News & Resources</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -82,7 +83,7 @@
             <p>Whenever you have a major life change—marriage, children, divorce, or significant financial events.</p>
           </details>
         </div>
-        <p><a class="button" href="contact.html">Start planning →</a></p>
+        <p><a class="button button--accent" href="contact.html">Start planning →</a></p>
       </aside>
     </div>
   </main>
@@ -94,17 +95,40 @@
     </div>
   </footer>
 
-  <!-- Mobile Menu Script -->
+  <!-- Mobile Menu + Mobile Dropdown -->
   <script>
-    (function(){
+    (function () {
       const toggle = document.querySelector('.menu-toggle');
       const navList = document.getElementById('primary-navigation');
-      if (toggle && navList) {
-        toggle.addEventListener('click', () => {
-          const open = navList.classList.toggle('open');
-          toggle.setAttribute('aria-expanded', open);
-        });
-      }
+
+      toggle?.addEventListener('click', () => {
+        const open = navList.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open);
+        document.body.classList.toggle('nav-open', open);
+      });
+
+      const dropdown = document.querySelector('.dropdown');
+      const trigger = dropdown?.querySelector('.dropdown-toggle');
+
+      function isMobile() { return window.matchMedia('(max-width:768px)').matches; }
+
+      trigger?.addEventListener('click', (e) => {
+        if (isMobile()) {
+          e.preventDefault();
+          const expanded = dropdown.classList.toggle('expanded');
+          trigger.setAttribute('aria-expanded', String(expanded));
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          navList.classList.remove('open');
+          toggle?.setAttribute('aria-expanded', 'false');
+          document.body.classList.remove('nav-open');
+          dropdown?.classList.remove('expanded');
+          trigger?.setAttribute('aria-expanded', 'false');
+        }
+      });
     })();
   </script>
 </body>

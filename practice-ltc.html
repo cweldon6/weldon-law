@@ -4,12 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Long-Term Care Planning | Weldon Law, LLC</title>
-  <meta name="description" content="Plan for nursing home care, Medicaid eligibility, and asset protection with Weldon Law, LLC in New Jersey." />
+  <meta name="description" content="Aligning care needs with benefits and protections—Long-Term Care Planning by Weldon Law, LLC." />
   <link rel="stylesheet" href="branded-styles.css" />
 </head>
 <body class="hero--copy">
 
-  <!-- Site Header / Navigation -->
   <header class="site-header">
     <div class="container nav-container">
       <div class="logo">
@@ -17,27 +16,28 @@
           <img src="images/WeldonLawLogoG.png" alt="Weldon Law, LLC logo" />
         </a>
       </div>
+
       <nav class="main-nav" id="nav">
         <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">
           <span class="menu-icon"></span>
         </button>
+
         <ul class="navbar" id="primary-navigation">
-          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
+
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-              Areas of Practice
-              <span class="dropdown-arrow">▼</span>
-            </a>
+            <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Areas of Practice</a>
             <ul class="dropdown-content">
               <li><a href="practice-guardianships.html">Guardianships</a></li>
-              <li><a href="practice-ltc.html">Long-Term Care Planning</a></li>
+              <li><a href="practice-ltc.html" aria-current="page">Long-Term Care Planning</a></li>
               <li><a href="practice-lp.html">Life Planning (POA/Advance Directive)</a></li>
               <li><a href="practice-legacy.html">Legacy Planning (Wills & Trusts)</a></li>
               <li><a href="practice-probate.html">Probate</a></li>
               <li><a href="practice-general.html">General Counsel & Other Matters</a></li>
             </ul>
           </li>
+
           <li><a href="news.html">News & Resources</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -45,66 +45,78 @@
     </div>
   </header>
 
-  <!-- Page Content -->
   <main class="landing container" style="padding: var(--space-6) 0;">
     <h1>Long-Term Care Planning</h1>
-    <p class="tagline">Smart preparation to protect assets and ensure care when it’s needed most.</p>
+    <p class="tagline">Protecting assets while aligning care needs and benefits.</p>
 
     <div class="info-grid">
       <article class="card-collapsible">
-        <h2>Our Approach</h2>
-        <p>
-          Nursing home and assisted living costs can quickly erode a lifetime of savings. Long-term
-          care planning focuses on strategies to maintain eligibility for Medicaid while protecting
-          assets for spouses and families.
-        </p>
+        <h2>How we help</h2>
         <ul class="services-list">
-          <li>Medicaid eligibility and application assistance</li>
-          <li>Asset preservation strategies</li>
-          <li>Spousal protections</li>
-          <li>Coordination with financial and healthcare providers</li>
+          <li>Medicaid planning and guidance</li>
+          <li>Coordination with benefits and programs</li>
+          <li>Crisis planning and spend-down strategies</li>
+          <li>Care agreements and family planning</li>
         </ul>
+        <p>We map out options clearly so families can make informed decisions during transition.</p>
       </article>
 
       <aside class="card-collapsible">
-        <h2>Why act early?</h2>
-        <p>
-          Timing matters. Early planning can expand your options, reduce stress, and allow
-          for structured asset transfers within Medicaid look-back rules.
-        </p>
+        <h2>FAQs</h2>
         <div class="faq-list">
           <details>
-            <summary>What if care is already needed?</summary>
-            <p>We assist with crisis planning, identifying immediate options to protect what you can while securing care.</p>
+            <summary>When should we start planning?</summary>
+            <p>Sooner is usually better, but there are strategies even in urgent situations.</p>
           </details>
           <details>
-            <summary>Can I protect my home?</summary>
-            <p>Yes, there are strategies to preserve a primary residence for a spouse or heirs while qualifying for Medicaid.</p>
+            <summary>Do gifts always cause penalties?</summary>
+            <p>Rules are complex; we’ll evaluate your timeline and advise on best options.</p>
           </details>
         </div>
-        <p><a class="button" href="contact.html">Discuss options →</a></p>
+        <p><a class="button button--accent" href="contact.html">Talk with us →</a></p>
       </aside>
     </div>
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <p>&copy; 2025 Weldon Law, LLC. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- Mobile Menu Script -->
   <script>
-    (function(){
+    (function () {
       const toggle = document.querySelector('.menu-toggle');
       const navList = document.getElementById('primary-navigation');
-      if (toggle && navList) {
-        toggle.addEventListener('click', () => {
-          const open = navList.classList.toggle('open');
-          toggle.setAttribute('aria-expanded', open);
-        });
-      }
+
+      toggle?.addEventListener('click', () => {
+        const open = navList.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open);
+        document.body.classList.toggle('nav-open', open);
+      });
+
+      const dropdown = document.querySelector('.dropdown');
+      const trigger = dropdown?.querySelector('.dropdown-toggle');
+
+      function isMobile() { return window.matchMedia('(max-width:768px)').matches; }
+
+      trigger?.addEventListener('click', (e) => {
+        if (isMobile()) {
+          e.preventDefault();
+          const expanded = dropdown.classList.toggle('expanded');
+          trigger.setAttribute('aria-expanded', String(expanded));
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          navList.classList.remove('open');
+          toggle?.setAttribute('aria-expanded', 'false');
+          document.body.classList.remove('nav-open');
+          dropdown?.classList.remove('expanded');
+          trigger?.setAttribute('aria-expanded', 'false');
+        }
+      });
     })();
   </script>
 </body>

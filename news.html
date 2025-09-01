@@ -21,14 +21,11 @@
         <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">
           <span class="menu-icon"></span>
         </button>
-       <ul class="navbar" id="primary-navigation">
-          <li><a href="index.html" aria-current="page">Home</a></li>
+        <ul class="navbar" id="primary-navigation">
+          <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-              Areas of Practice
-              <span class="dropdown-arrow">▼</span>
-            </a>
+            <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Areas of Practice</a>
             <ul class="dropdown-content">
               <li><a href="practice-guardianships.html">Guardianships</a></li>
               <li><a href="practice-ltc.html">Long-Term Care Planning</a></li>
@@ -38,7 +35,7 @@
               <li><a href="practice-general.html">General Counsel & Other Matters</a></li>
             </ul>
           </li>
-          <li><a href="news.html">News & Resources</a></li>
+          <li><a href="news.html" aria-current="page">News & Resources</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
@@ -51,7 +48,6 @@
     <p class="tagline">Updates, guides, and practical notes for New Jersey families.</p>
 
     <div class="info-grid">
-      <!-- Coming Soon / Under Construction marker -->
       <article class="card-collapsible" role="status" aria-live="polite">
         <h2>🚧 Coming soon</h2>
         <p>
@@ -68,7 +64,6 @@
         <p class="small-subtext">Last updated: <time datetime="2025-09-01">Sep 2025</time></p>
       </article>
 
-      <!-- Simple “Stay in the loop” / contact CTA -->
       <aside class="card-collapsible">
         <h2>Stay in the loop</h2>
         <p>
@@ -85,65 +80,40 @@
     </div>
   </main>
 
-  <!-- Unified Footer -->
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <p>&copy; 2025 Weldon Law, LLC. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- Minimal mobile menu script (same as other pages) -->
+  <!-- Unified Mobile Menu Script -->
   <script>
     (function(){
       const toggle = document.querySelector('.menu-toggle');
       const navList = document.getElementById('primary-navigation');
+      const dropdownToggle = document.querySelector('.dropdown-toggle');
+
       if (toggle && navList) {
         toggle.addEventListener('click', () => {
           const open = navList.classList.toggle('open');
           toggle.setAttribute('aria-expanded', open);
         });
       }
+
+      if (dropdownToggle) {
+        dropdownToggle.addEventListener('click', (e) => {
+          const isMobile = window.matchMedia('(max-width: 768px)').matches;
+          if (isMobile) {
+            e.preventDefault();
+            const dropdown = dropdownToggle.closest('.dropdown');
+            const expanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
+            dropdownToggle.setAttribute('aria-expanded', String(!expanded));
+            dropdown.classList.toggle('expanded');
+          }
+        });
+      }
     })();
   </script>
-  <script>
-(function(){
-  const toggle = document.querySelector('.menu-toggle');
-  const navList = document.getElementById('primary-navigation');
-
-  // Hamburger open/close
-  if (toggle && navList) {
-    toggle.addEventListener('click', () => {
-      const open = navList.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-  }
-
-  // Mobile dropdown: tap "Areas of Practice" to expand
-  const ddToggle = document.querySelector('.dropdown > .dropdown-toggle');
-  const dropdown = ddToggle?.closest('.dropdown');
-
-  function isMobile(){ return window.matchMedia('(max-width: 768px)').matches; }
-
-  if (ddToggle && dropdown) {
-    ddToggle.addEventListener('click', (e) => {
-      if (isMobile()) {
-        e.preventDefault();
-        const expanded = dropdown.classList.toggle('expanded');
-        ddToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-      }
-    });
-
-    // Also allow keyboard activation
-    ddToggle.addEventListener('keydown', (e) => {
-      if (isMobile() && (e.key === 'Enter' || e.key === ' ')) {
-        e.preventDefault();
-        const expanded = dropdown.classList.toggle('expanded');
-        ddToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-      }
-    });
-  }
-})();
-</script>
-
 </body>
 </html>

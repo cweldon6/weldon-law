@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Life Planning (POA & Advance Directive) | Weldon Law, LLC</title>
-  <meta name="description" content="Practical, clear Life Planning: Powers of Attorney and Advance Directives to protect your in-life decision-making with Weldon Law, LLC in New Jersey." />
+  <title>Life Planning (POA/Advance Directive) | Weldon Law, LLC</title>
+  <meta name="description" content="Power of Attorney and Advance Directive planning with Weldon Law, LLC." />
   <link rel="stylesheet" href="branded-styles.css" />
 </head>
 <body class="hero--copy">
 
-  <!-- Site Header / Navigation -->
   <header class="site-header">
     <div class="container nav-container">
       <div class="logo">
@@ -17,27 +16,28 @@
           <img src="images/WeldonLawLogoG.png" alt="Weldon Law, LLC logo" />
         </a>
       </div>
+
       <nav class="main-nav" id="nav">
         <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">
           <span class="menu-icon"></span>
         </button>
+
         <ul class="navbar" id="primary-navigation">
-          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
+
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-              Areas of Practice
-              <span class="dropdown-arrow">▼</span>
-            </a>
+            <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Areas of Practice</a>
             <ul class="dropdown-content">
               <li><a href="practice-guardianships.html">Guardianships</a></li>
               <li><a href="practice-ltc.html">Long-Term Care Planning</a></li>
-              <li><a href="practice-lp.html">Life Planning (POA/Advance Directive)</a></li>
+              <li><a href="practice-lp.html" aria-current="page">Life Planning (POA/Advance Directive)</a></li>
               <li><a href="practice-legacy.html">Legacy Planning (Wills & Trusts)</a></li>
               <li><a href="practice-probate.html">Probate</a></li>
               <li><a href="practice-general.html">General Counsel & Other Matters</a></li>
             </ul>
           </li>
+
           <li><a href="news.html">News & Resources</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -45,66 +45,78 @@
     </div>
   </header>
 
-  <!-- Page Content -->
   <main class="landing container" style="padding: var(--space-6) 0;">
-    <h1>Life Planning (POA &amp; Advance Directive)</h1>
-    <p class="tagline">Authority and clarity—so decisions can be made when they’re needed most.</p>
+    <h1>Life Planning (POA/Advance Directive)</h1>
+    <p class="tagline">Clear documents now prevent stressful decisions later.</p>
 
     <div class="info-grid">
       <article class="card-collapsible">
-        <h2>What is Life Planning?</h2>
-        <p>
-          Life Planning puts in-life decision-making tools in place—so if you can’t act,
-          the right person can help you immediately, without court delays.
-        </p>
+        <h2>What we prepare</h2>
         <ul class="services-list">
-          <li>Durable Financial Power of Attorney</li>
-          <li>Healthcare Power of Attorney / Proxy</li>
-          <li>Advance Directive / Living Will</li>
-          <li>HIPAA Authorization</li>
+          <li>Durable Power of Attorney</li>
+          <li>Advance Directive / Health Care Proxy</li>
+          <li>HIPAA releases</li>
+          <li>Care preferences and guidance</li>
         </ul>
-        <p>Documents are tailored to your preferences and coordinated with your financial and medical providers where appropriate.</p>
+        <p>We explain the options in plain language and tailor the documents to your needs.</p>
       </article>
 
       <aside class="card-collapsible">
-        <h2>Why it matters</h2>
-        <p>
-          Properly executed POA and healthcare directives can avoid guardianship,
-          reduce family conflict, and ensure your wishes are followed.
-        </p>
+        <h2>Common questions</h2>
         <div class="faq-list">
           <details>
             <summary>Who should be my agent?</summary>
-            <p>Choose someone you trust, who is organized, and who is willing to follow your instructions.</p>
+            <p>Choose someone you trust who can act calmly and in your best interest.</p>
           </details>
           <details>
-            <summary>Can I limit powers?</summary>
-            <p>Yes—powers can be tailored, springing, or time-limited based on your needs.</p>
+            <summary>Do these documents expire?</summary>
+            <p>They remain valid unless revoked; we recommend reviewing them every few years.</p>
           </details>
         </div>
-        <p><a class="button" href="contact.html">Get started →</a></p>
+        <p><a class="button button--accent" href="contact.html">Get started →</a></p>
       </aside>
     </div>
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <p>&copy; 2025 Weldon Law, LLC. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- Mobile Menu Script -->
   <script>
-    (function(){
+    (function () {
       const toggle = document.querySelector('.menu-toggle');
       const navList = document.getElementById('primary-navigation');
-      if (toggle && navList) {
-        toggle.addEventListener('click', () => {
-          const open = navList.classList.toggle('open');
-          toggle.setAttribute('aria-expanded', open);
-        });
-      }
+
+      toggle?.addEventListener('click', () => {
+        const open = navList.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open);
+        document.body.classList.toggle('nav-open', open);
+      });
+
+      const dropdown = document.querySelector('.dropdown');
+      const trigger = dropdown?.querySelector('.dropdown-toggle');
+
+      function isMobile() { return window.matchMedia('(max-width:768px)').matches; }
+
+      trigger?.addEventListener('click', (e) => {
+        if (isMobile()) {
+          e.preventDefault();
+          const expanded = dropdown.classList.toggle('expanded');
+          trigger.setAttribute('aria-expanded', String(expanded));
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          navList.classList.remove('open');
+          toggle?.setAttribute('aria-expanded', 'false');
+          document.body.classList.remove('nav-open');
+          dropdown?.classList.remove('expanded');
+          trigger?.setAttribute('aria-expanded', 'false');
+        }
+      });
     })();
   </script>
 </body>
