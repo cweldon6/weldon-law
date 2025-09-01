@@ -11,32 +11,43 @@
 <header class="site-header">
   <div class="container nav-container">
     <div class="logo">
-      <a href="index.html"><img src="images/WeldonLawLogoG.png" alt="Weldon Law logo" /></a>
+      <a href="index.html">
+        <img src="images/WeldonLawLogoG.png" alt="Weldon Law logo" />
+      </a>
     </div>
+
     <nav class="main-nav" id="nav">
       <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">
         <span class="menu-icon"></span>
       </button>
+
       <ul class="navbar" id="primary-navigation">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html" aria-current="page">About</a></li>
+
         <li class="dropdown">
-          <a href="#" aria-haspopup="true" aria-expanded="false">Areas of Practice</a>
+          <!-- IMPORTANT: class="dropdown-toggle" + arrow -->
+          <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Areas of Practice <span class="dropdown-arrow">▾</span>
+          </a>
           <ul class="dropdown-content">
             <li><a href="practice-guardianships.html">Guardianships</a></li>
             <li><a href="practice-ltc.html">Long-Term Care Planning</a></li>
-            <li><a href="practi ce-lp.html">Life Planning (POA/Advance Directive)</a></li>
-            <li><a href="practice-legacy.html">Legacy Planning (Wills & Trusts)</a></li>
+            <!-- fixed the space/typo here -->
+            <li><a href="practice-lp.html">Life Planning (POA/Advance Directive)</a></li>
+            <li><a href="practice-legacy.html">Legacy Planning (Wills &amp; Trusts)</a></li>
             <li><a href="practice-probate.html">Probate</a></li>
-            <li><a href="practice-general.html">General Counsel & Other Matters</a></li>
+            <li><a href="practice-general.html">General Counsel &amp; Other Matters</a></li>
           </ul>
         </li>
-        <li><a href="news.html">News & Resources</a></li>
+
+        <li><a href="news.html">News &amp; Resources</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </div>
 </header>
+
 
 <main class="landing">
   <!-- Hero Section with Rotator -->
@@ -67,92 +78,75 @@
     </div>
   </section>
 
-  <section class="bio-section-enhanced">
+  <!-- Bio (same pattern as Home) -->
+<section class="about-bio">
   <div class="container">
-    <div class="about-snippet-enhanced">
-      <div class="bio-content">
-        <img src="images/christopher-weldon-headshot2.jpg" 
-             alt="Portrait of Christopher R. Weldon, Esquire" 
-             class="bio-image-enhanced" width="250" height="250" loading="lazy" />
-
-        <div class="bio-text">
-          <p><strong>Christopher R. Weldon, Esquire</strong>&mdash;founder of Weldon Law&mdash;has dedicated his legal career to advocating for vulnerable individuals and those who support them. He focuses on guardianship, life &amp; legacy planning, long-term care preparation, probate matters, and other related elder law issues.</p>
-
-          <p>With more than a decade of elder law experience and involvement in over 1,000 guardianship and fiduciary matters, Chris is recognized for his compassionate approach and commitment to resolving conflict efficiently. His background includes service as a State Regulatory Attorney, advocacy to improve elder care and guardianship laws, and a history of implementing practical, streamlined solutions.</p>
-
-          <p>Chris earned his Juris Doctor from Widener University&mdash;Delaware Law School and holds a Bachelor of Science in Business Administration from William Paterson University. Admitted to the New Jersey Bar in 2015, he is committed to making complex legal matters understandable and helping clients navigate important decisions with confidence.</p>
-
-          <p>His approach combines traditional legal expertise with strategic use of technology, thoughtfully implementing digital workflows and organizational systems that reduce administrative burden while ensuring each matter receives dedicated personal attention.</p>
-        </div>
+    <div class="about-snippet">
+      <img src="images/christopher-weldon-headshot2.jpeg"
+           alt="Portrait of Christopher R. Weldon, Esquire"
+           class="bio-image" width="250" height="250" loading="lazy">
+      <div class="bio-text">
+        <p><strong>Christopher R. Weldon, Esquire</strong>—founder of Weldon Law—has dedicated his legal career to advocating for vulnerable individuals and those who support them. He focuses on guardianship, life &amp; legacy planning, long-term care preparation, probate matters, and other related elder law issues.</p>
+        <p>With more than a decade of elder law experience and involvement in over 1,000 guardianship and fiduciary matters, Chris is recognized for his compassionate approach and commitment to resolving conflict efficiently. His background includes service as a State Regulatory Attorney, advocacy to improve elder care and guardianship laws, and a history of implementing practical, streamlined solutions.</p>
+        <p>Chris earned his Juris Doctor from Widener University—Delaware Law School and holds a Bachelor of Science in Business Administration from William Paterson University. Admitted to the New Jersey Bar in 2015, he is committed to making complex legal matters understandable and helping clients navigate important decisions with confidence.</p>
+        <p>His approach combines traditional legal expertise with strategic use of technology, thoughtfully implementing digital workflows and organizational systems that reduce administrative burden while ensuring each matter receives dedicated personal attention.</p>
       </div>
     </div>
   </div>
 </section>
 
-  <!-- Philosophy & Community Section with Accent Background -->
-  <section class="philosophy-community-section">
-    <div class="container">
-      <div class="philosophy-community-grid">
-        <div class="philosophy-card">
-          <h2>Philosophy</h2>
-          <p>Every elder law matter involves both legal complexity and deeply personal family dynamics. Chris takes time to understand not only the legal requirements but also each client's unique needs and goals. His philosophy is simple: provide clear, compassionate counsel that protects dignity and preserves independence, while ensuring families feel supported throughout the process.</p>
-        </div>
+<!-- Cards row 1 -->
+<section class="about-cards">
+  <div class="container">
+    <div class="info-grid">
+      <article class="card-collapsible" style="border-left-color: var(--color-accent);">
+        <h2>Community Involvement</h2>
+        <p>Chris remains actively engaged in community education and professional service. He has delivered presentations on guardianship law and elder care issues, contributed to legislative initiatives, and participates in local bar association activities to strengthen advocacy for New Jersey’s aging population.</p>
+        <ul>
+          <li>Legislative advocacy for elder care reform</li>
+          <li>Community education on guardianship laws</li>
+          <li>Professional development presentations</li>
+          <li>Local bar association involvement</li>
+        </ul>
+      </article>
 
-        <div class="community-card">
-          <h2>Community Involvement</h2>
-          <p>Chris remains actively engaged in community education and professional service. He has delivered presentations on guardianship law and elder care issues, contributed to legislative initiatives, and participates in local bar association activities to strengthen advocacy for New Jersey's aging population.</p>
-          <ul class="involvement-list">
-            <li>Legislative advocacy for elder care reform</li>
-            <li>Community education on guardianship laws</li>
-            <li>Professional development presentations</li>
-            <li>Local bar association involvement</li>
-          </ul>
-        </div>
-      </div>
+      <article class="card-collapsible">
+        <h2>Professional Experience</h2>
+        <p>Chris has been involved in more than 1,000 guardianship and fiduciary matters across New Jersey courts, bringing deep knowledge of healthcare regulations, benefit programs, and the legal/financial issues families face in later life.</p>
+        <ul>
+          <li>Former State Regulatory Attorney</li>
+          <li>Advocacy for elder care and guardianship reform</li>
+          <li>Presentations to judicial and professional audiences</li>
+          <li>Proven record in conflict resolution and efficient case management</li>
+        </ul>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Professional Background Section with Subtle Pattern -->
-  <section class="professional-section">
-    <div class="container">
-      <div class="professional-grid">
-        <div class="experience-card">
-          <h2>Professional Experience</h2>
-          <p>Chris has been involved in more than 1,000 guardianship and fiduciary matters across New Jersey courts, bringing deep knowledge of healthcare regulations, benefit programs, and the legal/financial issues families face in later life.</p>
-          <ul class="experience-list">
-            <li>Former State Regulatory Attorney</li>
-            <li>Advocacy for elder care and guardianship reform</li>
-            <li>Presentations to judicial and professional audiences</li>
-            <li>Proven record in conflict resolution and efficient case management</li>
-          </ul>
-        </div>
+<!-- Cards row 2 -->
+<section class="about-cards">
+  <div class="container">
+    <div class="info-grid">
+      <article class="card-collapsible">
+        <h2>Education &amp; Credentials</h2>
+        <ul>
+          <li>Juris Doctor, Widener University – Delaware Law School</li>
+          <li>B.S. in Business Administration, William Paterson University</li>
+          <li>Licensed to practice law in New Jersey (admitted 2015)</li>
+          <li>Member, New Jersey State Bar Association</li>
+        </ul>
+      </article>
 
-        <div class="credentials-card">
-          <h2>Education & Credentials</h2>
-          <ul class="credentials-list">
-            <li>Juris Doctor, Widener University &ndash; Delaware Law School</li>
-            <li>B.S. in Business Administration, William Paterson University</li>
-            <li>Licensed to practice law in New Jersey (admitted 2015)</li>
-            <li>Member, New Jersey State Bar Association</li>
-          </ul>
-        </div>
-      </div>
+      <article class="card-collapsible">
+        <h2>Ready to Get Started?</h2>
+        <p>Contact Weldon Law today to discuss your guardianship, estate planning, or elder law needs. We’ll reply promptly with next steps.</p>
+        <a href="contact.html" class="btn btn--accent">Get in touch →</a>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Contact CTA Section with Background -->
-  <section class="cta-section">
-    <div class="cta-section__overlay"></div>
-    <div class="container cta-content">
-      <h2>Ready to Get Started?</h2>
-      <p>Contact Weldon Law today to discuss your guardianship, estate planning, or elder law needs.</p>
-      <div class="cta-buttons">
-        <a href="contact.html" class="btn btn--outline-white">Get in Touch</a>
-        <a class="btn btn--accent" href="tel:+18568902944">(856) 890-2944</a>
-      </div>
-    </div>
-  </section>
-</main>
 
 <footer class="site-footer">
   <div class="container">

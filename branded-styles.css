@@ -675,3 +675,152 @@ button[type="submit"]:hover{ filter:brightness(1.05); }
 
   /* if your CTA bar has a different height, adjust 56px accordingly */
 }
+
+/* Contact page: accent submit + comfy bottom gap */
+.page-contact .form-section button[type="submit"]{
+  background: var(--color-accent);
+  color: #fff;
+  border: 0;
+}
+.page-contact .form-section button[type="submit"]:hover{
+  filter: brightness(.95);
+}
+
+/* Give the content some breathing room above the footer */
+.page-contact .landing{
+  padding-bottom: var(--space-6); /* adjust to taste: space-5..space-7 */
+}
+
+/* ===== About page: bio layout (match Home) ===== */
+.about-bio { padding-block: var(--space-4); }
+@media (min-width: 768px){ .about-bio { padding-block: var(--space-5); } }
+
+.about-bio .about-snippet { max-width: var(--max-width); margin: 0 auto; }
+.about-bio .about-snippet::after { content:""; display:block; clear:both; }
+
+/* Float-left headshot, text wraps nicely */
+.about-bio .bio-image {
+  float: left;
+  width: clamp(180px, 22vw, 280px);
+  height: auto;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  margin: 0 var(--space-5) var(--space-4) 0;
+}
+@media (min-width: 900px){ .about-bio .bio-image { margin-top: .15rem; } } /* baseline nudge */
+@media (max-width: 600px){
+  .about-bio .bio-image { float:none; display:block; margin:0 auto var(--space-3); width:min(72%,260px); }
+}
+.about-bio .bio-text p { margin: 0 0 var(--space-3); hyphens: none; }
+
+/* ===== About page: cards (reuse home card style) ===== */
+/* Wrap each “row” of cards exactly like Home */
+.about-cards { padding-block: var(--space-4); }
+.about-cards + .about-cards { padding-top: var(--space-2); }
+
+.about-cards .info-grid { gap: var(--space-2); padding: var(--space-1) 0; }
+.about-cards .card-collapsible {
+  display:flex; flex-direction:column; align-items:flex-start; height:100%;
+  padding: var(--space-5);
+}
+.about-cards .card-collapsible h2 { margin:0 0 var(--space-3); }
+
+/* Make rows align nicely on desktop */
+@media (min-width: 900px){
+  .about-cards .card-collapsible { min-height: 340px; }
+}
+@media (min-width: 1200px){
+  .about-cards .card-collapsible { min-height: 360px; }
+}
+
+/* CTA button style inside a card */
+.btn--accent {
+  background: var(--color-accent);
+  color: #fff;
+  border: 0;
+}
+.btn--accent:hover { filter: brightness(.95); }
+
+/* === About page hero (match Home rotator rules) === */
+
+/* same soft band + spacing as Home */
+.hero-about{
+  position: relative;
+  background:
+    radial-gradient(1100px 400px at 85% 0%, color-mix(in oklab, var(--color-accent) 8%, transparent) 0%, transparent 55%),
+    radial-gradient(900px 360px at 10% 100%, color-mix(in oklab, var(--color-primary) 6%, transparent) 0%, transparent 55%),
+    var(--color-bg-soft);
+  padding: var(--space-4) 0;
+}
+
+/* center the rotator content exactly like Home */
+.hero-about__content.hero-rotator{
+  width: min(90%, var(--max-width));
+  margin-inline: auto;
+  text-align: center;
+  position: relative;
+}
+
+/* match Home heading/sub spacings */
+.hero-about .hero-line{
+  margin: 0 0 .25rem 0;
+  line-height: var(--lh-tight);
+}
+.hero-about .hero-sub{
+  margin: 0;
+  max-width: 56ch;
+  margin-inline: auto;
+  hyphens: none; -webkit-hyphens: none; -ms-hyphens: none;
+}
+
+/* use the same arrows container rules as Home */
+.hero-about .hero-controls{
+  position: absolute;
+  top: 50%; left: 0; right: 0;
+  transform: translateY(-50%);
+  display: flex; justify-content: space-between; align-items: center;
+  pointer-events: none; padding: 0 var(--space-2);
+}
+.hero-about .hero-controls button{
+  width: 2.25rem; height: 2.25rem; display: grid; place-items: center;
+  border: 1px solid var(--color-primary);
+  background: rgba(44,53,57,.9); backdrop-filter: blur(8px);
+  border-radius: 50%; font-size: 1.25rem; line-height: 1;
+  cursor: pointer; pointer-events: auto; transition: all .2s ease;
+  color: #fff; font-weight: 300; box-shadow: 0 2px 8px rgba(44,53,57,.15);
+}
+.hero-about .hero-controls button:hover{
+  background: var(--color-primary); border-color: var(--color-primary);
+  transform: scale(1.05); box-shadow: 0 4px 12px rgba(44,53,57,.25);
+}
+.hero-about .hero-controls button:active{ transform: scale(.98); }
+.hero-about .hero-controls button:focus-visible{
+  outline: 2px solid rgba(255,255,255,.8); outline-offset: 2px;
+}
+
+/* fade class already used by your JS */
+.hero-about .hero-rotator.is-fading .hero-line,
+.hero-about .hero-rotator.is-fading .hero-sub{ opacity: 0; transition: opacity .45s ease; }
+
+/* hide arrows on mobile—same as Home */
+@media (max-width: 768px){
+  .hero-about .hero-controls{ display: none !important; }
+}
+
+/* Prevent the desktop nav list from becoming a scrollable box */
+.site-header .navbar {
+  overflow: visible !important;   /* don’t show scrollbars */
+  white-space: nowrap;            /* keep items on one line */
+  max-height: none !important;    /* make sure no stray height limits */
+}
+
+/* Belt-and-suspenders: hide legacy WebKit scrollbar buttons if any */
+.site-header .navbar::-webkit-scrollbar,
+.site-header .navbar::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Ensure dropdown menu doesn’t inherit nowrap from the parent list */
+.site-header .navbar .dropdown-content {
+  white-space: normal;
+}

@@ -1,40 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Legacy Planning (Wills & Trusts) | Weldon Law, LLC</title>
-<meta name="description" content="Wills and trusts to direct your estate and preserve your intent for loved ones." />
-<link rel="stylesheet" href="branded-styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Legacy Planning (Wills & Trusts) | Weldon Law, LLC</title>
+  <meta name="description" content="Legacy planning, wills, and trusts guidance from Weldon Law, LLC in New Jersey." />
+  <link rel="stylesheet" href="branded-styles.css" />
 </head>
 <body class="hero--copy">
-<header class="site-header">...<!-- same header/nav --></header>
-<main class="landing container" style="padding: var(--space-6) 0;">
-<h1>Legacy Planning (Wills &amp; Trusts)</h1>
-<p class="tagline">Direct your estate and preserve your intent for loved ones.</p>
 
+  <!-- Site Header / Navigation -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="images/WeldonLawLogoG.png" alt="Weldon Law, LLC logo" />
+        </a>
+      </div>
+      <nav class="main-nav" id="nav">
+        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">
+          <span class="menu-icon"></span>
+        </button>
+        <ul class="navbar" id="primary-navigation">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li class="dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Areas of Practice</a>
+            <ul class="dropdown-content">
+              <li><a href="practice-guardianships.html">Guardianships</a></li>
+              <li><a href="practice-ltc.html">Long-Term Care Planning</a></li>
+              <li><a href="practice-lp.html">Life Planning (POA/Advance Directive)</a></li>
+              <li><a href="practice-legacy.html" aria-current="page">Legacy Planning (Wills & Trusts)</a></li>
+              <li><a href="practice-probate.html">Probate</a></li>
+              <li><a href="practice-general.html">General Counsel & Other Matters</a></li>
+            </ul>
+          </li>
+          <li><a href="news.html">News & Resources</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-<div class="info-grid">
-<div>
-<h2>Core Components</h2>
-<ul class="services-list">
-<li>Last Will &amp; Testament; guardians for minors</li>
-<li>Revocable living trusts; special‑needs trusts</li>
-<li>Beneficiary designations and asset titling</li>
-<li>Coordination with POA/health directives</li>
-</ul>
-<p><a class="button" href="contact.html">Map your legacy →</a></p>
-</div>
-<div class="faq-content">
-<h2>FAQs</h2>
-<div class="faq-list">
-<details><summary>Do I need a trust?</summary><p>Not always. We evaluate probate goals, beneficiaries, and asset mix to recommend the right structure.</p></details>
-<details><summary>How often should I update?</summary><p>Major life events, law changes, or every 3–5 years.</p></details>
-</div>
-</div>
-</div>
-</main>
-<footer class="site-footer">...<!-- same footer --></footer>
-<script>/* menu toggle */</script>
+  <!-- Page Content -->
+  <main class="landing container" style="padding: var(--space-6) 0;">
+    <h1>Legacy Planning (Wills &amp; Trusts)</h1>
+    <p class="tagline">Protect your family. Preserve your wishes. Plan with confidence.</p>
+
+    <div class="info-grid">
+      <article class="card-collapsible">
+        <h2>Wills &amp; Trusts</h2>
+        <p>
+          A thoughtful estate plan ensures that your assets are distributed according to your wishes
+          and that your loved ones are supported. We create customized wills and trusts to fit
+          individual needs and family goals.
+        </p>
+        <ul class="services-list">
+          <li>Simple and complex wills</li>
+          <li>Revocable and irrevocable trusts</li>
+          <li>Special needs planning</li>
+          <li>Charitable giving strategies</li>
+        </ul>
+      </article>
+
+      <aside class="card-collapsible">
+        <h2>Why plan now?</h2>
+        <p>
+          Legacy planning is not just about wealth. It’s about clarity, avoiding disputes, and protecting
+          the people who matter most. Starting early means your plan evolves as your family grows.
+        </p>
+        <div class="faq-list">
+          <details>
+            <summary>Do I need a trust?</summary>
+            <p>Not everyone needs a trust, but many benefit from one for efficiency, privacy, or special planning.</p>
+          </details>
+          <details>
+            <summary>How often should I update my will?</summary>
+            <p>Whenever you have a major life change—marriage, children, divorce, or significant financial events.</p>
+          </details>
+        </div>
+        <p><a class="button" href="contact.html">Start planning →</a></p>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 Weldon Law, LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Mobile Menu Script -->
+  <script>
+    (function(){
+      const toggle = document.querySelector('.menu-toggle');
+      const navList = document.getElementById('primary-navigation');
+      if (toggle && navList) {
+        toggle.addEventListener('click', () => {
+          const open = navList.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', open);
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

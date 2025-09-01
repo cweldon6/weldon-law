@@ -6,39 +6,43 @@
   <title>Contact Weldon Law, LLC | Schedule a Consultation</title>
   <meta name="description" content="Get in touch with Weldon Law, LLC to discuss guardianship, estate planning, probate, and long-term care planning matters in New Jersey." />
   <link rel="stylesheet" href="branded-styles.css" />
+
+  <!-- Page-scoped tweaks (only for contact page) -->
+  <style>
+    /* Hide both quick-CTA bars on Contact */
+    .page-contact .top-cta,
+    .page-contact .intake-stick__mobilebar { display: none !important; }
+
+    /* Remove bottom padding reserved for the desktop intake footer on other pages */
+    @media (min-width: 1024px) {
+      .page-contact { padding-bottom: 0 !important; }
+    }
+  </style>
 </head>
-<body class="hero--copy">
 
-  <!-- Top utility CTA bar -->
-  <section class="top-cta" role="region" aria-label="Quick contact">
-    <div class="container top-cta__inner">
-      <div class="top-cta__prompt">
-        <strong>Have a question?</strong> Start here and we’ll get back to you quickly.
-      </div>
-      <div class="top-cta__actions">
-        <!-- On mobile: opens intake sheet; on desktop: scrolls to form -->
-        <a href="#intakeSheet" class="btn btn--outline" id="ctaGetHelp">Get help now →</a>
-        <a class="btn btn--phone" href="tel:+18568902944" aria-label="Call Weldon Law at (856) 890-2944">
-          (856) 890-2944
-        </a>
-      </div>
-    </div>
-  </section>
-
+<body class="hero--copy page-contact">
+  <!-- Header (same structure/behavior as Home) -->
   <header class="site-header">
     <div class="container nav-container">
       <div class="logo">
         <a href="index.html">
-          <img src="images/WeldonLawLogoG.png" alt="Weldon Law, LLC logo" />
+          <img src="images/WeldonLawLogoG.png" alt="Weldon Law logo">
         </a>
       </div>
+
       <nav class="main-nav" id="nav">
-        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">&#9776;</button>
+        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">
+          <span class="menu-icon"></span>
+        </button>
+
         <ul class="navbar" id="primary-navigation">
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li class="dropdown">
-            <a href="#" aria-haspopup="true" aria-expanded="false">Areas of Practice</a>
+            <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+              Areas of Practice
+              <span class="dropdown-arrow">▼</span>
+            </a>
             <ul class="dropdown-content">
               <li><a href="practice-guardianships.html">Guardianships</a></li>
               <li><a href="practice-ltc.html">Long-Term Care Planning</a></li>
@@ -55,61 +59,7 @@
     </div>
   </header>
 
-  <!-- Sticky Intake Banner (mobile only on this page) -->
-  <section class="intake-stick" role="complementary" aria-label="Quick intake">
-    <div class="intake-stick__mobilebar" aria-hidden="false">
-      <a href="#intakeSheet" class="intake-stick__cta" id="openIntakeMobile" role="button" aria-controls="intakeSheet" aria-expanded="false">
-        Get help now →
-      </a>
-    </div>
-
-    <!-- Mobile sheet -->
-    <div class="intake-sheet" id="intakeSheet" aria-hidden="true" aria-modal="true" role="dialog" aria-label="Intake form">
-      <div class="intake-sheet__panel" role="document">
-        <button class="intake-sheet__close" id="closeIntakeMobile" aria-label="Close">✕</button>
-
-        <h2>How can we help?</h2>
-        <form id="intakeFormStickyMobile" novalidate>
-          <input type="hidden" name="siteKey" value="WL5616!SecureKey" />
-          <input type="text" name="company" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
-
-          <div class="intake-form__row intake-form__row--split">
-            <div>
-              <label for="sm-first-name">First name*</label>
-              <input id="sm-first-name" name="first-name" autocomplete="given-name" required />
-            </div>
-            <div>
-              <label for="sm-last-name">Last name*</label>
-              <input id="sm-last-name" name="last-name" autocomplete="family-name" required />
-            </div>
-          </div>
-
-          <label for="sm-email">Email*</label>
-          <input id="sm-email" name="email" type="email" autocomplete="email" required />
-
-          <label for="sm-phone">Phone</label>
-          <input id="sm-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" />
-
-          <label for="sm-interest">Type of matter</label>
-          <select id="sm-interest" name="interest">
-            <option value="">-- Please Select --</option>
-            <option value="guardianship">Guardianship</option>
-            <option value="ltc">Long-Term Care Planning</option>
-            <option value="estate">Estate Planning</option>
-            <option value="probate">Probate</option>
-            <option value="other">Other</option>
-          </select>
-
-          <label for="sm-message">Brief summary</label>
-          <textarea id="sm-message" name="message" rows="5" placeholder="Please describe your situation briefly..."></textarea>
-
-          <button type="submit">Submit</button>
-          <div id="sm-status" class="success-inline hidden" role="status" aria-live="polite"></div>
-          <div id="sm-error" class="error-inline hidden" role="alert"></div>
-        </form>
-      </div>
-    </div>
-  </section>
+  <!-- No top-cta / no mobile sticky CTA on Contact -->
 
   <main class="landing">
     <div class="container landing-layout">
@@ -125,40 +75,58 @@
         <h2>Send a Message</h2>
 
         <form id="intakeFormContact" novalidate>
+          <!-- Security fields -->
           <input type="hidden" name="siteKey" value="WL5616!SecureKey" />
           <input type="text" name="company" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
           <div class="form-row">
-            <div>
+            <div class="form-field">
               <label for="first-name">First Name</label>
               <input type="text" id="first-name" name="first-name" autocomplete="given-name" required>
+              <div class="field-error" role="alert" aria-live="polite"></div>
             </div>
-            <div>
+            <div class="form-field">
               <label for="last-name">Last Name</label>
               <input type="text" id="last-name" name="last-name" autocomplete="family-name" required>
+              <div class="field-error" role="alert" aria-live="polite"></div>
             </div>
           </div>
 
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" autocomplete="email" required>
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+            <div class="field-error" role="alert" aria-live="polite"></div>
+          </div>
 
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel-national">
+          <div class="form-field">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel-national">
+            <div class="field-error" role="alert" aria-live="polite"></div>
+          </div>
 
-          <label for="interest">Type of Matter</label>
-          <select id="interest" name="interest">
-            <option value="">-- Please Select --</option>
-            <option value="guardianship">Guardianship</option>
-            <option value="ltc">Long-Term Care Planning</option>
-            <option value="estate">Estate Planning</option>
-            <option value="probate">Probate</option>
-            <option value="other">Other</option>
-          </select>
+          <div class="form-field">
+            <label for="interest">Type of Matter</label>
+            <select id="interest" name="interest">
+              <option value="">-- Please Select --</option>
+              <option value="guardianship">Guardianship</option>
+              <option value="ltc">Long-Term Care Planning</option>
+              <option value="estate">Estate Planning</option>
+              <option value="probate">Probate</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
 
-          <label for="message">Brief Summary</label>
-          <textarea id="message" name="message" rows="5" placeholder="Please describe your situation briefly..."></textarea>
+          <div class="form-field">
+            <label for="message">Brief Summary</label>
+            <textarea id="message" name="message" rows="5" placeholder="Please describe your situation briefly..."></textarea>
+            <div class="field-error" role="alert" aria-live="polite"></div>
+          </div>
 
-          <button type="submit">Submit</button>
+          <button type="submit">
+            <span class="btn-text">Submit</span>
+            <span class="btn-loading hidden" aria-hidden="true">Sending...</span>
+          </button>
+
           <div id="contact-status" class="success-inline hidden" role="status" aria-live="polite"></div>
           <div id="contact-error" class="error-inline hidden" role="alert"></div>
         </form>
@@ -172,125 +140,219 @@
     </div>
   </footer>
 
-  <!-- Page script -->
+  <!-- JS (shares the same nav & form patterns as Home) -->
   <script>
-  const FLOW_URL = "https://prod-121.westus.logic.azure.com:443/workflows/2fd109379c324cd5bbab1546b34dca3c/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=GH5F3oVR83EzQ2fzn0l0yUzqs9bmVpHFZP0D0lJgBV8";
+    // Config
+    const FLOW_URL = "https://prod-121.westus.logic.azure.com:443/workflows/2fd109379c324cd5bbab1546b34dca3c/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=GH5F3oVR83EzQ2fzn0l0yUzqs9bmVpHFZP0D0lJgBV8";
 
-  (function(){
-    const toggle = document.querySelector('.menu-toggle');
-    const navList = document.getElementById('primary-navigation');
-    if (toggle && navList) {
+    // Utilities
+    const qs = (sel, root = document) => root.querySelector(sel);
+    const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+    const digitsOnly = str => (str || '').replace(/[^\d]/g, '');
+    const trimLeadingOne = d => (d.length === 11 && d.startsWith('1')) ? d.slice(1) : d;
+    const isValidEmail = email => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    // Mobile Navigation (same behavior as Home)
+    function initMobileNavigation() {
+      const toggle = qs('.menu-toggle');
+      const navList = qs('#primary-navigation');
+      const body = document.body;
+      if (!toggle || !navList) return;
+
       toggle.addEventListener('click', () => {
-        navList.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', navList.classList.contains('open'));
+        const isOpen = navList.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', isOpen);
+        body.classList.toggle('nav-open', isOpen);
+      });
+
+      const dropdownToggle = qs('.dropdown-toggle');
+      if (dropdownToggle) {
+        dropdownToggle.addEventListener('click', (e) => {
+          if (window.innerWidth <= 768) {
+            e.preventDefault();
+            const dropdown = dropdownToggle.closest('.dropdown');
+            const expanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
+            dropdownToggle.setAttribute('aria-expanded', String(!expanded));
+            dropdown.classList.toggle('expanded');
+          }
+        });
+      }
+
+      // Close on outside click / ESC / resize
+      document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768 && navList.classList.contains('open')) {
+          if (!e.target.closest('.site-header')) closeMobileNav();
+        }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navList.classList.contains('open')) {
+          closeMobileNav();
+          toggle.focus();
+        }
+      });
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && navList.classList.contains('open')) {
+          closeMobileNav();
+        }
+      });
+
+      function closeMobileNav() {
+        navList.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        body.classList.remove('nav-open');
+        const dropdown = qs('.dropdown');
+        const dt = qs('.dropdown-toggle');
+        if (dropdown && dt) {
+          dropdown.classList.remove('expanded');
+          dt.setAttribute('aria-expanded', 'false');
+        }
+      }
+
+      // Constrain panel height so the mobile CTA area (hidden here) would align if present
+      function setNavMaxHeight() {
+        const header = qs('.site-header');
+        const viewport = window.innerHeight;
+        const headerH = header ? header.getBoundingClientRect().height : 56;
+        const maxH = Math.max(180, viewport - headerH);
+        navList.style.maxHeight = maxH + 'px';
+        navList.style.overflowY = 'auto';
+      }
+      setNavMaxHeight();
+      window.addEventListener('resize', setNavMaxHeight, { passive: true });
+      window.addEventListener('orientationchange', setNavMaxHeight, { passive: true });
+    }
+
+    // Form helpers (same feel as Home)
+    function formatPhoneLive(el) {
+      if (!el) return;
+      el.addEventListener('input', () => {
+        let d = trimLeadingOne(digitsOnly(el.value));
+        if (!d) { el.value = ''; return; }
+        if (d.length <= 3) el.value = `(${d}`;
+        else if (d.length <= 6) el.value = `(${d.slice(0,3)}) ${d.slice(3)}`;
+        else el.value = `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6,10)}`;
       });
     }
-  })();
 
-  const qs = (s, r=document) => r.querySelector(s);
-  function digitsOnly(s) { return (s || '').replace(/[^\d]/g, ''); }
-  function trimLeadingOne(d) { return (d.length === 11 && d.startsWith('1')) ? d.slice(1) : d; }
-  function formatPhoneLive(el) {
-    if (!el) return;
-    el.addEventListener('input', () => {
-      let d = trimLeadingOne(digitsOnly(el.value));
-      if (!d) { el.value = ''; return; }
-      if (d.length <= 3) el.value = `(${d}`;
-      else if (d.length <= 6) el.value = `(${d.slice(0,3)}) ${d.slice(3)}`;
-      else el.value = `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6,10)}`;
-    });
-  }
+    function validateField(field) {
+      const wrapper = field.closest('.form-field');
+      const errorDiv = wrapper?.querySelector('.field-error');
+      let valid = true;
+      let msg = '';
 
-  function validateRequired(form) {
-    const required = form.querySelectorAll('[required]');
-    let ok = true;
-    required.forEach(f => {
-      if (!f.value.trim()) { ok = false; f.setAttribute('aria-invalid', 'true'); }
-      else f.removeAttribute('aria-invalid');
-    });
-    return ok;
-  }
+      field.removeAttribute('aria-invalid');
+      wrapper?.classList.remove('valid','error');
+      if (errorDiv) errorDiv.textContent = '';
 
-  async function submitIntake(form, statusEl, errorEl) {
-    const data = Object.fromEntries(new FormData(form).entries());
-    const phone = data.phone || qs('#phone')?.value || '';
-    data.phone = trimLeadingOne(digitsOnly(phone));
+      if (field.hasAttribute('required') && !field.value.trim()) {
+        valid = false; msg = 'This field is required';
+      } else if (field.type === 'email' && field.value && !isValidEmail(field.value)) {
+        valid = false; msg = 'Please enter a valid email address';
+      } else if (field.type === 'tel' && field.value && digitsOnly(field.value).length < 10) {
+        valid = false; msg = 'Please enter a valid phone number';
+      }
 
-    if (!validateRequired(form)) {
-      errorEl.textContent = 'Please fill in the required fields.';
-      errorEl.classList.remove('hidden');
-      statusEl.classList.add('hidden');
-      return;
+      if (!valid) {
+        field.setAttribute('aria-invalid','true');
+        wrapper?.classList.add('error');
+        if (errorDiv) errorDiv.textContent = msg;
+      } else if (field.value.trim()) {
+        wrapper?.classList.add('valid');
+      }
+      return valid;
     }
 
-    errorEl.classList.add('hidden');
-    statusEl.textContent = 'Sending…';
-    statusEl.classList.remove('hidden');
+    function validateForm(form) {
+      const fields = form.querySelectorAll('input[required], input[type="email"], input[type="tel"]');
+      let ok = true;
+      fields.forEach(f => { if (!validateField(f)) ok = false; });
+      return ok;
+    }
 
-    try {
-      const res = await fetch(FLOW_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data), mode: 'cors' });
-      const raw = await res.clone().text();
-      let payload = null; try { payload = JSON.parse(raw); } catch {}
-      if (res.ok && payload?.success) {
-        statusEl.textContent = 'Thanks—check your email for a confirmation.';
-        form.reset();
-      } else {
-        errorEl.textContent = payload?.message || 'Sorry, something went wrong. Please email chris@weldon.law or call (856) 890-2944.';
+    function setupFormValidation(form) {
+      const fields = form.querySelectorAll('input, select, textarea');
+      fields.forEach(field => {
+        field.addEventListener('blur', () => validateField(field));
+        field.addEventListener('input', () => {
+          const wrapper = field.closest('.form-field');
+          if (wrapper?.classList.contains('error')) {
+            setTimeout(() => validateField(field), 250);
+          }
+        });
+      });
+    }
+
+    function setButtonLoading(button, loading) {
+      const t = button.querySelector('.btn-text');
+      const l = button.querySelector('.btn-loading');
+      button.disabled = !!loading;
+      if (t) t.classList.toggle('hidden', !!loading);
+      if (l) l.classList.toggle('hidden', !loading);
+    }
+
+    async function submitIntake(form, statusEl, errorEl) {
+      if (!validateForm(form)) {
+        errorEl.textContent = 'Please correct the errors above';
         errorEl.classList.remove('hidden');
         statusEl.classList.add('hidden');
+        return;
       }
-    } catch {
-      errorEl.textContent = 'Network issue—please email chris@weldon.law or call (856) 890-2944.';
-      errorEl.classList.remove('hidden');
-      statusEl.classList.add('hidden');
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      data.phone = trimLeadingOne(digitsOnly(data.phone || ''));
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      setButtonLoading(submitBtn, true);
+      errorEl.classList.add('hidden');
+      statusEl.textContent = 'Sending…';
+      statusEl.classList.remove('hidden');
+
+      try {
+        const response = await fetch(FLOW_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+          mode: 'cors'
+        });
+
+        const text = await response.clone().text();
+        let json = null; try { json = JSON.parse(text); } catch {}
+
+        if (response.ok && json?.success) {
+          statusEl.textContent = 'Thanks—check your email for a confirmation.';
+          form.reset();
+          form.querySelectorAll('.form-field').forEach(f => f.classList.remove('valid','error'));
+        } else {
+          throw new Error(json?.message || `Server error: ${response.status}`);
+        }
+      } catch (err) {
+        const msg = ('' + err.message).includes('Network')
+          ? 'Network issue—please email chris@weldon.law or call (856) 890-2944.'
+          : 'Sorry, something went wrong. Please email chris@weldon.law or call (856) 890-2944.';
+        errorEl.textContent = msg;
+        errorEl.classList.remove('hidden');
+        statusEl.classList.add('hidden');
+      } finally {
+        setButtonLoading(submitBtn, false);
+      }
     }
-  }
 
-  (function(){
-    const form = qs('#intakeFormContact');
-    formatPhoneLive(qs('#phone'));
-    const statusEl = qs('#contact-status'), errorEl = qs('#contact-error');
-    form.addEventListener('submit', (e) => { e.preventDefault(); submitIntake(form, statusEl, errorEl); });
-  })();
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+      initMobileNavigation();
 
-  // Mobile sheet open/close
-  (function(){
-    const sheet = qs('#intakeSheet');
-    const openBtn = qs('#openIntakeMobile');
-    const closeBtn = qs('#closeIntakeMobile');
-    function open() { sheet.setAttribute('aria-hidden','false'); setTimeout(() => qs('#sm-first-name')?.focus(), 0); }
-    function close() { sheet.setAttribute('aria-hidden','true'); }
-    openBtn?.addEventListener('click', (e)=>{ e.preventDefault(); open(); });
-    closeBtn?.addEventListener('click', close);
-    sheet?.addEventListener('click', (e)=>{ if (e.target === sheet) close(); });
-  })();
+      const form = qs('#intakeFormContact');
+      setupFormValidation(form);
+      formatPhoneLive(qs('#phone'));
 
-  // Top CTA behavior: mobile opens sheet; desktop scrolls to form
-  (function(){
-    const cta = qs('#ctaGetHelp');
-    const form = qs('#intakeFormContact');
-    cta?.addEventListener('click', (e) => {
-      const isMobile = window.matchMedia('(max-width: 768px)').matches;
-      if (!isMobile) {
+      const statusEl = qs('#contact-status');
+      const errorEl  = qs('#contact-error');
+      form.addEventListener('submit', (e) => {
         e.preventDefault();
-        form?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        qs('#first-name')?.focus();
-      }
+        submitIntake(form, statusEl, errorEl);
+      });
     });
-  })();
-
-  // Avoid mobile bar overlapping content
-  (function(){
-    const bar = document.querySelector('.intake-stick__mobilebar');
-    function pad() {
-      if (!bar) return;
-      const h = bar.getBoundingClientRect().height || 56;
-      document.body.style.paddingBottom = (window.innerWidth <= 768) ? (h + 8) + 'px' : '';
-    }
-    window.addEventListener('resize', pad);
-    window.addEventListener('orientationchange', pad);
-    pad();
-  })();
   </script>
 </body>
 </html>

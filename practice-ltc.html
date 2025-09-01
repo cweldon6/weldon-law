@@ -1,46 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Long‑Term Care Planning | Weldon Law, LLC</title>
-<meta name="description" content="Asset protection, benefits alignment, and practical strategies for long‑term care planning in New Jersey." />
-<link rel="stylesheet" href="branded-styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Long-Term Care Planning | Weldon Law, LLC</title>
+  <meta name="description" content="Plan for nursing home care, Medicaid eligibility, and asset protection with Weldon Law, LLC in New Jersey." />
+  <link rel="stylesheet" href="branded-styles.css" />
 </head>
 <body class="hero--copy">
-<!-- Header reused -->
-<header class="site-header">...<!-- same header/nav as above --></header>
 
+  <!-- Site Header / Navigation -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="images/WeldonLawLogoG.png" alt="Weldon Law, LLC logo" />
+        </a>
+      </div>
+      <nav class="main-nav" id="nav">
+        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">
+          <span class="menu-icon"></span>
+        </button>
+        <ul class="navbar" id="primary-navigation">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li class="dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Areas of Practice</a>
+            <ul class="dropdown-content">
+              <li><a href="practice-guardianships.html">Guardianships</a></li>
+              <li><a href="practice-ltc.html" aria-current="page">Long-Term Care Planning</a></li>
+              <li><a href="practice-lp.html">Life Planning (POA/Advance Directive)</a></li>
+              <li><a href="practice-legacy.html">Legacy Planning (Wills & Trusts)</a></li>
+              <li><a href="practice-probate.html">Probate</a></li>
+              <li><a href="practice-general.html">General Counsel & Other Matters</a></li>
+            </ul>
+          </li>
+          <li><a href="news.html">News & Resources</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-<main class="landing container" style="padding: var(--space-6) 0;">
-<h1>Long‑Term Care Planning</h1>
-<p class="tagline">Protecting assets while aligning care needs and benefits.</p>
+  <!-- Page Content -->
+  <main class="landing container" style="padding: var(--space-6) 0;">
+    <h1>Long-Term Care Planning</h1>
+    <p class="tagline">Smart preparation to protect assets and ensure care when it’s needed most.</p>
 
+    <div class="info-grid">
+      <article class="card-collapsible">
+        <h2>Our Approach</h2>
+        <p>
+          Nursing home and assisted living costs can quickly erode a lifetime of savings. Long-term
+          care planning focuses on strategies to maintain eligibility for Medicaid while protecting
+          assets for spouses and families.
+        </p>
+        <ul class="services-list">
+          <li>Medicaid eligibility and application assistance</li>
+          <li>Asset preservation strategies</li>
+          <li>Spousal protections</li>
+          <li>Coordination with financial and healthcare providers</li>
+        </ul>
+      </article>
 
-<div class="info-grid">
-<div>
-<h2>Focus Areas</h2>
-<ul class="services-list">
-<li>Medicaid (NJ FamilyCare) strategy and spend‑down planning</li>
-<li>Crisis vs. proactive planning; caregiver agreements</li>
-<li>Powers of attorney and health care proxies</li>
-<li>Facility, home‑care, and waiver program navigation</li>
-<li>Appeals and redeterminations</li>
-</ul>
-<p><a class="button" href="contact.html">Discuss your options →</a></p>
-</div>
-<div class="faq-content">
-<h2>FAQs</h2>
-<div class="faq-list">
-<details><summary>When should we start planning?</summary><p>Earlier is better, but meaningful steps can be taken even during a crisis. We’ll outline tradeoffs and a timeline.</p></details>
-<details><summary>Will I lose my home?</summary><p>Not necessarily. Eligibility and estate‑recovery rules are nuanced; we review exemptions and planning opportunities.</p></details>
-</div>
-</div>
-</div>
-</main>
+      <aside class="card-collapsible">
+        <h2>Why act early?</h2>
+        <p>
+          Timing matters. Early planning can expand your options, reduce stress, and allow
+          for structured asset transfers within Medicaid look-back rules.
+        </p>
+        <div class="faq-list">
+          <details>
+            <summary>What if care is already needed?</summary>
+            <p>We assist with crisis planning, identifying immediate options to protect what you can while securing care.</p>
+          </details>
+          <details>
+            <summary>Can I protect my home?</summary>
+            <p>Yes, there are strategies to preserve a primary residence for a spouse or heirs while qualifying for Medicaid.</p>
+          </details>
+        </div>
+        <p><a class="button" href="contact.html">Discuss options →</a></p>
+      </aside>
+    </div>
+  </main>
 
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 Weldon Law, LLC. All rights reserved.</p>
+    </div>
+  </footer>
 
-<footer class="site-footer">...<!-- same footer --></footer>
-<script>/* menu toggle same as others */</script>
+  <!-- Mobile Menu Script -->
+  <script>
+    (function(){
+      const toggle = document.querySelector('.menu-toggle');
+      const navList = document.getElementById('primary-navigation');
+      if (toggle && navList) {
+        toggle.addEventListener('click', () => {
+          const open = navList.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', open);
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

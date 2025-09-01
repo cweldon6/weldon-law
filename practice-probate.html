@@ -1,41 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Probate & Estate Administration | Weldon Law, LLC</title>
-<meta name="description" content="Guidance through probate, estate administration, and court procedures across New Jersey." />
-<link rel="stylesheet" href="branded-styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Probate | Weldon Law, LLC</title>
+  <meta name="description" content="Compassionate, efficient guidance through probate and estate administration in New Jersey." />
+  <link rel="stylesheet" href="branded-styles.css" />
 </head>
 <body class="hero--copy">
-<header class="site-header">...<!-- same header/nav --></header>
-<main class="landing container" style="padding: var(--space-6) 0;">
-<h1>Probate &amp; Estate Administration</h1>
-<p class="tagline">Clear steps. Timely filings. Steady communication.</p>
 
+  <!-- Site Header / Navigation -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="images/WeldonLawLogoG.png" alt="Weldon Law, LLC logo" />
+        </a>
+      </div>
+      <nav class="main-nav" id="nav">
+        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">
+          <span class="menu-icon"></span>
+        </button>
+        <ul class="navbar" id="primary-navigation">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li class="dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Areas of Practice</a>
+            <ul class="dropdown-content">
+              <li><a href="practice-guardianships.html">Guardianships</a></li>
+              <li><a href="practice-ltc.html">Long-Term Care Planning</a></li>
+              <li><a href="practice-lp.html">Life Planning (POA/Advance Directive)</a></li>
+              <li><a href="practice-legacy.html">Legacy Planning (Wills & Trusts)</a></li>
+              <li><a href="practice-probate.html" aria-current="page">Probate</a></li>
+              <li><a href="practice-general.html">General Counsel & Other Matters</a></li>
+            </ul>
+          </li>
+          <li><a href="news.html">News & Resources</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-<div class="info-grid">
-<div>
-<h2>What we handle</h2>
-<ul class="services-list">
-<li>Surrogate filings and short certificates</li>
-<li>Executor/administrator guidance and duties</li>
-<li>Creditor claims and notices</li>
-<li>Accounting and distributions</li>
-<li>Will contests and disputes</li>
-</ul>
-<p><a class="button" href="contact.html">Get help with probate →</a></p>
-</div>
-<div class="faq-content">
-<h2>FAQs</h2>
-<div class="faq-list">
-<details><summary>How long does probate take?</summary><p>Timelines vary by county and complexity; we set expectations and milestones early.</p></details>
-<details><summary>Do we always need probate?</summary><p>Sometimes assets pass outside probate via title or beneficiary designations. We review your specific situation.</p></details>
-</div>
-</div>
-</div>
-</main>
-<footer class="site-footer">...<!-- same footer --></footer>
-<script>/* menu toggle */</script>
+  <!-- Page Content -->
+  <main class="landing container" style="padding: var(--space-6) 0;">
+    <h1>Probate</h1>
+    <p class="tagline">Clear steps. Steady guidance. Respect for your loved one’s wishes.</p>
+
+    <div class="info-grid">
+      <article class="card-collapsible">
+        <h2>Guidance through estate administration</h2>
+        <p>
+          Losing a loved one is difficult. We help executors and families navigate probate and
+          estate administration with clarity and compassion—from Surrogate’s Court filings to
+          asset transfers and final accounting.
+        </p>
+        <ul class="services-list">
+          <li>Probate of Will / intestate administration</li>
+          <li>Notices to heirs and beneficiaries</li>
+          <li>Inventory, valuation, and debt resolution</li>
+          <li>Tax filings and final distributions</li>
+        </ul>
+        <p>
+          Each matter moves at a different pace depending on assets, beneficiaries, and any
+          disputes. We’ll outline a practical timeline and keep you informed throughout.
+        </p>
+      </article>
+
+      <aside class="card-collapsible">
+        <h2>Common questions</h2>
+        <div class="faq-list">
+          <details>
+            <summary>Do all estates have to go through probate?</summary>
+            <p>Not always. Small estates or assets with beneficiary designations can transfer outside probate. We’ll help you determine what’s required.</p>
+          </details>
+          <details>
+            <summary>How long does probate take?</summary>
+            <p>Simple estates can wrap up in months; more complex estates may take longer. We’ll set expectations early and keep things moving.</p>
+          </details>
+          <details>
+            <summary>What if there’s a dispute?</summary>
+            <p>We work to resolve issues efficiently, from clarifying fiduciary duties to addressing objections, always aiming to minimize stress and cost.</p>
+          </details>
+        </div>
+        <p><a class="button" href="contact.html">Talk to an attorney →</a></p>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 Weldon Law, LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Mobile Menu Script -->
+  <script>
+    (function(){
+      const toggle = document.querySelector('.menu-toggle');
+      const navList = document.getElementById('primary-navigation');
+      if (toggle && navList) {
+        toggle.addEventListener('click', () => {
+          const open = navList.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', open);
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
