@@ -948,5 +948,35 @@
 
     document.addEventListener('DOMContentLoaded', initializeApp);
   </script>
+  <!-- Cookie Banner -->
+<div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie notice">
+  <div class="cookie-banner__inner container">
+    <p>
+      This site uses cookies and similar technologies for basic functionality and anonymous analytics. 
+      By continuing to use this site, you agree to our 
+      <a href="privacy.html">Privacy Policy</a>.
+    </p>
+    <button id="cookieAccept" class="btn btn--accent">Accept</button>
+  </div>
+</div>
+
+<script>
+  (function(){
+    const banner = document.getElementById('cookieBanner');
+    const accept = document.getElementById('cookieAccept');
+    if (!banner || !accept) return;
+
+    // Hide if already accepted
+    if (localStorage.getItem('cookiesAccepted') === 'yes') {
+      banner.style.display = 'none';
+    }
+
+    accept.addEventListener('click', () => {
+      localStorage.setItem('cookiesAccepted', 'yes');
+      banner.style.display = 'none';
+    });
+  })();
+</script>
+
 </body>
 </html>
