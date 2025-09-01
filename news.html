@@ -1,37 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>News & Resources | Weldon Law, LLC</title>
-<meta name="description" content="Guides and updates on guardianship, planning, probate, and elder‑law topics in New Jersey." />
-<link rel="stylesheet" href="branded-styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>News & Resources | Weldon Law, LLC</title>
+  <meta name="description" content="News, updates, and practical resources from Weldon Law, LLC." />
+  <link rel="stylesheet" href="branded-styles.css" />
 </head>
 <body class="hero--copy">
-<header class="site-header">...<!-- same header/nav --></header>
-<main class="landing container" style="padding: var(--space-6) 0;">
-<h1>News &amp; Resources</h1>
-<p class="tagline">Practical explainers and firm updates.</p>
 
+  <!-- Unified Header / Navigation -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="images/WeldonLawLogoG.png" alt="Weldon Law, LLC logo" />
+        </a>
+      </div>
+      <nav class="main-nav" id="nav">
+        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">
+          <span class="menu-icon"></span>
+        </button>
+        <ul class="navbar" id="primary-navigation">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li class="dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Areas of Practice</a>
+            <ul class="dropdown-content">
+              <li><a href="practice-guardianships.html">Guardianships</a></li>
+              <li><a href="practice-ltc.html">Long-Term Care Planning</a></li>
+              <li><a href="practice-lp.html">Life Planning (POA/Advance Directive)</a></li>
+              <li><a href="practice-legacy.html">Legacy Planning (Wills & Trusts)</a></li>
+              <li><a href="practice-probate.html">Probate</a></li>
+              <li><a href="practice-general.html">General Counsel & Other Matters</a></li>
+            </ul>
+          </li>
+          <li><a href="news.html" aria-current="page">News & Resources</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-<section class="info-grid" style="padding:0;">
-<div>
-<h2>Guides</h2>
-<ul class="services-list">
-<li><a href="#">Starting a Guardianship in New Jersey (Guide)</a></li>
-<li><a href="#">POA vs. Guardianship: What’s the difference?</a></li>
-<li><a href="#">What to expect in Probate</a></li>
-</ul>
-</div>
-<div>
-<h2>Firm Updates</h2>
-<ul class="services-list">
-<li><a href="#">Welcome to Weldon Law (Launch)</a></li>
-</ul>
-</div>
-</section>
-</main>
-<footer class="site-footer">...<!-- same footer --></footer>
-<script>/* menu toggle */</script>
+  <!-- Page Content -->
+  <main class="landing container" style="padding: var(--space-6) 0;">
+    <h1>News &amp; Resources</h1>
+    <p class="tagline">Updates, guides, and practical notes for New Jersey families.</p>
+
+    <div class="info-grid">
+      <!-- Coming Soon / Under Construction marker -->
+      <article class="card-collapsible" role="status" aria-live="polite">
+        <h2>🚧 Coming soon</h2>
+        <p>
+          We’re building a helpful library of short explainers, checklists, and updates on
+          guardianships, long-term care planning, wills &amp; trusts, and probate. Please check back
+          soon—new posts are being added.
+        </p>
+        <ul class="services-list">
+          <li>Guardianship basics: when it’s needed &amp; what to expect</li>
+          <li>Life planning toolkit: POA &amp; advance directive tips</li>
+          <li>Long-term care planning primers</li>
+          <li>Plain-English probate overview</li>
+        </ul>
+        <p class="small-subtext">Last updated: <time datetime="2025-09-01">Sep 2025</time></p>
+      </article>
+
+      <!-- Simple “Stay in the loop” / contact CTA -->
+      <aside class="card-collapsible">
+        <h2>Stay in the loop</h2>
+        <p>
+          Have a question you’d like us to cover here? Send a note and we’ll prioritize it in the
+          resource queue.
+        </p>
+        <p>
+          <a class="button button--accent" href="contact.html">Suggest a topic →</a>
+        </p>
+        <p class="small-subtext">
+          Prefer to talk? Call <a href="tel:+18568902944">(856) 890-2944</a>.
+        </p>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Unified Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 Weldon Law, LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Minimal mobile menu script (same as other pages) -->
+  <script>
+    (function(){
+      const toggle = document.querySelector('.menu-toggle');
+      const navList = document.getElementById('primary-navigation');
+      if (toggle && navList) {
+        toggle.addEventListener('click', () => {
+          const open = navList.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', open);
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
