@@ -21,11 +21,14 @@
         <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">
           <span class="menu-icon"></span>
         </button>
-        <ul class="navbar" id="primary-navigation">
-          <li><a href="index.html">Home</a></li>
+       <ul class="navbar" id="primary-navigation">
+          <li><a href="index.html" aria-current="page">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li class="dropdown">
-            <a href="#" aria-haspopup="true" aria-expanded="false">Areas of Practice</a>
+            <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+              Areas of Practice
+              <span class="dropdown-arrow">▼</span>
+            </a>
             <ul class="dropdown-content">
               <li><a href="practice-guardianships.html">Guardianships</a></li>
               <li><a href="practice-ltc.html">Long-Term Care Planning</a></li>
@@ -35,7 +38,7 @@
               <li><a href="practice-general.html">General Counsel & Other Matters</a></li>
             </ul>
           </li>
-          <li><a href="news.html" aria-current="page">News & Resources</a></li>
+          <li><a href="news.html">News & Resources</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
