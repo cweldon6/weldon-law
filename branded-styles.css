@@ -857,3 +857,55 @@ button[type="submit"]:hover{ filter:brightness(1.05); }
     align-self: flex-end;
   }
 }
+
+/* === Site Notice (Under Construction) === */
+.notice-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--color-accent, #A47864);
+  color: var(--color-bg, #FFFFFF);
+  border-bottom: 1px solid color-mix(in oklab, #000 12%, transparent);
+  box-shadow: 0 1px 0 rgba(0,0,0,.05), 0 2px 6px rgba(0,0,0,.06);
+}
+
+.notice-bar .notice-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: .65rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+.notice-bar .notice-text {
+  line-height: 1.3;
+}
+
+.notice-bar .notice-dismiss {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: .25rem .5rem;
+  cursor: pointer;
+  border-radius: .5rem;
+}
+
+.notice-bar .notice-dismiss:hover,
+.notice-bar .notice-dismiss:focus {
+  outline: 2px solid color-mix(in oklab, #000 20%, transparent);
+  outline-offset: 2px;
+}
+
+/* Make sure text remains readable on small screens */
+@media (max-width: 640px) {
+  .notice-bar .notice-inner {
+    padding: .6rem .8rem;
+  }
+  .notice-bar .notice-text {
+    font-size: .95rem;
+  }
+}
