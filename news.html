@@ -105,5 +105,45 @@
       }
     })();
   </script>
+  <script>
+(function(){
+  const toggle = document.querySelector('.menu-toggle');
+  const navList = document.getElementById('primary-navigation');
+
+  // Hamburger open/close
+  if (toggle && navList) {
+    toggle.addEventListener('click', () => {
+      const open = navList.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  // Mobile dropdown: tap "Areas of Practice" to expand
+  const ddToggle = document.querySelector('.dropdown > .dropdown-toggle');
+  const dropdown = ddToggle?.closest('.dropdown');
+
+  function isMobile(){ return window.matchMedia('(max-width: 768px)').matches; }
+
+  if (ddToggle && dropdown) {
+    ddToggle.addEventListener('click', (e) => {
+      if (isMobile()) {
+        e.preventDefault();
+        const expanded = dropdown.classList.toggle('expanded');
+        ddToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      }
+    });
+
+    // Also allow keyboard activation
+    ddToggle.addEventListener('keydown', (e) => {
+      if (isMobile() && (e.key === 'Enter' || e.key === ' ')) {
+        e.preventDefault();
+        const expanded = dropdown.classList.toggle('expanded');
+        ddToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      }
+    });
+  }
+})();
+</script>
+
 </body>
 </html>
