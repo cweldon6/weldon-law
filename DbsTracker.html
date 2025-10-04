@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blood Sugar Tracker (Phone-Only)</title>
+<meta name="theme-color" content="#667eea" />
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,Arial;
+       background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:20px}
+  .container{max-width:900px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden}
+  .header{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:30px;text-align:center}
+  .header h1{font-size:28px;margin-bottom:6px}
+  .header p{opacity:.9;font-size:14px}
+  .form-section{padding:24px 30px;border-bottom:1px solid #e0e0e0}
+  .form-group{margin-bottom:16px}
+  label{display:block;margin-bottom:8px;font-weight:600;color:#333;font-size:14px}
+  input[type="date"],input[type="time"],input[type="number"],select{
+    width:100%;padding:12px;border:2px solid #e0e0e0;border-radius:8px;font-size:16px;transition:border-color .2s}
+  input:focus,select:focus{outline:none;border-color:#667eea}
+  .form-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px}
+  .btn{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;border:none;
+       padding:14px 30px;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;width:100%;
+       transition:transform .15s,box-shadow .15s}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 5px 15px rgba(102,126,234,.35)}
+  .records-section{padding:24px 30px}
+  .records-header{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .stack{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{border:1px solid #e0e0e0;background:#fafafa;border-radius:8px;padding:8px 12px;font-size:13px}
+  .btn-small{border:1px solid #e0e0e0;background:#fff;border-radius:8px;padding:8px 12px;font-size:13px;cursor:pointer}
+  .btn-danger{background:#e74c3c;color:#fff;border:none}
+  table{width:100%;border-collapse:collapse}
+  thead th{background:#f8f9fa;padding:12px;text-align:left;font-weight:600;color:#555;font-size:14px;border-bottom:2px solid #e0e0e0}
+  td{padding:10px;border-bottom:1px solid #f0f0f0;color:#333;vertical-align:middle}
+  tr:hover{background:#f8f9fa}
+  .actions{display:flex;gap:6px}
+  .delete-btn,.edit-btn{border:none;border-radius:6px;padding:6px 10px;font-size:12px;cursor:pointer}
+  .delete-btn{background:#e74c3c;color:#fff}
+  .edit-btn{background:#eef;border:1px solid #ccd}
+  .empty-state{text-align:center;padding:40px;color:#999}
+  .empty-state svg{width:64px;height:64px;margin-bottom:16px;opacity:.5}
+  .foot{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .soft{opacity:.8}
+  @media (max-width:900px){.form-row{grid-template-columns:1fr 1fr}}
+  @media (max-width:600px){.form-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🩸 Blood Sugar Tracker</h1>
+      <p>Phone-only, offline. Data is stored privately on this device.</p>
+    </div>
+
+    <div class="form-section">
+      <form id="bloodSugarForm" autocomplete="off">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date" required />
+          </div>
+          <div class="form-group">
+            <label for="time">Time</label>
+            <input type="time" id="time" required />
+          </div>
+          <div class="form-group">
+            <label for="reading">Blood Sugar (mg/dL)</label>
+            <input type="number" id="reading" inputmode="numeric" min="0" max="700" step="1" required />
+          </div>
+          <div class="form-group">
+            <label for="timing">Timing</label>
+            <select id="timing" required>
+              <option value="">Select timing</option>
+              <option>Fasting</option><option>Breakfast</option><option>Lunch</option>
+              <option>Dinner</option><option>Bedtime</option><option>Random</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="stack" style="margin:8px 0 16px 0">
+          <button type="button" class="btn-small" data-quick="Fasting">+ Fasting</button>
+          <button type="button" class="btn-small" data-quick="Breakfast">+ Breakfast</button>
+          <button type="button" class="btn-small" data-quick="Lunch">+ Lunch</button>
+          <button type="button" class="btn-small" data-quick="Dinner">+ Dinner</button>
+          <button type="button" class="btn-small" data-quick="Bedtime">+ Bedtime</button>
+        </div>
+
+        <button type="submit" class="btn">Add Reading</button>
+      </form>
+    </div>
+
+    <div class="records-section">
+      <div class="records-header">
+        <h2>Reading History</h2>
+        <div class="stack">
+          <button id="exportCsv" class="btn-small">Export CSV</button>
+          <label class="btn-small" style="cursor:pointer">
+            Restore JSON<input id="restoreJson" type="file" accept=".json,application/json" hidden />
+          </label>
+          <button id="backupJson" class="btn-small">Backup JSON</button>
+          <button id="clearAll" class="btn-small btn-danger">Clear All</button>
+        </div>
+      </div>
+
+      <div class="stack soft" style="margin-bottom:10px">
+        <span class="chip" id="countChip">0 records</span>
+        <span class="chip" id="avg7">7-day avg: —</span>
+        <span class="chip" id="avg30">30-day avg: —</span>
+        <span class="chip" id="lastEntry">Last: —</span>
+      </div>
+
+      <div id="recordsContainer">
+        <div class="empty-state">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414A1 1 0 0117 9.414V19a2 2 0 01-2 2z"/>
+          </svg>
+          <p>No readings yet. Add your first reading above!</p>
+        </div>
+      </div>
+
+      <div class="foot">
+        <small class="soft">Tip: use <b>Backup JSON</b> periodically to save to Files. Restoring won’t duplicate rows.</small>
+      </div>
+    </div>
+  </div>
+
+<script>
+(() => {
+  const LS_KEY = 'bs_readings_phoneonly_v1';
+  let readings = [];
+  const $ = s => document.querySelector(s);
+  const byId = id => document.getElementById(id);
+
+  // defaults
+  const now = new Date();
+  byId('date').valueAsDate = now;
+  byId('time').value = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute:'2-digit', hour12: false });
+
+  function load() {
+    try { readings = JSON.parse(localStorage.getItem(LS_KEY)) || []; }
+    catch { readings = []; }
+    readings.sort((a,b) => b.id - a.id);
+    render();
+  }
+  function save() { localStorage.setItem(LS_KEY, JSON.stringify(readings)); }
+
+  // quick timing buttons
+  document.querySelectorAll('[data-quick]').forEach(btn => {
+    btn.addEventListener('click', () => { byId('timing').value = btn.dataset.quick; byId('reading').focus(); });
+  });
+
+  // add
+  byId('bloodSugarForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const date = byId('date').value;
+    const time = byId('time').value || '00:00';
+    const readingVal = parseInt(byId('reading').value, 10);
+    const timing = byId('timing').value;
+
+    if (!date || !Number.isFinite(readingVal) || !timing) return;
+
+    readings.unshift({ id: Date.now(), date, time, reading: readingVal, timing });
+    save(); render();
+    e.target.reset();
+    const n = new Date();
+    byId('date').valueAsDate = n;
+    byId('time').value = n.toLocaleTimeString('en-GB', { hour: '2-digit', minute:'2-digit', hour12: false });
+  });
+
+  // edit/delete
+  window.deleteReading = (id) => {
+    readings = readings.filter(r => r.id !== id);
+    save(); render();
+  };
+  window.editReading = (id) => {
+    const r = readings.find(x => x.id === id);
+    if (!r) return;
+    const readingNew = prompt('Edit reading (mg/dL):', r.reading);
+    if (readingNew === null) return;
+    const readingInt = parseInt(readingNew, 10);
+    if (!Number.isFinite(readingInt)) return alert('Enter a valid number');
+
+    const timingNew = prompt('Edit timing (Fasting/Breakfast/Lunch/Dinner/Bedtime/Random):', r.timing);
+    if (timingNew === null || !timingNew.trim()) return;
+
+    const dateNew = prompt('Edit date (YYYY-MM-DD):', r.date);
+    if (dateNew === null || !/^\d{4}-\d{2}-\d{2}$/.test(dateNew)) return alert('Use YYYY-MM-DD');
+
+    const timeNew = prompt('Edit time (HH:MM 24h):', r.time || '00:00');
+    if (timeNew === null || !/^\d{2}:\d{2}$/.test(timeNew)) return alert('Use HH:MM');
+
+    r.reading = readingInt; r.timing = timingNew.trim(); r.date = dateNew; r.time = timeNew;
+    save(); render();
+  };
+
+  // stats
+  function avgSince(days) {
+    const cutoff = new Date(); cutoff.setDate(cutoff.getDate()-days);
+    const sel = readings.filter(r => new Date(r.date) >= cutoff);
+    if (!sel.length) return '—';
+    const mean = sel.reduce((s,r)=>s+r.reading,0) / sel.length;
+    return Math.round(mean);
+  }
+
+  // export csv
+  function toCSV(list) {
+    const lines = [['date','time','reading_mg_dL','timing']];
+    list.forEach(r => lines.push([r.date, r.time || '', r.reading, r.timing]));
+    return lines.map(row =>
+      row.map(v => String(v).includes(',') ? `"${String(v).replace(/"/g,'""')}"` : String(v)).join(',')
+    ).join('\n');
+  }
+  function download(name, text, type='text/plain') {
+    const blob = new Blob([text], {type:type}); const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a);
+    a.click(); a.remove(); URL.revokeObjectURL(url);
+  }
+  byId('exportCsv').addEventListener('click', () => {
+    const csv = toCSV(readings.slice().sort((a,b)=> new Date(a.date) - new Date(b.date)));
+    const fname = `blood-sugar-${new Date().toISOString().slice(0,10)}.csv`;
+    download(fname, csv, 'text/csv');
+  });
+
+  // backup / restore json
+  byId('backupJson').addEventListener('click', () => {
+    const json = JSON.stringify(readings, null, 2);
+    const fname = `bs-backup-${new Date().toISOString().replace(/[:.]/g,'-')}.json`;
+    download(fname, json, 'application/json');
+  });
+  byId('restoreJson').addEventListener('change', (e) => {
+    const file = e.target.files?.[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const imported = JSON.parse(String(reader.result));
+        if (!Array.isArray(imported)) throw new Error('bad');
+        // merge + de-dupe by (date|time|timing|reading)
+        const key = x => `${x.date}|${x.time||''}|${x.timing}|${x.reading}`;
+        const map = new Map(readings.map(r => [key(r), r]));
+        imported.forEach(it => {
+          const norm = { id: it.id || Date.now()+Math.floor(Math.random()*100000),
+                         date: it.date, time: it.time||'', timing: it.timing, reading: +it.reading };
+          if (norm.date && norm.timing && Number.isFinite(norm.reading)) map.set(key(norm), norm);
+        });
+        readings = Array.from(map.values()).sort((a,b)=>b.id-a.id);
+        save(); render(); e.target.value = '';
+        alert('Restore complete.');
+      } catch { alert('Restore failed: invalid file.'); }
+    };
+    reader.readAsText(file);
+  });
+
+  function render() {
+    byId('countChip').textContent = `${readings.length} record${readings.length===1?'':'s'}`;
+    byId('avg7').textContent = `7-day avg: ${avgSince(7)}`;
+    byId('avg30').textContent = `30-day avg: ${avgSince(30)}`;
+    byId('lastEntry').textContent = readings[0]
+      ? `Last: ${readings[0].date} ${readings[0].time||''} (${readings[0].reading})`
+      : 'Last: —';
+
+    const container = byId('recordsContainer');
+    if (!readings.length) {
+      container.innerHTML = document.querySelector('.empty-state').outerHTML;
+      return;
+    }
+    let html = `
+      <table>
+        <thead><tr>
+          <th>Date</th><th>Time</th><th>Reading</th><th>Timing</th><th>Actions</th>
+        </tr></thead><tbody>`;
+    readings.forEach(r => {
+      const d = new Date(r.date + 'T00:00:00');
+      const dStr = d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+      html += `<tr>
+        <td>${dStr}</td>
+        <td>${r.time || ''}</td>
+        <td><strong>${r.reading}</strong></td>
+        <td>${r.timing}</td>
+        <td class="actions">
+          <button class="edit-btn" onclick="editReading(${r.id})">Edit</button>
+          <button class="delete-btn" onclick="deleteReading(${r.id})">Delete</button>
+        </td>
+      </tr>`;
+    });
+    html += `</tbody></table>`;
+    container.innerHTML = html;
+  }
+
+  load();
+})();
+</script>
+</body>
+</html>
