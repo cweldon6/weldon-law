@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Will Intake & Assembly</title>
+  <style>
+    :root{
+      --bg:#f5f7fa; --card:#fff; --ink:#111827; --muted:#6b7280;
+      --brand:#3451b2; --brand-2:#6b8cff; --ok:#16a34a; --warn:#b45309; --bad:#b91c1c;
+      --line:#e5e7eb; --chip:#eef2ff;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--ink);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,system-ui,sans-serif;
+      line-height:1.55;
+    }
+    .wrap{max-width:1100px;margin:32px auto;padding:0 16px}
+    .card{background:var(--card); border-radius:12px; box-shadow:0 8px 28px rgba(0,0,0,.06); overflow:hidden; border:1px solid var(--line)}
+    header.hero{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff; padding:28px 24px}
+    .hero h1{margin:0 0 6px; font-weight:650; letter-spacing:.2px}
+    .hero p{margin:0; opacity:.92}
+    .content{padding:20px}
+    .grid{display:grid; gap:16px; grid-template-columns:repeat(12,1fr)}
+    @media (max-width:900px){ .grid{grid-template-columns:1fr} }
+    .col-8{grid-column:span 8} .col-4{grid-column:span 4}
+
+    section.block{border:1px solid var(--line); border-radius:10px; background:#fff; padding:16px 16px 8px; margin-bottom:12px}
+    section.block h2{margin:0 0 8px; font-size:18px; font-weight:650}
+    .row{display:flex; gap:12px; flex-wrap:wrap}
+    .field{flex:1 1 220px; min-width:220px}
+    label{display:block; font-size:12px; color:var(--muted); margin-bottom:6px}
+    input[type="text"], input[type="date"], select, textarea{
+      width:100%; padding:10px 12px; border:1px solid var(--line);
+      border-radius:8px; background:#fff; color:#111827;
+      outline:none; transition:border .15s ease;
+    }
+    textarea{min-height:96px}
+    input:focus, select:focus, textarea:focus{border-color:var(--brand)}
+    .chipbar{display:flex; gap:8px; flex-wrap:wrap; margin:8px 0}
+    .chip{background:var(--chip); color:#1e3a8a; border:1px solid #dbe2ff; padding:6px 10px; border-radius:999px; font-size:12px}
+    .btnrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    button{border:0; border-radius:10px; padding:10px 14px; font-weight:600; cursor:pointer; background:var(--brand); color:#fff}
+    button.ghost{background:#fff; color:var(--brand); border:1px solid var(--brand)}
+    button.safe{background:var(--ok)} button.warn{background:var(--warn)} button.bad{background:var(--bad)}
+    .list{display:flex; flex-direction:column; gap:12px}
+    .rowline{border:1px solid var(--line); border-radius:10px; padding:10px; display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; background:#fff}
+    .rowline .mini{min-width:140px; flex:1 1 140px}
+    .kvs{font:12px/1.55 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; white-space:pre-wrap; background:#0b1020; color:#e6e6e6; padding:12px; border-radius:8px; border:1px solid #10172a; overflow:auto; max-height:360px}
+    .muted{color:var(--muted)} .divider{height:1px;background:var(--line);margin:10px 0}
+    .right{margin-left:auto}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <header class="hero">
+        <h1>Last Will Intake & Assembly</h1>
+        <p>Collect once. Assemble cleanly. Preview JSON and a draft Will with clause inserts (aligned to your skeleton & clause library).</p>
+      </header>
+
+      <div class="content">
+        <div class="grid">
+          <div class="col-8">
+
+            <!-- Article I — Client & Family Identification -->
+            <section class="block" id="sec-core">
+              <h2>Article I — Client & Family Identification</h2>
+
+              <div class="row">
+                <div class="field">
+                  <label>Client First Name</label>
+                  <input type="text" id="clientFirst" autocomplete="given-name"/>
+                </div>
+                <div class="field">
+                  <label>Client Middle Name</label>
+                  <input type="text" id="clientMiddle" autocomplete="additional-name"/>
+                </div>
+                <div class="field">
+                  <label>Client Last Name</label>
+                  <input type="text" id="clientLast" autocomplete="family-name"/>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="field">
+                  <label>Street</label>
+                  <input type="text" id="clientStreet"/>
+                </div>
+                <div class="field">
+                  <label>City</label>
+                  <input type="text" id="clientCity"/>
+                </div>
+                <div class="field">
+                  <label>State</label>
+                  <select id="clientState"></select>
+                </div>
+                <div class="field">
+                  <label>County (NJ list if State = NJ; else custom)</label>
+                  <select id="clientCounty"></select>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="field">
+                  <label>Marital Status</label>
+                  <select id="maritalStatus">
+                    <option value="">— select —</option>
+                    <option value="single">Single</option>
+                    <option value="married">Married</option>
+                    <option value="widowed">Widowed</option>
+                    <option value="divorced">Divorced</option>
+                    <option value="separated">Separated</option>
+                    <option value="domestic_partner">Domestic Partner / Civil Union</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row" id="spouseRow" style="display:none">
+                <div class="field">
+                  <label>Spouse / Partner First Name</label>
+                  <input type="text" id="spouseFirst"/>
+                </div>
+                <div class="field">
+                  <label>Spouse Middle Name</label>
+                  <input type="text" id="spouseMiddle"/>
+                </div>
+                <div class="field">
+                  <label>Spouse Last Name</label>
+                  <input type="text" id="spouseLast"/>
+                </div>
+              </div>
+
+              <div class="chipbar">
+                <span class="chip">Names stored as First / Middle / Last. Full names are derived.</span>
+                <span class="chip">County phrasing polished in Will header.</span>
+              </div>
+            </section>
+
+            <!-- Article I — Children -->
+            <section class="block" id="sec-children">
+              <h2>Children & Relationships</h2>
+
+              <div class="row">
+                <div class="field">
+                  <label>Do you have any children?</label>
+                  <select id="hasChildren">
+                    <option value="">— select —</option>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                  </select>
+                </div>
+              </div>
+
+              <div id="childrenZone" style="display:none">
+                <div class="btnrow">
+                  <button id="btnAddChild" type="button">+ Add Child</button>
+                  <span class="chip">Types: Biological / Adopted / Step</span>
+                </div>
+                <div class="list" id="childrenList" style="margin-top:10px"></div>
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="row">
+                <div class="field">
+                  <label>Include Adopted/ART Definitions Clause?</label>
+                  <select id="useAdoptedART">
+                    <option value="">— select —</option>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Acknowledge stepchildren when client has no children?</label>
+                  <select id="ackStepWhenNoChildren">
+                    <option value="">— select —</option>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            <!-- Article IV — Residuary -->
+            <section class="block" id="sec-residuary">
+              <h2>Article IV — Residuary Estate</h2>
+
+              <div class="row">
+                <div class="field">
+                  <label>Primary Distribution</label>
+                  <select id="resPrimary">
+                    <option value="">— choose a pattern —</option>
+                    <option value="all_to_spouse_then_descendants_per_stirpes">
+                      All to Spouse; if not living, to Descendants per stirpes
+                    </option>
+                    <option value="to_descendants_per_stirpes">
+                      To Descendants per stirpes (skip spouse)
+                    </option>
+                    <option value="to_named_beneficiaries_shares">
+                      To Named Beneficiaries in Shares
+                    </option>
+                    <option value="to_trust_for_spouse_then_descendants_per_stirpes">
+                      To Trust for Spouse; remainder to Descendants per stirpes
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div id="resToNamed" style="display:none">
+                <div class="btnrow">
+                  <button type="button" id="btnAddResBen">+ Add Residuary Beneficiary</button>
+                  <span class="chip">Share total must equal 100%</span>
+                </div>
+                <div id="resBenList" class="list" style="margin-top:10px"></div>
+              </div>
+
+              <div class="row" style="margin-top:8px">
+                <div class="field">
+                  <label>Disaster Fallback (all primary predecease)</label>
+                  <select id="resDisaster">
+                    <option value="">— select —</option>
+                    <option value="to_heirs_at_law">To Heirs at Law</option>
+                    <option value="to_charity_named">To Named Charity</option>
+                    <option value="split_charity_and_heirs">Split: Charity + Heirs (set shares)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div id="resDisasterDetails" style="display:none; margin-top:8px">
+                <div class="row" id="disasterCharityRow" style="display:none">
+                  <div class="field">
+                    <label>Charity Name</label>
+                    <input type="text" id="disasterCharityName"/>
+                  </div>
+                  <div class="field">
+                    <label>Charity EIN (optional)</label>
+                    <input type="text" id="disasterCharityEIN"/>
+                  </div>
+                  <div class="field">
+                    <label>Share % to Charity (if split)</label>
+                    <input type="number" min="0" max="100" step="0.01" id="disasterCharityPct" placeholder="e.g., 60"/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" style="margin-top:8px">
+                <div class="field">
+                  <label>Backup Distribution (if primary partially fails)</label>
+                  <select id="resBackup">
+                    <option value="">— select —</option>
+                    <option value="per_stirpes_to_descendants">Per stirpes to Descendants</option>
+                    <option value="per_capita_to_descendants">Per capita to Descendants</option>
+                    <option value="to_heirs_at_law">To Heirs at Law</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            <!-- Article V — Executor -->
+            <section class="block" id="sec-executor">
+              <h2>Article V — Executor</h2>
+              <div class="row">
+                <div class="field"><label>Primary Executor — First</label><input type="text" id="ex1First"></div>
+                <div class="field"><label>Primary Executor — Middle</label><input type="text" id="ex1Middle"></div>
+                <div class="field"><label>Primary Executor — Last</label><input type="text" id="ex1Last"></div>
+              </div>
+              <div id="exAltList" class="list" style="margin-top:8px"></div>
+              <div class="btnrow"><button type="button" id="btnAddExAlt">+ Add Alternate Executor</button></div>
+              <div class="divider"></div>
+              <div class="row">
+                <div class="field">
+                  <label>Executor Compensation</label>
+                  <select id="exCompYN">
+                    <option value="">— select —</option>
+                    <option value="yes">Allow compensation</option>
+                    <option value="no">Waive compensation</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Corporate Fiduciary Option</label>
+                  <select id="exCorp">
+                    <option value="">— select —</option>
+                    <option value="allow">Allow corporate fiduciary</option>
+                    <option value="disallow">Disallow</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Bond Requirement</label>
+                  <select id="exBond">
+                    <option value="">— select —</option>
+                    <option value="waive">Waive bond</option>
+                    <option value="require">Require bond</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            <!-- Article VII — Minors Trust -->
+            <section class="block" id="sec-minors">
+              <h2>Article VII — Contingent Trust for Minors</h2>
+
+              <div class="row">
+                <div class="field"><label>Create minors’ trust if a beneficiary is under ___ years</label><input type="text" id="mtAge" placeholder="e.g., 25"></div>
+                <div class="field">
+                  <label>HEMS Standard</label>
+                  <select id="mtHEMS">
+                    <option value="">— select —</option>
+                    <option value="yes">Include HEMS standard</option>
+                    <option value="no">Do not include</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Age-Based Staging</label>
+                  <select id="mtStages">
+                    <option value="">— select —</option>
+                    <option value="none">None (outright when age met)</option>
+                    <option value="two">Two stages (e.g., 50/50)</option>
+                    <option value="three">Three stages (e.g., 33/33/34)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div id="mtStagesDetails" style="display:none">
+                <div class="row">
+                  <div class="field"><label>Stage 1 — %</label><input type="text" id="mtP1" placeholder="e.g., 33"></div>
+                  <div class="field"><label>Stage 1 — Age</label><input type="text" id="mtA1" placeholder="e.g., 21"></div>
+                  <div class="field"><label>Stage 2 — %</label><input type="text" id="mtP2" placeholder="e.g., 33"></div>
+                  <div class="field"><label>Stage 2 — Age</label><input type="text" id="mtA2" placeholder="e.g., 25"></div>
+                  <div class="field"><label>Stage 3 — %</label><input type="text" id="mtP3" placeholder="e.g., 34"></div>
+                  <div class="field"><label>Stage 3 — Age</label><input type="text" id="mtA3" placeholder="e.g., 30"></div>
+                </div>
+              </div>
+
+              <div class="divider"></div>
+              <h3 style="margin:6px 0 8px">Trustee Ladder</h3>
+              <div class="row">
+                <div class="field"><label>Primary Trustee — First</label><input type="text" id="tr1First"></div>
+                <div class="field"><label>Primary Trustee — Middle</label><input type="text" id="tr1Middle"></div>
+                <div class="field"><label>Primary Trustee — Last</label><input type="text" id="tr1Last"></div>
+              </div>
+              <div id="trAltList" class="list" style="margin-top:8px"></div>
+              <div class="btnrow"><button type="button" id="btnAddTrAlt">+ Add Alternate Trustee</button></div>
+            </section>
+
+            <!-- Articles II/III/VI/VIII/IX — Misc -->
+            <section class="block" id="sec-misc">
+              <h2>Articles II, III, VI, VIII, IX — Other Clauses</h2>
+              <div class="row">
+                <div class="field">
+                  <label>Debts/Taxes Handling (Art. II)</label>
+                  <select id="miscDebtsTaxes">
+                    <option value="">— select —</option>
+                    <option value="pay_all_costs_taxes_from_residue">Residue bears taxes (default)</option>
+                    <option value="apportion_estate_tax">Apportion estate tax</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Tangible Personal Property (Art. III)</label>
+                  <select id="miscTangible">
+                    <option value="">— select —</option>
+                    <option value="memo_policy_only">Honor memo (default)</option>
+                    <option value="memo_plus_specifics">Memo + specific bequests</option>
+                    <option value="no_memo_specifics_only">Specific bequests only</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Executor Powers (Art. VI)</label>
+                  <select id="miscPowers">
+                    <option value="">— select —</option>
+                    <option value="broad_ucta_style">Broad modern powers (default)</option>
+                    <option value="limited_basic">Limited basic powers</option>
+                  </select>
+                </div>
+              </div>
+
+              <div id="tangibleSpecifics" style="display:none">
+                <div class="row">
+                  <div class="field" style="flex:1 1 100%">
+                    <label>Specific Tangible Bequests (one per line; "Item — To Person")</label>
+                    <textarea id="tangibleLines" placeholder="e.g., Grandfather clock — To Jane Doe&#10;Diamond ring — To John Doe"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" style="margin-top:8px">
+                <div class="field">
+                  <label>Execution/Attestation (Art. IX)</label>
+                  <select id="miscExecution">
+                    <option value="">— select —</option>
+                    <option value="standard_nj_self_proving">New Jersey self-proving affidavit</option>
+                    <option value="basic_execution_only">Witnesses only (no self-proving)</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Witness #1 — First</label><input type="text" id="w1First">
+                </div>
+                <div class="field">
+                  <label>Witness #1 — Last</label><input type="text" id="w1Last">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="field">
+                  <label>Witness #2 — First</label><input type="text" id="w2First">
+                </div>
+                <div class="field">
+                  <label>Witness #2 — Last</label><input type="text" id="w2Last">
+                </div>
+                <div class="field">
+                  <label>Notary Commission Expiration (MM/DD/YYYY)</label><input type="text" id="notaryExp" placeholder="MM/DD/YYYY">
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+          <div class="col-4">
+            <!-- Actions -->
+            <section class="block">
+              <h2>Quick Actions</h2>
+              <div class="btnrow">
+                <button class="ghost" id="btnPreviewJSON" type="button">Preview JSON</button>
+                <button id="btnCopyJSON" type="button">Copy JSON</button>
+                <button class="safe" id="btnDownloadJSON" type="button">Download JSON</button>
+              </div>
+              <div class="btnrow">
+                <button id="btnPreviewWill" type="button">Preview Will (Skeleton + Clauses)</button>
+              </div>
+              <div class="btnrow">
+                <button class="ghost" id="btnImportJSON" type="button">Import JSON</button>
+                <input id="fileImportJSON" type="file" accept="application/json" style="display:none">
+                <button id="btnToggleInlinePreview" type="button">Toggle Inline Preview</button>
+              </div>
+
+            </section>
+
+            <section class="block">
+              <h2>Blueprint</h2>
+              <p class="muted">Live mapping of selections → clause keys.</p>
+              <div id="blueprintView" class="kvs" aria-live="polite"></div>
+            </section>
+
+            <section class="block">
+              <h2>Validation</h2>
+              <div id="validationView" class="kvs" aria-live="polite"></div>
+            </section>
+
+            <section class="block">
+              <h2>JSON Preview</h2>
+              <div id="jsonView" class="kvs" aria-live="polite"></div>
+            </section>
+            <section class="block" id="inlinePreviewBlock" style="display:none">
+              <h2>Will Preview (Inline)</h2>
+              <pre id="willPreviewInline" class="kvs"></pre>
+            </section>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Single consolidated script ===== -->
+  <script>
+/***********************
+ * Utilities & Helpers *
+ ***********************/
+const STATES=["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY","DC"];
+const NJ_COUNTIES=["Atlantic","Bergen","Burlington","Camden","Cape May","Cumberland","Essex","Gloucester","Hudson","Hunterdon","Mercer","Middlesex","Monmouth","Morris","Ocean","Passaic","Salem","Somerset","Sussex","Union","Warren"];
+function byId(id){return document.getElementById(id)}
+function safe(v){return v==null?"":String(v).trim()}
+function titleCase(s){s=safe(s);if(!s)return"";return s.toLowerCase().replace(/\b([a-z])/g,(m,c)=>c.toUpperCase())}
+function fullName(first,middle,last){const f=titleCase(first),m=titleCase(middle),l=titleCase(last);return[f,m,l].filter(Boolean).join(" ")}
+function pctToNumber(s){if(!s)return 0;const n=parseFloat(String(s).replace(/[%\s]/g,""));return isFinite(n)?n:0}
+const uid=(()=>{let i=1;return()=>i++})();
+
+/***************************
+ * Global In-Memory Store  *
+ ***************************/
+const store={
+  meta:{schemaVersion:"2.1.0",generatedAt:"",locale:"en-US",fillPolicy:"empty-string"},
+  client:{first:"",middle:"",last:"",street:"",city:"",state:"NJ",county:"Atlantic"},
+  spouse:{first:"",middle:"",last:""},
+  maritalStatus:"",
+  family:{hasChildren:false,children:[],useAdoptedART:false,ackStepWhenNoChildren:false},
+  residuary:{
+    primary:"",
+    toNamed:[], // {id, first,middle,last, sharePct}
+    disaster:"",
+    disasterCharity:{name:"",ein:"",sharePct:0},
+    backup:""
+  },
+  executor:{
+    primary:{first:"",middle:"",last:""},
+    alternates:[], // {id, first,middle,last}
+    compYN:"",corp:"",bond:""
+  },
+  minors:{
+    trustAge:"",hems:false,stages:"none",
+    p1:"",a1:"",p2:"",a2:"",p3:"",a3:"",
+    trusteePrimary:{first:"",middle:"",last:""},
+    trusteeAlternates:[]
+  },
+  misc:{
+    debtsTaxes:"",tangible:"",tangibleLines:[],
+    powers:"",execution:"",
+    witness1:{first:"",last:""},
+    witness2:{first:"",last:""},
+    notaryExp:""
+  },
+  blueprint:{},
+  placeholders:{}
+};
+
+/***********************
+ * DOM Initialization  *
+ ***********************/
+function initStates(){
+  const sel = byId("clientState");
+  if (!sel) return;
+  sel.innerHTML =
+    `<option value="">— select —</option>` +
+    STATES.map(s => `<option value="${s}">${s}</option>`).join("");
+  sel.value = store.client.state || "NJ";
+}
+
+function initCounty(){
+  const stateEl  = byId("clientState");
+  const countyEl = byId("clientCounty");
+  if (!stateEl || !countyEl) return;
+
+  const state = stateEl.value;
+
+  if (state === "NJ") {
+    countyEl.outerHTML =
+      `<select id="clientCounty">` +
+        NJ_COUNTIES.map(c => `<option value="${c}">${c}</option>`).join("") +
+      `</select>`;
+  } else {
+    countyEl.outerHTML =
+      `<input type="text" id="clientCounty"
+        placeholder="County / Province / Region"
+        value="${safe(store.client.county)}">`;
+  }
+
+  // Re-bind after swap (outerHTML replaces the node)
+  const newCountyEl = byId("clientCounty");
+  newCountyEl.addEventListener("input",  syncBasics);
+  newCountyEl.addEventListener("change", syncBasics);
+}
+
+/*****************************
+ * Section: Children (stable)
+ *****************************/
+function addChildRow(){
+  const id=uid();
+  store.family.children.push({id,first:"",middle:"",last:"",type:"",dob:"",notes:"",bioParents:[],isART:false});
+  renderChildren();
+}
+function removeChild(id){
+  store.family.children=store.family.children.filter(c=>c.id!==id);
+  renderChildren(); syncBasics();
+}
+function computeParentOptions(){
+  const client=fullName(store.client.first,store.client.middle,store.client.last);
+  const spouse=fullName(store.spouse.first,store.spouse.middle,store.spouse.last);
+  const opts=[{v:"client",label:`Client — ${client||"Unnamed"}`}];
+  if(spouse) opts.push({v:"spouse",label:`Spouse/Partner — ${spouse}`});
+  return opts.map(o=>`<option value="${o.v}">${o.label}</option>`).join("");
+}
+function applyChildEdit(id,inp,key){
+  const row=store.family.children.find(x=>x.id===id); if(!row) return;
+  if(key==="bioParents"){ row.bioParents=Array.from(inp.selectedOptions).map(o=>o.value); }
+  else if(key==="isART"){ row.isART=(inp.value==="yes"); }
+  else{ row[key]=inp.value; }
+  syncBasics();
+}
+function renderChildren(){
+  const list=byId("childrenList"); if(!list) return;
+  list.innerHTML="";
+  const parentOpts=computeParentOptions();
+  store.family.children.forEach(c=>{
+    const el=document.createElement("div");
+    el.className="rowline"; el.dataset.childId=c.id;
+    el.innerHTML=`
+      <div class="mini"><label>First</label><input type="text" data-k="first" value="${safe(c.first)}"></div>
+      <div class="mini"><label>Middle</label><input type="text" data-k="middle" value="${safe(c.middle)}"></div>
+      <div class="mini"><label>Last</label><input type="text" data-k="last" value="${safe(c.last)}"></div>
+      <div class="mini">
+        <label>Type</label>
+        <select data-k="type">
+          <option value="">— select —</option>
+          <option value="biological" ${c.type==="biological"?"selected":""}>Biological</option>
+          <option value="adopted" ${c.type==="adopted"?"selected":""}>Adopted</option>
+          <option value="step" ${c.type==="step"?"selected":""}>Step</option>
+        </select>
+      </div>
+      <div class="mini"><label>DOB</label><input type="date" data-k="dob" value="${safe(c.dob)}"></div>
+      <div class="mini">
+        <label>Biological Parent(s)</label>
+        <select data-k="bioParents" multiple size="2">${parentOpts}</select>
+      </div>
+      <div class="mini">
+        <label>Conceived via ART</label>
+        <select data-k="isART">
+          <option value="no" ${!c.isART?"selected":""}>No</option>
+          <option value="yes" ${c.isART?"selected":""}>Yes</option>
+        </select>
+      </div>
+      <div class="mini" style="flex:2 1 280px"><label>Notes</label><input type="text" data-k="notes" value="${safe(c.notes)}"></div>
+      <button class="ghost right" type="button" data-act="remove">Remove</button>
+    `;
+    el.querySelectorAll("input,select").forEach(inp=>{
+      const k=inp.getAttribute("data-k");
+      if(k==="bioParents"){
+        const opts=Array.from(inp.options).map(o=>o.value);
+        c.bioParents=c.bioParents.filter(v=>opts.includes(v));
+        for(const o of inp.options){ o.selected=c.bioParents.includes(o.value); }
+      }
+      inp.addEventListener("input", ()=>applyChildEdit(c.id,inp,k));
+      inp.addEventListener("change", ()=>applyChildEdit(c.id,inp,k));
+    });
+    el.querySelector('[data-act="remove"]').addEventListener("click", ()=>removeChild(c.id));
+    list.appendChild(el);
+  });
+}
+
+/************************
+ * Section: Residuary
+ ************************/
+function addResBenRow(){
+  const id=uid();
+  store.residuary.toNamed.push({id,first:"",middle:"",last:"",sharePct:0});
+  renderResBen();
+}
+function removeResBen(id){
+  store.residuary.toNamed=store.residuary.toNamed.filter(b=>b.id!==id);
+  renderResBen(); syncBasics();
+}
+function renderResBen(){
+  const host=byId("resBenList"); if(!host) return;
+  host.innerHTML="";
+  store.residuary.toNamed.forEach(b=>{
+    const row=document.createElement("div");
+    row.className="rowline"; row.dataset.benId=b.id;
+    row.innerHTML=`
+      <div class="mini"><label>First</label><input type="text" data-k="first" value="${safe(b.first)}"></div>
+      <div class="mini"><label>Middle</label><input type="text" data-k="middle" value="${safe(b.middle)}"></div>
+      <div class="mini"><label>Last</label><input type="text" data-k="last" value="${safe(b.last)}"></div>
+      <div class="mini"><label>Share %</label><input type="number" min="0" max="100" step="0.01" data-k="sharePct" value="${safe(b.sharePct)}"></div>
+      <button class="ghost right" type="button" data-act="remove">Remove</button>
+    `;
+    row.querySelectorAll("input").forEach(inp=>{
+      const k=inp.getAttribute("data-k");
+      inp.addEventListener("input", ()=>{
+        if(k==="sharePct"){ b.sharePct=pctToNumber(inp.value); }
+        else{ b[k]=inp.value; }
+        syncBasics();
+      });
+    });
+    row.querySelector('[data-act="remove"]').addEventListener("click", ()=>removeResBen(b.id));
+    host.appendChild(row);
+  });
+}
+function renderDisasterDetails(){
+  const mode=store.residuary.disaster;
+  const dWrap=byId("resDisasterDetails"), cRow=byId("disasterCharityRow");
+  if(!dWrap||!cRow) return;
+  const showChar=(mode==="to_charity_named"||mode==="split_charity_and_heirs");
+  dWrap.style.display=mode?"":"none";
+  cRow.style.display=showChar?"":"none";
+}
+
+/*****************************
+ * Deriveds & Sync Functions *
+ *****************************/
+function updateDerived(){
+  store.meta.generatedAt=new Date().toISOString();
+  const clientFull=fullName(store.client.first,store.client.middle,store.client.last);
+  const spouseFull=fullName(store.spouse.first,store.spouse.middle,store.spouse.last);
+  store.placeholders={
+    ClientFullName:clientFull,
+    ClientCity:titleCase(store.client.city),
+    ClientCounty:titleCase(store.client.county||""),
+    SpouseFullName:spouseFull,
+    Witness1FullName:fullName(store.misc.witness1.first,"",store.misc.witness1.last),
+    Witness2FullName:fullName(store.misc.witness2.first,"",store.misc.witness2.last),
+    NotaryExpirationDate:safe(store.misc.notaryExp)
+  };
+  store.blueprint={
+    "Article I — Family":[],
+    "Article II — Debts/Taxes":[],
+    "Article III — Tangible":[],
+    "Article IV — Residuary":[],
+    "Article V — Executor":[],
+    "Article VI — Powers":[],
+    "Article VII — Minors Trust":[],
+    "Article VIII — Misc":[],
+    "Article IX — Execution":[]
+  };
+}
+
+function syncBasics(){
+  if(byId("clientFirst")){ store.client.first=byId("clientFirst").value; }
+  if(byId("clientMiddle")){ store.client.middle=byId("clientMiddle").value; }
+  if(byId("clientLast")){ store.client.last=byId("clientLast").value; }
+  if(byId("clientStreet")){ store.client.street=byId("clientStreet").value; }
+  if(byId("clientCity")){ store.client.city=byId("clientCity").value; }
+  if(byId("clientState")){ store.client.state=byId("clientState").value||"NJ"; }
+  if(byId("clientCounty")){ store.client.county=byId("clientCounty").value; }
+
+  if(byId("maritalStatus")){
+    store.maritalStatus=byId("maritalStatus").value;
+    const showSpouse=["married","domestic_partner","separated"].includes(store.maritalStatus);
+    const row=byId("spouseRow"); if(row) row.style.display=showSpouse?"":"none";
+    if(showSpouse){
+      store.spouse.first = byId("spouseFirst")?.value||"";
+      store.spouse.middle= byId("spouseMiddle")?.value||"";
+      store.spouse.last  = byId("spouseLast")?.value||"";
+    }else{
+      store.spouse={first:"",middle:"",last:""};
+    }
+  }
+
+  updateDerived(); validateAll(); determineBlueprint(); renderBlueprint(); renderJSON();
+}
+
+/****************
+ * Validation   *
+ ****************/
+function validateAll(){
+  const errs=[];
+  if(!store.client.first||!store.client.last){ errs.push("Client first/last name is required."); }
+  if(!store.client.city){ errs.push("Client city is required."); }
+  if(!store.client.state){ errs.push("Client state is required."); }
+
+  if(store.residuary.primary==="to_named_beneficiaries_shares"){
+    const total = store.residuary.toNamed.reduce((s,b)=> s + (Number(b.sharePct)||0), 0);
+const totalRounded = Math.round(total * 100) / 100;  // keep two decimals
+if (Math.abs(Math.round(total*100) - 10000) > 1) {
+  errs.push(`Residuary shares must total 100%. Current total: ${totalRounded}%.`);
+}
+
+    store.residuary.toNamed.forEach((b,i)=>{
+      const f=fullName(b.first,b.middle,b.last);
+      if(!f) errs.push(`Residuary beneficiary #${i+1} missing name.`);
+      if(b.sharePct==null || Number.isNaN(Number(b.sharePct))){ errs.push(`Residuary beneficiary #${i+1} missing share %.`); }
+    });
+  }
+  if(["all_to_spouse_then_descendants_per_stirpes","to_trust_for_spouse_then_descendants_per_stirpes"].includes(store.residuary.primary)){
+    const sFull=fullName(store.spouse.first,store.spouse.middle,store.spouse.last);
+    if(!sFull){ errs.push("Primary plan references a spouse, but spouse name is blank."); }
+  }
+
+  byId("validationView") && (byId("validationView").textContent = errs.length?("Errors:\n- "+errs.join("\n- ")):"No blocking errors.");
+  return errs;
+}
+
+/****************
+ * Blueprint    *
+ ****************/
+const CLAUSES={
+  family:{
+    adopted_art_def:"Family_Adopted_ART",
+    stepchildren_ack:"Family_Stepchildren_Acknowledgement",
+    basic_children_id:"Family_Basic_Children_ID",
+    no_children:"Family_No_Children"
+  },
+  debtsTaxes:{
+    pay_all_costs_taxes_from_residue:"DebtsTaxes_AllFromResidue",
+    apportion_estate_tax:"DebtsTaxes_Apportion"
+  },
+  tangible:{
+    memo_policy_only:"Tangible_MemoPolicy_Only",
+    memo_plus_specifics:"Tangible_MemoPlusSpecifics",
+    no_memo_specifics_only:"Tangible_SpecificsOnly"
+  },
+  residuary:{
+    all_to_spouse_then_descendants_per_stirpes:"Res_AllToSpouse_Then_PerStirpes",
+    to_descendants_per_stirpes:"Res_ToDescendants_PerStirpes",
+    to_named_beneficiaries_shares:"Res_ToNamedBeneficiaries_Shares",
+    to_trust_for_spouse_then_descendants_per_stirpes:"Res_ToSpousalTrust_Then_PerStirpes",
+    disaster:{
+      to_heirs_at_law:"Res_Disaster_HeirsAtLaw",
+      to_charity_named:"Res_Disaster_ToCharity",
+      split_charity_and_heirs:"Res_Disaster_SplitCharityHeirs"
+    },
+    backup:{
+      per_stirpes_to_descendants:"Res_Backup_PerStirpes",
+      per_capita_to_descendants:"Res_Backup_PerCapita",
+      to_heirs_at_law:"Res_Backup_HeirsAtLaw"
+    }
+  },
+  executor:{
+    ladder:"Executor_Ladder",
+    comp_yes:"Executor_Compensation_Yes",
+    comp_no:"Executor_Compensation_No",
+    corp_allow:"Executor_Corporate_Allow",
+    corp_disallow:"Executor_Corporate_Disallow",
+    bond_waive:"Executor_Bond_Waive",
+    bond_require:"Executor_Bond_Require"
+  },
+  powers:{broad_ucta_style:"Powers_Broad_UCTA",limited_basic:"Powers_Limited"},
+  minors:{
+    trust_core:"MinorsTrust_Core",
+    hems:"MinorsTrust_HEMS",
+    staging_two:"MinorsTrust_TwoStage",
+    staging_three:"MinorsTrust_ThreeStage",
+    trustee_block:"MinorsTrust_TrusteeBlock"
+  },
+  misc:{execution_standard_nj:"Execution_NJ_SelfProving",execution_basic:"Execution_Basic"}
+};
+// --- Simple text library for all clause keys we currently output ---
+const CLAUSE_TEXT = {
+  // Article I — Family
+  Family_Basic_Children_ID:
+`I have the following children: {{ChildrenList}}.`,
+
+  Family_Adopted_ART:
+`References to “children” include legally adopted children and those conceived through assisted reproductive technology (ART).`,
+
+  Family_No_Children:
+`I have no living children.`,
+
+  Family_Stepchildren_Acknowledgement:
+`I have stepchildren whom I do not intend to include as my descendants unless otherwise expressly provided.`,
+
+  // Article II — Debts/Taxes
+  DebtsTaxes_AllFromResidue:
+`All just debts, funeral expenses, expenses of administration, and all estate and inheritance taxes shall be paid from my residuary estate.`,
+
+  DebtsTaxes_Apportion:
+`Estate and inheritance taxes shall be apportioned among recipients in accordance with applicable law; my Executor shall make equitable allocations.`,
+
+  // Article III — Tangible Personal Property
+  Tangible_MemoPolicy_Only:
+`My tangible personal property shall be distributed by my Executor, taking into account any memorandum I may leave.`,
+
+  Tangible_MemoPlusSpecifics:
+`My tangible personal property shall be distributed per any memorandum and the specific gifts listed below: {{TangibleSpecifics}}`,
+
+  Tangible_SpecificsOnly:
+`My tangible personal property shall be distributed as follows: {{TangibleSpecifics}}`,
+
+  // Article IV — Residuary
+  Res_AllToSpouse_Then_PerStirpes:
+`I give my residuary estate to my spouse, {{SpouseFullName}}. If my spouse does not survive me, I give my residuary estate to my descendants, per stirpes.`,
+
+  Res_ToDescendants_PerStirpes:
+`I give my residuary estate to my descendants, per stirpes.`,
+
+  Res_ToNamedBeneficiaries_Shares:
+`I give my residuary estate to the following beneficiaries in the shares indicated: {{ResNamedShares}} (total 100%).`,
+
+  Res_ToSpousalTrust_Then_PerStirpes:
+`I give my residuary estate in trust for the benefit of my spouse, with remainder to my descendants, per stirpes.`,
+
+  Res_Disaster_HeirsAtLaw:
+`If all primary beneficiaries predecease me, my residuary estate passes to my heirs at law.`,
+
+  Res_Disaster_ToCharity:
+`If all primary beneficiaries predecease me, my residuary estate passes to {{DisasterCharity}}.`,
+
+  Res_Disaster_SplitCharityHeirs:
+`If all primary beneficiaries predecease me, my residuary estate is divided {{DisasterCharityPct}}% to {{DisasterCharity}} and the balance to my heirs at law.`,
+
+  Res_Backup_PerStirpes:
+`If any share of my residuary estate fails, such share shall be distributed to my descendants, per stirpes.`,
+
+  Res_Backup_PerCapita:
+`If any share of my residuary estate fails, such share shall be distributed to my descendants, per capita at each generation.`,
+
+  Res_Backup_HeirsAtLaw:
+`If any share of my residuary estate fails, such share shall be distributed to my heirs at law.`,
+
+  // Article V — Executor
+  Executor_Ladder:
+`I nominate {{ExecutorPrimary}} as Executor.{{ExecutorAltTail}}`,
+
+  Executor_Compensation_Yes:
+`My Executor may receive reasonable compensation for services.`,
+
+  Executor_Compensation_No:
+`My Executor shall serve without compensation, but shall be reimbursed for reasonable expenses.`,
+
+  Executor_Corporate_Allow:
+`A corporate fiduciary may serve as Executor or successor Executor.`,
+
+  Executor_Corporate_Disallow:
+`No corporate fiduciary may serve as Executor.`,
+
+  Executor_Bond_Waive:
+`No bond shall be required of any individual Executor.`,
+
+  Executor_Bond_Require:
+`A bond shall be required of any Executor.`,
+
+  // Article VI — Powers
+  Powers_Broad_UCTA:
+`My Executor shall have broad fiduciary powers customarily granted under modern statutes, including the power to retain, invest, sell, lease, and distribute in cash or in kind.`,
+
+  Powers_Limited:
+`My Executor shall have only those powers necessary to collect, conserve, and distribute my estate.`,
+
+  // Article VII — Minors Trust
+  MinorsTrust_Core:
+`Any share passing to a beneficiary who has not attained the age of {{TrustAge}} years shall be held in trust for that beneficiary.`,
+
+  MinorsTrust_HEMS:
+`The Trustee may distribute for health, education, maintenance, and support (HEMS).`,
+
+  MinorsTrust_TwoStage:
+`Upon the beneficiary attaining the specified ages, the trust shall distribute in two stages: {{TwoStagePlan}}.`,
+
+  MinorsTrust_ThreeStage:
+`Upon the beneficiary attaining the specified ages, the trust shall distribute in three stages: {{ThreeStagePlan}}.`,
+
+  MinorsTrust_TrusteeBlock:
+`I appoint {{TrusteePrimary}} as Trustee. If unable or unwilling to serve, the following shall serve in order: {{TrusteeAlternates}}.`,
+
+  // Article IX — Execution
+  Execution_NJ_SelfProving:
+`This Will is executed with a New Jersey self-proving affidavit.`,
+
+  Execution_Basic:
+`This Will is executed in the presence of two witnesses.`,
+
+  // Simple headings
+  __HEADINGS__: {
+    I:   "ARTICLE I — FAMILY",
+    II:  "ARTICLE II — DEBTS AND TAXES",
+    III: "ARTICLE III — TANGIBLE PERSONAL PROPERTY",
+    IV:  "ARTICLE IV — RESIDUARY ESTATE",
+    V:   "ARTICLE V — EXECUTOR",
+    VI:  "ARTICLE VI — POWERS",
+    VII: "ARTICLE VII — CONTINGENT TRUST FOR MINORS",
+    VIII:"ARTICLE VIII — MISCELLANEOUS",
+    IX:  "ARTICLE IX — EXECUTION"
+  }
+};
+
+function determineBlueprint(){
+  const bp={
+    "Article I — Family":[],
+    "Article II — Debts/Taxes":[],
+    "Article III — Tangible":[],
+    "Article IV — Residuary":[],
+    "Article V — Executor":[],
+    "Article VI — Powers":[],
+    "Article VII — Minors Trust":[],
+    "Article VIII — Misc":[],
+    "Article IX — Execution":[]
+  };
+
+  // FAMILY (I)
+  if(store.family.hasChildren){
+    bp["Article I — Family"].push(CLAUSES.family.basic_children_id);
+    if(store.family.useAdoptedART) bp["Article I — Family"].push(CLAUSES.family.adopted_art_def);
+  }else{
+    bp["Article I — Family"].push(CLAUSES.family.no_children);
+    if(store.family.ackStepWhenNoChildren) bp["Article I — Family"].push(CLAUSES.family.stepchildren_ack);
+  }
+
+  // II
+  if(store.misc.debtsTaxes) bp["Article II — Debts/Taxes"].push(CLAUSES.debtsTaxes[store.misc.debtsTaxes]);
+
+  // III
+  if(store.misc.tangible) bp["Article III — Tangible"].push(CLAUSES.tangible[store.misc.tangible]);
+
+  // IV
+  if(store.residuary.primary) bp["Article IV — Residuary"].push(CLAUSES.residuary[store.residuary.primary]);
+  if(store.residuary.disaster) bp["Article IV — Residuary"].push(CLAUSES.residuary.disaster[store.residuary.disaster]);
+  if(store.residuary.backup) bp["Article IV — Residuary"].push(CLAUSES.residuary.backup[store.residuary.backup]);
+
+  // V
+  bp["Article V — Executor"].push(CLAUSES.executor.ladder);
+  if(store.executor.compYN==="yes") bp["Article V — Executor"].push(CLAUSES.executor.comp_yes);
+  if(store.executor.compYN==="no")  bp["Article V — Executor"].push(CLAUSES.executor.comp_no);
+  if(store.executor.corp==="allow") bp["Article V — Executor"].push(CLAUSES.executor.corp_allow);
+  if(store.executor.corp==="disallow") bp["Article V — Executor"].push(CLAUSES.executor.corp_disallow);
+  if(store.executor.bond==="waive") bp["Article V — Executor"].push(CLAUSES.executor.bond_waive);
+  if(store.executor.bond==="require") bp["Article V — Executor"].push(CLAUSES.executor.bond_require);
+
+  // VI
+  if(store.misc.powers) bp["Article VI — Powers"].push(CLAUSES.powers[store.misc.powers]);
+
+  // VII
+  if(store.minors.trustAge || store.family.hasChildren){
+    bp["Article VII — Minors Trust"].push(CLAUSES.minors.trust_core);
+    bp["Article VII — Minors Trust"].push(CLAUSES.minors.trustee_block);
+    if(store.minors.hems) bp["Article VII — Minors Trust"].push(CLAUSES.minors.hems);
+    if(store.minors.stages==="two") bp["Article VII — Minors Trust"].push(CLAUSES.minors.staging_two);
+    if(store.minors.stages==="three") bp["Article VII — Minors Trust"].push(CLAUSES.minors.staging_three);
+  }
+
+  // IX
+  if(store.misc.execution==="standard_nj_self_proving") bp["Article IX — Execution"].push(CLAUSES.misc.execution_standard_nj);
+  if(store.misc.execution==="basic_execution_only") bp["Article IX — Execution"].push(CLAUSES.misc.execution_basic);
+
+  store.blueprint=bp;
+}
+
+function renderBlueprint(){
+  const lines=[];
+  for(const [k,arr] of Object.entries(store.blueprint)){
+    lines.push(k+(arr.length? " — "+arr.join(", "):""));
+  }
+  byId("blueprintView") && (byId("blueprintView").textContent=lines.join("\n"));
+}
+
+/**************
+ * JSON I/O   *
+ **************/
+function exportJSON(){
+  return {
+    meta:{...store.meta},
+    client:{...store.client},
+    spouse:{...store.spouse},
+    maritalStatus:store.maritalStatus,
+    family:{
+      hasChildren:store.family.hasChildren,
+      useAdoptedART:store.family.useAdoptedART,
+      ackStepWhenNoChildren:store.family.ackStepWhenNoChildren,
+      children:store.family.children.map(c=>({
+        id:c.id,first:c.first,middle:c.middle,last:c.last,type:c.type,
+        dob:c.dob,notes:c.notes,bioParents:[...c.bioParents],isART:!!c.isART
+      }))
+    },
+    residuary:{
+      primary:store.residuary.primary,
+      toNamed:store.residuary.toNamed.map(b=>({id:b.id,first:b.first,middle:b.middle,last:b.last,sharePct:b.sharePct})),
+      disaster:store.residuary.disaster,
+      disasterCharity:{...store.residuary.disasterCharity},
+      backup:store.residuary.backup
+    },
+    executor: JSON.parse(JSON.stringify(store.executor)),
+    minors:   JSON.parse(JSON.stringify(store.minors)),
+    misc:     JSON.parse(JSON.stringify(store.misc)),
+    blueprint:{...store.blueprint},
+    placeholders:{...store.placeholders}
+  };
+}
+function renderJSON(){ byId("jsonView") && (byId("jsonView").textContent=JSON.stringify(exportJSON(),null,2)); }
+async function copyJSON(){
+  try{ await navigator.clipboard.writeText(JSON.stringify(exportJSON(),null,2)); alert("JSON copied."); }
+  catch(e){ console.warn(e); alert("Copy failed; select and copy manually from the preview."); }
+}
+function downloadJSON(){
+  const blob=new Blob([JSON.stringify(exportJSON(),null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob); const a=document.createElement("a");
+  a.href=url; a.download="will-intake.json"; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),500);
+}
+
+/*********************************
+ * Section: Executor & Minors UI *
+ *********************************/
+function renderExAlts(){
+  const host=byId("exAltList"); if(!host) return;
+  host.innerHTML="";
+  store.executor.alternates.forEach(a=>{
+    const row=document.createElement("div");
+    row.className="rowline";
+    row.innerHTML=`
+      <div class="mini"><label>Alt Executor — First</label><input type="text" data-k="first" value="${safe(a.first)}"></div>
+      <div class="mini"><label>Alt Executor — Middle</label><input type="text" data-k="middle" value="${safe(a.middle)}"></div>
+      <div class="mini"><label>Alt Executor — Last</label><input type="text" data-k="last" value="${safe(a.last)}"></div>
+      <button class="ghost right" type="button" data-act="rm">Remove</button>
+    `;
+    row.querySelectorAll("input").forEach(inp=>{
+      const k=inp.getAttribute("data-k");
+      inp.addEventListener("input", ()=>{ a[k]=inp.value; syncExecutor(); });
+    });
+    row.querySelector('[data-act="rm"]').addEventListener("click", ()=>{ removeExAlt(a.id); });
+    host.appendChild(row);
+  });
+}
+function addExAltRow(){ store.executor.alternates.push({id:uid(),first:"",middle:"",last:""}); renderExAlts(); syncExecutor(); }
+function removeExAlt(id){ store.executor.alternates=store.executor.alternates.filter(x=>x.id!==id); renderExAlts(); syncExecutor(); }
+function syncExecutor(){
+  store.executor.primary.first = byId("ex1First")?.value||"";
+  store.executor.primary.middle= byId("ex1Middle")?.value||"";
+  store.executor.primary.last  = byId("ex1Last")?.value||"";
+  store.executor.compYN=byId("exCompYN")?.value||"";
+  store.executor.corp  =byId("exCorp")?.value||"";
+  store.executor.bond  =byId("exBond")?.value||"";
+  updateDerived(); validateAll(); determineBlueprint(); renderBlueprint(); renderJSON();
+}
+
+function renderTrAlts(){
+  const host=byId("trAltList"); if(!host) return;
+  host.innerHTML="";
+  store.minors.trusteeAlternates.forEach(t=>{
+    const row=document.createElement("div");
+    row.className="rowline";
+    row.innerHTML=`
+      <div class="mini"><label>Alt Trustee — First</label><input type="text" data-k="first" value="${safe(t.first)}"></div>
+      <div class="mini"><label>Alt Trustee — Middle</label><input type="text" data-k="middle" value="${safe(t.middle)}"></div>
+      <div class="mini"><label>Alt Trustee — Last</label><input type="text" data-k="last" value="${safe(t.last)}"></div>
+      <button class="ghost right" type="button" data-act="rm">Remove</button>
+    `;
+    row.querySelectorAll("input").forEach(inp=>{
+      const k=inp.getAttribute("data-k");
+      inp.addEventListener("input", ()=>{ t[k]=inp.value; syncMinors(); });
+    });
+    row.querySelector('[data-act="rm"]').addEventListener("click", ()=>{ removeTrAlt(t.id); });
+    host.appendChild(row);
+  });
+}
+function addTrAltRow(){ store.minors.trusteeAlternates.push({id:uid(),first:"",middle:"",last:""}); renderTrAlts(); syncMinors(); }
+function removeTrAlt(id){ store.minors.trusteeAlternates=store.minors.trusteeAlternates.filter(x=>x.id!==id); renderTrAlts(); syncMinors(); }
+function syncMinors(){
+  store.minors.trustAge=byId("mtAge")?.value||"";
+  store.minors.hems=(byId("mtHEMS")?.value==="yes");
+  store.minors.stages=byId("mtStages")?.value||"none";
+  ["mtP1","mtA1","mtP2","mtA2","mtP3","mtA3"].forEach(id=>{
+    const el=byId(id); if(!el) return;
+    const k=id.slice(2).toLowerCase(); // p1,a1,p2,a2,p3,a3
+    store.minors[k]=el.value;
+  });
+  store.minors.trusteePrimary.first = byId("tr1First")?.value||"";
+  store.minors.trusteePrimary.middle= byId("tr1Middle")?.value||"";
+  store.minors.trusteePrimary.last  = byId("tr1Last")?.value||"";
+  updateDerived(); validateAll(); determineBlueprint(); renderBlueprint(); renderJSON();
+}
+
+/***********************
+ * Misc (Debts/Tangible/Powers/Exec)
+ ***********************/
+function syncMisc(){
+  if(byId("miscDebtsTaxes")) store.misc.debtsTaxes=byId("miscDebtsTaxes").value;
+  if(byId("miscTangible"))   store.misc.tangible  =byId("miscTangible").value;
+  if(byId("tangibleLines"))  store.misc.tangibleLines=(byId("tangibleLines").value||"").split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+  if(byId("miscPowers"))     store.misc.powers    =byId("miscPowers").value;
+  if(byId("miscExecution"))  store.misc.execution =byId("miscExecution").value;
+  if(byId("w1First")) store.misc.witness1.first=byId("w1First").value;
+  if(byId("w1Last"))  store.misc.witness1.last =byId("w1Last").value;
+  if(byId("w2First")) store.misc.witness2.first=byId("w2First").value;
+  if(byId("w2Last"))  store.misc.witness2.last =byId("w2Last").value;
+  if(byId("notaryExp")) store.misc.notaryExp=byId("notaryExp").value;
+
+  const tSel=byId("miscTangible"); const block=byId("tangibleSpecifics");
+  if(tSel&&block){ block.style.display=(tSel.value==="memo_plus_specifics"||tSel.value==="no_memo_specifics_only")?"":"none"; }
+
+  updateDerived(); validateAll(); determineBlueprint(); renderBlueprint(); renderJSON();
+}
+function applyStoreToForm(){
+  // Core
+  byId("clientFirst").value  = store.client.first || "";
+  byId("clientMiddle").value = store.client.middle || "";
+  byId("clientLast").value   = store.client.last || "";
+  byId("clientStreet").value = store.client.street || "";
+  byId("clientCity").value   = store.client.city || "";
+  byId("clientState").value  = store.client.state || "NJ";
+  initCounty(); // rebuilds county control
+  byId("clientCounty").value = store.client.county || "";
+
+  byId("maritalStatus").value = store.maritalStatus || "";
+  const showSpouse = ["married","domestic_partner","separated"].includes(store.maritalStatus);
+  byId("spouseRow").style.display = showSpouse ? "" : "none";
+  if (showSpouse){
+    byId("spouseFirst").value  = store.spouse.first || "";
+    byId("spouseMiddle").value = store.spouse.middle || "";
+    byId("spouseLast").value   = store.spouse.last || "";
+  }
+
+  // Children
+  byId("hasChildren").value = store.family.hasChildren ? "yes" : (store.family.hasChildren===false ? "no" : "");
+  byId("childrenZone").style.display = store.family.hasChildren ? "" : "none";
+  renderChildren();
+
+  // Family toggles
+  byId("useAdoptedART").value = store.family.useAdoptedART ? "yes" : (store.family.useAdoptedART===false ? "no" : "");
+  byId("ackStepWhenNoChildren").value = store.family.ackStepWhenNoChildren ? "yes" : (store.family.ackStepWhenNoChildren===false ? "no" : "");
+
+  // Residuary
+  byId("resPrimary").value = store.residuary.primary || "";
+  byId("resToNamed").style.display = (store.residuary.primary==="to_named_beneficiaries_shares") ? "" : "none";
+  renderResBen();
+  byId("resDisaster").value = store.residuary.disaster || "";
+  renderDisasterDetails();
+  byId("disasterCharityName").value = store.residuary.disasterCharity?.name || "";
+  byId("disasterCharityEIN").value  = store.residuary.disasterCharity?.ein || "";
+  byId("disasterCharityPct").value  = store.residuary.disasterCharity?.sharePct ?? "";
+
+  byId("resBackup").value = store.residuary.backup || "";
+
+  // Executor
+  byId("ex1First").value  = store.executor.primary.first || "";
+  byId("ex1Middle").value = store.executor.primary.middle || "";
+  byId("ex1Last").value   = store.executor.primary.last || "";
+  byId("exCompYN").value  = store.executor.compYN || "";
+  byId("exCorp").value    = store.executor.corp || "";
+  byId("exBond").value    = store.executor.bond || "";
+  renderExAlts();
+
+  // Minors Trust
+  byId("mtAge").value     = store.minors.trustAge || "";
+  byId("mtHEMS").value    = store.minors.hems ? "yes":"no";
+  byId("mtStages").value  = store.minors.stages || "none";
+  byId("mtStagesDetails").style.display = (store.minors.stages==="two"||store.minors.stages==="three") ? "" : "none";
+  ["mtP1","mtA1","mtP2","mtA2","mtP3","mtA3"].forEach(id=>{
+    if (byId(id)) byId(id).value = store.minors[id.slice(2).toLowerCase()] || "";
+  });
+  byId("tr1First").value  = store.minors.trusteePrimary.first || "";
+  byId("tr1Middle").value = store.minors.trusteePrimary.middle || "";
+  byId("tr1Last").value   = store.minors.trusteePrimary.last || "";
+  renderTrAlts();
+
+  // Misc
+  byId("miscDebtsTaxes").value = store.misc.debtsTaxes || "";
+  byId("miscTangible").value   = store.misc.tangible || "";
+  byId("tangibleSpecifics").style.display =
+    (store.misc.tangible==="memo_plus_specifics"||store.misc.tangible==="no_memo_specifics_only") ? "" : "none";
+  byId("tangibleLines").value  = (store.misc.tangibleLines||[]).join("\n");
+  byId("miscPowers").value     = store.misc.powers || "";
+  byId("miscExecution").value  = store.misc.execution || "";
+  byId("w1First").value = store.misc.witness1.first || "";
+  byId("w1Last").value  = store.misc.witness1.last || "";
+  byId("w2First").value = store.misc.witness2.first || "";
+  byId("w2Last").value  = store.misc.witness2.last || "";
+  byId("notaryExp").value = store.misc.notaryExp || "";
+
+  // Derived/blueprint panes
+  updateDerived(); determineBlueprint(); renderBlueprint(); renderJSON();
+}
+
+function migrateIfNeeded(obj){
+  // Example: bump minor mismatches across versions
+  const v = obj?.meta?.schemaVersion || "1.0.0";
+  // Add migrations here as you rev schemas.
+  return obj;
+}
+
+function hydrateFromJSON(obj){
+  const incoming = migrateIfNeeded(obj);
+  if (!incoming || !incoming.client || !incoming.misc) throw new Error("Invalid JSON structure.");
+  Object.assign(store, incoming);
+  applyStoreToForm();
+}
+
+
+/********************
+ * Will Preview shim
+ ********************/
+function renderWillPreview(){
+  updateDerived(); determineBlueprint(); // ensure fresh
+
+  const lines = [];
+
+  // Header
+  lines.push(`${store.placeholders.ClientFullName}`.toUpperCase());
+  const addrBits = [store.client.street, store.client.city && `${store.client.city}, ${store.client.state}`, store.client.county && `County of ${store.client.county}`]
+                    .filter(Boolean).join(" • ");
+  if (addrBits) lines.push(addrBits);
+  lines.push(""); // spacer
+
+  // Helpers
+  const nm = (p)=>[p.first,p.middle,p.last].filter(Boolean).map(titleCase).join(" ");
+const listNames = (arr)=>arr.map(nm).filter(Boolean).join("; ") || "—";
+const childrenList = store.family.children.map(c=>nm(c)).join("; ") || "—";
+const resNamed = store.residuary.toNamed.map(b=>`${nm(b)} — ${b.sharePct}%`).join("; ");
+const tSpecs = (store.misc.tangibleLines||[]).join("; ");
+const execPrimary = nm(store.executor.primary) || "—";
+const execAlts = (store.executor.alternates||[]).map(nm).filter(Boolean).join(" ➝ ") || "—";
+const trPrimary = nm(store.minors.trusteePrimary) || "—";
+const trAlts = (store.minors.trusteeAlternates||[]).map(nm).filter(Boolean).join(" ➝ ") || "—";
+
+// NEW: decide if there are any alternates at all
+const hasExecAlts = !!(store.executor.alternates && store.executor.alternates.some(a=>nm(a)));
+const execAltTail = hasExecAlts
+  ? ` If {{ExecutorPrimary}} does not serve, I nominate in order: {{ExecutorAlternates}}.`
+  : "";
+
+
+  const fill = (txt)=>txt
+    .replaceAll("{{ChildrenList}}", childrenList)
+    .replaceAll("{{TangibleSpecifics}}", tSpecs || "None specified.")
+    .replaceAll("{{ResNamedShares}}", resNamed || "—")
+    .replaceAll("{{SpouseFullName}}", store.placeholders.SpouseFullName || "—")
+    .replaceAll("{{DisasterCharity}}", store.residuary.disasterCharity.name || "the charity I have named")
+    .replaceAll("{{DisasterCharityPct}}", String(store.residuary.disasterCharity.sharePct || 0))
+    .replaceAll("{{ExecutorPrimary}}", execPrimary)
+    .replaceAll("{{ExecutorAlternates}}", execAlts)
+    .replaceAll("{{ExecutorAltTail}}", execAltTail)
+    .replaceAll("{{TrusteePrimary}}", trPrimary)
+    .replaceAll("{{TrusteeAlternates}}", trAlts)
+    .replaceAll("{{TrustAge}}", store.minors.trustAge || "18")
+    .replaceAll("{{TwoStagePlan}}", `${store.minors.p1 || "50"}% at age ${store.minors.a1 || "25"}, balance at age ${store.minors.a2 || "30"}`)
+    .replaceAll("{{ThreeStagePlan}}", `${store.minors.p1 || "33"}% at ${store.minors.a1 || "21"}; ${store.minors.p2 || "33"}% at ${store.minors.a2 || "25"}; ${store.minors.p3 || "34"}% at ${store.minors.a3 || "30"}`);
+
+  // Build article by article based on blueprint
+  const H = CLAUSE_TEXT.__HEADINGS__;
+  const addSection = (headingKey, keys=[])=>{
+    lines.push(H[headingKey]); lines.push("");
+    if (!keys.length) { lines.push("[No clauses selected]"); lines.push(""); return; }
+    keys.forEach(k=>{
+      const t = CLAUSE_TEXT[k];
+      lines.push(t ? fill(t) : `[MISSING: ${k}]`);
+      lines.push(""); // spacer
+    });
+  };
+
+  addSection("I",   store.blueprint["Article I — Family"]);
+  addSection("II",  store.blueprint["Article II — Debts/Taxes"]);
+  addSection("III", store.blueprint["Article III — Tangible"]);
+  addSection("IV",  store.blueprint["Article IV — Residuary"]);
+  addSection("V",   store.blueprint["Article V — Executor"]);
+  addSection("VI",  store.blueprint["Article VI — Powers"]);
+  addSection("VII", store.blueprint["Article VII — Minors Trust"]);
+  addSection("VIII",store.blueprint["Article VIII — Misc"]);
+  addSection("IX",  store.blueprint["Article IX — Execution"]);
+
+  // Show it in a new window
+  const w = window.open("", "_blank");
+  w.document.write(`
+    <title>Will Preview — ${store.placeholders.ClientFullName}</title>
+    <pre style="white-space:pre-wrap; font:14px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; padding:16px;">
+${lines.join("\n")}
+    </pre>
+  `);
+  w.document.close();
+}
+
+
+/****************
+ * MOUNT        *
+ ****************/
+function mount(){
+  initStates(); initCounty();
+
+  // Core listeners
+  byId("clientState")?.addEventListener("change",()=>{ initCounty(); syncBasics(); });
+  document.addEventListener("change",(e)=>{ if(e.target && e.target.id==="clientCounty") syncBasics(); });
+  ["clientFirst","clientMiddle","clientLast","clientStreet","clientCity"].forEach(id=> byId(id)?.addEventListener("input",syncBasics));
+
+  byId("maritalStatus")?.addEventListener("change",()=>{
+    const show=["married","domestic_partner","separated"].includes(byId("maritalStatus").value);
+    const row=byId("spouseRow"); if(row) row.style.display=show?"":"none";
+    if(!show){ store.spouse={first:"",middle:"",last:""}; }
+    syncBasics();
+  });
+  ["spouseFirst","spouseMiddle","spouseLast"].forEach(id=> byId(id)?.addEventListener("input",syncBasics));
+
+  // Children on/off
+  byId("hasChildren")?.addEventListener("change",()=>{
+    const v=byId("hasChildren").value; const show=(v==="yes");
+    const zone=byId("childrenZone"); if(zone) zone.style.display=show?"":"none";
+    store.family.hasChildren=show;
+    if(!show){ store.family.children=[]; renderChildren(); }
+    syncBasics();
+  });
+  byId("btnAddChild")?.addEventListener("click",addChildRow);
+  byId("useAdoptedART")?.addEventListener("change",()=>{ store.family.useAdoptedART=(byId("useAdoptedART").value==="yes"); syncBasics(); });
+  byId("ackStepWhenNoChildren")?.addEventListener("change",()=>{ store.family.ackStepWhenNoChildren=(byId("ackStepWhenNoChildren").value==="yes"); syncBasics(); });
+
+  // Residuary
+  byId("resPrimary")?.addEventListener("change",()=>{
+    store.residuary.primary=byId("resPrimary").value;
+    const toNamed=byId("resToNamed"); if(toNamed) toNamed.style.display=(store.residuary.primary==="to_named_beneficiaries_shares")?"":"none";
+    syncBasics();
+  });
+  byId("btnAddResBen")?.addEventListener("click",addResBenRow);
+  byId("resDisaster")?.addEventListener("change",()=>{
+    store.residuary.disaster=byId("resDisaster").value;
+    renderDisasterDetails(); syncBasics();
+  });
+  ["disasterCharityName","disasterCharityEIN","disasterCharityPct"].forEach(id=>{
+    byId(id)?.addEventListener("input",()=>{
+      store.residuary.disasterCharity.name = byId("disasterCharityName")?.value||"";
+      store.residuary.disasterCharity.ein  = byId("disasterCharityEIN")?.value||"";
+      store.residuary.disasterCharity.sharePct=pctToNumber(byId("disasterCharityPct")?.value||"");
+      syncBasics();
+    });
+  });
+  byId("resBackup")?.addEventListener("change",()=>{ store.residuary.backup=byId("resBackup").value; syncBasics(); });
+
+  // Sidebar
+  byId("btnPreviewJSON")?.addEventListener("click",()=>{ updateDerived(); validateAll(); renderJSON(); });
+  byId("btnCopyJSON")?.addEventListener("click",copyJSON);
+  byId("btnDownloadJSON")?.addEventListener("click",downloadJSON);
+  byId("btnPreviewWill")?.addEventListener("click",()=>{ updateDerived(); validateAll(); renderWillPreview(); });
+
+  // Executor + Minors + Misc wiring
+  byId("btnAddExAlt")?.addEventListener("click",addExAltRow);
+  ["ex1First","ex1Middle","ex1Last"].forEach(id=> byId(id)?.addEventListener("input",syncExecutor));
+  ["exCompYN","exCorp","exBond"].forEach(id=> byId(id)?.addEventListener("change",syncExecutor));
+
+  byId("btnAddTrAlt")?.addEventListener("click",addTrAltRow);
+  ["tr1First","tr1Middle","tr1Last"].forEach(id=> byId(id)?.addEventListener("input",syncMinors));
+  byId("mtAge")?.addEventListener("input",syncMinors);
+  byId("mtHEMS")?.addEventListener("change",syncMinors);
+  byId("mtStages")?.addEventListener("change",()=>{
+    const v=byId("mtStages").value; const det=byId("mtStagesDetails");
+    if(det) det.style.display=(v==="two"||v==="three")?"":"none";
+    syncMinors();
+  });
+  ["mtP1","mtA1","mtP2","mtA2","mtP3","mtA3"].forEach(id=> byId(id)?.addEventListener("input",syncMinors));
+
+  byId("miscDebtsTaxes")?.addEventListener("change",syncMisc);
+  byId("miscTangible")?.addEventListener("change",syncMisc);
+  byId("tangibleLines")?.addEventListener("input",syncMisc);
+  byId("miscPowers")?.addEventListener("change",syncMisc);
+  byId("miscExecution")?.addEventListener("change",syncMisc);
+  ["w1First","w1Last","w2First","w2Last","notaryExp"].forEach(id=> byId(id)?.addEventListener("input",syncMisc));
+
+  // Initial render defaults
+  ["clientFirst","clientMiddle","clientLast","clientStreet","clientCity"].forEach(id=> byId(id)&&(byId(id).value=""));
+  if(byId("maritalStatus")) byId("maritalStatus").value="";
+
+  renderChildren(); renderResBen(); renderExAlts(); renderTrAlts(); renderDisasterDetails();
+
+  updateDerived(); validateAll(); determineBlueprint(); renderBlueprint(); renderJSON();
+}
+
+// Import JSON
+byId("btnImportJSON")?.addEventListener("click", ()=> byId("fileImportJSON").click());
+byId("fileImportJSON")?.addEventListener("change", async (e)=>{
+  const f = e.target.files?.[0]; if(!f) return;
+  try{
+    const txt = await f.text();
+    const obj = JSON.parse(txt);
+    await hydrateFromJSON(obj);
+    alert("JSON imported and form hydrated.");
+  }catch(err){
+    console.error(err);
+    alert("Import failed. Ensure the file is a valid export from this tool.");
+  }finally{
+    e.target.value = ""; // allow re-selecting same file
+  }
+});
+
+// Inline preview
+byId("btnToggleInlinePreview")?.addEventListener("click", ()=>{
+  const block = byId("inlinePreviewBlock");
+  const pre   = byId("willPreviewInline");
+  if (block.style.display==="none"){
+    block.style.display="";
+    // Generate same preview text used for the popup
+    const capture = (()=>{
+      updateDerived(); determineBlueprint();
+      // reuse renderWillPreview()’s inner logic
+      const w = { lines: [] };
+      const H = CLAUSE_TEXT.__HEADINGS__;
+      const nm = (p)=>[p.first,p.middle,p.last].filter(Boolean).map(titleCase).join(" ");
+      const childrenList = store.family.children.map(c=>nm(c)).join("; ") || "—";
+      const resNamed = store.residuary.toNamed.map(b=>`${nm(b)} — ${b.sharePct}%`).join("; ");
+      const tSpecs = (store.misc.tangibleLines||[]).join("; ");
+      const execPrimary = nm(store.executor.primary) || "—";
+      const execAlts = (store.executor.alternates||[]).map(nm).filter(Boolean).join(" ➝ ") || "—";
+      const trPrimary = nm(store.minors.trusteePrimary) || "—";
+      const trAlts = (store.minors.trusteeAlternates||[]).map(nm).filter(Boolean).join(" ➝ ") || "—";
+      const fill = (txt)=>txt
+        .replaceAll("{{ChildrenList}}", childrenList)
+        .replaceAll("{{TangibleSpecifics}}", tSpecs || "None specified.")
+        .replaceAll("{{ResNamedShares}}", resNamed || "—")
+        .replaceAll("{{SpouseFullName}}", store.placeholders.SpouseFullName || "—")
+        .replaceAll("{{DisasterCharity}}", store.residuary.disasterCharity.name || "the charity I have named")
+        .replaceAll("{{DisasterCharityPct}}", String(store.residuary.disasterCharity.sharePct || 0))
+        .replaceAll("{{ExecutorPrimary}}", execPrimary)
+        .replaceAll("{{ExecutorAlternates}}", execAlts)
+        .replaceAll("{{TrusteePrimary}}", trPrimary)
+        .replaceAll("{{TrusteeAlternates}}", trAlts)
+        .replaceAll("{{TrustAge}}", store.minors.trustAge || "18")
+        .replaceAll("{{TwoStagePlan}}", `${store.minors.p1 || "50"}% at age ${store.minors.a1 || "25"}, balance at age ${store.minors.a2 || "30"}`)
+        .replaceAll("{{ThreeStagePlan}}", `${store.minors.p1 || "33"}% at ${store.minors.a1 || "21"}; ${store.minors.p2 || "25"}% at ${store.minors.a2 || "25"}; ${store.minors.p3 || "34"}% at ${store.minors.a3 || "30"}`);
+      const add = (k, keys)=>{ w.lines.push(H[k]); w.lines.push(""); keys.forEach(ck=>{ w.lines.push(CLAUSE_TEXT[ck]?fill(CLAUSE_TEXT[ck]):`[MISSING: ${ck}]`); w.lines.push(""); }); };
+      w.lines.push(`${store.placeholders.ClientFullName}`.toUpperCase());
+      const addrBits=[store.client.street, store.client.city && `${store.client.city}, ${store.client.state}`, store.client.county && `County of ${store.client.county}`].filter(Boolean).join(" • ");
+      if(addrBits) w.lines.push(addrBits);
+      w.lines.push("");
+      add("I",   store.blueprint["Article I — Family"]);
+      add("II",  store.blueprint["Article II — Debts/Taxes"]);
+      add("III", store.blueprint["Article III — Tangible"]);
+      add("IV",  store.blueprint["Article IV — Residuary"]);
+      add("V",   store.blueprint["Article V — Executor"]);
+      add("VI",  store.blueprint["Article VI — Powers"]);
+      add("VII", store.blueprint["Article VII — Minors Trust"]);
+      add("VIII",store.blueprint["Article VIII — Misc"]);
+      add("IX",  store.blueprint["Article IX — Execution"]);
+      return w.lines.join("\n");
+    })();
+    pre.textContent = capture;
+  } else {
+    block.style.display="none";
+  }
+});
+
+// Restore from localStorage if present
+try{
+  const cached = localStorage.getItem("will-intake-autosave");
+  if (cached){
+  hydrateFromJSON(JSON.parse(cached));
+}
+}catch(e){ console.warn("Autosave restore skipped:", e); }
+
+// Debounced autosave on every sync
+let autosaveTimer = null;
+function queueAutosave(){
+  clearTimeout(autosaveTimer);
+  autosaveTimer = setTimeout(()=>{
+    try{ localStorage.setItem("will-intake-autosave", JSON.stringify(exportJSON())); }catch(e){}
+  }, 300);
+}
+// Patch the existing sync calls to also autosave:
+const oldSyncBasics = syncBasics;
+syncBasics = function(){ oldSyncBasics(); queueAutosave(); };
+const oldSyncMisc = syncMisc;
+syncMisc = function(){ oldSyncMisc(); queueAutosave(); };
+const oldSyncExec = syncExecutor;
+syncExecutor = function(){ oldSyncExec(); queueAutosave(); };
+const oldSyncMinors = syncMinors;
+syncMinors = function(){ oldSyncMinors(); queueAutosave(); };
+
+
+window.addEventListener("DOMContentLoaded",mount);
+  </script>
+</body>
+</html>
