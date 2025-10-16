@@ -1,982 +1,1176 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Weldon Law, LLC | Guardianship, Estate & Elder Law in New Jersey</title>
-  <meta name="description" content="Weldon Law, LLC provides experienced, compassionate counsel in guardianship, estate planning, probate, and long-term care planning throughout New Jersey.">
-
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Weldon Law, LLC | Guardianship, Estate & Elder Law in New Jersey">
-  <meta property="og:description" content="Experienced, compassionate counsel in guardianship, estate planning, probate, and long-term care planning throughout New Jersey.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://weldon.law/">
-  <meta property="og:image" content="https://weldon.law/images/og-image.jpg">
-  
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Weldon Law, LLC | Elder Law Attorney in New Jersey">
-  <meta name="twitter:description" content="Expert guidance in guardianship, estate planning, and elder law matters.">
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LegalService",
-    "name": "Weldon Law, LLC",
-    "description": "Experienced elder law attorney providing guardianship, estate planning, probate, and long-term care planning services in New Jersey.",
-    "url": "https://weldon.law",
-    "telephone": "+1-856-890-2944",
-    "email": "chris@weldon.law",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Voorhees",
-      "addressRegion": "NJ",
-      "addressCountry": "US"
-    },
-    "areaServed": {
-      "@type": "State",
-      "name": "New Jersey"
-    },
-    "serviceType": ["Guardianship", "Estate Planning", "Probate", "Long-Term Care Planning"],
-    "founder": {
-      "@type": "Person",
-      "name": "Christopher R. Weldon",
-      "jobTitle": "Attorney"
-    }
-  }
-  </script>
-
-  <link rel="stylesheet" href="branded-styles.css">
-  <link rel="preload" href="images/WeldonLawLogoG.png" as="image">
-  
-  <!-- Configuration -->
-  <script>
-    window.INTAKE_PROXY = '/api/intake';
-  </script>
-
-  <!-- Minimal inline CSS for collapsible cards (kept lightweight) -->
+  <meta charset="utf-8" />
+  <title>Will Builder — Drafting</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="./wizard.css" />
   <style>
-    .card-collapsible[data-collapsed="true"] .services-list li:nth-child(n+4){display:none}
-    .card-collapsible[data-collapsed="true"] p:nth-of-type(n+2){display:none}
-    .card-collapsible[data-collapsed="true"]{
-      -webkit-mask-image:linear-gradient(to bottom,#000 85%,rgba(0,0,0,.85) 95%,transparent 100%);
-      mask-image:linear-gradient(to bottom,#000 85%,rgba(0,0,0,.85) 95%,transparent 100%);
+    /* Layout helpers specific to this page (kept small) */
+  .app { min-height: 100dvh; display: grid; grid-template-rows: 1fr auto; }
+    .dock-actions { margin-left:auto; display:flex; gap:.5rem; }
+    .muted { font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace; font-size:.75rem; color:var(--muted); }
+
+    /* Full document letter view */
+    dialog#letter { 
+      width: min(1000px, 96vw); 
+      max-height: 90vh; 
+      border: 1px solid var(--line); 
+      border-radius: 12px; 
+      background: var(--panel); 
+      color: var(--ink); 
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      padding: 0;
+      overflow: hidden;
     }
-    .card-toggle{
-      margin-top:var(--space-4,1rem);
-      background:transparent;border:1px solid var(--color-border,#C9A13B);
-      border-radius:9999px;padding:.5rem .9rem;font:inherit;cursor:pointer;
-      transition:background .15s ease,border-color .15s ease,transform .15s ease
+    dialog#letter::backdrop { background: rgba(15,23,42,.65); }
+    .letter-inner { 
+      padding: 0.75rem 1rem; 
+      position: relative; 
+      display: flex; 
+      flex-direction: column; 
+      height: 100%; 
+      max-height: 90vh;
     }
-    .card-toggle:hover{background:var(--color-bg-soft,#F7F7F5);transform:translateY(-1px)}
-    .card-toggle:focus-visible{outline:2px solid var(--color-focus,#133978);outline-offset:2px}
-    .card-collapsible[data-collapsed="false"]{-webkit-mask-image:none;mask-image:none}
+    .letter-paper { 
+      background: #fff; 
+      color: #000; 
+      padding: 1in; 
+      font-family: "Times New Roman", Times, serif; 
+      font-size: 12pt; 
+      line-height: 1.5; 
+      border-radius: 4px; 
+      overflow-y: auto;
+      flex: 1;
+    }
+    
+    /* Terminal mode styling for will document */
+    .terminal-mode {
+      background: #0f1115 !important;
+      color: #e5e7eb !important;
+      padding: 1.5rem !important;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+      font-size: 13px !important;
+      line-height: 1.55 !important;
+      border-radius: 4px;
+      min-height: 300px;
+      overflow-y: auto;
+      flex: 1;
+    }
+    
+    /* Terminal mode will document structure */
+    .terminal-mode .will-header h1 {
+      display: block;
+      font-weight: 800;
+      margin: 0 0 1rem 0;
+      color: #e5e7eb !important;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+      font-size: 13px !important;
+      text-transform: none;
+      line-height: 1.55;
+    }
+    
+    .terminal-mode .will-article,
+    .terminal-mode .will-introduction {
+      margin: 0.5rem 0;
+    }
+    
+    .terminal-mode .article-title {
+      display: block;
+      font-weight: 800;
+      letter-spacing: .02em;
+      margin: 1rem 0 0.5rem 0;
+      color: #e5e7eb !important;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+      font-size: 13px !important;
+      text-transform: none;
+      line-height: 1.55;
+    }
+    
+    .terminal-mode .article-content,
+    .terminal-mode .introduction-content {
+      color: #e5e7eb !important;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+      font-size: 13px !important;
+      margin-left: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    
+    .terminal-mode .article-content p,
+    .terminal-mode .introduction-content p {
+      margin: 0 0 0.5rem 0;
+      color: #e5e7eb !important;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+      font-size: 13px !important;
+      text-align: left;
+      line-height: 1.55;
+    }
+    
+    .terminal-mode .article-content p:last-child,
+    .terminal-mode .introduction-content p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .terminal-mode .placeholder-content {
+      font-style: italic;
+      color: #9ca3af !important;
+    }
+    
+    .terminal-mode em {
+      font-style: normal;
+      color: #c7d2fe !important;
+    }
+    
+    .terminal-mode .ph {
+      background: rgba(164,120,100,.15);
+      color: #A47864 !important;
+      font-weight: 500;
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+    
+    .terminal-mode .ph-filled {
+      background: transparent;
+      color: #e5e7eb !important;
+      border-bottom: 1px dashed #A47864;
+    }
+    
+    .terminal-mode .token-highlight {
+      padding: 0 3px;
+      border-radius: 3px;
+      background: rgba(15, 23, 42, 0.4);
+    }
+    
+    .terminal-mode .token-highlight.token-missing {
+      color: #f87171 !important;
+    }
+    
+    .terminal-mode .token-highlight.token-filled {
+      color: #34d399 !important;
+    }
+    
+    /* Override all nested elements in terminal mode */
+    .terminal-mode * {
+      color: #e5e7eb !important;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+      font-size: 13px !important;
+    }
+    
+  /* Sticky toolbar for close control (always visible while scrolling) */
+  .letter-toolbar { 
+    position: sticky; 
+    top: 0; 
+    z-index: 20; 
+    display: flex; 
+    justify-content: flex-end; 
+    align-items: center; 
+    gap: .5rem; 
+    padding: 0.5rem 0 0.5rem 0; 
+    margin-bottom: 0.5rem;
+    background: var(--panel);
+    flex-shrink: 0;
+  }
+  /* add a subtle backdrop to ensure contrast over page content */
+  .letter-toolbar::before { 
+    content: ""; 
+    position: absolute; 
+    inset: 0 0 auto 0; 
+    height: 100%; 
+    background: var(--panel); 
+    opacity: 1; 
+    pointer-events: none; 
+    border-radius: 8px 8px 0 0; 
+  }
+  .letter-toolbar > * { position: relative; z-index: 1; }
+    
+    /* Will document structure styling for 12pt Times New Roman */
+    .letter-paper .will-header h1 { font-size: 12pt; font-weight: bold; text-align: center; margin: 0 0 1.5rem 0; text-transform: uppercase; color: #000; }
+    .letter-paper .article-title { font-size: 12pt; font-weight: bold; margin: 1.5rem 0 1rem 0; text-transform: uppercase; color: #000; }
+    .letter-paper .will-article[data-section="debts"] .article-title { margin-top: 1.5rem; } /* Extra space before Article I */
+    .letter-paper .article-content { margin-left: 1rem; }
+    .letter-paper .article-content p { margin: 0 0 0.75rem 0; text-align: justify; color: #000; }
+    .letter-paper .introduction-content p { margin: 0 0 0.75rem 0; text-align: justify; color: #000; }
+    .letter-paper .placeholder-content { font-style: italic; color: #000; background: transparent; }
+    
+    /* Override all token highlighting and colors to uniform black */
+    .letter-paper .ph, .letter-paper .ph-filled, .letter-paper .token-highlight, .letter-paper .token-missing, .letter-paper em, .letter-paper strong { 
+      color: #000 !important; 
+      background: transparent !important; 
+      border: none !important; 
+      font-style: normal !important; 
+      font-weight: normal !important;
+      font-family: "Times New Roman", Times, serif !important;
+    }
+    .letter-paper * { 
+      color: #000 !important; 
+      font-family: "Times New Roman", Times, serif !important;
+      font-size: 12pt !important;
+    }
+  
+  /* Terminal-style preview when shown in dialog */
+  #letterPaper .preview-terminal {
+    background: #0f1115;
+    color: #e5e7eb;
+    border: 1px solid #273142;
+    border-radius: 8px;
+    padding: 1.5rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    overflow: auto;
+    max-height: calc(90vh - 120px);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  
+  /* Ensure terminal styles are applied in the dialog */
+  #letterPaper .preview-terminal .h-article {
+    display: block;
+    font-weight: 800;
+    letter-spacing: .02em;
+    text-transform: none;
+    margin: 12px 0 6px;
+    color: #e5e7eb;
+  }
+  
+  #letterPaper .preview-terminal .h-title {
+    display: block;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: #e5e7eb;
+  }
+  
+  #letterPaper .preview-terminal em {
+    font-style: normal;
+    color: #c7d2fe;
+  }
+  
+  #letterPaper .preview-terminal .ph {
+    background: rgba(164,120,100,.15);
+    color: #A47864;
+    font-weight: 500;
+    border-radius: 3px;
+    padding: 0 2px;
+  }
+  
+  #letterPaper .preview-terminal .ph-filled {
+    background: transparent;
+    color: #e5e7eb;
+    border-bottom: 1px dashed #A47864;
+  }
+  
+  #letterPaper .preview-terminal .token-highlight {
+    padding: 0 3px;
+    border-radius: 3px;
+    background: rgba(15, 23, 42, 0.4);
+  }
+  
+  #letterPaper .preview-terminal .token-highlight.token-missing {
+    color: #f87171;
+  }
+  
+  #letterPaper .preview-terminal .token-highlight.token-filled {
+    color: #34d399;
+  }
+  
+  /* (removed) Export Preview dialog styling */
+  /* Terminal-style preview in left rail */
+  .terminal-preview { background:#0b1020; color:#b4f1ff; border:1px solid #1f2a44; border-radius:8px; padding:.75rem; font: 12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; line-height:1.35; white-space:pre; overflow:auto; min-height: 280px; height: clamp(320px, 50vh, 720px); max-height: 65vh; }
+  .terminal-preview .muted { color:#6ea0b3; }
+  .terminal-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:.5rem; }
+  .terminal-header .title { font-weight:600; color: var(--ink); }
+  .terminal-actions { display:flex; gap:.5rem; }
+  .terminal-actions .btn.btn-sm {
+    background:#122039; color:#d9fbff; border-color:#233659;
+    padding: .2rem .5rem; font-size: .72rem; line-height: 1;
+    border-radius: 6px; min-height: 26px; width: auto;
+  }
+  /* Reuse icon-close style for dialog X */
+  .icon-close.letter-close,
+  .letter-toolbar .icon-close {
+    background: transparent; border: 1px solid var(--line-2); color: var(--muted);
+    width: 28px; height: 28px; border-radius: 6px; padding: 0; font-size: 16px;
+  }
+  .icon-close.letter-close:hover,
+  .letter-toolbar .icon-close:hover { background: var(--panel-alt); color: var(--ink); border-color: var(--brand); }
+    /* Compact close icon for rail headers */
+    .rail-card-header .icon-close {
+      background: transparent; border: 1px solid var(--line-2); color: var(--muted);
+      width: 26px; height: 26px; border-radius: 6px; padding: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 14px; line-height: 1; cursor: pointer;
+    }
+    .rail-card-header .icon-close:hover { background: var(--panel-alt); color: var(--ink); border-color: var(--brand); }
+  /* Add breathing room above the export preview card */
+  .rail-subcard { margin-top: 1rem; }
+    
+    /* Hide duplicate Print Preview button on desktop */
+    .mobile-print-preview {
+      display: none;
+    }
+    
+    /* Hide minimize button on desktop */
+    .preview-minimize-btn {
+      display: none;
+    }
+    
+    /* Show Preview floating button (hidden by default, shown on mobile when preview minimized) */
+    .show-preview-btn {
+      display: none;
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 200;
+      background: var(--brand);
+      color: #fff;
+      border: 1px solid var(--brand-dark);
+      border-radius: 8px;
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(31, 59, 115, 0.3);
+      transition: all 0.15s ease;
+    }
+    
+    .show-preview-btn:hover {
+      background: var(--brand-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(31, 59, 115, 0.4);
+    }
+    
+    /* Mobile-specific adjustments for print preview dialog */
+    @media (max-width: 900px) {
+      /* Show duplicate Print Preview button on mobile */
+      .mobile-print-preview {
+        display: inline-flex;
+      }
+      
+      /* Force buttons to be side by side on mobile (override wizard.css column layout) */
+      .preview-header .preview-actions {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 0.5rem !important;
+        flex-wrap: nowrap;
+        align-items: center;
+      }
+      
+      /* Make buttons compact to fit side by side */
+      .preview-actions .btn-sm {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.85rem;
+        white-space: nowrap;
+        flex: 1;
+        min-width: 0;
+      }
+      
+      /* Show and style minimize button on mobile */
+      .preview-minimize-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: 1px solid var(--line-2);
+        color: var(--muted);
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        padding: 0;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 1;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        flex-shrink: 0;
+      }
+      
+      .preview-minimize-btn:hover {
+        background: var(--panel-alt);
+        color: var(--ink);
+        border-color: var(--brand);
+      }
+      
+      dialog#letter { 
+        width: 100vw; 
+        max-height: 100vh; 
+        height: 100vh;
+        border-radius: 0;
+        padding: 0;
+        margin: 0;
+        max-width: 100vw;
+        inset: 0;
+      }
+      .letter-inner { 
+        padding: 0.5rem; 
+        height: 100vh;
+        max-height: 100vh;
+      }
+      .letter-toolbar {
+        padding: 0.75rem 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .letter-paper { 
+        padding: 1rem; 
+        font-size: 11pt; 
+      }
+      .letter-paper * { font-size: 11pt !important; }
+      .terminal-mode {
+        padding: 1rem !important;
+        font-size: 12px !important;
+      }
+      .terminal-mode * {
+        font-size: 12px !important;
+      }
+      
+      /* Mobile form field optimizations */
+      .form-field {
+        gap: 0.35rem;
+      }
+      
+      .form-field label {
+        min-width: 7rem;
+        max-width: 7rem;
+        font-size: 0.8rem;
+      }
+      
+      .form-field input,
+      .form-field select,
+      .form-field textarea {
+        padding: 0.5rem 0.65rem;
+        font-size: 0.95rem;
+      }
+      
+      /* Reduce heights of input fields */
+      input, select {
+        min-height: 38px;
+      }
+      
+      /* Tighten up segmented controls */
+      .seg-control {
+        padding: 0.25rem;
+      }
+      
+      .seg-btn {
+        padding: 0.45rem 0.75rem;
+        font-size: 0.85rem;
+      }
+      
+      /* Optimize button spacing for +Middle name/initial and +Suffix */
+      .toggle-extra-btn {
+        padding: 0.35rem 0.6rem;
+        font-size: 0.75rem;
+      }
+      
+      /* Optimize segmented control layout for mobile */
+      /* Make rows with segmented controls stack vertically */
+      .row:has(.seg-label-spacer) {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+      }
+      
+      .seg-label-spacer {
+        grid-column: auto !important;
+        justify-content: flex-start !important;
+      }
+      
+      .seg-label-spacer label {
+        text-align: left !important;
+        min-width: auto !important;
+        max-width: none !important;
+        font-size: 0.8rem !important;
+        font-weight: 600 !important;
+      }
+      
+      .seg-control-wrapper {
+        grid-column: auto !important;
+        display: block !important;
+        padding-left: 0 !important;
+      }
+      
+      .seg-field {
+        display: block !important;
+      }
+      
+      /* Better mobile styling for segmented controls */
+      .seg-control {
+        display: inline-flex !important;
+        width: auto !important;
+        background: var(--panel-alt) !important;
+        border: 1px solid var(--line-2) !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+      }
+      
+      .seg-btn {
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        padding: 0.5rem 1rem !important;
+        font-size: 0.85rem !important;
+        font-weight: 500 !important;
+        color: var(--ink) !important;
+        transition: all 0.15s ease !important;
+        min-width: 70px !important;
+      }
+      
+      .seg-btn + .seg-btn {
+        border-left: 1px solid var(--line-2) !important;
+      }
+      
+      .seg-btn:hover {
+        background: var(--panel) !important;
+      }
+      
+      .seg-btn.active {
+        background: var(--brand) !important;
+        color: #fff !important;
+        font-weight: 600 !important;
+      }
+      
+      /* Tighten panel spacing */
+      .panel {
+        padding: 0.75rem;
+      }
+      
+      .center-pane .panel h2 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+      }
+      
+      /* Reduce gap in row layouts */
+      .row {
+        gap: 0.5rem;
+      }
+      
+      .dock-head { align-items: flex-start; flex-direction: column; }
+      .dock-actions { margin-left: 0; }
+    }
   </style>
 </head>
-
-<body class="hero--copy">
-  <!-- Quick Contact Bar -->
-  <section class="top-cta" role="region" aria-label="Quick contact">
-    <div class="container top-cta__inner">
-      <div class="top-cta__prompt">
-        <strong>Have a question?</strong> Start here and hear back fast.
-      </div>
-      <div class="top-cta__actions">
-        <a href="#" id="ctaGetHelp" class="btn btn--outline" role="button">
-          Submit Inquiry →
-        </a>
-        <a class="btn btn--phone" href="tel:+18568902944" aria-label="Call Weldon Law at (856) 890-2944">
-          (856) 890-2944
-        </a>
-      </div>
+<body>
+  <!-- Brand ribbon lives under the app chrome -->
+  <div class="brand-ribbon" aria-hidden="true">
+    <div class="brand-inner">
+      <img src="../assets/evergreen-logo.jpeg" alt="Evergreen Legal logo featuring a stylized evergreen tree, conveying professionalism and trust in a legal context" class="brand-logo" />
+      <img src="../assets/temp-textLogo.jpeg" alt="Weldon Law text logo, displaying the words Weldon Law in a modern font, set within a clean and welcoming interface" class="brand-text-logo" />
+      <div class="brand-tag">Beta</div>
+      <div class="brand-spacer"></div>
     </div>
-  </section>
-
-  <!-- Main Header -->
-  <header class="site-header">
-    <div class="container nav-container">
-      <div class="logo">
-        <a href="index.html">
-          <img src="images/WeldonLawLogoG.png" alt="Weldon Law logo">
-        </a>
-      </div>
-      
-      <nav class="main-nav" id="nav">
-        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle menu">
-          <span class="menu-icon"></span>
-        </button>
-        
-        <ul class="navbar" id="primary-navigation">
-          <li><a href="index.html" aria-current="page">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-              Areas of Practice
-              <span class="dropdown-arrow">▼</span>
-            </a>
-            <ul class="dropdown-content">
-              <li><a href="practice-guardianships.html">Guardianships</a></li>
-              <li><a href="practice-ltc.html">Long-Term Care Planning</a></li>
-              <li><a href="practice-lp.html">Life Planning (POA/Advance Directive)</a></li>
-              <li><a href="practice-legacy.html">Legacy Planning (Wills & Trusts)</a></li>
-              <li><a href="practice-probate.html">Probate</a></li>
-              <li><a href="practice-general.html">General Counsel & Other Matters</a></li>
-            </ul>
-          </li>
-          <li><a href="news.html">News & Resources</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
+    <!-- Tagline inside the ribbon, to the right of the emoji -->
+    <div class="brand-tagline" aria-hidden="true">
+      <span>It’s your sentence.</span>
+      <span>It should be your signature.</span>
     </div>
-  </header>
+  </div>
 
-  <!-- Mobile Contact Sheet -->
-  <section class="intake-stick" role="complementary" aria-label="Quick intake">
-    <div class="intake-stick__mobilebar" aria-hidden="false">
-      <a href="#intakeSheet" class="intake-stick__cta" id="openIntakeMobile" role="button" aria-controls="intakeSheet" aria-expanded="false">
-        Get help now →
-      </a>
-    </div>
-    
-    <div class="intake-sheet" id="intakeSheet" aria-hidden="true" aria-modal="true" role="dialog" aria-label="Intake form">
-      <div class="intake-sheet__panel" role="document">
-        <button class="intake-sheet__close" id="closeIntakeMobile" aria-label="Close">✕</button>
-        
-        <h2>How can we help?</h2>
-        
-        <form id="intakeFormStickyMobile" novalidate>
-          <!-- Security Fields -->
-          <input type="hidden" name="siteKey" value="WL5616!SecureKey">
-          <input type="text" name="company" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <!-- Show Preview floating button (mobile only, appears when preview is minimized) -->
+  <button class="show-preview-btn" id="showPreviewBtn" style="display: none;">
+    Show Preview
+  </button>
 
-          <!-- Name Fields -->
-          <div class="intake-form__row intake-form__row--split">
-            <div class="form-field">
-              <label for="sm-first-name">First name*</label>
-              <input id="sm-first-name" name="first-name" autocomplete="given-name" required>
-              <div class="field-error" role="alert" aria-live="polite"></div>
+  <!-- Hidden Action Button (centered in ribbon, behind center pane initially) -->
+  <div class="hidden-action-zone">
+    <img src="../assets/willWizard.ico" alt="Advanced Options" id="hiddenActionButton" class="wizard-icon">
+  </div>
+  
+  <!-- Wizard Message -->
+  <div class="wizard-message" id="wizardMessage">
+    <div class="wizard-text">What's up boss?</div>
+    <select class="wizard-dropdown" id="wizardDropdown">
+      <option value="">Choose an option...</option>
+      <option value="import-export">Import/Export (Show me)</option>
+      <option value="preview-options">Preview options (Show me)</option>
+      <option value="report-by-tab">Generate clauses report (by tab)</option>
+      <option value="export-clauses-only">Export clauses (confidential)</option>
+      <option value="reset-intake">Clear fields and reset defaults</option>
+      <option value="load-homer">Load Homer</option>
+    </select>
+    <button class="wizard-close-btn" id="wizardCloseBtn">Nothing, go away!</button>
+  </div>
+  
+  <div class="app">
+    <!-- 3-RAIL LAYOUT: Left (IO/Utils) | Center (Forms) | Right (Preview) -->
+    <main class="container">
+      <div class="layout">
+        
+        <!-- LEFT RAIL: IO & Utilities -->
+        <aside class="left-pane" aria-label="IO and Utilities">
+          <!-- Placeholder content shown until a tool is revealed -->
+          <div class="rail-card rail-placeholder" id="leftPlaceholder">
+            <div class="rail-card-header">Tools</div>
+            <p class="muted">Use the wizard icon in the ribbon to reveal tools here.</p>
+          </div>
+
+          <!-- IO tools (hidden by default) -->
+          <div class="rail-card" id="ioCard" hidden>
+            <div class="rail-card-header" style="display:flex;align-items:center;gap:.5rem;justify-content:space-between">
+              <span>IO</span>
+              <div style="display:flex;align-items:center;gap:.5rem;">
+                <div class="io-toggle" role="group" aria-label="Import/Export mode">
+                  <button class="btn btn-sm" id="ioShowImports" aria-pressed="false">Imports</button>
+                  <button class="btn btn-sm" id="ioShowExports" aria-pressed="false">Exports</button>
+                </div>
+                <button type="button" class="icon-close" id="closeIoCard" aria-label="Close IO" title="Close">×</button>
+              </div>
             </div>
-            <div class="form-field">
-              <label for="sm-last-name">Last name*</label>
-              <input id="sm-last-name" name="last-name" autocomplete="family-name" required>
-              <div class="field-error" role="alert" aria-live="polite"></div>
+
+            <!-- Imports Section (hidden until toggled) -->
+            <div id="ioImports" hidden>
+              <button class="btn" id="importJsonFloating">� Import JSON</button>
+              <button class="btn" id="importCsvBtn">📥 Import CSV</button>
+              <input type="file" id="importCsvInput" accept=".csv,text/csv" hidden />
+            </div>
+
+            <!-- Exports Section (hidden until toggled) -->
+            <div id="ioExports" hidden>
+              <button class="btn" id="exportJsonBtn">📤 Export JSON</button>
+              <button class="btn" id="exportCsvBtn">📤 Export CSV</button>
+              <button class="btn" id="exportTextBtn">📄 Export Text (.txt)</button>
+              <a class="btn" href="./export.html" target="_blank" style="text-align: center; text-decoration: none;">📄 Export Word (docx)</a>
+            </div>
+
+            <!-- Export JSON structure preview (shown only when Exports mode is active) -->
+            <div id="exportStructureCard" class="rail-subcard" hidden>
+              <div class="terminal-header">
+                <div class="title">JSON Export Preview</div>
+                <div class="terminal-actions">
+                  <button class="btn btn-sm" id="copySkeletonBtn" title="Copy to clipboard">Copy</button>
+                </div>
+              </div>
+              <pre class="terminal-preview" id="exportSkeletonPreview"><span class="muted">// Export structure will appear here…</span></pre>
             </div>
           </div>
-
-          <!-- Contact Fields -->
-          <div class="form-field">
-            <label for="sm-email">Email*</label>
-            <input id="sm-email" name="email" type="email" autocomplete="email" required>
-            <div class="field-error" role="alert" aria-live="polite"></div>
-          </div>
-
-          <div class="form-field">
-            <label for="sm-phone">Phone</label>
-            <input id="sm-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national">
-            <div class="field-error" role="alert" aria-live="polite"></div>
-          </div>
-
-          <!-- Matter Type -->
-          <div class="form-field">
-            <label for="sm-interest">Type of matter</label>
-            <select id="sm-interest" name="interest">
-              <option value="">-- Please Select --</option>
-              <option value="guardianship">Guardianship</option>
-              <option value="ltc">Long-Term Care Planning</option>
-              <option value="estate">Estate Planning</option>
-              <option value="probate">Probate</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-
-          <!-- Message -->
-          <div class="form-field">
-            <label for="sm-message">Brief summary</label>
-            <textarea id="sm-message" name="message" rows="5" placeholder="Please describe your situation briefly..."></textarea>
-          </div>
-
-          <!-- Submit -->
-          <button type="submit">
-            <span class="btn-text">Submit</span>
-            <span class="btn-loading hidden" aria-hidden="true">Sending...</span>
-          </button>
           
-          <div class="small-subtext">We'll reply promptly. No obligation.</div>
+          <!-- View tools (visible by default) -->
+          <div class="rail-card" id="viewCard">
+            <div class="rail-card-header" style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;">
+              <span>Preview</span>
+              <button type="button" class="icon-close" id="closeViewCard" aria-label="Close Preview" title="Close">×</button>
+            </div>
+            <button class="btn" id="expandLetter">🖨️ Print Preview</button>
+            <button class="btn" id="expandLetterClausesOnly">�️ Print Preview (Clauses Only)</button>
+          </div>
+        </aside>
 
-          <!-- Form Meta -->
-          <div class="intake-form__meta">
-            <a href="/privacy.html">Privacy + terms</a>
-            <span class="form-help">Submitting this form does not create an attorney–client relationship. Please avoid confidential details.</span>
+        <!-- CENTER PANE: Intake Forms -->
+        <section class="center-pane" id="intake-pane" aria-label="Intake">
+          <div class="panel">
+            <nav class="panel-tabs" aria-label="Wizard sections">
+              <button class="mobile-tab-prev" id="mobileTabPrev" aria-label="Previous tab">‹</button>
+              <div class="tabs tabs-panel" id="tabs-inline" data-tablist="wizard" role="tablist" aria-label="Articles"></div>
+              <button class="mobile-tab-next" id="mobileTabNext" aria-label="Next tab">›</button>
+            </nav>
+            <h2 id="currentTabTitle">Intake Wizard</h2>
+            <div id="tabContent">
+              <!-- Dynamic tab content will be rendered here -->
+              <p class="loading-message">Loading intake form...</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- RIGHT RAIL: Will Preview -->
+        <aside class="right-pane" id="preview-pane" aria-label="Will Preview">
+          <div class="preview-card">
+            <div class="preview-header">
+              <h3>Will Preview</h3>
+              <div class="preview-actions">
+                <button class="btn btn-sm mobile-print-preview" id="expandLetterRightMobile" title="Expand Terminal Preview">
+                  Terminal
+                </button>
+                <button class="btn btn-sm" id="expandLetterRight" title="Print Preview">
+                  Print
+                </button>
+                <button class="preview-minimize-btn" id="previewMinimizeBtn" title="Minimize preview" aria-label="Minimize preview">
+                  −
+                </button>
+              </div>
+            </div>
+            <div class="preview-content" id="preview-content">
+              <!-- Unified will preview will be rendered here -->
+              <p class="preview-loading">Preview loading...</p>
+            </div>
           </div>
 
-          <!-- Status Messages -->
-          <div id="sm-status" class="success-inline hidden" role="status" aria-live="polite"></div>
-          <div id="sm-error" class="error-inline hidden" role="alert"></div>
-        </form>
+          <!-- Practice Notes Container -->
+          <div class="practice-notes-container" id="practiceNotesContainer">
+            <div class="practice-notes-header" id="practiceNotesHeader">
+              <h4>Practice Notes</h4>
+              <button class="practice-notes-toggle" id="practiceNotesToggle" aria-expanded="false" title="Expand practice notes">
+                <span class="toggle-icon">▲</span>
+              </button>
+            </div>
+            <div class="practice-notes-content" id="practiceNotesContent">
+              <div class="practice-notes-body">
+                <p class="practice-notes-placeholder">Contextual guidance</p>
+                <p class="practice-notes-coming-soon">
+                  Client Information — Practice notes coming soon
+                </p>
+              </div>
+            </div>
+          </div>
+        </aside>
+
       </div>
-    </div>
-  </section>
 
-  <!-- Main Content -->
-  <main id="main-content">
-    <!-- Hero Section -->
-    <section class="intro-banner">
-      <div class="container hero-rotator" aria-live="polite">
-        <h1 class="hero-line"></h1>
-        <p class="hero-sub"></p>
-
-        <div class="hero-controls">
-          <button class="hero-prev" type="button" aria-label="Previous message">‹</button>
-          <button class="hero-next" type="button" aria-label="Next message">›</button>
-        </div>
-
-        <!-- Hero Message Templates -->
-        <template id="heroMessages">
-          <div data-h1="Rooted in your community"
-               data-sub="Every matter is approached with the care it deserves, regardless of asset level or complexity."
-               data-target="all"></div>
-
-          <div data-h1="Life vs. Legacy"
-               data-sub="Take control now."
-               data-target="lp,legacy"></div>
-
-          <div data-h1="Protecting dignity &ndash;"
-               data-sub="preserving independence."
-               data-target="guard,ltc"></div>
-
-          <div data-h1="Harnessing technology"
-               data-sub="Improving access and outcomes securely and consistently."
-               data-target="probate,general"></div>
-        </template>
-      </div>
-    </section>
-
-    <!-- Practice Areas -->
-    <section class="container practice-areas-section">
-      <div class="practice-areas">
-        <article class="practice-area" data-pa="lp" style="--pa-bg:url('images/pa-life.PNG')">
-          <h3 class="pa-title">
-            <a href="practice-lp.html">
-              <span class="pa-title-main">Life Planning</span>
-              <span class="pa-title-sub">(POA/Advance Directive)</span>
-            </a>
-          </h3>
-          <p>Planning for in-life decision-making and authority if you can't act.</p>
-        </article>
-
-        <article class="practice-area" data-pa="guard" style="--pa-bg:url('images/pa-guardianships.PNG')">
-          <h3><a href="practice-guardianships.html">Guardianships</a></h3>
-          <p>Establishing and administering guardianships with diligence and care.</p>
-        </article>
-
-        <article class="practice-area" data-pa="ltc" style="--pa-bg:url('images/pa-ltc.PNG')">
-          <h3><a href="practice-ltc.html">Long-Term Care Planning</a></h3>
-          <p>Protecting assets while aligning care needs and benefits.</p>
-        </article>
-
-        <article class="practice-area" data-pa="legacy" style="--pa-bg:url('images/pa-legacy.PNG')">
-          <h3 class="pa-title">
-            <a href="practice-legacy.html">
-              <span class="pa-title-main">Legacy Planning</span>
-              <span class="pa-title-sub">(Wills & Trusts)</span>
-            </a>
-          </h3>
-          <p>Directing your estate and preserving your intent for loved ones.</p>
-        </article>
-
-        <article class="practice-area" data-pa="probate" style="--pa-bg:url('images/pa-probate.PNG')">
-          <h3><a href="practice-probate.html">Probate</a></h3>
-          <p>Guidance through estate administration and court procedures.</p>
-        </article>
-
-        <article class="practice-area" data-pa="general" style="--pa-bg:url('images/pa-general.PNG')">
-          <h3><a href="practice-general.html">General Counsel & Other Matters</a></h3>
-          <p>Related elder-law and fiduciary issues tailored to your situation.</p>
-        </article>
-      </div>
-    </section>
-
-   <section class="bio-section bio-section--band" aria-labelledby="bio-heading">
-  <div class="container about-snippet">
-    <img
-      src="images/christopher-weldon-headshot2.jpeg"
-      alt="Portrait of Christopher R. Weldon, Esquire"
-      class="bio-image"
-      width="1000"
-      height="1000"
-      loading="lazy"
-    />
-
-    <div class="prose">
-      <h2 id="bio-heading">About Weldon Law</h2>
-      <p>
-        Weldon Law delivers a modern, community-rooted approach to elder law—making complex legal issues clearer, decisions less overwhelming, and solutions more practical for families across New Jersey.
-      </p>
-      <p>
-        Every matter is handled with compassion, clarity, and efficiency so that clients and their loved ones feel supported through some of life’s most difficult transitions.
-      </p>
-      <p>
-        <a href="about.html">Christopher R. Weldon, Esq.</a>, the firm’s founder, brings more than a decade of public service experience to the private sector, including involvement in over 1,000 guardianship and fiduciary matters statewide.
-      </p>
-      <p>
-        By combining that background with modern technology and streamlined workflows, Weldon Law provides steady advocacy, responsive communication, and tailored strategies—ensuring every case receives the attention it deserves from start to finish.
-      </p>
-    </div>
-  </div>
-</section>
-
-    <!-- Why / How -->
-    <section class="container home-cards">
-      <div class="info-grid">
-        <div class="card-collapsible" data-collapsed="true">
-          <h2>Why choose Weldon Law</h2>
-          <ul class="services-list">
-            <li><strong>1,000+ guardianship/fiduciary matters</strong> handled across NJ courts</li>
-            <li><strong>Transparent process</strong> and timely communication</li>
-            <li><strong>Neighborly, steady counsel</strong> when decisions feel overwhelming</li>
-            <li><strong>Local expertise</strong> with statewide experience</li>
-            <li><strong>Technology-enabled efficiency</strong> without losing the personal touch</li>
-          </ul>
-          <p>Chris brings over a decade of focused experience in elder law matters, with deep knowledge of healthcare regulations, benefit programs, and the complex intersection of legal and financial planning for aging adults.</p>
-          <p>What sets Weldon Law apart is the combination of legal expertise and genuine understanding of the challenges families face during difficult transitions.</p>
-          <button type="button" class="card-toggle" aria-expanded="false">Read more</button>
-        </div>
-
-        <div class="card-collapsible" data-collapsed="true">
-          <h2>How we work</h2>
-          <ol class="services-list">
-            <li><strong>Start here:</strong> Send a short intake (mobile sheet or "Get help now →")</li>
-            <li><strong>You will hear back quickly</strong> with next steps and a short call</li>
-            <li><strong>Clear plan</strong> for your matter and timelines</li>
-            <li><strong>Regular updates</strong> as your matter progresses</li>
-            <li><strong>Efficient resolution</strong> with minimal stress on your family</li>
-          </ol>
-          <p>The practice uses secure digital tools for document sharing and communication, making it easy to provide updates and receive information without unnecessary delays.</p>
-          <p>You'll always know what to expect next, what documents may be needed, and how your matter is progressing.</p>
-          <button type="button" class="card-toggle" aria-expanded="false">Read more</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Approach / Getting Started -->
-    <section class="container home-cards">
-      <div class="info-grid">
-        <div class="card-collapsible" data-collapsed="true">
-          <h2>Our Approach</h2>
-          <p>Every elder law matter involves both legal complexity and deeply personal family dynamics. I take time to understand your family’s specific needs, concerns, and goals.</p>
-          <p>My experience with healthcare regulations, government benefits, and estate planning enables proactive issue-spotting and practical solutions.</p>
-          <ul class="services-list">
-            <li>Comprehensive evaluation</li>
-            <li>Clear explanation of options</li>
-            <li>Step-by-step guidance</li>
-            <li>Ongoing support and communication</li>
-          </ul>
-          <button type="button" class="card-toggle" aria-expanded="false">Read more</button>
-        </div>
-
-        <div class="card-collapsible" data-collapsed="true">
-          <h2>Getting Started</h2>
-          <p>Initial consultations assess your situation and outline options and next steps. Planning ahead or responding to immediate needs—both are welcome.</p>
-          <p><strong>Ready?</strong> Use the contact form below or call <a href="tel:+18568902944">(856) 890-2944</a>. We typically respond the same business day.</p>
-          <button type="button" class="card-toggle" aria-expanded="false">Read more</button>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2025 Weldon Law, LLC. All rights reserved.</p>
-      <p><small><strong>Site Under Construction:</strong> This website will officially launch soon. Current content may include placeholders and should not be relied upon for legal advice. For immediate assistance, please call (856) 890-2944.</small></p>
-    </div>
-  </footer>
-
-  <!-- Desktop Footer Intake Form -->
-  <section class="intake-footer" role="complementary" aria-label="Quick intake footer">
-    <form id="intakeFormFooterDesktop" class="intake-footer__form" novalidate>
-      <!-- Security Fields -->
-      <input type="hidden" name="siteKey" value="WL5616!SecureKey">
-      <input type="text" name="company" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
-      
-      <div class="intake-footer__row">
-        <label class="vf">
-          <span class="vh">Last name</span>
-          <input id="ft-last-name" name="last-name" placeholder="Last name" required>
-        </label>
-        
-        <label class="vf">
-          <span class="vh">First name</span>
-          <input id="ft-first-name" name="first-name" placeholder="First name" required>
-        </label>
-        
-        <label class="vf">
-          <span class="vh">Email</span>
-          <input id="ft-email" name="email" type="email" placeholder="Email" required>
-        </label>
-        
-        <label class="vf">
-          <span class="vh">Phone</span>
-          <input id="ft-phone" name="phone" type="tel" inputmode="tel" placeholder="Phone">
-        </label>
-        
-        <label class="vf">
-          <span class="vh">Type of matter</span>
-          <select id="ft-interest" name="interest" aria-label="Type of matter">
-            <option value="">Matter type</option>
-            <option value="guardianship">Guardianship</option>
-            <option value="ltc">Long-Term Care Planning</option>
-            <option value="estate">Estate Planning</option>
-            <option value="probate">Probate</option>
-            <option value="other">Other</option>
-          </select>
-        </label>
-        
-        <button type="submit" class="intake-footer__submit" aria-label="Submit intake">
-          <span class="btn-text">Submit</span>
-          <span class="btn-loading hidden" aria-hidden="true">Sending...</span>
+      <!-- Mobile Jump to Preview Button (hidden on desktop) -->
+      <div class="mobile-preview-jump">
+        <button class="btn btn-mobile-jump" id="mobileJumpToPreview">
+          Jump to Preview ↓
         </button>
       </div>
-      
-      <div id="intakeFooterPanel" class="intake-footer__statusline" aria-live="polite">
-        <span id="ft-status" class="success-inline hidden"></span>
-        <span id="ft-error" class="error-inline hidden" role="alert"></span>
-        <span class="small-subtext">We'll reply promptly. No obligation.</span>
-      </div>
-    </form>
-  </section>
-
-  <!-- JavaScript -->
-  <script>
-    // Configuration
-    const FLOW_URL = "https://defaultd5c04a86773448c69c5c579000192e.d0.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/2fd109379c324cd5bbab1546b34dca3c/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=-xN6aeUrA99tUTdgdhnr4g9MpokgDGMuoCeJdynMn_4";
-
-    const errorMessages = {
-      'first-name': 'Please enter your first name',
-      'last-name': 'Please enter your last name',
-      'email': 'Please enter a valid email address',
-      'phone': 'Please enter a valid phone number'
-    };
-
-    const qs = (selector, root = document) => root.querySelector(selector);
-    const qsa = (selector, root = document) => Array.from(root.querySelectorAll(selector));
-    const digitsOnly = str => (str || '').replace(/[^\d]/g, '');
-    const trimLeadingOne = digits => (digits.length === 11 && digits.startsWith('1')) ? digits.slice(1) : digits;
-
-    // Mobile Navigation
-    function initMobileNavigation() {
-      const toggle = qs('.menu-toggle');
-      const navList = qs('#primary-navigation');
-      const body = document.body;
-      if (!toggle || !navList) return;
-
-      toggle.addEventListener('click', () => {
-        const isOpen = navList.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', isOpen);
-        body.classList.toggle('nav-open', isOpen);
-      });
-
-      const dropdownToggle = qs('.dropdown-toggle');
-      if (dropdownToggle) {
-        dropdownToggle.addEventListener('click', (e) => {
-          if (window.innerWidth <= 768) {
-            e.preventDefault();
-            const dropdown = dropdownToggle.closest('.dropdown');
-            const isExpanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
-            dropdownToggle.setAttribute('aria-expanded', !isExpanded);
-            dropdown.classList.toggle('expanded');
-          }
-        });
-      }
-
-      document.addEventListener('click', (e) => {
-        if (window.innerWidth <= 768 && navList.classList.contains('open')) {
-          if (!e.target.closest('.site-header')) closeMobileNav();
-        }
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && navList.classList.contains('open')) {
-          closeMobileNav();
-          toggle.focus();
-        }
-      });
-
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 768 && navList.classList.contains('open')) {
-          closeMobileNav();
-        }
-      });
-
-      function closeMobileNav() {
-        navList.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-        body.classList.remove('nav-open');
-        const dropdown = qs('.dropdown');
-        const dropdownToggle = qs('.dropdown-toggle');
-        if (dropdown && dropdownToggle) {
-          dropdown.classList.remove('expanded');
-          dropdownToggle.setAttribute('aria-expanded', 'false');
-        }
-      }
-    }
-
-    // Phone Number Formatting
-    function formatPhoneLive(element) {
-      if (!element) return;
-      element.addEventListener('input', () => {
-        let digits = trimLeadingOne(digitsOnly(element.value));
-        if (!digits) { element.value = ''; return; }
-        if (digits.length <= 3) {
-          element.value = `(${digits}`;
-        } else if (digits.length <= 6) {
-          element.value = `(${digits.slice(0,3)}) ${digits.slice(3)}`;
-        } else {
-          element.value = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6,10)}`;
-        }
-      });
-    }
-
-    const isValidEmail = email => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-    function validateField(field) {
-      const fieldContainer = field.closest('.form-field');
-      const errorDiv = fieldContainer?.querySelector('.field-error');
-      let isValid = true;
-      let errorMessage = '';
-
-      field.removeAttribute('aria-invalid');
-      fieldContainer?.classList.remove('valid', 'error');
-      if (errorDiv) errorDiv.textContent = '';
-
-      if (field.hasAttribute('required') && !field.value.trim()) {
-        isValid = false;
-        errorMessage = errorMessages[field.name] || 'This field is required';
-      } else if (field.type === 'email' && field.value && !isValidEmail(field.value)) {
-        isValid = false;
-        errorMessage = 'Please enter a valid email address';
-      } else if (field.type === 'tel' && field.value && digitsOnly(field.value).length < 10) {
-        isValid = false;
-        errorMessage = 'Please enter a valid phone number';
-      }
-
-      if (!isValid) {
-        field.setAttribute('aria-invalid', 'true');
-        fieldContainer?.classList.add('error');
-        if (errorDiv) errorDiv.textContent = errorMessage;
-      } else if (field.value.trim()) {
-        fieldContainer?.classList.add('valid');
-      }
-      return isValid;
-    }
-
-    function validateForm(form) {
-      const fields = form.querySelectorAll('input[required], input[type="email"], input[type="tel"]');
-      let isValid = true;
-      fields.forEach(field => { if (!validateField(field)) isValid = false; });
-      return isValid;
-    }
-
-    function setupFormValidation(form) {
-      if (!form) return;
-      const fields = form.querySelectorAll('input, select, textarea');
-      fields.forEach(field => {
-        field.addEventListener('blur', () => validateField(field));
-        field.addEventListener('input', () => {
-          const fieldContainer = field.closest('.form-field');
-          if (fieldContainer?.classList.contains('error')) {
-            setTimeout(() => validateField(field), 300);
-          }
-        });
-      });
-    }
-
-    function setButtonLoading(button, loading) {
-      const textSpan = button.querySelector('.btn-text');
-      const loadingSpan = button.querySelector('.btn-loading');
-      button.disabled = !!loading;
-      if (textSpan) textSpan.classList.toggle('hidden', !!loading);
-      if (loadingSpan) loadingSpan.classList.toggle('hidden', !loading);
-    }
-
-    // Mobile Sheet
-    function initMobileSheet() {
-      const sheet = qs('#intakeSheet');
-      const openButton = qs('#openIntakeMobile');
-      const closeButton = qs('#closeIntakeMobile');
-      if (!sheet || !openButton || !closeButton) return;
-
-      function trapFocus(container, enabled) {
-        if (!container) return;
-        const getFocusable = () => container.querySelectorAll(
-          'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
-        );
-        function handleKeydown(e) {
-          if (!enabled) return;
-          if (e.key === 'Escape') { closeMobileSheet(); return; }
-          if (e.key !== 'Tab') return;
-          const focusable = Array.from(getFocusable()).filter(el => !el.disabled && el.offsetParent !== null);
-          if (!focusable.length) return;
-          const first = focusable[0], last = focusable[focusable.length - 1];
-          if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
-          else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
-        }
-        if (container.__trapHandler) document.removeEventListener('keydown', container.__trapHandler);
-        container.__trapHandler = handleKeydown;
-        document.addEventListener('keydown', handleKeydown);
-      }
-
-      function openMobileSheet() {
-        sheet.setAttribute('aria-hidden', 'false');
-        openButton.setAttribute('aria-expanded', 'true');
-        document.body.style.overflow = 'hidden';
-        setTimeout(() => { qs('#sm-first-name')?.focus(); }, 100);
-        trapFocus(sheet, true);
-      }
-
-      function closeMobileSheet() {
-        sheet.setAttribute('aria-hidden', 'true');
-        openButton.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-        trapFocus(sheet, false);
-        openButton.focus();
-      }
-
-      openButton.addEventListener('click', (e) => { e.preventDefault(); openMobileSheet(); });
-      closeButton.addEventListener('click', closeMobileSheet);
-      sheet.addEventListener('click', (e) => { if (e.target === sheet) closeMobileSheet(); });
-
-      window.closeMobileSheet = closeMobileSheet;
-    }
-
-    // CTA Routing
-    function initCTARouting() {
-      const ctaButton = qs('#ctaGetHelp');
-      if (!ctaButton) return;
-      ctaButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (window.innerWidth <= 768) {
-          qs('#openIntakeMobile')?.click();
-        } else {
-          window.location.href = 'contact.html';
-        }
-      });
-    }
-
-    // Submit flow
-    async function submitIntake(form, statusElement, errorElement) {
-      const submitButton = form.querySelector('button[type="submit"]');
-      if (!validateForm(form)) {
-        errorElement.textContent = 'Please correct the errors above';
-        errorElement.classList.remove('hidden');
-        statusElement.classList.add('hidden');
-        return;
-      }
-
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
-      data.phone = trimLeadingOne(digitsOnly(data.phone || ''));
-
-      setButtonLoading(submitButton, true);
-      errorElement.classList.add('hidden');
-      statusElement.textContent = 'Sending…';
-      statusElement.classList.add('success-inline');
-      statusElement.classList.remove('hidden');
-
-      try {
-        const response = await fetch(FLOW_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-          mode: 'cors'
-        });
-
-        const responseText = await response.clone().text();
-        let responseJson = null;
-        try { responseJson = JSON.parse(responseText); } catch {}
-
-        if (response.ok && responseJson?.success) {
-          statusElement.textContent = 'Thanks—check your email for a confirmation.';
-          form.reset();
-          form.querySelectorAll('.form-field').forEach(f => f.classList.remove('valid','error'));
-          if (form.id === 'intakeFormStickyMobile') {
-            setTimeout(() => { if (window.closeMobileSheet) window.closeMobileSheet(); }, 2000);
-          }
-        } else {
-          throw new Error(responseJson?.message || `Server error: ${response.status}`);
-        }
-      } catch (error) {
-        console.error('Form submission error:', error);
-        const msg = error.message.includes('Network')
-          ? 'Network issue—please email chris@weldon.law or call (856) 890-2944.'
-          : 'Sorry, something went wrong. Please email chris@weldon.law or call (856) 890-2944.';
-        errorElement.textContent = msg;
-        errorElement.classList.add('error-inline');
-        errorElement.classList.remove('hidden');
-        statusElement.classList.remove('success-inline');
-        statusElement.classList.add('hidden');
-      } finally {
-        setButtonLoading(submitButton, false);
-      }
-    }
-
-    function initializeIntakeForm(formId, statusId, errorId, phoneId) {
-      const form = qs('#' + formId);
-      if (!form) return;
-      setupFormValidation(form);
-      formatPhoneLive(qs('#' + phoneId));
-      const statusElement = qs('#' + statusId);
-      const errorElement = qs('#' + errorId);
-      form.addEventListener('submit', (e) => { e.preventDefault(); submitIntake(form, statusElement, errorElement); });
-    }
-
-    // Bottom padding for mobile sticky bar
-    function adjustBottomPaddingMobile() {
-      const mobileBar = qs('.intake-stick__mobilebar');
-      if (!mobileBar) return;
-      const h = mobileBar.getBoundingClientRect().height || 56;
-      document.body.style.paddingBottom = window.innerWidth <= 768 ? `${h + 8}px` : '';
-    }
-
-    // Hero Rotator (unchanged logic; swipe enabled)
-    function initHeroRotator() {
-      const wrapper = qs('.hero-rotator');
-      if (!wrapper) return;
-
-      const h1Element = wrapper.querySelector('.hero-line');
-      const pElement = wrapper.querySelector('.hero-sub');
-      const template = qs('#heroMessages');
-
-      const practiceContainer = qs('.practice-areas');
-      const practiceTiles = practiceContainer ? Array.from(practiceContainer.children) : [];
-      practiceTiles.forEach((tile, index) => { tile.dataset.origIndex ??= String(index); });
-      const practiceByKey = practiceTiles.reduce((map, tile) => {
-        const key = tile.getAttribute('data-pa')?.trim();
-        if (key) map[key] = tile;
-        return map;
-      }, {});
-
-      const messages = Array.from(template?.content?.children || []).map(node => ({
-        h1: node.getAttribute('data-h1') || '',
-        sub: node.getAttribute('data-sub') || '',
-        targets: (node.getAttribute('data-target') || '').split(',').map(s => s.trim()).filter(Boolean)
-      })).filter(msg => msg.h1);
-
-      if (!messages.length) return;
-
-      const prevButton = wrapper.querySelector('.hero-prev');
-      const nextButton = wrapper.querySelector('.hero-next');
-
-      let currentIndex = 0;
-      let rotationTimer = null;
-      const ROTATION_DURATION = 6500;
-      const FADE_DURATION = 450;
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      let touchStartX = 0;
-      let touchEndX = 0;
-      const SWIPE_THRESHOLD = 75;
-
-      function handleTouchStart(e){ touchStartX = e.changedTouches[0].screenX; }
-      function handleTouchEnd(e){ touchEndX = e.changedTouches[0].screenX; handleSwipeGesture(); }
-      function handleSwipeGesture(){
-        const d = touchEndX - touchStartX;
-        if (Math.abs(d) > SWIPE_THRESHOLD) d > 0 ? navigateToPrevious() : navigateToNext();
-      }
-
-      function navigateToPrevious(){ stopRotation(); currentIndex = (currentIndex - 1 + messages.length) % messages.length; renderMessage(currentIndex); startRotation(); }
-      function navigateToNext(){ stopRotation(); currentIndex = (currentIndex + 1) % messages.length; renderMessage(currentIndex); startRotation(); }
-
-      const TILE_TINT = getComputedStyle(document.documentElement).getPropertyValue('--tile-tint').trim() || 'rgba(201,161,59,0.12)';
-      const tints = Array(messages.length).fill(TILE_TINT);
-
-      function insertAtPosition(container, element, position){
-        const referenceNode = container.children[position] || null;
-        if (element && element !== referenceNode) container.insertBefore(element, referenceNode);
-      }
-
-      function clearTileStates(){
-        practiceTiles.forEach(tile => { tile.classList.remove('is-active'); tile.style.removeProperty('--pa-tint'); });
-      }
-
-      function restoreOriginalTileOrder(){
-        if (!practiceContainer || !practiceTiles.length) return;
-        const sorted = [...practiceTiles].sort((a,b)=> (+a.dataset.origIndex) - (+b.dataset.origIndex));
-        sorted.forEach(tile => practiceContainer.appendChild(tile));
-      }
-
-      function isSingleColumnLayout(){
-        if (!practiceContainer) return false;
-        const columns = getComputedStyle(practiceContainer).gridTemplateColumns.split(' ').filter(Boolean).length;
-        return columns <= 1;
-      }
-
-      function applyMessageToTiles(messageIndex){
-        const message = messages[messageIndex % messages.length];
-        const tint = tints[messageIndex % tints.length] || 'rgba(201,161,59,0.12)';
-        const targets = message.targets;
-        const isAll = targets.length === 1 && targets[0].toLowerCase() === 'all';
-
-        clearTileStates();
-
-        if (isAll) {
-          restoreOriginalTileOrder();
-          practiceTiles.forEach(tile => { tile.classList.add('is-active'); tile.style.setProperty('--pa-tint', tint); });
-          return;
-        }
-
-        const primaryTile = practiceByKey[targets[0]];
-        const secondaryTile = practiceByKey[targets[1]];
-
-        if (primaryTile) { primaryTile.classList.add('is-active'); primaryTile.style.setProperty('--pa-tint', tint); }
-        if (secondaryTile) { secondaryTile.classList.add('is-active'); secondaryTile.style.setProperty('--pa-tint', tint); }
-
-        if (isSingleColumnLayout()) {
-          if (primaryTile) insertAtPosition(practiceContainer, primaryTile, 0);
-          if (secondaryTile) insertAtPosition(practiceContainer, secondaryTile, 1);
-        } else {
-          restoreOriginalTileOrder();
-        }
-      }
-
-      function renderMessage(index, immediate = false){
-        const message = messages[index % messages.length];
-        if (!message) return;
-
-        if (immediate) {
-          h1Element.textContent = message.h1;
-          pElement.textContent = message.sub;
-          applyMessageToTiles(index);
-          return;
-        }
-
-        wrapper.classList.add('is-fading');
-        setTimeout(() => {
-          h1Element.textContent = message.h1;
-          pElement.textContent = message.sub;
-          wrapper.classList.remove('is-fading');
-          applyMessageToTiles(index);
-        }, FADE_DURATION);
-      }
-
-      function startRotation(){
-        if (prefersReducedMotion || messages.length < 2) return;
-        stopRotation();
-        rotationTimer = setInterval(() => {
-          currentIndex = (currentIndex + 1) % messages.length;
-          renderMessage(currentIndex);
-        }, ROTATION_DURATION);
-      }
-
-      function stopRotation(){ if (rotationTimer) { clearInterval(rotationTimer); rotationTimer = null; } }
-
-      renderMessage(currentIndex, true);
-      startRotation();
-
-      wrapper.addEventListener('touchstart', handleTouchStart, { passive: true });
-      wrapper.addEventListener('touchend', handleTouchEnd, { passive: true });
-
-      wrapper.addEventListener('mouseenter', stopRotation);
-      wrapper.addEventListener('mouseleave', startRotation);
-      wrapper.addEventListener('focusin', stopRotation);
-      wrapper.addEventListener('focusout', startRotation);
-
-      nextButton?.addEventListener('click', navigateToNext);
-      prevButton?.addEventListener('click', navigateToPrevious);
-
-      window.addEventListener('resize', () => applyMessageToTiles(currentIndex));
-      document.addEventListener('visibilitychange', () => { document.hidden ? stopRotation() : startRotation(); });
-
-      let scrollTimeout, isScrollPaused = false;
-      window.addEventListener('scroll', () => {
-        if (!isScrollPaused) { stopRotation(); isScrollPaused = true; }
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => { isScrollPaused = false; startRotation(); }, 15000);
-      }, { passive: true });
-    }
-
-    function initPrefetching() {
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(() => {
-          const link = document.createElement('link');
-          link.rel = 'prefetch';
-          link.href = 'about.html';
-          document.head.appendChild(link);
-        });
-      }
-    }
-
-    function initCardCollapsers() {
-      const cards = document.querySelectorAll('.card-collapsible');
-      cards.forEach(card => {
-        if (!card.hasAttribute('data-collapsed')) card.setAttribute('data-collapsed','true');
-        let btn = card.querySelector('.card-toggle');
-        if (!btn) {
-          btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'card-toggle';
-          btn.textContent = 'Read more';
-          btn.setAttribute('aria-expanded','false');
-          card.appendChild(btn);
-        }
-        btn.addEventListener('click', () => {
-          const isCollapsed = card.getAttribute('data-collapsed') === 'true';
-          card.setAttribute('data-collapsed', String(!isCollapsed));
-          btn.setAttribute('aria-expanded', String(!isCollapsed));
-          btn.textContent = isCollapsed ? 'Show less' : 'Read more';
-        });
-      });
-    }
-
-    function initializeApp() {
-      initMobileNavigation();
-      initMobileSheet();
-      initCTARouting();
-      initHeroRotator();
-      initCardCollapsers();
-
-      initializeIntakeForm('intakeFormStickyMobile', 'sm-status', 'sm-error', 'sm-phone');
-      initializeIntakeForm('intakeFormFooterDesktop', 'ft-status', 'ft-error', 'ft-phone');
-
-      adjustBottomPaddingMobile();
-      initPrefetching();
-
-      window.addEventListener('resize', adjustBottomPaddingMobile);
-      window.addEventListener('orientationchange', adjustBottomPaddingMobile);
-    }
-
-    document.addEventListener('DOMContentLoaded', initializeApp);
-  </script>
-  <!-- Cookie Banner -->
-<div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie notice">
-  <div class="cookie-banner__inner container">
-    <p>
-      This site uses cookies and similar technologies for basic functionality and anonymous analytics. 
-      By continuing to use this site, you agree to our 
-      <a href="privacy.html">Privacy Policy</a>.
-    </p>
-    <button id="cookieAccept" class="btn btn--accent">Accept</button>
+    </main>
   </div>
-</div>
 
-<script>
-  (function(){
-    const banner = document.getElementById('cookieBanner');
-    const accept = document.getElementById('cookieAccept');
-    if (!banner || !accept) return;
+  <!-- Letter view dialog -->
+  <dialog id="letter">
+    <div class="letter-inner">
+      <div class="letter-toolbar">
+        <button class="btn btn-sm" id="letterCopy" title="Copy document text">Copy</button>
+        <button class="icon-close" id="letterClose" aria-label="Close letter">×</button>
+      </div>
+      <div class="letter-paper" id="letterPaper">
+        <!-- full document goes here -->
+      </div>
+    </div>
+  </dialog>
 
-    // Hide if already accepted
-    if (localStorage.getItem('cookiesAccepted') === 'yes') {
-      banner.style.display = 'none';
+  <!-- (removed) Export Preview dialog -->
+
+  <!-- Scripts -->
+  <script type="module">
+  import { initApp, App, Bus, renderTab, buildCanonicalIntake } from "./app.js";
+    
+    // Initialize the unified intake app
+    await initApp();
+    
+    // Wizard message functionality
+    const wizardIcon = document.getElementById('hiddenActionButton');
+    const wizardMessage = document.getElementById('wizardMessage');
+    const wizardDropdown = document.getElementById('wizardDropdown');
+    const wizardCloseBtn = document.getElementById('wizardCloseBtn');
+    let messageTimeout;
+    
+    // Helper to check if we're on mobile
+    function isMobile() {
+      return window.innerWidth <= 900;
+    }
+    
+    function hideMessage() {
+      wizardMessage.classList.remove('show');
+      wizardMessage.classList.add('hide');
+      wizardDropdown.value = ''; // Reset dropdown
+    }
+    
+    function startHideTimer(delay = 5000) {
+      if (messageTimeout) {
+        clearTimeout(messageTimeout);
+      }
+      messageTimeout = setTimeout(hideMessage, delay);
+    }
+    
+    // Smoothly scroll back to the position where the ribbon is hidden (desktop only)
+    function scrollToRibbonHidden() {
+      if (!isMobile() && maxScrollPosition !== null) {
+        window.scrollTo({ top: maxScrollPosition, behavior: 'smooth' });
+      }
     }
 
-    accept.addEventListener('click', () => {
-      localStorage.setItem('cookiesAccepted', 'yes');
-      banner.style.display = 'none';
+    // Immediately jump to the ribbon-hidden position (no smooth) — useful when focus changes (e.g., new tab)
+    function scrollToRibbonHiddenHard() {
+      if (!isMobile() && maxScrollPosition !== null) {
+        window.scrollTo(0, maxScrollPosition);
+      }
+    }
+    
+    wizardIcon.addEventListener('click', () => {
+      // Show the message
+      wizardMessage.classList.remove('hide');
+      wizardMessage.classList.add('show');
+      
+      // Hide after 5 seconds (longer since there's a dropdown)
+      startHideTimer();
     });
-  })();
-</script>
+    
+    // Handle dropdown selection
+    wizardDropdown.addEventListener('change', async (e) => {
+      const value = e.target.value;
+
+      const leftPane = document.querySelector('.left-pane');
+      const ioCard = document.getElementById('ioCard');
+      const viewCard = document.getElementById('viewCard');
+      const leftPlaceholder = document.getElementById('leftPlaceholder');
+      const ioImports = document.getElementById('ioImports');
+      const ioExports = document.getElementById('ioExports');
+      const ioShowImports = document.getElementById('ioShowImports');
+      const ioShowExports = document.getElementById('ioShowExports');
+
+      const pulse = (el) => {
+        if (!el) return;
+        el.style.animation = 'pulse 1s ease-in-out';
+        setTimeout(() => (el.style.animation = ''), 1000);
+      };
+
+      const showOnly = (which) => {
+        // Hide both main tool cards, then show requested (keep placeholder visible)
+        if (ioCard) ioCard.hidden = which !== 'io';
+        if (viewCard) viewCard.hidden = which !== 'view';
+      };
+
+      const reveal = (which) => {
+        showOnly(which);
+        // Hide the Tools placeholder when a tool is explicitly selected
+        if (leftPlaceholder) leftPlaceholder.hidden = true;
+        leftPane?.scrollIntoView({ behavior: 'smooth' });
+        pulse(which === 'io' ? ioCard : viewCard);
+        hideMessage();
+      };
+
+      if (value === 'import-export') {
+        reveal('io');
+        // Default to Exports view when opening IO (also shows skeleton)
+        setIoMode('exports');
+          // Return to the ribbon-hidden scroll position
+          scrollToRibbonHidden();
+      } else if (value === 'preview-options') {
+        reveal('view');
+          // Return to the ribbon-hidden scroll position
+          scrollToRibbonHidden();
+      } else if (value === 'export-clauses-only') {
+        // Fire a clauses-only export (unhydrated placeholders preserved)
+        try {
+          App?.exportClausesOnly?.();
+        } catch (err) {
+          console.error('Clauses-only export failed', err);
+        }
+        hideMessage();
+          scrollToRibbonHidden();
+      } else if (value === 'report-by-tab') {
+        try {
+          // Pre-scroll in case the browser defers scroll during new-tab open
+          scrollToRibbonHiddenHard();
+          await App?.runByTabReport?.();
+          // Post-scroll (immediate) and schedule a small fallback to cover focus shifts
+          scrollToRibbonHiddenHard();
+          setTimeout(scrollToRibbonHiddenHard, 200);
+        } catch (err) {
+          console.error('Report generation failed', err);
+          alert('Could not generate the by-tab report. See console for details.');
+        }
+        hideMessage();
+        // Smooth follow-up for UX polish
+        scrollToRibbonHidden();
+      } else if (value === 'load-homer') {
+        // Quick-load the Homer sample intake directly from sandbox
+        try {
+          await App?.loadIntakeFromUrl?.('../sandbox/homer-sample-intake.json', { sourceName: 'Homer sample' });
+        } catch (err) {
+          console.error('Quick-load failed', err);
+          alert('Failed to load the Homer sample. See console for details.');
+        }
+        hideMessage();
+          scrollToRibbonHidden();
+      } else if (value === 'reset-intake') {
+        // Clear fields and reset defaults in intake center pane
+        try { localStorage.removeItem('intakeState'); } catch {}
+        // Reset App state for intake-related data
+        App.setState({ intake: {}, selectedClauses: {}, nameBank: [] });
+        // Re-render current tab UI and preview
+        const current = App.state.currentTab || 'testator';
+        await renderTab(current);
+        Bus.emit('preview-update', { forceImmediate: true });
+        // Visual cue on center pane
+        const centerPane = document.querySelector('.center-pane');
+        centerPane?.scrollIntoView({ behavior: 'smooth' });
+        pulse(centerPane);
+        hideMessage();
+          scrollToRibbonHidden();
+      }
+    });
+    
+    // Reset timer when dropdown is opened/focused
+    wizardDropdown.addEventListener('focus', () => startHideTimer(8000));
+    
+    // Calculate and cache the maximum scroll position
+    let maxScrollPosition = null;
+    
+    function calculateMaxScroll() {
+      const centerPane = document.querySelector('.center-pane');
+      if (centerPane) {
+        const centerPaneRect = centerPane.getBoundingClientRect();
+        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const centerPaneTopFromPage = centerPaneRect.top + currentScrollTop;
+        // Maintain a 10px buffer so the center pane top doesn't touch the browser edge
+        maxScrollPosition = Math.max(0, centerPaneTopFromPage - 10);
+      }
+    }
+    
+    // Calculate max scroll on load and resize (only for desktop)
+    if (!isMobile()) {
+      calculateMaxScroll();
+    }
+    window.addEventListener('resize', () => {
+      if (!isMobile()) {
+        calculateMaxScroll();
+      } else {
+        maxScrollPosition = null; // Clear scroll limits on mobile
+      }
+    });
+
+    // On initial load, start with the ribbon hidden by scrolling to the max allowed position (desktop only)
+    if (!isMobile() && maxScrollPosition !== null) {
+      // Use a microtask to ensure layout is settled
+      Promise.resolve().then(() => {
+        window.scrollTo(0, maxScrollPosition);
+      });
+    }
+    
+    // Enforce scroll limits (desktop only)
+    window.addEventListener('scroll', () => {
+      if (!isMobile() && maxScrollPosition !== null && window.pageYOffset > maxScrollPosition) {
+        window.scrollTo(0, maxScrollPosition);
+      }
+    });
+    
+    // Handle close button click
+    wizardCloseBtn.addEventListener('click', () => {
+      hideMessage();
+      
+      // Scroll to the maximum allowed position
+      if (maxScrollPosition !== null) {
+        window.scrollTo({
+          top: maxScrollPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+
+    // IO toggle setup
+  const ioImports = document.getElementById('ioImports');
+  const ioExports = document.getElementById('ioExports');
+  const ioShowImports = document.getElementById('ioShowImports');
+  const ioShowExports = document.getElementById('ioShowExports');
+  const closeIoCard = document.getElementById('closeIoCard');
+  const closeViewCard = document.getElementById('closeViewCard');
+  const leftPlaceholderRef = document.getElementById('leftPlaceholder');
+  const ioCardRef = document.getElementById('ioCard');
+  const viewCardRef = document.getElementById('viewCard');
+
+    const exportStructureCard = document.getElementById('exportStructureCard');
+    const exportSkeletonPreview = document.getElementById('exportSkeletonPreview');
+    const copySkeletonBtn = document.getElementById('copySkeletonBtn');
+
+    function prettyPrintJson(obj) {
+      try { return JSON.stringify(obj, null, 2); } catch { return '{\n  /* error building preview */\n}'; }
+    }
+
+    function renderExportPreview() {
+      const canonical = buildCanonicalIntake();
+      const current = (App?.state?.intake) || {};
+      // Merge current values over the canonical blank structure so order stays canonical
+      const live = { ...canonical, ...current };
+      exportSkeletonPreview.textContent = prettyPrintJson(live);
+    }
+
+    function setIoMode(mode) {
+      const showImports = mode === 'imports';
+      if (ioImports) ioImports.hidden = !showImports;
+      if (ioExports) ioExports.hidden = showImports;
+      ioShowImports?.setAttribute('aria-pressed', String(showImports));
+      ioShowExports?.setAttribute('aria-pressed', String(!showImports));
+
+      // Show or hide the export structure card, and refresh its content when switching to Exports
+      if (exportStructureCard) exportStructureCard.hidden = showImports; // show when Exports
+      if (!showImports) {
+        renderExportPreview();
+      }
+    }
+
+    // Helper: when no tool cards are visible, show the Tools placeholder again
+    function updateToolsPlaceholderVisibility() {
+      const noToolsVisible = (!!ioCardRef && ioCardRef.hidden) && (!!viewCardRef && viewCardRef.hidden);
+      if (leftPlaceholderRef) leftPlaceholderRef.hidden = !noToolsVisible ? true : false;
+    }
+
+    closeIoCard?.addEventListener('click', () => {
+      if (ioCardRef) ioCardRef.hidden = true;
+      // Keep Preview as-is; show Tools placeholder only if nothing is visible
+      updateToolsPlaceholderVisibility();
+    });
+    closeViewCard?.addEventListener('click', () => {
+      if (viewCardRef) viewCardRef.hidden = true;
+      updateToolsPlaceholderVisibility();
+    });
+
+    ioShowImports?.addEventListener('click', () => setIoMode('imports'));
+    ioShowExports?.addEventListener('click', () => setIoMode('exports'));
+
+    // (removed) Export popout preview wiring on export button clicks
+
+    // Copy skeleton to clipboard
+    copySkeletonBtn?.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(exportSkeletonPreview.textContent || '');
+        copySkeletonBtn.textContent = 'Copied!';
+        setTimeout(() => (copySkeletonBtn.textContent = 'Copy'), 1200);
+      } catch {}
+    });
+
+    // Live-update the export preview on any intake change or state change
+    const maybeRender = () => {
+      // Only render if Exports mode is visible and the card is shown
+      const exportsVisible = ioExports && !ioExports.hidden;
+      const cardVisible = exportStructureCard && !exportStructureCard.hidden;
+      if (exportsVisible && cardVisible) renderExportPreview();
+    };
+    Bus.on?.('form-change', maybeRender);
+    Bus.on?.('state-change', maybeRender);
+    Bus.on?.('preview-update', maybeRender);
+
+    // Keyboard shortcuts: Alt+I (IO Imports), Alt+O (IO Exports), Alt+P (Preview)
+    function showTool(which) {
+      if (which === 'io') {
+        if (ioCardRef) ioCardRef.hidden = false;
+        if (viewCardRef) viewCardRef.hidden = true;
+      } else if (which === 'view') {
+        if (viewCardRef) viewCardRef.hidden = false;
+        if (ioCardRef) ioCardRef.hidden = true;
+      }
+      if (leftPlaceholderRef) leftPlaceholderRef.hidden = true;
+      updateToolsPlaceholderVisibility?.();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      // Ignore when typing in inputs/textareas/contenteditable
+      const tag = (e.target?.tagName || '').toLowerCase();
+      if (tag === 'input' || tag === 'textarea' || e.target?.isContentEditable) return;
+
+      if (e.altKey && !e.ctrlKey && !e.metaKey) {
+        // Alt+I → IO (Imports)
+        if (e.code === 'KeyI') {
+          e.preventDefault();
+          showTool('io');
+          setIoMode('imports');
+          scrollToRibbonHidden();
+        }
+        // Alt+O → IO (Exports)
+        else if (e.code === 'KeyO') {
+          e.preventDefault();
+          showTool('io');
+          setIoMode('exports');
+          scrollToRibbonHidden();
+        }
+        // Alt+P → Preview
+        else if (e.code === 'KeyP') {
+          e.preventDefault();
+          showTool('view');
+          scrollToRibbonHidden();
+        }
+      }
+    });
+    
+    // Mobile tab navigation with arrows
+    if (isMobile()) {
+      const prevBtn = document.getElementById('mobileTabPrev');
+      const nextBtn = document.getElementById('mobileTabNext');
+      const tabsContainer = document.querySelector('.panel-tabs .tabs');
+      
+      if (prevBtn && nextBtn && tabsContainer) {
+        // Navigate to previous tab
+        prevBtn.addEventListener('click', () => {
+          const tabs = Array.from(tabsContainer.querySelectorAll('.tab'));
+          const currentTab = tabs.find(tab => tab.getAttribute('aria-selected') === 'true');
+          const currentIndex = tabs.indexOf(currentTab);
+          
+          if (currentIndex > 0) {
+            tabs[currentIndex - 1].click();
+          }
+        });
+        
+        // Navigate to next tab
+        nextBtn.addEventListener('click', () => {
+          const tabs = Array.from(tabsContainer.querySelectorAll('.tab'));
+          const currentTab = tabs.find(tab => tab.getAttribute('aria-selected') === 'true');
+          const currentIndex = tabs.indexOf(currentTab);
+          
+          if (currentIndex < tabs.length - 1) {
+            tabs[currentIndex + 1].click();
+          }
+        });
+        
+        // Update button states based on current tab
+        const updateNavigationButtons = () => {
+          const tabs = Array.from(tabsContainer.querySelectorAll('.tab'));
+          const currentTab = tabs.find(tab => tab.getAttribute('aria-selected') === 'true');
+          const currentIndex = tabs.indexOf(currentTab);
+          
+          // Disable prev button on first tab
+          prevBtn.disabled = (currentIndex === 0);
+          
+          // Disable next button on last tab
+          nextBtn.disabled = (currentIndex === tabs.length - 1);
+        };
+        
+        // Update on load and on tab changes
+        updateNavigationButtons();
+        Bus.on?.('tab-change', updateNavigationButtons);
+        
+        // Also update after a small delay to catch dynamic tab rendering
+        setTimeout(updateNavigationButtons, 500);
+      }
+    }
+    
+    // Preview minimize/show functionality (mobile only)
+    if (isMobile()) {
+      const previewPane = document.querySelector('.right-pane');
+      const centerPane = document.querySelector('.center-pane');
+      const previewMinimizeBtn = document.getElementById('previewMinimizeBtn');
+      const showPreviewBtn = document.getElementById('showPreviewBtn');
+      
+      // Dynamically adjust center pane padding to accommodate preview pane
+      function adjustCenterPanePadding() {
+        if (centerPane && previewPane) {
+          const previewHeight = previewPane.offsetHeight;
+          const previewIsVisible = previewPane.style.display !== 'none';
+          
+          if (previewIsVisible) {
+            // Add padding equal to preview height + 20px buffer
+            centerPane.style.paddingBottom = `${previewHeight + 20}px`;
+          } else {
+            // Remove padding when preview is hidden
+            centerPane.style.paddingBottom = '0';
+          }
+        }
+      }
+      
+      // Adjust on load
+      adjustCenterPanePadding();
+      
+      // Adjust on window resize
+      window.addEventListener('resize', adjustCenterPanePadding);
+      
+      // Adjust when preview updates
+      Bus.on?.('preview-update', adjustCenterPanePadding);
+      
+      if (previewMinimizeBtn && showPreviewBtn && previewPane) {
+        // Minimize preview and show "Show Preview" button
+        previewMinimizeBtn.addEventListener('click', () => {
+          previewPane.style.display = 'none';
+          showPreviewBtn.style.display = 'block';
+          adjustCenterPanePadding(); // Update padding when minimized
+        });
+        
+        // Show preview and hide "Show Preview" button
+        showPreviewBtn.addEventListener('click', () => {
+          previewPane.style.display = 'block';
+          showPreviewBtn.style.display = 'none';
+          // Use setTimeout to ensure display change is applied before measuring
+          setTimeout(adjustCenterPanePadding, 10);
+        });
+      }
+    }
+  </script>
 
 </body>
 </html>
