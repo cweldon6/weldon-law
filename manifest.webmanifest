@@ -1,0 +1,14 @@
+{
+  "name": "Weldon Law, LLC",
+  "short_name": "Weldon Law",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#133978",
+  "description": "Guardianship, estate planning, probate, and long-term care planning throughout New Jersey.",
+  "icons": [
+    { "src": "/images/WeldonLawLogoG.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/images/WeldonLawLogoG.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

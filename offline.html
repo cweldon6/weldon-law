@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>You're offline | Weldon Law</title>
+  <link rel="stylesheet" href="/branded-styles.css" />
+  <meta name="theme-color" content="#133978" />
+  <style>
+    main{max-width:720px;margin:8vh auto;padding:24px;background:#fff;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+    .muted{color:#555}
+    body{background:#f5f7fb}
+  </style>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/images/WeldonLawLogoG.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="You're offline. You can still view previously cached pages. Reconnect to submit forms or fetch new content.">
+  <meta property="og:title" content="You're offline | Weldon Law" />
+  <meta property="og:description" content="Reconnect to submit forms or fetch new content." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/images/WeldonLawLogoG.png" />
+  <meta property="og:url" content="https://weldon.law/offline.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="You're offline | Weldon Law" />
+  <meta name="twitter:description" content="Reconnect to submit forms or fetch new content." />
+  <link rel="icon" href="/images/WeldonLawLogoG.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/images/WeldonLawLogoG.png" sizes="192x192" type="image/png">
+  <link rel="icon" href="/images/WeldonLawLogoG.png" sizes="512x512" type="image/png">
+  <meta name="robots" content="noindex,nofollow">
+  
+</head>
+<body class="hero--copy">
+  <main>
+    <h1>You're offline</h1>
+    <p class="muted">It looks like there’s no internet connection. You can still browse pages you’ve visited before. Please reconnect to submit forms or view new content.</p>
+    <p><a href="/">Return to Home</a></p>
+  </main>
+
+  <script>
+    // Register the service worker if not already
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistration().then(reg => {
+        if (!reg) { navigator.serviceWorker.register('/sw.js').catch(()=>{}); }
+      });
+    }
+  </script>
+</body>
+</html>
