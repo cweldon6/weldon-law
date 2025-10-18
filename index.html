@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Weldon Law, LLC | Guardianship, Estate & Elder Law in New Jersey</title>
   <meta name="description" content="Weldon Law, LLC provides experienced, compassionate counsel in guardianship, estate planning, probate, and long-term care planning throughout New Jersey.">
 
@@ -51,9 +51,12 @@
   <link rel="preload" href="images/WeldonLawLogoG.png" as="image">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#133978">
+  <meta name="application-name" content="Weldon Law">
+  <meta name="mobile-web-app-capable" content="yes">
   <link rel="apple-touch-icon" href="/images/WeldonLawLogoG.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Weldon Law">
   
   <!-- Configuration -->
   <script>
@@ -62,6 +65,8 @@
 
   <!-- Minimal inline CSS for collapsible cards (kept lightweight) -->
   <style>
+    /* Safe-area support for full-screen PWAs (iOS notch, etc.) */
+    body { padding-top: env(safe-area-inset-top, 0); padding-left: env(safe-area-inset-left, 0); padding-right: env(safe-area-inset-right, 0); }
     .card-collapsible[data-collapsed="true"] .services-list li:nth-child(n+4){display:none}
     .card-collapsible[data-collapsed="true"] p:nth-of-type(n+2){display:none}
     .card-collapsible[data-collapsed="true"]{
@@ -976,6 +981,18 @@
         }).catch((err) => console.error('SW registration failed:', err));
       });
     }
+  </script>
+  <script>
+    // Add a class when launched as standalone/fullscreen to allow optional UI tweaks
+    (function(){
+      const mqStandalone = window.matchMedia('(display-mode: standalone)');
+      function updateDisplayMode(){
+        const isStandalone = navigator.standalone || mqStandalone.matches;
+        document.documentElement.classList.toggle('pwa-display', !!isStandalone);
+      }
+      mqStandalone.addEventListener?.('change', updateDisplayMode);
+      updateDisplayMode();
+    })();
   </script>
   <!-- Cookie Banner -->
 <div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie notice">
