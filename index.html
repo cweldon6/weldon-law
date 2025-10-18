@@ -57,6 +57,20 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Weldon Law">
+  <script>
+    // Apply PWA class ASAP so CSS for status bar/safe area runs before first paint
+    (function(){
+      try {
+        var mq = window.matchMedia('(display-mode: standalone)');
+        function set(){
+          var isStandalone = (typeof navigator !== 'undefined' && 'standalone' in navigator && navigator.standalone) || (mq && mq.matches);
+          if (isStandalone) document.documentElement.classList.add('pwa-display');
+        }
+        if (mq && mq.addEventListener) mq.addEventListener('change', set);
+        set();
+      } catch (e) {}
+    })();
+  </script>
   
   <!-- Configuration -->
   <script>

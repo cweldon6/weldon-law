@@ -83,6 +83,18 @@ body {
 
 /* When running as a PWA (html.pwa-display set by JS), fill the top safe area
    to match the header ribbon so the phone's time/status area inherits it. */
+@media (display-mode: standalone), (display-mode: fullscreen) {
+  body::before { /* fallback if head script is blocked */
+    content:"";
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: env(safe-area-inset-top, 0);
+    background: var(--color-primary);
+    z-index: 1001;
+    pointer-events: none;
+  }
+}
+
 html.pwa-display body::before{
   content:"";
   position: fixed;
@@ -115,6 +127,12 @@ p { text-align: justify; hyphens: auto; }
   position: sticky; top: 0; z-index: 1000;
   background: var(--color-primary); color: #fff; padding: var(--space-3) 0;
 }
+
+/* In PWA mode, extend header content below the status area so it feels seamless */
+@media (display-mode: standalone), (display-mode: fullscreen) {
+  .site-header { padding-top: calc(var(--space-3) + env(safe-area-inset-top, 0)); }
+}
+html.pwa-display .site-header { padding-top: calc(var(--space-3) + env(safe-area-inset-top, 0)); }
 .nav-container { display:flex; justify-content:space-between; align-items:center; }
 .logo img { max-height:64px; height:auto; width:auto; }
 
