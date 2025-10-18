@@ -81,6 +81,18 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* When running as a PWA (html.pwa-display set by JS), fill the top safe area
+   to match the header ribbon so the phone's time/status area inherits it. */
+html.pwa-display body::before{
+  content:"";
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: env(safe-area-inset-top, 0);
+  background: var(--color-primary);
+  z-index: 1001; /* above header background but below any modals */
+  pointer-events: none;
+}
+
 /* Focus */
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
   outline:3px solid var(--color-focus);outline-offset:2px;border-radius:4px;
